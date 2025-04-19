@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scene/cnFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scene/Center.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/TrailSprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/startSceneBG.png" type="Texture" id=4]
+[ext_resource path="res://art/red.png" type="Texture" id=5]
+[ext_resource path="res://scripts/LianpuChooseScene.gd" type="Script" id=6]
+[ext_resource path="res://scripts/ChooseScene.gd" type="Script" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.94378
+height = 6.81431
+
+[node name="ChooseScene" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="BG" type="TextureRect" parent="."]
+margin_left = 2.0
+margin_right = 1026.0
+margin_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 4 )
+expand = true
+
+[node name="TrailSprite" parent="." instance=ExtResource( 3 )]
+
+[node name="Center" parent="." instance=ExtResource( 2 )]
+position = Vector2( 486, 461 )
+
+[node name="LianpuChooseScene" type="RigidBody2D" parent="." groups=["enemies"]]
+mode = 1
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LianpuChooseScene"]
+scale = Vector2( 2.348, 2.348 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="LianpuChooseScene"]
+texture = ExtResource( 5 )
+
+[node name="SelectionLabel" type="Label" parent="LianpuChooseScene"]
+margin_left = -30.0
+margin_top = -49.0
+margin_right = 34.0
+margin_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 1 )
+text = "5分钟限时挑战"
+align = 1
+valign = 1
