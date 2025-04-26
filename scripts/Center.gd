@@ -36,7 +36,7 @@ func play_hit_effect():
 func update_yinyang_image(var is_yang_mode:bool):
 	#切换阴阳模式图像
 	if is_yang_mode:
-		$Sprite.texture=load("res://art/yangTaiJi.png")
+		sprite.texture=load("res://art/yangTaiJi.png")
 	else:
-		$Sprite.texture=load("res://art/yinTaiJi.png")
+		sprite.texture=load("res://art/yinTaiJi.png")
 			
