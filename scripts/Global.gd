@@ -9,6 +9,7 @@ var max_energy:float=10
 var	random = RandomNumberGenerator.new()
 var ui = null
 
+
 func _ready():
 	random.randomize()
 	# 尝试直接获取目标节点
