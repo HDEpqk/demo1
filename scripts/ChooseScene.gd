@@ -8,10 +8,10 @@ func _ready():
 	var scale_y = viewport_size.y / texture_size.y
 	$BG.rect_scale = Vector2(scale_x, scale_y)
 	#设置场景脸谱的位置
-	$LianpuChooseScene.position=viewport_size/2
+	$Center.position=viewport_size/2
 	#设置center的位置
-	$Center.position.x=viewport_size.x/2
-	$Center.position.y=viewport_size.y-100
+	$LianpuChooseScene.position.x=viewport_size.x/2
+	$LianpuChooseScene.position.y=viewport_size.y-100
 
 func _exit_tree():
 	var global_script = get_node("/root/Global")  # 假设单例名为 Global

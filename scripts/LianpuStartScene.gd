@@ -35,17 +35,14 @@ func queue_free():
 		Color.red:
 			#跳转到游戏选择界面
 			get_tree().change_scene("res://scene/ChooseScene.tscn")
-			pass
 		Color.yellow:
-			#跳转到游戏教程界面(暂时跳转到游戏开始界面)
+			#跳转到游戏教程界面
 			get_tree().change_scene("res://scene/StartScene.tscn")
-			pass
 		Color.green:
-			#跳转到游戏设置界面(暂时跳转到游戏开始界面)
-			get_tree().change_scene("res://scene/StartScene.tscn")
-			pass
+			#跳转到游戏设置界面
+			get_tree().change_scene("res://scene/SettingScene.tscn")
 		Color.blue:
 			#退出游戏
 			get_tree().quit()
-			pass
+
 	.queue_free()

@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func _ready():
 	#设置背景的缩放
 	var viewport_size = get_viewport().size
@@ -12,3 +13,6 @@ func _ready():
 	#设置center的位置
 	$Center.position.x=viewport_size.x/2
 	$Center.position.y=viewport_size.y-100
+	#注册设置面板
+	var setting_panel=$SettingPanel
+	UiMgr.register_control("SettingPanel",setting_panel)

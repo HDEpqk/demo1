@@ -30,6 +30,7 @@ expand = true
 position = Vector2( 486, 461 )
 
 [node name="LianpuChooseScene" type="RigidBody2D" parent="." groups=["enemies"]]
+scale = Vector2( 2, 2 )
 mode = 1
 script = ExtResource( 6 )
 
