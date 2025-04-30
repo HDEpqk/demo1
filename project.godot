@@ -17,6 +17,7 @@ run/main_scene="res://scene/StartScene.tscn"
 
 Global="*res://scripts/Global.gd"
 DataMgr="*res://scripts/DataMgr.gd"
+UiMgr="*res://scripts/UIMgr.gd"
 
 [display]
 

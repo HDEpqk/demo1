@@ -33,7 +33,5 @@ func cycle_color():
 	DataMgr.set_setting("audio","sound_enabled",isSfxOn)
 
 
-
-
 func queue_free():
 	pass

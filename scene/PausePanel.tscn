@@ -40,14 +40,14 @@ text = "暂停"
 align = 1
 
 [node name="ResumeGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 33.0
+margin_top = 20.0
 margin_right = 158.0
 margin_bottom = 74.0
 text = "继续游戏"
 icon = ExtResource( 3 )
 
 [node name="BackToStartButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 111.0
+margin_top = 78.0
 margin_right = 158.0
 margin_bottom = 132.0
 text = "返回开始场景"
