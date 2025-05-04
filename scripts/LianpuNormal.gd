@@ -4,8 +4,8 @@ extends "res://scripts/Lianpu.gd"
 onready var ui=Global.ui
 
 
-func init(_color:Color, pos:Vector2):
-	.init(_color,pos)
+func init(_mode:int, pos:Vector2):
+	.init(_mode,pos)
 	#初始能量值
 	if Global.random!=null:
 		energy=Global.random.randi_range(0, 10)
@@ -20,16 +20,16 @@ func cycle_color():
 
 func update_energy_label():
 	match operation_type:
-		OperationType.jia:
+		GameEnums.OperationType.jia:
 			$EnergyLabel.text="+"+str(energy)
 			pass
-		OperationType.jian:
+		GameEnums.OperationType.jian:
 			$EnergyLabel.text="-"+str(energy)
 			pass
-		OperationType.cheng:
+		GameEnums.OperationType.cheng:
 			$EnergyLabel.text="×"+str(energy)
 			pass
-		OperationType.chu:
+		GameEnums.OperationType.chu:
 			$EnergyLabel.text="÷"+str(energy)
 			pass
 		_:
@@ -38,16 +38,16 @@ func update_energy_label():
 func queue_free():
 #根据运算类型进行不同运算
 	match operation_type:
-		OperationType.jia:
+		GameEnums.OperationType.jia:
 			Global.energy+=energy
 			pass
-		OperationType.jian:
+		GameEnums.OperationType.jian:
 			Global.energy-=energy
 			pass
-		OperationType.cheng:
+		GameEnums.OperationType.cheng:
 			Global.energy*=energy
 			pass
-		OperationType.chu:
+		GameEnums.OperationType.chu:
 			if energy==0:
 				print("你÷了0所以game over!")
 				#跳转到结束界面

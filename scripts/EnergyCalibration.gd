@@ -1,4 +1,4 @@
-extends Node2D  # 假设指针的父节点是场景根节点
+extends Control 
 
 # 配置参数
 export var value_range: Vector2 = Vector2(-1.1, 1.1)  # 值范围（左到右）
@@ -14,14 +14,6 @@ var temp_energy:float=0#临时能量值
 onready var global_script = get_node("/root/Global")  # 假设单例名为 Global
 
 func _ready():
-		# 获取视口（屏幕）的尺寸
-	var viewport_size = get_viewport().size
-	print(viewport_size.x)
-	# 将节点位置设置为屏幕上方中心
-	position.x = viewport_size.x / 2-$BG.rect_size.x/2
-	print(position.x)
-	$BG.anchor_left=0.5
-	$BG.anchor_top=0.5
 	$BG/pointer/Label.text=str(global_script.energy)
 	current_time = total_time
 	$BG/CountdownLabel.visible=false

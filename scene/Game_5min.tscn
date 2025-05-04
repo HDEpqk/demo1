@@ -11,21 +11,19 @@
 [node name="SpawnManager" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
-[node name="Timer" type="Timer" parent="SpawnManager"]
+[node name="SpawnTimer" type="Timer" parent="SpawnManager"]
 wait_time = 3.0
 autostart = true
 
+[node name="SpawnedEnemies" type="Node2D" parent="SpawnManager"]
+
 [node name="Center" parent="." instance=ExtResource( 1 )]
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
-
-[node name="TrailSprite" parent="." instance=ExtResource( 2 )]
-
 [node name="MainCountdownLabel" type="Label" parent="."]
-margin_left = 50.0
-margin_top = 1.0
-margin_right = 90.0
-margin_bottom = 15.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 36.0
+margin_bottom = 26.0
 rect_scale = Vector2( 2, 2 )
 text = "300"
 
@@ -34,5 +32,9 @@ script = ExtResource( 5 )
 
 [node name="MainCountdownTimer" type="Timer" parent="MainCountdown"]
 
-[connection signal="timeout" from="SpawnManager/Timer" to="SpawnManager" method="_on_SpawnTimer_timeout"]
+[node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="TrailSprite" parent="." instance=ExtResource( 2 )]
+
+[connection signal="timeout" from="SpawnManager/SpawnTimer" to="SpawnManager" method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="MainCountdown/MainCountdownTimer" to="." method="_on_MainCountdownTimer_timeout"]

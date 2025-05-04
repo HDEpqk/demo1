@@ -14,7 +14,6 @@ func _ready():
 		print("未能找到 CountdownLabel 节点！")
 	else:
 		print("已成功找到 CountdownLabel 节点。")
-		$"../MainCountdownLabel".anchor_left=0.2
 	$MainCountdownTimer.start()
 	
 # 计时器信号回调
