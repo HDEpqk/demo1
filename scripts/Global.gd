@@ -2,7 +2,8 @@
 extends Node
 
 
-var is_yang_mode:=false
+
+var taiji_mode=GameEnums.TaijiMode.yin
 var energy:float=0
 var min_energy:float=-10
 var max_energy:float=10
@@ -29,7 +30,10 @@ func _on_node_added(node):
 		print("单例脚本获取到新场景节点")
 		
 func reset_data():
-	is_yang_mode=false
+	taiji_mode=GameEnums.TaijiMode.yin
 	energy=0
 	min_energy=-10
 	max_energy=10
+
+func set_taiji_mode(var new_taiji_mode):
+	taiji_mode=new_taiji_mode

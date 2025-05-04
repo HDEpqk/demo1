@@ -1,23 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://art/scaleNeedle.png" type="Texture" id=1]
+[ext_resource path="res://art/ui/game/scaleNeedle.png" type="Texture" id=1]
 [ext_resource path="res://scripts/EnergyCalibration.gd" type="Script" id=2]
+[ext_resource path="res://new_theme.tres" type="Theme" id=3]
 
 [sub_resource type="Gradient" id=1]
 interpolation_mode = 1
 offsets = PoolRealArray( 0, 0.238532, 0.522936, 0.770642 )
-colors = PoolColorArray( 1, 0, 0, 1, 0, 0.596078, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1 )
+colors = PoolColorArray( 0.717647, 0, 0, 1, 0, 0.596078, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1 )
 
 [sub_resource type="GradientTexture2D" id=2]
 gradient = SubResource( 1 )
 
-[node name="EnergyCalibration" type="Node2D"]
+[node name="EnergyCalibration" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 12.0
+theme = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="BG" type="TextureRect" parent="."]
 self_modulate = Color( 0.768627, 0.768627, 0.768627, 1 )
-margin_right = 400.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_right = 200.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 0 )
 texture = SubResource( 2 )
 expand = true
 

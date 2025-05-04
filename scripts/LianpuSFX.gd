@@ -19,9 +19,6 @@ func _ready():
 
 
 
-func init(_color:Color, pos:Vector2):
-	pass
-	
 
 func cycle_color():
 	isSfxOn=!isSfxOn

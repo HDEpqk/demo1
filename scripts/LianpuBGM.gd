@@ -18,9 +18,6 @@ func _ready():
 		printerr("bgmSprite为空")
 
 
-
-func init(_color:Color, pos:Vector2):
-	pass
 	
 
 func cycle_color():
