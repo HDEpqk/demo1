@@ -33,18 +33,19 @@ _global_script_class_icons={
 [application]
 
 config/name="mydemo1"
-run/main_scene="res://scene/StartScene.tscn"
+run/main_scene="res://scene/game_scene/start/StartScene.tscn"
 
 [autoload]
 
-Global="*res://scripts/Global.gd"
-DataMgr="*res://scripts/DataMgr.gd"
-UiMgr="*res://scripts/UIMgr.gd"
+DataMgr="*res://scripts/global/DataMgr.gd"
+UiMgr="*res://scripts/global/UIMgr.gd"
+Global="*res://scripts/global/Global.gd"
+AnimationMgr="*res://scripts/global/AnimationMgr.gd"
 
 [display]
 
-window/size/width=640
-window/size/height=360
+window/size/width=960
+window/size/height=480
 window/size/always_on_top=true
 window/size/test_width=1280
 window/size/test_height=720
