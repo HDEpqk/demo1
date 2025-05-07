@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://art/ui/game/scaleNeedle.png" type="Texture" id=1]
+[ext_resource path="res://scripts/ui/EnergyCalibration.gd" type="Script" id=2]
+[ext_resource path="res://new_theme.tres" type="Theme" id=3]
+
+[sub_resource type="Gradient" id=1]
+interpolation_mode = 1
+offsets = PoolRealArray( 0, 0.238532, 0.522936, 0.770642 )
+colors = PoolColorArray( 0.717647, 0, 0, 1, 0, 0.596078, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+
+[node name="EnergyCalibration" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 12.0
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="BG" type="TextureRect" parent="."]
+self_modulate = Color( 0.768627, 0.768627, 0.768627, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_right = 200.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 200, 0 )
+texture = SubResource( 2 )
+expand = true
+
+[node name="mid" type="Label" parent="BG"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 40.0
+margin_right = 8.0
+margin_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+align = 1
+valign = 1
+
+[node name="min" type="Label" parent="BG"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 100.0
+margin_top = 40.0
+margin_right = 121.0
+margin_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_rotation = -0.019063
+text = "-10"
+align = 1
+valign = 1
+
+[node name="max" type="Label" parent="BG"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 100.0
+margin_top = 40.0
+margin_right = 116.0
+margin_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+align = 1
+valign = 1
+
+[node name="pointer" type="TextureRect" parent="BG"]
+self_modulate = Color( 0, 0, 1, 1 )
+margin_left = 200.0
+margin_right = 210.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="current" type="Label" parent="BG/pointer"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -9.0
+margin_top = -28.0
+margin_right = -1.0
+margin_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="CountdownLabel" type="Label" parent="BG"]
+margin_left = 430.0
+margin_top = 5.0
+margin_right = 458.0
+margin_bottom = 21.0
+rect_scale = Vector2( 2, 2 )
+align = 1
+valign = 1
+
+[node name="CountdownTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]
