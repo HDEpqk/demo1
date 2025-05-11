@@ -6,7 +6,6 @@ var current_time: int
 
 
 func _ready():
-	print("初始化Game_5min")
 	current_time = total_time
 	$MainCountdownTimer.wait_time = 1.0  # 每秒触发一次
 	$MainCountdownTimer.connect("timeout", self, "_on_MainCountdownTimer_timeout")
@@ -29,5 +28,4 @@ func _on_MainCountdownTimer_timeout():
 
 # 更新显示（保持缩进统一用4个空格）
 func update_display():
-	print("更新时间")
 	$MainCountdownLabel.text = "%d" % current_time

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scene/game_play/TrailSprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://art/ui/start/startSceneBG.png" type="Texture" id=4]
 [ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=5]
 [ext_resource path="res://scripts/game_scene/choose/LianpuChooseScene.gd" type="Script" id=6]

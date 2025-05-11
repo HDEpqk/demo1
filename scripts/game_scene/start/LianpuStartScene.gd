@@ -3,6 +3,7 @@ extends "res://scripts/game_play/Lianpu.gd"
 
 
 func _ready():
+	._ready()
 	# 安全初始化
 	taiji_mode=GameEnums.TaijiMode.huo
 	#该脸谱应该静止
@@ -26,7 +27,8 @@ func update_selection_label():
 		GameEnums.TaijiMode.shui:
 			$SelectionLabel.text="退出游戏"
 
-func queue_free():
+	
+func _on_animation_finished():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
 			#跳转到游戏选择界面
@@ -40,4 +42,3 @@ func queue_free():
 		GameEnums.TaijiMode.shui:
 			#退出游戏
 			get_tree().quit()
-	.queue_free()

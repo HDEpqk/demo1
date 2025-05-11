@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scene/game_play/TrailSprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/game_scene/setting/LianpuReturn.gd" type="Script" id=3]
 [ext_resource path="res://scripts/game_scene/setting/LianpuSFX.gd" type="Script" id=4]

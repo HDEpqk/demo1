@@ -1,38 +1,44 @@
 # Global.gd
 extends Node
 
-
-
 var taiji_mode=GameEnums.TaijiMode.yin
 var energy:float=0
+var score:float=0
 var min_energy:float=-10
 var max_energy:float=10
-var	random = RandomNumberGenerator.new()
 
+# 在Global.gd或独立配置文件中定义五行相克关系
+const WUXING_COUNTER = {
+	GameEnums.TaijiMode.huo: GameEnums.TaijiMode.jin,   # 火克金
+	GameEnums.TaijiMode.mu: GameEnums.TaijiMode.tu,     # 木克土
+	GameEnums.TaijiMode.tu: GameEnums.TaijiMode.shui,   # 土克水
+	GameEnums.TaijiMode.shui: GameEnums.TaijiMode.huo,  # 水克火
+	GameEnums.TaijiMode.jin: GameEnums.TaijiMode.mu     # 金克木
+}
 
 func _ready():
-	random.randomize()
-	# 尝试直接获取目标节点
-#	var tree = get_tree()
-#	var current_scene = tree.get_current_scene()
-#	ui = current_scene.get_node("UI")  # 根据实际节点路径修改
-#	if ui:
-#		print("单例脚本直接获取到新场景节点")
-#	else:
-#		# 若未获取到，再监听 node_added 信号
-#		tree.connect("node_added", self, "_on_node_added")
-#
-#
-#func _on_node_added(node):
-#	if node.name == "UI": # 根据实际节点名称修改
-#		ui = node
-#		print("单例脚本获取到新场景节点")
-		
+	EventBus.connect("global_energy_changed", self, "_on_energy_changed")
+	EventBus.connect("global_taiji_mode_changed", self, "_on_taiji_mode_changed")
+	EventBus.connect("global_score_changed", self, "_on_score_changed")
+	
+
+func _on_energy_changed(new_value: float):
+	energy = new_value
+	#DebugUtils.log("全局能量已更新："+str(energy))
+	
+func _on_taiji_mode_changed(new_value:int):
+	taiji_mode = new_value
+	#print("全局模式已更新：",taiji_mode)
+
+func _on_score_changed(new_value: float):
+	score= new_value
+	DebugUtils.log("全局分数已更新："+str(score))
+
 func reset_data():
 	taiji_mode=GameEnums.TaijiMode.yin
 	energy=0
+	score=0
 	min_energy=-10
 	max_energy=10
 
-func set_taiji_mode(var new_taiji_mode):
-	taiji_mode=new_taiji_mode
+
