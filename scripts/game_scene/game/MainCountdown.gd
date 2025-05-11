@@ -6,7 +6,6 @@ var current_time: int
 
 
 func _ready():
-	print("初始化MainCountdown")
 	current_time = total_time
 	$MainCountdownTimer.wait_time = 1.0  # 每秒触发一次
 	$MainCountdownTimer.connect("timeout", self, "_on_MainCountdownTimer_timeout")
@@ -18,7 +17,6 @@ func _ready():
 	
 # 计时器信号回调
 func _on_MainCountdownTimer_timeout():
-	print("更新时间")
 	current_time -= 1
 	update_display()
 	if current_time <= 0:

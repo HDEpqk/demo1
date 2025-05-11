@@ -9,6 +9,10 @@ signal event_triggered(event_name, event_args)
 signal score_changed(new_score)
 signal player_died(position)
 signal enemy_spawned(enemy_type)
+signal global_energy_changed(new_value)
+signal global_score_changed(new_value)
+signal global_taiji_mode_changed(new_value)
+signal cycle_lianpu(dic)
 
 func _ready():
 	instance = self  # 初始化实例引用

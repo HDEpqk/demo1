@@ -2,6 +2,10 @@
 class_name WeightedRandom
 
 static func get_item(weight_dict: Dictionary):
+	if weight_dict.empty():
+		push_error("权重字典为空！")
+		return null
+		
 	var total = 0
 	for key in weight_dict:
 		total += weight_dict[key]
