@@ -75,7 +75,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -140,7 +140,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.4 ),
+"times": PoolRealArray( 0.05 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -564,15 +564,16 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimatedDeath" type="AnimatedSprite" parent="."]
-visible = false
 frames = SubResource( 86 )
-animation = "death_01"
+animation = "death_04"
+frame = 10
 
 [node name="Area2D" type="Area2D" parent="." groups=["danger_area"]]
 collision_layer = 2
 
 [node name="MetalCollision" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 27 )
+disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -580,6 +581,9 @@ __meta__ = {
 [node name="LoopTimer" type="Timer" parent="."]
 
 [node name="EndTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
 
 [connection signal="timeout" from="LoopTimer" to="." method="_on_LoopTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

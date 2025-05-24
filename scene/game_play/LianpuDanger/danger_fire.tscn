@@ -100,11 +100,6 @@ animations = [ {
 "name": "begin_attack",
 "speed": 12.0
 }, {
-"frames": [  ],
-"loop": true,
-"name": "death01",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "loop_attack",
@@ -362,6 +357,7 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 11 )
 animation = "begin_attack"
 __meta__ = {
@@ -371,7 +367,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimatedDeath" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( 0, -13 )
 frames = SubResource( 86 )
 animation = "death_01"
@@ -388,3 +383,6 @@ disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"

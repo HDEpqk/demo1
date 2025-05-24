@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
@@ -6,10 +6,471 @@
 [ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=4]
 [ext_resource path="res://scripts/game_scene/end/GameOverScene.gd" type="Script" id=5]
 [ext_resource path="res://scripts/game_scene/end/LianpuGameOver.gd" type="Script" id=6]
+[ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=7]
+[ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.94378
 height = 6.81431
+
+[sub_resource type="AtlasTexture" id=86]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=65]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=66]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=67]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=87]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=88]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=68]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=89]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=69]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=90]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 576, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=91]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=63]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=64]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=70]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 192, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=71]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 256, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=72]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 320, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=73]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 384, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=74]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 448, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=75]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 512, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=76]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 576, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=77]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=78]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 64, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=79]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 128, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=80]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 192, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=81]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 256, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=82]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 320, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=83]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 384, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=84]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 448, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=85]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 512, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=92]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 0, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=93]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 64, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=94]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 128, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=95]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 192, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=96]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 256, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=97]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 320, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=98]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 384, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=99]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 448, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=100]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 512, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=101]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 576, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=102]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 640, 446, 64, 63 )
+
+[sub_resource type="SpriteFrames" id=103]
+animations = [ {
+"frames": [ SubResource( 86 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 87 ), SubResource( 88 ), SubResource( 68 ), SubResource( 89 ), SubResource( 69 ), SubResource( 90 ), null ],
+"loop": true,
+"name": "death_01",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 91 ), SubResource( 63 ), SubResource( 64 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), null ],
+"loop": true,
+"name": "death_02",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), null ],
+"loop": true,
+"name": "death_03",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ), null ],
+"loop": true,
+"name": "death_04",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=104]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=105]
+resource_name = "death_01"
+length = 0.2
+loop = true
+step = 0.02
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_01" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedDeath:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=106]
+resource_name = "death_02"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_02" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=107]
+resource_name = "death_03"
+length = 0.18
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_03" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.18 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=108]
+resource_name = "death_04"
+length = 0.22
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_04" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.22 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="GameOverScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -18,7 +479,7 @@ script = ExtResource( 5 )
 
 [node name="Center" parent="." instance=ExtResource( 2 )]
 
-[node name="LianpuGameOver" type="RigidBody2D" parent="." groups=["enemies"]]
+[node name="LianpuGameOver" type="RigidBody2D" parent="." groups=["lianpu"]]
 mode = 1
 script = ExtResource( 6 )
 
@@ -41,12 +502,66 @@ text = "返回选择界面"
 align = 1
 valign = 1
 
-[node name="Label" type="Label" parent="."]
-margin_right = 80.0
+[node name="AnimatedDeath" type="AnimatedSprite" parent="LianpuGameOver"]
+frames = SubResource( 103 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuGameOver"]
+bus = "SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LianpuGameOver"]
+anims/RESET = SubResource( 104 )
+anims/death_01 = SubResource( 105 )
+anims/death_02 = SubResource( 106 )
+anims/death_03 = SubResource( 107 )
+anims/death_04 = SubResource( 108 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -40.0
+margin_top = 40.0
+margin_right = 24.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 32, 0 )
+theme = ExtResource( 1 )
+text = "游戏结束"
+align = 1
+valign = 1
+
+[node name="HighestScoreLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -36.0
+margin_top = 338.0
+margin_right = 36.0
 margin_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 36, 0 )
 theme = ExtResource( 1 )
-text = "游戏结束"
+text = "历史最高得分:"
+align = 1
+valign = 1
+
+[node name="CurrentScoreLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -36.0
+margin_top = 459.0
+margin_right = 36.0
+margin_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 36, 0 )
+theme = ExtResource( 1 )
+text = "本局得分:"
 align = 1
 valign = 1

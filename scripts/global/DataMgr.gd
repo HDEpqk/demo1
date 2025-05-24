@@ -11,8 +11,7 @@ var default_settings = {
 		"sound_enabled": true,
 	},
 	"game": {
-		"last_level": 1,
-		"high_score": 0
+		"highest_score": 0
 	}
 }
 

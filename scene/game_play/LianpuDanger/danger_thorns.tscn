@@ -384,3 +384,6 @@ polygon = PoolVector2Array( -11, 4.80825e-07, -7, -5, -8, -13, 6, -27, 12, -30, 
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
