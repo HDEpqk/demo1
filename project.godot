@@ -45,8 +45,8 @@ EventBus="*res://scripts/global/EventBus.gd"
 
 [display]
 
-window/size/width=960
-window/size/height=480
+window/size/width=1280
+window/size/height=720
 window/size/always_on_top=true
 window/size/test_width=1280
 window/size/test_height=720
@@ -75,6 +75,7 @@ ui_pause={
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="lianpu"
+2d_physics/layer_3="dead"
 
 [physics]
 

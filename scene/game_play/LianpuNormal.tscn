@@ -290,3 +290,6 @@ anims/death_04 = ExtResource( 7 )
 visible = false
 frames = SubResource( 45 )
 animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"

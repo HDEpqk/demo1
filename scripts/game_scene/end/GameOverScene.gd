@@ -12,8 +12,10 @@ func _ready():
 	#设置center的位置
 	$Center.position.x=viewport_size.x/2
 	$Center.position.y=viewport_size.y-100
-	#设置label的scale
-	$Label.rect_scale=Vector2(5,5)
-	#设置label的位置
-	$Label.rect_position.x=viewport_size.x/2-$Label.rect_size.x/2*$Label.rect_scale.x
+
+	var highest_score=DataMgr.get_setting("game","highest_score")
+	if Global.score>highest_score:
+		DataMgr.set_setting("game","highest_score",Global.score)
 	
+	$CanvasLayer/HighestScoreLabel.text="历史最高得分:"+str(DataMgr.get_setting("game","highest_score"))
+	$CanvasLayer/CurrentScoreLabel.text="本局得分:"+str(Global.score)

@@ -90,6 +90,8 @@ func check_energy():
 		if is_timming:
 			#关闭倒计时文本
 			countdown_label.visible=false
+			#把倒计时文本恢复颜色
+			countdown_label.self_modulate=Color.white
 			#关闭计时器
 			countdown_timer.stop()
 			is_timming=!is_timming
@@ -100,9 +102,6 @@ func check_energy():
 			elif temp_energy>0:
 				Global.max_energy=temp_energy
 				max_energy_label.text=str(float("%0.1f" % Global.max_energy))
-	#print("check_energy:temp_energy=",temp_energy)
-	#print("check_energy:min_energy=",Global.min_energy)
-	#print("check_energy:max_energy=",Global.max_energy)
 	
 		
 # 计时器信号回调
@@ -112,8 +111,12 @@ func _on_CountdownTimer_timeout():
 	if current_time <= 0:
 		countdown_timer.stop()
 		countdown_label.text = "TIME UP!"
+		#把倒计时文本恢复颜色
+		countdown_label.self_modulate=Color.white
 		#跳转到结束界面
-		get_tree().change_scene("res://scene/GameOverScene.tscn")
+		get_tree().change_scene("res://scene/game_scene/end/GameOverScene.tscn")
+	elif current_time<=10:
+		countdown_label.self_modulate=Color.red
 
 # 更新显示（保持缩进统一用4个空格）
 func update_display():

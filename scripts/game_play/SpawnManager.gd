@@ -3,7 +3,16 @@ extends Node2D
 
 # 配置参数
 export var base_spawn_interval := 3.0
-export var score_acceleration := 0.98  # 每100分时间缩短系数
+export var score_acceleration := 0.98  # 每1000分时间缩短系数
+export var min_spawn_interval: float = 0.3   # 最小生成间隔
+#加速后的生成间隔
+var accelerate_spawn_interval:=1.0
+#减速后的生成间隔
+var decelerate_spawn_interval:=5.0
+#当前是否是加速状态
+var is_accelerate:=false
+#当前是否是减速状态
+var is_decelerate:=false
 
 # 敌人配置（类型、场景、最小分数、权重）
 const ENEMY_CONFIG := [
@@ -11,7 +20,7 @@ const ENEMY_CONFIG := [
 		"type": "normal",
 		"scene": preload("res://scene/game_play/LianpuNormal.tscn"),
 		"min_score": 0,
-		"weight": 60,
+		"weight": 100,
 		"reward_score":1,
 		"speed":30
 	},
@@ -19,40 +28,67 @@ const ENEMY_CONFIG := [
 		"type": "danger_fire",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_fire.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 30,
+		"weight": 20,
 		"reward_score":5,
-		"speed":30
+		"speed":20
 	},
 	{
 		"type": "danger_metal",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_metal.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 10,
-		"reward_score":5,
-		"speed":30
+		"weight": 20,
+		"reward_score":10,
+		"speed":20
 	},
 	{
 		"type": "danger_thorns",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_thorns.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 30,
+		"weight": 20,
 		"reward_score":5,
-		"speed":30
+		"speed":20
 	},
 	{
 		"type": "danger_water",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_water.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 30,
+		"weight": 20,
 		"reward_score":5,
-		"speed":30
+		"speed":20
 	},
-#	{
-#		"type": "prop",
-#		"scene": preload(""),
-#		"min_score": 200,
-#		"weight": 10
-#	}
+	{
+		"type": "prop_accelerate",
+		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 10,
+		"reward_score":5,
+		"speed":10
+	},
+	{
+		"type": "prop_crazy",
+		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
+		"weight": 5,
+		"reward_score":5,
+		"speed":10
+	},
+	{
+		"type": "prop_multiple",
+		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
+		"min_score": 80,#全局分数达到该分数才生成该lianpu
+		"weight": 10,
+		"reward_score":5,
+		"speed":10
+	},
+	{
+		"type": "prop_decelerate",
+		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 10,
+		"reward_score":5,
+		"speed":10
+	}
+	
 ]
 
 onready var timer = $SpawnTimer
@@ -61,17 +97,32 @@ onready var enemy_container=$SpawnedEnemies
 
 func _ready():
 	update_spawn_speed()
-	EventBus.connect("score_updated", self, "_on_score_updated")
+	EventBus.connect("global_score_changed", self, "_on_score_changed")
 	EventBus.connect("cycle_lianpu", self, "_on_cycle_lianpu")
-
-func _on_score_updated(new_score: int):
+	EventBus.connect("accelerate_spawn_begin", self, "_on_accelerate_spawn_begin")
+	EventBus.connect("accelerate_spawn_end", self, "_on_accelerate_spawn_end")
+	EventBus.connect("decelerate_spawn_begin", self, "_on_decelerate_spawn_begin")
+	EventBus.connect("decelerate_spawn_end", self, "_on_decelerate_spawn_end")
+	
+func _on_score_changed(new_score: int):
 	current_score = new_score
 	update_spawn_speed()
 
 func update_spawn_speed():
-	# 根据分数加速生成：每100分减少2%间隔时间
-	var acceleration = pow(score_acceleration, floor(current_score / 100.0))
-	timer.wait_time = base_spawn_interval * acceleration
+
+	DebugUtils.log("update_spawn_speed() - is_accelerate: " + str(is_accelerate) + ", is_decelerate: " + str(is_decelerate))
+	# 原方法代码...
+	# 根据分数加速生成：每1000分减少2%间隔时间
+	var acceleration = pow(score_acceleration, floor(current_score / 1000.0))
+	var current_spawn_interval
+	if is_accelerate:
+		current_spawn_interval=max(accelerate_spawn_interval, min_spawn_interval)
+	elif is_decelerate:
+		current_spawn_interval=max(decelerate_spawn_interval, min_spawn_interval)
+	else:
+		current_spawn_interval = max(base_spawn_interval * acceleration, min_spawn_interval)
+	timer.wait_time = current_spawn_interval
+	DebugUtils.log("当前生成间隔时间："+str(timer.wait_time))
 	if timer.is_stopped():
 		timer.start()
 
@@ -218,3 +269,26 @@ func _spawn_replacement(config: Dictionary, pos: Vector2):
 	Color.transparent, Color.white, 0.3)
 	tween.start()
 
+func _on_accelerate_spawn_begin(duration):
+	DebugUtils.log("begin accelerate!:SpawnMgr")
+	is_accelerate=true
+	if is_decelerate:
+		is_decelerate=false
+	update_spawn_speed()	
+
+func _on_accelerate_spawn_end(value):
+	DebugUtils.log("end accelerate!:SpawnMgr")
+	is_accelerate=false
+	update_spawn_speed()	
+
+func _on_decelerate_spawn_begin(duration):
+	DebugUtils.log("begin decelerate!:SpawnMgr")
+	is_decelerate=true
+	if is_accelerate:
+		is_accelerate=false
+	update_spawn_speed()
+
+func _on_decelerate_spawn_end(value):
+	DebugUtils.log("end decelerate!:SpawnMgr")
+	is_decelerate=false
+	update_spawn_speed()	

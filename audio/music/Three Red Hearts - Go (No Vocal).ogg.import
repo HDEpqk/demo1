@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Three Red Hearts - Go (No Vocal).ogg-44fcea410c0ce2d544ef40f8737bbbf4.oggstr"
+
+[deps]
+
+source_file="res://audio/music/Three Red Hearts - Go (No Vocal).ogg"
+dest_files=[ "res://.import/Three Red Hearts - Go (No Vocal).ogg-44fcea410c0ce2d544ef40f8737bbbf4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

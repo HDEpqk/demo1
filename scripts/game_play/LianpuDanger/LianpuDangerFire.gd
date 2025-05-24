@@ -13,7 +13,10 @@ func _physics_process(delta):
 func init(_mode:int, pos:Vector2, _reward_score:float, _speed:float):
 	.init(_mode, pos, _reward_score, _speed)
 	taiji_mode = GameEnums.TaijiMode.huo
-
+	#关闭死亡动画sprite
+	$AnimatedDeath.visible=false
+	#开启普通动画
+	$AnimatedSprite.visible=true
 	
 #切换到循环动画
 func switch_loop_attack():
@@ -21,8 +24,8 @@ func switch_loop_attack():
 	
 func handle_death():
 	#关闭碰撞体和图片
-	$BodyCollision.set_deferred("disabled", true)
-	$Area2D/FireCollision.set_deferred("disabled", true)
+	$BodyCollision.set("disabled", true)
+	$Area2D/FireCollision.set("disabled", true)
 	$AnimatedSprite.visible=false
 	.handle_death()
 

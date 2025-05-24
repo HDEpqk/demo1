@@ -7,7 +7,10 @@ onready var isSfxOn:bool=DataMgr.get_setting("audio","sound_enabled")
 func _ready():
 	# 安全初始化图片
 	if sfxSprite!= null:
-		sfxSprite.texture=load("res://art/ui/setting/sfxOn.png")
+		if isSfxOn:
+			sfxSprite.texture=load("res://art/ui/setting/sfxOn.png")
+		else:
+			sfxSprite.texture=load("res://art/ui/setting/sfxOff.png")
 	else:
 		printerr("bgmSprite为空")
 	#该脸谱应该静止
@@ -20,15 +23,17 @@ func _ready():
 
 
 
-func cycle_color():
+func cycle_taiji_mode():
 	isSfxOn=!isSfxOn
 	if isSfxOn:
 		sfxSprite.texture=load("res://art/ui/setting/sfxOn.png")
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), false)#取消静音
 	else:
 		sfxSprite.texture=load("res://art/ui/setting/sfxOff.png")
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), true)#静音
 
 	DataMgr.set_setting("audio","sound_enabled",isSfxOn)
 
 
-func queue_free():
+func handle_death():
 	pass

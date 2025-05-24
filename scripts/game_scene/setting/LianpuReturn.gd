@@ -18,12 +18,10 @@ func _ready():
 
 
 
-	
-
-func cycle_color():
+func cycle_taiji_mode():
 	pass
 
 
-func queue_free():
+func handle_death():
 	get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")
 	.queue_free()

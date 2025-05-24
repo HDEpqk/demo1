@@ -1,6 +1,13 @@
 extends Node2D
 
-
+# 在脚本顶部预加载所有音效资源（只加载一次）
+const SFX_JIN = preload("res://audio/sfx/jin1.wav")
+const SFX_MU = preload("res://audio/sfx/mu1.wav")
+const SFX_SHUI = preload("res://audio/sfx/shui1.wav")
+const SFX_HUO = preload("res://audio/sfx/huo2.wav")
+const SFX_TU = preload("res://audio/sfx/tu.tres")
+const SFX_YANG= preload("res://audio/sfx/yang2.wav")
+const SFX_CYCLE_CENTER= preload("res://audio/sfx/cycle_center.wav")
 
 const FOLLOW_SPEED = 60
 export var pointCount = 10
@@ -9,14 +16,16 @@ var press_timer = 0.0
 export var long_press_threshold = 0.01  # 推荐设置为0.5秒
 onready var area2d = $Area2D
 onready var trail=$Node/Trail
+onready var audio_player = $AudioStreamPlayer
 
 #处理连击
 var combo_count := 0
 var current_combo_type = null
 var last_kill_time := 0.0
-const COMBO_TIMEOUT := 1.0  # 连击有效时间窗口（秒）
+const COMBO_TIMEOUT := 0.5  # 连击有效时间窗口（秒）
 var combo_history = []  # 存储最近三次连击的太极模式
 const REQUIRED_UNIQUE_TYPES = 3  # 需要不同模式的数量
+
 
 
 func _ready():
@@ -29,6 +38,12 @@ func _ready():
 	trail.default_color=Color.black
 	#订阅太极模式变化的事件
 	EventBus.connect("global_taiji_mode_changed",self,"update_trailSprite_texture")
+	#订阅太极模式变化的事件
+	EventBus.connect("global_taiji_mode_changed",self,"play_taiji_mode_sound")
+	#订阅player受伤的事件
+	EventBus.connect("player_hurt",self,"_on_player_hurt")
+	#订阅player恢复的事件
+	EventBus.connect("player_recovery",self,"_on_player_recovery")
 	
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
@@ -65,36 +80,27 @@ func _physics_process(delta):
 		trail.clear_points()
 
 func _on_body_entered(body):
-	if !is_long_pressed: return
+	DebugUtils.log("_on_body_entered:"+body.name)
+	if !is_long_pressed or !Global.mode_status[Global.taiji_mode]["isActive"] : return
 	
 	if body.is_in_group("lianpu"):
 		# 获取敌人的太极模式类型
 		var enemy_type = body.taiji_mode  # 需要确保敌人有taiji_mode属性
 		# 获取敌人的奖励分数
 		var base_score=body.reward_score
-		
-		 # 应用五行相克规则
-		var actual_score = handle_element_counter(
-			Global.taiji_mode,
-			enemy_type,
-			base_score
-		)
-		 # 显示克制关系提示
-		if actual_score > base_score:
-			show_counter_effect("相克加成")
-		elif actual_score < base_score:
-			show_counter_effect("反被克制") 
 	
 	# 原有敌人处理逻辑
 		match Global.taiji_mode:
 			GameEnums.TaijiMode.yang:
 				body.cycle_taiji_mode()
+				audio_player.stream=SFX_YANG
+				audio_player.play()
 				return
 			_:	
-				var new_score=Global.score+actual_score
-				DebugUtils.log("new_score:"+str(new_score))
-				EventBus.fire_event("global_score_changed",new_score)
-				body.handle_death()
+				if body.is_in_group("lianpu_dodge"):
+					body.handle_death_water(false)
+				else:
+					body.handle_death()  # 销毁敌人
 				
 		# 连击逻辑
 		var current_time = OS.get_ticks_msec() / 1000.0
@@ -120,8 +126,8 @@ func _on_body_entered(body):
 				
 			if unique_types.size() == REQUIRED_UNIQUE_TYPES:
 				print("触发土之太极模式")
-				EventBus.fire_event("global_taiji_mode_changed", GameEnums.TaijiMode.tu)
-				var score_3x = Global.score + actual_score * 3
+				EventBus.fire_event_multiparameter("global_taiji_mode_changed", GameEnums.TaijiMode.tu,Global.taiji_mode)
+				var score_3x = Global.score + base_score * 3*Global.multiple
 				EventBus.fire_event("global_score_changed", score_3x)
 				# 重置连击状态
 				combo_history.clear()
@@ -143,46 +149,17 @@ func _on_body_entered(body):
 		# 处理奖励（每次连击更新时判断）
 		if combo_count == 2:
 			DebugUtils.log("Global.score:"+str(Global.score))
-			var score_2x = Global.score + actual_score * 2
+			var score_2x = Global.score + base_score * 2*Global.multiple
 			EventBus.fire_event("global_score_changed", score_2x)
 		elif combo_count >= 3:
-			var score_3x = Global.score + actual_score * combo_count
+			var score_3x = Global.score + base_score * 3*Global.multiple
 			EventBus.fire_event("global_score_changed", score_3x)
-			EventBus.fire_event("global_taiji_mode_changed", enemy_type)
+			EventBus.fire_event_multiparameter("global_taiji_mode_changed",enemy_type,Global.taiji_mode)
 			combo_count = 0  # 重置连击
 
 
 		last_kill_time = current_time
-			
-		#node2d.visible = false					
-
-# 视觉反馈方法
-func show_counter_effect(text):
-	var label = Label.new()
-	label.text = text
-	label.add_color_override("font_color", Color.red if "克制" in text else Color.blue)
-	add_child(label)
-	label.rect_position = get_global_mouse_position()
-	# 添加动画效果...
-
-# 在敌人处理逻辑中添加分数调整
-func handle_element_counter(global_mode, enemy_mode, base_score):
-	# 获取克制关系
-	var counter_target = Global.WUXING_COUNTER.get(global_mode)
-	
-	if counter_target == enemy_mode:
-		# 克制加成
-		var bonus_score = base_score * 2
-		print("五行相克！加成分数: ", bonus_score)
-		return bonus_score
-	elif Global.WUXING_COUNTER.get(enemy_mode) == global_mode:
-		# 被克制惩罚
-		var penalty = base_score / 2
-		print("反被克制！扣除分数: ", penalty)
-		return -penalty
-	else:
-		# 普通得分
-		return base_score
+						
 
 func _on_area_entered(area):
 	if !is_long_pressed: return
@@ -190,13 +167,33 @@ func _on_area_entered(area):
 	if area.is_in_group("center"):
 		match Global.taiji_mode:
 			GameEnums.TaijiMode.yang:
-				EventBus.fire_event("global_taiji_mode_changed",GameEnums.TaijiMode.yin)
+				
+				EventBus.fire_event_multiparameter("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode)
 			_:	
-				EventBus.fire_event("global_taiji_mode_changed",GameEnums.TaijiMode.yang)
-	elif area.is_in_group("danger_area"):
+				EventBus.fire_event_multiparameter("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode)
+		audio_player.stream=SFX_CYCLE_CENTER
+		audio_player.play()
+		DebugUtils.log("播放了cycle_center音效")
+	elif area.is_in_group("danger_area") and !Global.is_invincible:
+		var root_script
+		
+		 #获取所有加入 "game_controller" 组的节点（通常只有根节点）
+		var controller_nodes = get_tree().get_nodes_in_group("lianpu")
+		if controller_nodes.size() > 0:
+			root_script = controller_nodes[0]
+			# 获取克制关系
+			var counter_target = Global.WUXING_COUNTER.get(Global.taiji_mode)
+			if counter_target == root_script.taiji_mode:
+				DebugUtils.log("五行相克！无视危险区域")
+				return
+		if root_script.is_dying:
+			DebugUtils.log("正在死亡的敌人！无视危险区域")
+			return  # 忽略正在死亡的敌人
+		
+		EventBus.fire_event("player_hurt",Global.taiji_mode)
 		DebugUtils.log("player hurt")
 	
-func update_trailSprite_texture(new_value:int):
+func update_trailSprite_texture(new_value:int,old_value:int=0):
 	match new_value:
 		GameEnums.TaijiMode.yin:
 			trail.default_color=Color.black
@@ -212,4 +209,61 @@ func update_trailSprite_texture(new_value:int):
 			trail.default_color=Color.firebrick
 		GameEnums.TaijiMode.tu:
 			trail.default_color=Color("#b36d41")
-	#DebugUtils.log("trail图片已更新")
+	if Global.mode_status[new_value]["isActive"]:
+		trail.self_modulate.a=1
+	else:
+		trail.self_modulate.a=28/255.0
+
+
+
+func play_taiji_mode_sound(new_value: int,old_value:int) -> void:
+	var sound_stream = null
+	
+	match new_value:
+		GameEnums.TaijiMode.yin:
+			return  # 不播放音效，直接返回
+			
+		GameEnums.TaijiMode.yang:
+			return  # 不播放音效，直接返回
+			
+		GameEnums.TaijiMode.jin:
+			sound_stream = SFX_JIN
+			DebugUtils.log("准备播放jin音效")
+			
+		GameEnums.TaijiMode.mu:
+			sound_stream = SFX_MU
+			DebugUtils.log("准备播放mu音效")
+			
+		GameEnums.TaijiMode.shui:
+			sound_stream = SFX_SHUI
+			DebugUtils.log("准备播放shui音效")
+			
+		GameEnums.TaijiMode.huo:
+			sound_stream = SFX_HUO
+			DebugUtils.log("准备播放huo音效")
+			
+		GameEnums.TaijiMode.tu:
+			sound_stream = SFX_TU
+			DebugUtils.log("准备播放tu音效")
+			
+		_:
+			DebugUtils.log("未知的五行模式: " + str(new_value))
+			return  # 未知模式，不播放任何音效
+	
+	# 统一处理音效播放
+	if sound_stream:
+		audio_player.stream = sound_stream
+		audio_player.play()
+		DebugUtils.log("音效播放成功")
+	else:
+		DebugUtils.log("错误: 未找到匹配的音效资源")
+
+func _on_player_hurt(global_mode):
+	DebugUtils.log("玩家受伤时做的事2")
+	#调低trail透明度
+	trail.self_modulate.a=28/255.0
+	#禁用player和lianpu的交互
+
+func _on_player_recovery(global_mode):
+	#调回trail透明度
+	trail.self_modulate.a=1

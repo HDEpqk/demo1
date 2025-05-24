@@ -34,7 +34,7 @@ grow_vertical = 2
 texture = ExtResource( 8 )
 expand = true
 
-[node name="LianpuBGM" type="RigidBody2D" parent="." groups=["enemies"]]
+[node name="LianpuBGM" type="RigidBody2D" parent="." groups=["lianpu"]]
 pause_mode = 2
 position = Vector2( 390, 352 )
 mode = 1
@@ -57,7 +57,7 @@ theme = ExtResource( 9 )
 align = 1
 valign = 1
 
-[node name="LianpuSFX" type="RigidBody2D" parent="." groups=["enemies"]]
+[node name="LianpuSFX" type="RigidBody2D" parent="." groups=["lianpu"]]
 pause_mode = 2
 position = Vector2( 840, 352 )
 mode = 1
@@ -87,7 +87,7 @@ position = Vector2( 654, 610 )
 [node name="TrailSprite" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
 
-[node name="LianpuReturn" type="RigidBody2D" parent="." groups=["enemies"]]
+[node name="LianpuReturn" type="RigidBody2D" parent="." groups=["lianpu"]]
 pause_mode = 2
 position = Vector2( 840, 352 )
 mode = 1
