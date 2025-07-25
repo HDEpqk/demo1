@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/game_scene/choose/ChooseScene.gd" type="Script" id=7]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=8]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=9]
+[ext_resource path="res://scene/game_scene/setting/LianpuReturn.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.94378
@@ -485,7 +486,7 @@ grow_vertical = 2
 texture = ExtResource( 4 )
 expand = true
 
-[node name="TrailSprite" parent="." instance=ExtResource( 3 )]
+[node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="Center" parent="." instance=ExtResource( 2 )]
 position = Vector2( 486, 461 )
@@ -526,3 +527,5 @@ anims/death_01 = SubResource( 105 )
 anims/death_02 = SubResource( 106 )
 anims/death_03 = SubResource( 107 )
 anims/death_04 = SubResource( 108 )
+
+[node name="LianpuReturn" parent="." instance=ExtResource( 10 )]

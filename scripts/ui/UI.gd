@@ -1,6 +1,9 @@
 # UI.gd
 extends CanvasLayer
 
+onready var viewport_size = get_viewport().size
+onready var bg:TextureRect=$BG
+onready var crazy_time_bg=$CrazyTimeBG
 onready var energy_calibration=$EnergyCalibration
 
 onready var pause_btn=$PauseButton
@@ -25,13 +28,14 @@ onready var decelerate_spawn_timer=$DecelerateSpawnLabel/DecelerateeSpawnTimer
 onready var crazy_time_timer=$CrazyTime/CrazyTimeTimer
 
 var current_multiple_time:float=0
-var total_multiple_time:float=5
 
 var current_accelerate_spawn_time:float=0
 
 var current_decelerate_spawn_time:float=0
 
 var current_crazy_time:float=0
+
+#var is_multiple_timer_timming:bool=false#加倍计时器是否在倒计时
 
 func _ready():
 	pause_btn.connect("pressed", self, "_on_pauseBtn_pressed")
@@ -63,8 +67,13 @@ func _ready():
 	decelerate_spawn_timer_Label.self_modulate=Color.skyblue
 	#订阅开始疯狂时间的事件
 	EventBus.connect("crazy_time_begin",self,"_on_crazy_time_begin")
-	#隐藏背景
-	$BG.visible=false
+	#隐藏crazyTime背景
+	crazy_time_bg.visible=false
+	#设置背景的缩放
+#	var texture_size = bg.get_size()
+#	var scale_x = viewport_size.x / texture_size.x
+#	var scale_y = viewport_size.y / texture_size.y
+#	bg.rect_scale = Vector2(scale_x, scale_y)
 	
 func _on_pauseBtn_pressed():
 	UiMgr.show_control("PausePanel")
@@ -77,13 +86,15 @@ func _update_score_label(new_value: float):
 	total_score_label.text="分数:"+str(new_value)
 	#DebugUtils.log("分数UI已更新")
 
-func _on_global_multiple_changed(new_value: int):
-	var multiple=clamp(new_value,1,2)
+func _on_global_multiple_changed(new_value: int,isTiming:bool,duration:float):
+	var multiple=clamp(new_value,1,8)
 	total_multipleLabel.text="倍数:X"+str(multiple)
-	multiple_timer_Label.visible=true
-	current_multiple_time=total_multiple_time
-	multiple_timer_Label.text="%d" %current_multiple_time	
-	multiple_timer.start()
+	if isTiming:
+		multiple_timer_Label.visible=true
+		current_multiple_time=duration
+		multiple_timer_Label.text="%d" %current_multiple_time	
+		multiple_timer.start()
+
 
 
 func _on_MultipleTimer_timeout():
@@ -93,8 +104,9 @@ func _on_MultipleTimer_timeout():
 		multiple_timer.stop()
 		multiple_timer_Label.visible=false
 		#倒计时结束后要把倍数调回去
-		Global.multiple=1
-		total_multipleLabel.text="倍数:X"+str(Global.multiple)
+		Global.set_lianpu_multiple(1)
+		EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
+		total_multipleLabel.text="倍数:X"+str(Global.get_multiple())
 
 func _on_accelerate_spawn_begin(duration):
 	DebugUtils.log("begin accelerate!:UI")
@@ -146,20 +158,22 @@ func _on_DecelerateeSpawnTimer_timeout():
 func _on_crazy_time_begin(duration):
 	current_crazy_time=duration
 	crazy_time_timer.start()
-	#显示背景
-	$BG.color=Color.gold
-	$BG.color.a=0.4
-	$BG.visible=true
+	#显示crazy_time_bg背景
+	crazy_time_bg.color=Color.gold
+	crazy_time_bg.color.a=0.4
+	crazy_time_bg.visible=true
 	DebugUtils.log("显示BG,当前BG的visible="+str($BG.visible))
 	#开始加速
-	EventBus.fire_event("accelerate_spawn_begin",5)
+	EventBus.fire_event("accelerate_spawn_begin",current_crazy_time)
+	#开始加倍
+	Global.set_lianpu_multiple(2)
+	EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),true,current_crazy_time)
 
 func _on_CrazyTimeTimer_timeout():
 	current_crazy_time-=1
 	if current_crazy_time<=0:
 		crazy_time_timer.stop()
-		#隐藏背景
-		$BG.visible=false
+		#隐藏crazy_time_bg背景
+		crazy_time_bg.visible=false
 		EventBus.fire_event("crazy_time_end")
-
 	

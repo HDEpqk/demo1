@@ -4,6 +4,10 @@
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=2]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=3]
 [ext_resource path="res://scripts/game_play/LianpuProp/LianpuPropCrazy.gd" type="Script" id=4]
+[ext_resource path="res://anim/LianpuDeath/death_03.anim" type="Animation" id=5]
+[ext_resource path="res://anim/LianpuDeath/death_01.anim" type="Animation" id=6]
+[ext_resource path="res://anim/LianpuDeath/death_04.anim" type="Animation" id=7]
+[ext_resource path="res://anim/LianpuDeath/death_02.anim" type="Animation" id=8]
 
 [sub_resource type="Animation" id=86]
 length = 0.001
@@ -30,227 +34,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=87]
-resource_name = "death_01"
-length = 0.2
-loop = true
-step = 0.02
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_animation_finished"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_01" ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedDeath:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=88]
-resource_name = "death_02"
-length = 0.2
-step = 0.02
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_02" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_animation_finished"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=89]
-resource_name = "death_03"
-length = 0.18
-step = 0.02
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_03" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.18 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_animation_finished"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=90]
-resource_name = "death_04"
-length = 0.22
-step = 0.02
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_04" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.22 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_animation_finished"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
 }
 
 [sub_resource type="Animation" id=91]
@@ -597,28 +380,30 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="prop_crazy" type="RigidBody2D" groups=["lianpu"]]
+[node name="prop_crazy" type="RigidBody2D" groups=["lianpu", "lianpu_prop"]]
 collision_layer = 2
 script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "loop"
 anims/RESET = SubResource( 86 )
-anims/death_01 = SubResource( 87 )
-anims/death_02 = SubResource( 88 )
-anims/death_03 = SubResource( 89 )
-anims/death_04 = SubResource( 90 )
+anims/death_01 = ExtResource( 6 )
+anims/death_02 = ExtResource( 8 )
+anims/death_03 = ExtResource( 5 )
+anims/death_04 = ExtResource( 7 )
 anims/loop = SubResource( 91 )
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -7.52316e-37, -3 )
 scale = Vector2( 4.746, 4.746 )
 shape = SubResource( 92 )
+disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 109 )
 animation = "loop"
 __meta__ = {
@@ -626,12 +411,27 @@ __meta__ = {
 }
 
 [node name="AnimatedDeath" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( 0, -13 )
 frames = SubResource( 110 )
-animation = "death_01"
+animation = "death_04"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
+
+[node name="EnergyLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -17.0
+margin_right = 16.0
+margin_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+text = "-10"
+align = 1
+valign = 1
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

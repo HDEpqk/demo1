@@ -12,7 +12,7 @@
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
-[node name="TrailSprite" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="SpawnManager" parent="." instance=ExtResource( 4 )]
 

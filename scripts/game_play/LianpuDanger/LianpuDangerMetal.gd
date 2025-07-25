@@ -8,11 +8,6 @@ export var end_duration := 2     # end_attack持续时间
 
 func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	.init(_mode,pos,_reward_score,_speed)
-	taiji_mode = GameEnums.TaijiMode.jin
-	#关闭死亡动画sprite
-	$AnimatedDeath.visible=false
-	#开启普通动画
-	$AnimatedSprite.visible=true
 	# 初始化计时器（替代动态创建方案）
 	$LoopTimer.wait_time = loop_duration
 	$EndTimer.wait_time = end_duration
@@ -31,6 +26,9 @@ func _on_EndTimer_timeout():
 
 # 维护原有碰撞和死亡逻辑
 func handle_death():
+	#暂停所有计时器
+	$LoopTimer.stop()
+	$EndTimer.stop()
 	$Area2D/MetalCollision.set("disabled", true)
 	$BodyCollision.set("disabled", true)
 	$AnimatedSprite.visible = false

@@ -10,10 +10,13 @@
 
 [node name="Game_5min" type="Node2D"]
 
+[node name="UI" parent="." instance=ExtResource( 3 )]
+
 [node name="SpawnManager" parent="." instance=ExtResource( 4 )]
 
 [node name="Center" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 270 )
+position = Vector2( 640, 360 )
+z_index = -1
 
 [node name="MainCountdownLabel" type="Label" parent="."]
 margin_left = 12.0
@@ -25,13 +28,12 @@ theme = ExtResource( 6 )
 text = "300"
 
 [node name="MainCountdown" type="Node2D" parent="."]
+z_index = -2
 script = ExtResource( 5 )
 
 [node name="MainCountdownTimer" type="Timer" parent="MainCountdown"]
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
-
-[node name="TrailSprite" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Music" parent="." instance=ExtResource( 7 )]
 

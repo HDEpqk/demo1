@@ -19,6 +19,7 @@ func _ready():
 		bgmLable.text="音乐"
 	else:
 		printerr("bgmSprite为空")
+	$SelectionLabel.self_modulate=Color.black
 	
 
 

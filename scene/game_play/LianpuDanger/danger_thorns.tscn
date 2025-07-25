@@ -362,6 +362,7 @@ shape = SubResource( 3 )
 disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 10 )
 animation = "begin_attack"
 __meta__ = {
@@ -371,9 +372,9 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimatedDeath" type="AnimatedSprite" parent="."]
-visible = false
 frames = SubResource( 86 )
 animation = "death_01"
+frame = 10
 
 [node name="Area2D" type="Area2D" parent="." groups=["danger_area"]]
 
@@ -387,3 +388,19 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
+
+[node name="EnergyLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -36.0
+margin_right = 16.0
+margin_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+text = "-10"
+align = 1
+valign = 1

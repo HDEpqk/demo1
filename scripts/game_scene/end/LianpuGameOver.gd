@@ -4,7 +4,7 @@ extends "res://scripts/game_play/Lianpu.gd"
 func _ready():
 	# mode循环顺序配置
 	taiji_order = [GameEnums.TaijiMode.huo,  # 原Color.red
-	GameEnums.TaijiMode.jin,]# 原Color.yellow 
+	GameEnums.TaijiMode.jin,GameEnums.TaijiMode.mu]# 原Color.yellow 
 	# 安全初始化
 	taiji_mode =taiji_order[0]
 	#该脸谱应该静止
@@ -16,9 +16,11 @@ func _ready():
 		if anim.begins_with("death_"):
 			death_animations.append(anim)
 	$AnimatedDeath.visible=false
+	update_selection_label()
 
 func cycle_taiji_mode():
-	.cycle_taiji_mode()
+	var index=taiji_order.find(taiji_mode)
+	taiji_mode=taiji_order[(index+1)%taiji_order.size()]
 	update_operation_type(taiji_mode)
 	if sprite != null:
 		update_texture()
@@ -55,6 +57,7 @@ func handle_death():
 	#关闭碰撞体和图片
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sprite.visible=false
+	$SelectionLabel.visible=false
 	.handle_death()
 
 
@@ -66,15 +69,21 @@ func cycle_color():
 func update_selection_label():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
-			$SelectionLabel.text="返回选择界面"
+			$SelectionLabel.text="再次挑战"
+			$SelectionLabel.self_modulate=Color("#e40000")
 		GameEnums.TaijiMode.jin:
+			$SelectionLabel.text="返回选择界面"
+			$SelectionLabel.self_modulate=Color("#e6da29")		
+		GameEnums.TaijiMode.mu:
 			$SelectionLabel.text="返回开始界面"
-
+			$SelectionLabel.self_modulate=Color("#28c641")
 func _on_animation_finished():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
+			SceneMgr.return_to_previous()
+		GameEnums.TaijiMode.jin:
 			#跳转到选择场景
 			get_tree().change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
-		GameEnums.TaijiMode.jin:
+		GameEnums.TaijiMode.mu:
 			#跳转到开始场景
 			get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")

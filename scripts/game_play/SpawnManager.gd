@@ -17,76 +17,112 @@ var is_decelerate:=false
 # 敌人配置（类型、场景、最小分数、权重）
 const ENEMY_CONFIG := [
 	{
-		"type": "normal",
-		"scene": preload("res://scene/game_play/LianpuNormal.tscn"),
+		"type": "normal_red",
+		"scene": preload("res://scene/game_play/LianpuNormal/normal_red.tscn"),
 		"min_score": 0,
-		"weight": 100,
+		"weight": 10,
 		"reward_score":1,
-		"speed":30
+		"speed":30,
+		"mode":GameEnums.TaijiMode.huo
+	},
+		{
+		"type": "normal_yellow",
+		"scene": preload("res://scene/game_play/LianpuNormal/normal_yellow.tscn"),
+		"min_score": 0,
+		"weight": 10,
+		"reward_score":1,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.jin		
+	},
+		{
+		"type": "normal_green",
+		"scene": preload("res://scene/game_play/LianpuNormal/normal_green.tscn"),
+		"min_score": 0,
+		"weight": 10,
+		"reward_score":1,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.mu		
+	},
+		{
+		"type": "normal_blue",
+		"scene": preload("res://scene/game_play/LianpuNormal/normal_blue.tscn"),
+		"min_score": 0,
+		"weight": 10,
+		"reward_score":1,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.shui
 	},
 	{
 		"type": "danger_fire",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_fire.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 20,
+		"weight": 5,
 		"reward_score":5,
-		"speed":20
+		"speed":20,
+		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "danger_metal",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_metal.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 20,
+		"weight": 50,
 		"reward_score":10,
-		"speed":20
+		"speed":20,
+		"mode":GameEnums.TaijiMode.jin
 	},
 	{
 		"type": "danger_thorns",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_thorns.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 20,
+		"weight": 5,
 		"reward_score":5,
-		"speed":20
+		"speed":20,
+		"mode":GameEnums.TaijiMode.mu
 	},
 	{
 		"type": "danger_water",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_water.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 20,
+		"weight": 5,
 		"reward_score":5,
-		"speed":20
+		"speed":20,
+		"mode":GameEnums.TaijiMode.shui
 	},
 	{
 		"type": "prop_accelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 10,
+		"weight": 4,
 		"reward_score":5,
-		"speed":10
+		"speed":30,
+		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
-		"min_score": 100,#全局分数达到该分数才生成该lianpu
-		"weight": 5,
-		"reward_score":5,
-		"speed":10
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 20,
+		"reward_score":10,
+		"speed":40,
+		"mode":GameEnums.TaijiMode.jin
 	},
 	{
 		"type": "prop_multiple",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
-		"min_score": 80,#全局分数达到该分数才生成该lianpu
-		"weight": 10,
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 30,
 		"reward_score":5,
-		"speed":10
+		"speed":40,
+		"mode":GameEnums.TaijiMode.mu
 	},
 	{
 		"type": "prop_decelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 10,
+		"weight": 4,
 		"reward_score":5,
-		"speed":10
+		"speed":30,
+		"mode":GameEnums.TaijiMode.shui
 	}
 	
 ]
@@ -133,9 +169,9 @@ func _on_SpawnTimer_timeout():
 	
 	# 初始化位置和模式和奖励分数
 	var pos = _get_spawn_position()
-	var mode = _get_random_taiji_mode()
-	var reward_score=enemy_data.reward_score
-	var speed=enemy_data.speed
+	var mode = enemy_data["mode"]
+	var reward_score=enemy_data["reward_score"]
+	var speed=enemy_data["speed"]
 	
 	if enemy.has_method("init"):
 		enemy.init(mode, pos,reward_score,speed)
@@ -190,24 +226,11 @@ func _get_spawn_position() -> Vector2:
 	return edges[randi() % edges.size()] if !edges.empty() else Vector2.ZERO
 
 
-func _get_random_taiji_mode() -> int:
-	# 配置权重字典
-	var weights = {
-		GameEnums.TaijiMode.huo: 25,
-		GameEnums.TaijiMode.jin: 25,
-		GameEnums.TaijiMode.mu: 25,
-		GameEnums.TaijiMode.shui: 25
-	}
-	# 调用静态工具类
-	return WeightedRandom.get_item(weights)
-
 # SpawnManager.gd lianpu切换部分
-
 # 配置不同敌人组的循环顺序（示例新增两组）
 const CYCLE_GROUPS = {
 	"danger_elements": ["danger_fire", "danger_metal", "danger_thorns", "danger_water"],
-	"new_group1": ["typeA", "typeB", "typeC"],
-	"new_group2": ["typeX", "typeY", "typeZ"]
+	"normal_elements": ["normal_red", "normal_yellow", "normal_green","normal_blue"]
 }
 
 # 通用事件处理
@@ -257,17 +280,17 @@ func _spawn_replacement(config: Dictionary, pos: Vector2):
 	
 	if new_enemy.has_method("init"):
 		new_enemy.init(
-			_get_random_taiji_mode(),
+			config["mode"],
 			pos,
 			config["reward_score"],
 			config["speed"]
 		)
 	 #添加渐入动画
-	new_enemy.modulate = Color.transparent
-	var tween=new_enemy.get_node("Tween")
-	tween.interpolate_property(new_enemy, "modulate", 
-	Color.transparent, Color.white, 0.3)
-	tween.start()
+#	new_enemy.modulate = Color.transparent
+#	var tween=new_enemy.get_node("Tween")
+#	tween.interpolate_property(new_enemy, "modulate", 
+#	Color.transparent, Color.white, 0.3)
+#	tween.start()
 
 func _on_accelerate_spawn_begin(duration):
 	DebugUtils.log("begin accelerate!:SpawnMgr")

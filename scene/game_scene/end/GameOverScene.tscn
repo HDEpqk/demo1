@@ -475,7 +475,7 @@ tracks/3/keys = {
 [node name="GameOverScene" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="TrailSprite" parent="." instance=ExtResource( 3 )]
+[node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="Center" parent="." instance=ExtResource( 2 )]
 
@@ -498,7 +498,6 @@ margin_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 1 )
-text = "返回选择界面"
 align = 1
 valign = 1
 
@@ -521,9 +520,8 @@ anims/death_04 = SubResource( 108 )
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -40.0
-margin_top = 40.0
-margin_right = 24.0
+margin_left = -32.0
+margin_right = 32.0
 margin_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -537,14 +535,14 @@ valign = 1
 [node name="HighestScoreLabel" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -36.0
-margin_top = 338.0
-margin_right = 36.0
-margin_bottom = 22.0
+margin_left = -52.0
+margin_top = 259.0
+margin_right = 52.0
+margin_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 36, 0 )
+rect_pivot_offset = Vector2( 52, 0 )
 theme = ExtResource( 1 )
 text = "历史最高得分:"
 align = 1
@@ -554,9 +552,9 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -36.0
-margin_top = 459.0
+margin_top = 400.0
 margin_right = 36.0
-margin_bottom = 22.0
+margin_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 2, 2 )

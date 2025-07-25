@@ -21,15 +21,16 @@ onready var audio_player = $AudioStreamPlayer
 #处理连击
 var combo_count := 0
 var current_combo_type = null
+var first_kill_time:= 0.0
 var last_kill_time := 0.0
-const COMBO_TIMEOUT := 0.5  # 连击有效时间窗口（秒）
+const COMBO_TIMEOUT := 1  # 连击有效时间窗口（秒）
 var combo_history = []  # 存储最近三次连击的太极模式
+var combo_history_time = []  # 存储最近三次连击的太极模式对应的时间
 const REQUIRED_UNIQUE_TYPES = 3  # 需要不同模式的数量
 
 
 
 func _ready():
-
 	# 配置碰撞检测
 	var area = $Area2D
 	var collision = $Area2D/CollisionShape2D
@@ -44,6 +45,10 @@ func _ready():
 	EventBus.connect("player_hurt",self,"_on_player_hurt")
 	#订阅player恢复的事件
 	EventBus.connect("player_recovery",self,"_on_player_recovery")
+	#设置对象属于第1层
+	area.collision_layer =1
+	# 设置对象检测第2层和第3层和第4层
+	area.collision_mask = (1 << 1) | (1 << 2) | (1 << 3)
 	
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
@@ -84,6 +89,15 @@ func _on_body_entered(body):
 	if !is_long_pressed or !Global.mode_status[Global.taiji_mode]["isActive"] : return
 	
 	if body.is_in_group("lianpu"):
+		#关闭danger_area的检测
+		if body.has_node("Area2D"):
+			var area=body.get_node("Area2D")
+			DebugUtils.log("area:"+str(area))
+			area.set_monitoring(false)
+			area.set_monitorable(false)
+			DebugUtils.log("body Area2D is_monitoring:"+str(area.is_monitoring()))
+			DebugUtils.log("body Area2D is_monitorable:"+str(area.is_monitorable()))
+			
 		# 获取敌人的太极模式类型
 		var enemy_type = body.taiji_mode  # 需要确保敌人有taiji_mode属性
 		# 获取敌人的奖励分数
@@ -98,67 +112,15 @@ func _on_body_entered(body):
 				return
 			_:	
 				if body.is_in_group("lianpu_dodge"):
-					body.handle_death_water(false)
+					if !Global.is_invincible:
+						body.handle_death_water(false)
+					else:
+						body.handle_death_water(true)
 				else:
 					body.handle_death()  # 销毁敌人
-				
-		# 连击逻辑
-		var current_time = OS.get_ticks_msec() / 1000.0
 		
- # 维护连击历史（最多保留最近三次）
-		if combo_history.size() >= REQUIRED_UNIQUE_TYPES:
-			combo_history.remove(0)
-		combo_history.append(enemy_type)
-		
-		# 检查时间有效性（所有连击都在时间窗口内）
-		var valid_combo = true
-		if combo_history.size() == REQUIRED_UNIQUE_TYPES:
-			# 检查第一个和最后一个的时间差
-			if (current_time - last_kill_time) > COMBO_TIMEOUT * (REQUIRED_UNIQUE_TYPES - 1):
-				valid_combo = false
-		
-		# 判断是否满足特殊条件
-		if valid_combo && combo_history.size() >= REQUIRED_UNIQUE_TYPES:
-			# 使用集合去重后判断唯一性
-			var unique_types = {}
-			for type in combo_history:
-				unique_types[type] = true
-				
-			if unique_types.size() == REQUIRED_UNIQUE_TYPES:
-				print("触发土之太极模式")
-				EventBus.fire_event_multiparameter("global_taiji_mode_changed", GameEnums.TaijiMode.tu,Global.taiji_mode)
-				var score_3x = Global.score + base_score * 3*Global.multiple
-				EventBus.fire_event("global_score_changed", score_3x)
-				# 重置连击状态
-				combo_history.clear()
-				combo_count = 0
-				return  # 直接返回不执行普通连击逻辑
-
-		# 保留原有普通连击逻辑（根据需要调整）
-		
-		if current_combo_type == enemy_type && (current_time - last_kill_time) <= COMBO_TIMEOUT:
-			combo_count += 1
-			print("连击次数: ", combo_count)
-		else:
-			combo_count = 1
-			current_combo_type = enemy_type
-			print("新连击开始")
-
-
-
-		# 处理奖励（每次连击更新时判断）
-		if combo_count == 2:
-			DebugUtils.log("Global.score:"+str(Global.score))
-			var score_2x = Global.score + base_score * 2*Global.multiple
-			EventBus.fire_event("global_score_changed", score_2x)
-		elif combo_count >= 3:
-			var score_3x = Global.score + base_score * 3*Global.multiple
-			EventBus.fire_event("global_score_changed", score_3x)
-			EventBus.fire_event_multiparameter("global_taiji_mode_changed",enemy_type,Global.taiji_mode)
-			combo_count = 0  # 重置连击
-
-
-		last_kill_time = current_time
+		# 调用提炼后的连击更新方法
+		update_combo(enemy_type, base_score)
 						
 
 func _on_area_entered(area):
@@ -167,31 +129,132 @@ func _on_area_entered(area):
 	if area.is_in_group("center"):
 		match Global.taiji_mode:
 			GameEnums.TaijiMode.yang:
-				
-				EventBus.fire_event_multiparameter("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode)
+				EventBus.fire_event_2param("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode)
 			_:	
-				EventBus.fire_event_multiparameter("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode)
+				EventBus.fire_event_2param("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode)
 		audio_player.stream=SFX_CYCLE_CENTER
 		audio_player.play()
 		DebugUtils.log("播放了cycle_center音效")
-	elif area.is_in_group("danger_area") and !Global.is_invincible:
-		var root_script
-		
-		 #获取所有加入 "game_controller" 组的节点（通常只有根节点）
-		var controller_nodes = get_tree().get_nodes_in_group("lianpu")
-		if controller_nodes.size() > 0:
-			root_script = controller_nodes[0]
+	elif area.is_in_group("danger_area"):
+		var root = area.get_parent()
+		if root:
 			# 获取克制关系
 			var counter_target = Global.WUXING_COUNTER.get(Global.taiji_mode)
-			if counter_target == root_script.taiji_mode:
+			print("counter_target:",counter_target)
+			var root_mode=root.taiji_mode
+			print("root_script_mode:",root_mode)
+			if counter_target == root_mode:
 				DebugUtils.log("五行相克！无视危险区域")
+				# 如果危险区域被克制，视为击杀敌人并更新连击
+				var enemy_type = root.taiji_mode
+				var base_score = root.reward_score
+				update_combo(enemy_type, base_score)
+				root.handle_death()  #销毁敌人
 				return
-		if root_script.is_dying:
-			DebugUtils.log("正在死亡的敌人！无视危险区域")
-			return  # 忽略正在死亡的敌人
-		
+			elif Global.is_invincible:
+				match Global.taiji_mode:
+					GameEnums.TaijiMode.yang:
+						root.cycle_taiji_mode()
+						audio_player.stream=SFX_YANG
+						audio_player.play()
+						return
+					_:	
+						DebugUtils.log("crazy8时间！无视危险区域")
+						# crazy8时间，视为击杀敌人并更新连击
+						var enemy_type = root.taiji_mode
+						var base_score = root.reward_score
+						update_combo(enemy_type, base_score)
+						root.handle_death()  #销毁敌人
+						return
+			elif Global.is_mu_protect_open:
+				match Global.taiji_mode:
+					GameEnums.TaijiMode.yang:
+						DebugUtils.log("木保护！无视危险区域切换敌人")
+						root.cycle_taiji_mode()
+						audio_player.stream=SFX_YANG
+						audio_player.play()
+						EventBus.fire_event("mu_protect_close")
+						return
+					_:
+						DebugUtils.log("木保护！无视危险区域销毁敌人")
+						var enemy_type = root.taiji_mode
+						var base_score = root.reward_score
+						update_combo(enemy_type, base_score)
+						root.handle_death()  #销毁敌人
+						EventBus.fire_event("mu_protect_close")
+						return
+		else:
+			print_debug("root not exist")
 		EventBus.fire_event("player_hurt",Global.taiji_mode)
 		DebugUtils.log("player hurt")
+
+# 提炼的连击更新方法
+func update_combo(enemy_type, base_score):
+	# 连击逻辑
+	var current_time = OS.get_ticks_msec() / 1000.0
+	
+	# 维护连击历史（最多保留最近三次）
+	if combo_history.size() >= REQUIRED_UNIQUE_TYPES:
+		combo_history.remove(0)
+		combo_history_time.remove(0)
+		if combo_history_time.size() >0:
+			first_kill_time=combo_history_time[0]
+	#记录第一次开始连击的时间
+	if combo_history.size()<=0:
+		first_kill_time=current_time
+	combo_history.append(enemy_type)
+	combo_history_time.append(current_time)
+	
+	# 检查时间有效性（所有连击都在时间窗口内）
+	var valid_combo = true
+	if combo_history.size() == REQUIRED_UNIQUE_TYPES:
+		# 检查第一个和最后一个的时间差
+		if (current_time - first_kill_time) > COMBO_TIMEOUT * (REQUIRED_UNIQUE_TYPES - 1):
+			valid_combo = false
+	
+	# 判断是否满足特殊条件
+	if valid_combo && combo_history.size() >= REQUIRED_UNIQUE_TYPES:
+		# 使用字典去重后判断唯一性
+		var unique_types = {}
+		for type in combo_history:
+			unique_types[type] = true
+			
+		if unique_types.size() == REQUIRED_UNIQUE_TYPES:
+			print("触发土之太极模式")
+			EventBus.fire_event_2param("global_taiji_mode_changed", GameEnums.TaijiMode.tu,Global.taiji_mode)
+			var score_3x = Global.score + base_score * 3*Global.multiple
+			EventBus.fire_event("global_score_changed", score_3x)
+			# 重置连击状态
+			combo_history.clear()
+			combo_history_time.clear()
+			combo_count = 0
+			last_kill_time = current_time  # 更新最后击杀时间
+			return  # 直接返回不执行普通连击逻辑
+
+	# 普通连击逻辑
+	if current_combo_type == enemy_type && (current_time - last_kill_time) <= COMBO_TIMEOUT:
+		combo_count += 1
+		print("连击次数: ", combo_count)
+	else:
+		combo_count = 1
+		current_combo_type = enemy_type
+		print("新连击开始")
+
+	# 处理奖励（每次连击更新时判断）
+	if combo_count == 2:
+		DebugUtils.log("Global.score:"+str(Global.score))
+		var score_2x = Global.score + base_score * 2*Global.multiple
+		EventBus.fire_event("global_score_changed", score_2x)
+	elif combo_count >= 3:
+		var score_3x = Global.score + base_score * 3*Global.multiple
+		EventBus.fire_event("global_score_changed", score_3x)
+		EventBus.fire_event_2param("global_taiji_mode_changed",enemy_type,Global.taiji_mode)
+		# 重置连击状态
+		combo_history.clear()
+		combo_history_time.clear()
+		combo_count = 0
+
+	last_kill_time = current_time
 	
 func update_trailSprite_texture(new_value:int,old_value:int=0):
 	match new_value:

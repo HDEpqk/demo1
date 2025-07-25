@@ -20,7 +20,7 @@ func _on_MainCountdownTimer_timeout():
 		main_countdown_timer.stop()
 		main_countdown_label.text = "TIME UP!"
 		# 跳转到结束界面
-		get_tree().change_scene("res://scene/GameOverScene.tscn")
+		SceneMgr.change_scene("res://scene/game_scene/end/GameOverScene.tscn")
 
 
 # 更新显示

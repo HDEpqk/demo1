@@ -4,8 +4,8 @@ extends "res://scripts/game_play/Lianpu.gd"
 
 func _ready():
 	# mode循环顺序配置
-	taiji_order = [GameEnums.TaijiMode.huo,  # 原Color.red
-	GameEnums.TaijiMode.jin,]# 原Color.yellow 
+	taiji_order = [GameEnums.TaijiMode.huo, 
+	GameEnums.TaijiMode.jin,]
 	# 安全初始化
 	taiji_mode =taiji_order[0]
 	#该脸谱应该静止
@@ -17,9 +17,11 @@ func _ready():
 		if anim.begins_with("death_"):
 			death_animations.append(anim)
 	$AnimatedDeath.visible=false
-
+	update_selection_label()
+	
 func cycle_taiji_mode():
-	.cycle_taiji_mode()
+	var index=taiji_order.find(taiji_mode)
+	taiji_mode=taiji_order[(index+1)%taiji_order.size()]
 	update_operation_type(taiji_mode)
 	if sprite != null:
 		update_texture()
@@ -39,23 +41,12 @@ func update_texture():
 		GameEnums.TaijiMode.shui:
 			sprite.texture=load("res://art/lianpu/LianpuNormal/blue_shadow_64.png")
 
-func update_operation_type(mode:int):
-	# 根据太极模式设置运算类型
-	match mode:
-		GameEnums.TaijiMode.huo:
-			operation_type=GameEnums.OperationType.jia  # 火对应加
-		GameEnums.TaijiMode.jin:
-			operation_type=GameEnums.OperationType.jian # 金对应减
-		GameEnums.TaijiMode.mu:
-			operation_type=GameEnums.OperationType.cheng # 木对应乘
-		GameEnums.TaijiMode.shui:
-			operation_type=GameEnums.OperationType.chu   # 水对应除
-
 
 func handle_death():
 	#关闭碰撞体和图片
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sprite.visible=false
+	$SelectionLabel.visible=false
 	.handle_death()
 
 
@@ -71,6 +62,7 @@ func update_selection_label():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
 			$SelectionLabel.text="5分钟限时挑战"
+			$SelectionLabel.self_modulate=Color("#e40000")
 		GameEnums.TaijiMode.jin:
 			$SelectionLabel.text="无尽挑战"
-			
+			$SelectionLabel.self_modulate=Color("#e6da29")

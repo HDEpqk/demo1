@@ -9,14 +9,7 @@ func _physics_process(delta):
 	# 设置角速度 (旋转)
 	angular_velocity = rotation_speed
 
-	
-func init(_mode:int, pos:Vector2, _reward_score:float, _speed:float):
-	.init(_mode, pos, _reward_score, _speed)
-	taiji_mode = GameEnums.TaijiMode.huo
-	#关闭死亡动画sprite
-	$AnimatedDeath.visible=false
-	#开启普通动画
-	$AnimatedSprite.visible=true
+
 	
 #切换到循环动画
 func switch_loop_attack():

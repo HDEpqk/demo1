@@ -1,5 +1,7 @@
 extends Control 
 
+# 在脚本顶部预加载所有音效资源（只加载一次）
+const SFX_COUNT_DOWN = preload("res://audio/sfx/count_down.wav")
 # 配置参数
 export var value_range: Vector2 = Vector2(-1.1, 1.1)  # 值范围（左到右）
 export var bg_width: float = 400.0  # 背景条宽度（需与实际尺寸一致）
@@ -11,6 +13,9 @@ var half_bg_width: float =bg_width/2
 var is_timming:bool=false
 var current_time: int
 var temp_energy:float=0#临时能量值
+var isMultipled:bool=false
+var isMultipledTwice:bool=false
+
 
 onready var current_energy_label=$BG/pointer/Node/current
 onready var min_energy_label=$BG/min
@@ -19,14 +24,25 @@ onready var max_energy_label=$BG/max
 onready var pointer_texture=$BG/pointer
 onready var bg=$BG
 onready var countdown_label =$BG/CountdownLabel
-onready var countdown_timer=$CountdownTimer
+onready var countdown_timer:Timer=$CountdownTimer
 
 func _ready():
 	current_energy_label.text=str(Global.energy)
 	current_time = total_time
 	countdown_label.visible=false
 	countdown_timer.wait_time = 1.0  # 每秒触发一次
+	#订阅开始疯狂时间的事件
+	EventBus.connect("crazy_time_begin",self,"_on_crazy_time_begin")
+	#订阅结束疯狂时间的事件
+	EventBus.connect("crazy_time_end",self,"_on_crazy_time_end")
 
+func _on_crazy_time_begin(duration):
+	countdown_timer.set_paused(true)
+	DebugUtils.log("EnergyCalibration/CountdownTimer开始暂停")
+
+func _on_crazy_time_end(value):
+	countdown_timer.set_paused(false)
+	DebugUtils.log("EnergyCalibration/CountdownTimer恢复计时")	
 
 func set_energy(new_value: float):
 	var original_new_value=new_value
@@ -67,6 +83,10 @@ func set_energy(new_value: float):
 		formatted = formatted.replace("-", "")
 	elif formatted.begins_with("+0"):
 		formatted = formatted.replace("+", "")
+	elif formatted.begins_with("+-0"):
+		formatted = formatted.replace("+-", "")
+	elif formatted.begins_with("-+0"):
+		formatted = formatted.replace("-+", "")
 	current_energy_label.text=formatted.replace(".0", "")
 	#DebugUtils.log("current_energy_label="+current_energy_label.text)
 	check_energy()
@@ -82,6 +102,11 @@ func check_energy():
 			countdown_timer.start()
 			is_timming=!is_timming
 			temp_energy=Global.energy
+			#加倍
+			if !isMultipled:
+				Global.set_energy_multiple(2)
+				EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
+				isMultipled=true
 		else:
 			if abs(Global.energy)>abs(temp_energy):
 				temp_energy=Global.energy
@@ -102,21 +127,41 @@ func check_energy():
 			elif temp_energy>0:
 				Global.max_energy=temp_energy
 				max_energy_label.text=str(float("%0.1f" % Global.max_energy))
-	
-		
+			if isMultipled:
+				Global.set_energy_multiple(1)
+				EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
+				isMultipled=false
+				isMultipledTwice=false
+
 # 计时器信号回调
 func _on_CountdownTimer_timeout():
 	current_time -= 1
 	update_display()
+	#加倍
+	if !isMultipled:
+		Global.set_energy_multiple(2)
+		EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
+		isMultipled=true
+		
 	if current_time <= 0:
 		countdown_timer.stop()
 		countdown_label.text = "TIME UP!"
 		#把倒计时文本恢复颜色
 		countdown_label.self_modulate=Color.white
 		#跳转到结束界面
-		get_tree().change_scene("res://scene/game_scene/end/GameOverScene.tscn")
+		SceneMgr.change_scene("res://scene/game_scene/end/GameOverScene.tscn")
 	elif current_time<=10:
 		countdown_label.self_modulate=Color.red
+		if $AudioStreamPlayer.stream==null:
+			$AudioStreamPlayer.stream=SFX_COUNT_DOWN
+		if $AudioStreamPlayer.stream!=null:
+			$AudioStreamPlayer.play()
+		#加倍
+		if !isMultipledTwice:
+			Global.set_energy_multiple(4)
+			EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
+			isMultipledTwice=true
+			
 
 # 更新显示（保持缩进统一用4个空格）
 func update_display():

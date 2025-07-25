@@ -118,4 +118,6 @@ valign = 1
 
 [node name="CountdownTimer" type="Timer" parent="."]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]

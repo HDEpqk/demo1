@@ -14,9 +14,11 @@ func _ready():
 		if anim.begins_with("death_"):
 			death_animations.append(anim)
 	$AnimatedDeath.visible=false
+	update_selection_label()
 
 func cycle_taiji_mode():
-	.cycle_taiji_mode()
+	var index=taiji_order.find(taiji_mode)
+	taiji_mode=taiji_order[(index+1)%taiji_order.size()]
 	update_operation_type(taiji_mode)
 	if sprite != null:
 		update_texture()
@@ -36,33 +38,26 @@ func update_texture():
 		GameEnums.TaijiMode.shui:
 			sprite.texture=load("res://art/lianpu/LianpuNormal/blue_shadow_64.png")
 
-func update_operation_type(mode:int):
-	# 根据太极模式设置运算类型
-	match mode:
-		GameEnums.TaijiMode.huo:
-			operation_type=GameEnums.OperationType.jia  # 火对应加
-		GameEnums.TaijiMode.jin:
-			operation_type=GameEnums.OperationType.jian # 金对应减
-		GameEnums.TaijiMode.mu:
-			operation_type=GameEnums.OperationType.cheng # 木对应乘
-		GameEnums.TaijiMode.shui:
-			operation_type=GameEnums.OperationType.chu   # 水对应除
-
 func update_selection_label():
-	match operation_type:
-		GameEnums.OperationType.jia:
+	match taiji_mode:
+		GameEnums.TaijiMode.huo:
 			$SelectionLabel.text="开始游戏"
-		GameEnums.OperationType.jian:
-			$SelectionLabel.text="游戏教程"
-		GameEnums.OperationType.cheng:
+			$SelectionLabel.self_modulate=Color("#e40000")
+		GameEnums.TaijiMode.jin:
 			$SelectionLabel.text="游戏设置"
-		GameEnums.OperationType.chu:
+			$SelectionLabel.self_modulate=Color("#e6da29")			
+		GameEnums.TaijiMode.mu:
+			$SelectionLabel.text="游戏教程"
+			$SelectionLabel.self_modulate=Color("#28c641")			
+		GameEnums.TaijiMode.shui:
 			$SelectionLabel.text="退出游戏"
+			$SelectionLabel.self_modulate=Color("#2d93dd")			
 
 func handle_death():
 	#关闭碰撞体和图片
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Sprite.visible=false
+	$SelectionLabel.visible=false
 	.handle_death()
 
 
@@ -72,11 +67,11 @@ func _on_animation_finished():
 			#跳转到游戏选择界面
 			get_tree().change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
 		GameEnums.TaijiMode.jin:
-			#跳转到游戏教程界面
-			get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")
-		GameEnums.TaijiMode.mu:
 			#跳转到游戏设置界面
 			get_tree().change_scene("res://scene/game_scene/setting/SettingScene.tscn")
+		GameEnums.TaijiMode.mu:
+			#跳转到游戏教程界面
+			get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")
 		GameEnums.TaijiMode.shui:
 			#退出游戏
 			get_tree().quit()

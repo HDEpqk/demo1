@@ -23,5 +23,6 @@ func cycle_taiji_mode():
 
 
 func handle_death():
+	$SelectionLabel.visible=false
 	get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")
 	.queue_free()

@@ -526,6 +526,6 @@ anims/death_02 = SubResource( 106 )
 anims/death_03 = SubResource( 107 )
 anims/death_04 = SubResource( 108 )
 
-[node name="TrailSprite" parent="." instance=ExtResource( 5 )]
+[node name="Player" parent="." instance=ExtResource( 5 )]
 
 [node name="Center" parent="." instance=ExtResource( 6 )]
