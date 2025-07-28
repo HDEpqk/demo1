@@ -44,13 +44,13 @@ func update_selection_label():
 			$SelectionLabel.text="开始游戏"
 			$SelectionLabel.self_modulate=Color("#e40000")
 		GameEnums.TaijiMode.jin:
-			$SelectionLabel.text="游戏设置"
+			$SelectionLabel.text="游戏排行"
 			$SelectionLabel.self_modulate=Color("#e6da29")			
 		GameEnums.TaijiMode.mu:
-			$SelectionLabel.text="游戏教程"
+			$SelectionLabel.text="游戏设置"
 			$SelectionLabel.self_modulate=Color("#28c641")			
 		GameEnums.TaijiMode.shui:
-			$SelectionLabel.text="退出游戏"
+			$SelectionLabel.text="开发名单"
 			$SelectionLabel.self_modulate=Color("#2d93dd")			
 
 func handle_death():
@@ -67,11 +67,11 @@ func _on_animation_finished():
 			#跳转到游戏选择界面
 			get_tree().change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
 		GameEnums.TaijiMode.jin:
+			#显示游戏排行榜
+			pass
+		GameEnums.TaijiMode.mu:
 			#跳转到游戏设置界面
 			get_tree().change_scene("res://scene/game_scene/setting/SettingScene.tscn")
-		GameEnums.TaijiMode.mu:
-			#跳转到游戏教程界面
-			get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")
 		GameEnums.TaijiMode.shui:
-			#退出游戏
-			get_tree().quit()
+			#开发者名单
+			pass

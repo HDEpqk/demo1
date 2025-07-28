@@ -100,13 +100,11 @@ class RandomDrawer:
 	func _init(items: Array):
 		_items = items.duplicate()
 		_items=shuffle_array(_items)  # 初始化时洗牌
-		print("_items:after shuffle_array"+str(_items))
+		#print("_items:after shuffle_array"+str(_items))
 		
 
 	# 使用 Fisher-Yates 算法随机打乱数组
 	func shuffle_array(arr: Array) -> Array:
-		# 初始化随机数种子
-		randomize()
 		var n = arr.size()
 		for i in range(n - 1, 0, -1):
 			# 生成 0 到 i 之间的随机索引

@@ -107,15 +107,21 @@ func _on_body_entered(body):
 		match Global.taiji_mode:
 			GameEnums.TaijiMode.yang:
 				body.cycle_taiji_mode()
-				audio_player.stream=SFX_YANG
-				audio_player.play()
+				if !body.is_in_group("lianpu_prop"):#如果不是lianpu_prop就播放切换声音
+					audio_player.stream=SFX_YANG
+					audio_player.play()
 				return
 			_:	
-				if body.is_in_group("lianpu_dodge"):
+				if body.is_in_group("lianpu_water"):
+					if Global.taiji_mode==GameEnums.TaijiMode.tu:
+						body.handle_death_water(true)
+						return
 					if !Global.is_invincible:
 						body.handle_death_water(false)
 					else:
 						body.handle_death_water(true)
+				elif body.is_in_group("lianpu_hide") and Global.taiji_mode==GameEnums.TaijiMode.yin:
+					return
 				else:
 					body.handle_death()  # 销毁敌人
 		

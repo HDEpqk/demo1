@@ -49,6 +49,8 @@ var mode_status={
 }
 
 func _ready():
+	#初始化随机数种子
+	randomize()
 	EventBus.connect("global_energy_changed", self, "_on_energy_changed")
 	EventBus.connect("global_taiji_mode_changed", self, "_on_taiji_mode_changed")
 	EventBus.connect("global_score_changed", self, "_on_score_changed")

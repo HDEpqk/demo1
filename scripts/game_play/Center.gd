@@ -57,7 +57,7 @@ func _ready():
 	EventBus.connect("mu_protect_close",self,"_on_mu_protect_close")
 	# 设置对象属于第4层
 	collision_layer = (1 << 3)
-	# 设置对象检测第1层和第2层和第3层 (第一层：player 第二层：lianpunormal和danger 第三层：lianpuprop 第四层：center)
+	# 设置对象检测第1层和第2层和第3层 (第一层：player 第二层：lianpunormal和danger和hide 第三层：lianpuprop 第四层：center)
 	collision_mask = 1 | (1 << 1) | (1 << 2)
 	
 	#初始化mode_timer字典
@@ -101,11 +101,17 @@ func _ready():
 func _on_body_entered(body):
 	DebugUtils.log("body entered")
 	if body.is_in_group("lianpu"):
-		if body.is_in_group("lianpu_dodge"):
+		if body.is_in_group("lianpu_water"):
 			body.handle_death_water(true)
 		elif body.is_in_group("lianpu_prop"):
 			#当白颜色的脸谱穿过白色中心时不会被销毁,穿过其他中心时会被销毁
 			if Global.taiji_mode==GameEnums.TaijiMode.yang:
+				return
+			else:
+				body.handle_death()  # 销毁敌人
+		elif body.is_in_group("lianpu_hide"):
+			#当黑颜色的脸谱穿过黑色中心时不会被销毁,穿过其他中心时会被销毁
+			if Global.taiji_mode==GameEnums.TaijiMode.yin:
 				return
 			else:
 				body.handle_death()  # 销毁敌人
@@ -143,11 +149,6 @@ func _on_area_entered(area):
 		else:
 			print_debug("root not exist")
 
-func play_hit_effect():
-	# 添加视觉反馈
-	var tween = create_tween()
-	tween.tween_property(sprite, "modulate", Color(1,0,0,1), 0.1)
-	tween.tween_property(sprite, "modulate", Color(1,1,1,1), 0.3)
 
 # 预加载所有纹理资源（只加载一次）
 const TEXTURE_YIN = preload("res://art/ui/game/taiji_yin.png")

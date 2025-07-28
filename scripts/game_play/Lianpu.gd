@@ -58,8 +58,6 @@ var taiji_order = [
 onready var sprite:Sprite = $Sprite
 
 func _ready():
-	# 初始化随机数种子
-	randomize()
 	 # 为每个刚体生成随机路径点（围绕中心点）
 	var angle = randf() * TAU
 	waypoint = target_position + Vector2.RIGHT.rotated(angle) * waypoint_distance
@@ -187,6 +185,8 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 		# 被克制惩罚
 		var penalty = base_score / 2
 		print("反被克制！扣除分数: ", penalty)
+		EventBus.fire_event("player_hurt",Global.taiji_mode)
+		DebugUtils.log("反被克制！player hurt")
 		return -penalty
 	else:
 		# 普通得分

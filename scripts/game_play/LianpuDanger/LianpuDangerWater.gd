@@ -42,6 +42,9 @@ func handle_death_water(isCenter:bool):
 		#播放水闪避音效
 		$AudioStreamPlayer.stream=load("res://audio/sfx/shui_dodge.tres")
 		$AudioStreamPlayer.play()
+		if Global.taiji_mode==GameEnums.TaijiMode.huo:
+			#如果当前太极模式是火触发克制惩罚
+			handle_score_operation()
 
 func _on_dodge_animation_finished():
 	$EnergyLabel.visible=true#开启EnergyLabel

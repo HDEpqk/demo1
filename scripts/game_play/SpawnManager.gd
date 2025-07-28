@@ -56,7 +56,7 @@ const ENEMY_CONFIG := [
 		"type": "danger_fire",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_fire.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 5,
+		"weight": 10,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
@@ -65,7 +65,7 @@ const ENEMY_CONFIG := [
 		"type": "danger_metal",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_metal.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 50,
+		"weight": 10,
 		"reward_score":10,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.jin
@@ -74,7 +74,7 @@ const ENEMY_CONFIG := [
 		"type": "danger_thorns",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_thorns.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 5,
+		"weight": 10,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
@@ -83,7 +83,7 @@ const ENEMY_CONFIG := [
 		"type": "danger_water",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_water.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 5,
+		"weight": 10,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
@@ -92,7 +92,7 @@ const ENEMY_CONFIG := [
 		"type": "prop_accelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 4,
+		"weight": 5,
 		"reward_score":5,
 		"speed":30,
 		"mode":GameEnums.TaijiMode.huo
@@ -101,7 +101,7 @@ const ENEMY_CONFIG := [
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 20,
+		"weight": 5,
 		"reward_score":10,
 		"speed":40,
 		"mode":GameEnums.TaijiMode.jin
@@ -110,7 +110,7 @@ const ENEMY_CONFIG := [
 		"type": "prop_multiple",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 30,
+		"weight": 5,
 		"reward_score":5,
 		"speed":40,
 		"mode":GameEnums.TaijiMode.mu
@@ -119,7 +119,43 @@ const ENEMY_CONFIG := [
 		"type": "prop_decelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 4,
+		"weight": 5,
+		"reward_score":5,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.shui
+	},
+	{
+		"type": "hide_red",
+		"scene": preload("res://scene/game_play/LianpuHide/hide_red.tscn"),
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 5,
+		"reward_score":5,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.huo
+	},
+	{
+		"type": "hide_yellow",
+		"scene": preload("res://scene/game_play/LianpuHide/hide_yellow.tscn"),
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 5,
+		"reward_score":5,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.jin
+	},
+	{
+		"type": "hide_green",
+		"scene": preload("res://scene/game_play/LianpuHide/hide_green.tscn"),
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 5,
+		"reward_score":5,
+		"speed":30,
+		"mode":GameEnums.TaijiMode.mu
+	},
+	{
+		"type": "hide_blue",
+		"scene": preload("res://scene/game_play/LianpuHide/hide_blue.tscn"),
+		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"weight": 5,
 		"reward_score":5,
 		"speed":30,
 		"mode":GameEnums.TaijiMode.shui
@@ -230,7 +266,8 @@ func _get_spawn_position() -> Vector2:
 # 配置不同敌人组的循环顺序（示例新增两组）
 const CYCLE_GROUPS = {
 	"danger_elements": ["danger_fire", "danger_metal", "danger_thorns", "danger_water"],
-	"normal_elements": ["normal_red", "normal_yellow", "normal_green","normal_blue"]
+	"normal_elements": ["normal_red", "normal_yellow", "normal_green","normal_blue"],
+	"hide_elements":["hide_red","hide_yellow","hide_green","hide_blue"]
 }
 
 # 通用事件处理
