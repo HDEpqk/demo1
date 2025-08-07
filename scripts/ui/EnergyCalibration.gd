@@ -148,8 +148,8 @@ func _on_CountdownTimer_timeout():
 		countdown_label.text = "TIME UP!"
 		#把倒计时文本恢复颜色
 		countdown_label.self_modulate=Color.white
-		#跳转到结束界面
-		SceneMgr.change_scene("res://scene/game_scene/end/GameOverScene.tscn")
+		#触发游戏结束事件
+		EventBus.fire_event("game_over","会响的倒计时结束了┗|｀O′|┛ 嗷~~!")
 	elif current_time<=10:
 		countdown_label.self_modulate=Color.red
 		if $AudioStreamPlayer.stream==null:

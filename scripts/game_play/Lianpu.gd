@@ -24,28 +24,84 @@ var reward_score:float#消除的基础奖励分数
 #var actual_score:float=reward_score#消除的最终奖励分数，默认等于基础奖励分数
 
 #寻路相关
-onready var target_position = get_viewport().size/2
+onready var center_position = get_viewport().size/2
 var waypoint_distance = 200  # 路径点到中心的距离
 var waypoint = Vector2.ZERO
 var at_waypoint = false
+var at_center:bool=false
 var is_set_linear_velocity=false
+var is_avoiding_center = false
+var exit_direction = Vector2.ZERO
+var screen_margin = 50.0  # 屏幕边界外的销毁距离
+var exit_velocity = Vector2.ZERO
+var exit_speed:float=50
 
+func start_avoid_center_behavior():
+	if !is_avoiding_center:
+		is_avoiding_center = true
+		
+		# 获取屏幕尺寸
+		var viewport_size = get_viewport_rect().size
+		
+		# 计算到各屏幕边缘的距离
+		var to_left = global_position.x
+		var to_right = viewport_size.x - global_position.x
+		var to_top = global_position.y
+		var to_bottom = viewport_size.y - global_position.y
+		
+		# 找到最小距离（使用嵌套 min()）
+		var min_dist = min(min(to_left, to_right), min(to_top, to_bottom))
+		
+		# 确定最小距离对应的方向
+		if min_dist == to_left:
+			exit_direction = Vector2(-1, 0)  # 向左
+		elif min_dist == to_right:
+			exit_direction = Vector2(1, 0)   # 向右
+		elif min_dist == to_top:
+			exit_direction = Vector2(0, -1)  # 向上
+		else:  # min_dist == to_bottom
+			exit_direction = Vector2(0, 1)   # 向下
+		
+		# 添加随机偏移使移动更自然
+		var random_angle = rand_range(-PI/6, PI/6)  # ±30度随机偏移
+		exit_direction = exit_direction.rotated(random_angle).normalized()
+		
+		# 设置离开速度
+		exit_velocity = exit_direction * exit_speed
+		is_set_linear_velocity = true
+		is_avoiding_center=true
+		DebugUtils.log("开始远离中心点移动")
+		DebugUtils.log("离开移动方向: " + str(exit_direction))
 
 func _physics_process(delta):
 	if !at_waypoint:
-		# 先移动到路径点
+		# 移动到路径点
 		var direction = (waypoint - global_position).normalized()
 		linear_velocity = direction * speed
-		
+
 		if global_position.distance_to(waypoint) < 5:
 			at_waypoint = true
-			is_set_linear_velocity=true
-	if is_set_linear_velocity:
-		# 再移动到中心点
-		var direction = (target_position - global_position).normalized()
+	elif !at_center:
+		#再移动到中心点
+		var direction = (center_position - global_position).normalized()
 		linear_velocity = direction * speed
+		if global_position.distance_to(center_position) < 5:
+			at_center=true
+			start_avoid_center_behavior()
+
+	if is_set_linear_velocity:
+		# 应用当前离开速度
+		linear_velocity = exit_velocity
 		is_set_linear_velocity=false
 		DebugUtils.log("只设置一次linear_velocity")
+	if is_avoiding_center:
+		# 检查是否超出屏幕边界
+		var viewport_rect = get_viewport_rect()
+		viewport_rect = viewport_rect.grow(screen_margin)  # 扩大边界
+
+		if !viewport_rect.has_point(global_position):
+			# 超出屏幕后销毁
+			queue_free()
 	
 # 定义太极模式循环顺序（与原颜色顺序对应）
 var taiji_order = [
@@ -60,9 +116,14 @@ onready var sprite:Sprite = $Sprite
 func _ready():
 	 # 为每个刚体生成随机路径点（围绕中心点）
 	var angle = randf() * TAU
-	waypoint = target_position + Vector2.RIGHT.rotated(angle) * waypoint_distance
+	waypoint = center_position + Vector2.RIGHT.rotated(angle) * waypoint_distance
 	#把刚体重力缩放设为0
 	set_gravity_scale(0)
+	if $AnimationPlayer!=null:
+		#获取所有死亡动画的名称
+		for anim in $AnimationPlayer.get_animation_list():
+			if anim.begins_with("death_"):
+				death_animations.append(anim)
 
 func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	# 验证模式有效性
@@ -113,6 +174,10 @@ func handle_death():
 		$Area2D.set_collision_mask(0)  # 设置掩码，不检测任何层
 	#根据taiji_mode改变死亡动画的颜色
 	match taiji_mode:
+		GameEnums.TaijiMode.yin:
+			$AnimatedDeath.self_modulate=Color.black
+		GameEnums.TaijiMode.yang:
+			$AnimatedDeath.self_modulate=Color.white
 		GameEnums.TaijiMode.huo:
 			$AnimatedDeath.self_modulate=Color("#e40000")
 		GameEnums.TaijiMode.jin:
@@ -120,8 +185,10 @@ func handle_death():
 		GameEnums.TaijiMode.mu:
 			$AnimatedDeath.self_modulate=Color("#28c641")
 		GameEnums.TaijiMode.shui:
-			$AnimatedDeath.self_modulate=Color("#2d93dd") 
-	
+			$AnimatedDeath.self_modulate=Color("#2d93dd")
+		GameEnums.TaijiMode.tu:
+			$AnimatedDeath.self_modulate=Color("#b36d41")
+		
 	$AnimatedDeath.visible=true#打开AnimatedDeath
 	if $EnergyLabel!=null:
 		$EnergyLabel.visible=false#关闭EnergyLabel
@@ -158,12 +225,12 @@ func handle_energy_operation():
 			new_energy_value=Global.energy*energy
 		GameEnums.OperationType.chu:
 			if energy==0:
+				if Global.is_invincible:return
 				if Global.is_mu_protect_open:
 					EventBus.fire_event("mu_protect_close")
 					return
-				DebugUtils.log("你÷了0所以game over!")
-				#跳转到结束界面
-				SceneMgr.change_scene("res://scene/game_scene/end/GameOverScene.tscn")
+				#触发游戏结束事件
+				EventBus.fire_event("game_over","你÷了0┗|｀O′|┛ 嗷~~!")
 			else:
 				new_energy_value=Global.energy/energy
 	#如果不处于无敌模式则进行能量计算
@@ -182,6 +249,13 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 		print("五行相克！加成分数: ", bonus_score)
 		return bonus_score
 	elif Global.WUXING_COUNTER.get(enemy_mode) == global_mode:
+		if Global.is_invincible:
+			DebugUtils.log("无敌时间！无视克制关系销毁敌人")
+			return base_score
+		if Global.is_mu_protect_open:
+			DebugUtils.log("木保护！无视克制关系销毁敌人")
+			EventBus.fire_event("mu_protect_close")
+			return base_score
 		# 被克制惩罚
 		var penalty = base_score / 2
 		print("反被克制！扣除分数: ", penalty)
@@ -214,7 +288,6 @@ func handle_element_counter_sfx():
 	var counter_target = Global.WUXING_COUNTER.get(Global.taiji_mode)
 	var sound_stream = null
 	if counter_target == taiji_mode:
-		print("播放相克音效！: ")
 		match counter_target:
 			GameEnums.TaijiMode.jin:
 				DebugUtils.log("播放了kejin音效")
@@ -228,11 +301,16 @@ func handle_element_counter_sfx():
 			GameEnums.TaijiMode.huo:
 				sound_stream=SFX_SHUI_COUNTER_HUO
 				DebugUtils.log("播放了kehuo音效")
-
+		
 	elif Global.WUXING_COUNTER.get(taiji_mode) == Global.taiji_mode:
-		sound_stream=SFX_HURT
+		if Global.is_invincible:
+			#如果当前处于疯狂时间或者有木保护就不播放受伤音效
+			sound_stream=SFX_HIT
+		elif Global.is_mu_protect_open:
+			sound_stream=SFX_HIT
+		else:
+			sound_stream=SFX_HURT
 	else:
-		DebugUtils.log("播放普通音效")
 		sound_stream=SFX_HIT
 
 	$AudioStreamPlayer.stream=sound_stream

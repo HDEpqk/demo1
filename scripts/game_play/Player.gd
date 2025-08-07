@@ -112,6 +112,7 @@ func _on_body_entered(body):
 					audio_player.play()
 				return
 			_:	
+				#if Global.taiji_mode==enemy_type:return#如果player和lianpu处于相同模式那么不产生交互
 				if body.is_in_group("lianpu_water"):
 					if Global.taiji_mode==GameEnums.TaijiMode.tu:
 						body.handle_death_water(true)
@@ -120,8 +121,13 @@ func _on_body_entered(body):
 						body.handle_death_water(false)
 					else:
 						body.handle_death_water(true)
-				elif body.is_in_group("lianpu_hide") and Global.taiji_mode==GameEnums.TaijiMode.yin:
-					return
+				elif body.is_in_group("lianpu_hide"):
+					if Global.is_invincible:
+						body.handle_death()  # 销毁敌人
+					elif Global.taiji_mode==GameEnums.TaijiMode.yin:
+						return
+					else:
+						body.handle_death()  # 销毁敌人
 				else:
 					body.handle_death()  # 销毁敌人
 		

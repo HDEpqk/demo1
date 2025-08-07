@@ -5,10 +5,9 @@ extends "res://scripts/game_play/Lianpu.gd"
 func _ready():
 	# 安全初始化
 	taiji_mode=GameEnums.TaijiMode.huo
+	energy=1#赋值成1避免除以0
 	#该脸谱应该静止
 	speed=0
-	# 初始化随机数种子
-	randomize()
 	# 获取所有死亡动画的名称
 	for anim in $AnimationPlayer.get_animation_list():
 		if anim.begins_with("death_"):
@@ -65,13 +64,13 @@ func _on_animation_finished():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
 			#跳转到游戏选择界面
-			get_tree().change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
+			SceneMgr.change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
 		GameEnums.TaijiMode.jin:
 			#显示游戏排行榜
-			pass
+			SceneMgr.change_scene("res://scene/ui/LeaderBoarder.tscn")
 		GameEnums.TaijiMode.mu:
 			#跳转到游戏设置界面
-			get_tree().change_scene("res://scene/game_scene/setting/SettingScene.tscn")
+			SceneMgr.change_scene("res://scene/game_scene/setting/SettingScene.tscn")
 		GameEnums.TaijiMode.shui:
 			#开发者名单
-			pass
+			SceneMgr.change_scene("res://scene/game_scene/developer/DeveloperScene.tscn")

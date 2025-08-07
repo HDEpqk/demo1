@@ -8,10 +8,9 @@ func _ready():
 	GameEnums.TaijiMode.jin,]
 	# 安全初始化
 	taiji_mode =taiji_order[0]
+	energy=1#赋值成1避免除以0
 	#该脸谱应该静止
 	speed=0
-	# 初始化随机数种子
-	randomize()
 	# 获取所有死亡动画的名称
 	for anim in $AnimationPlayer.get_animation_list():
 		if anim.begins_with("death_"):
@@ -53,9 +52,9 @@ func handle_death():
 func _on_animation_finished():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
-			get_tree().change_scene("res://scene/game_scene/game/Game_5min.tscn")
+			SceneMgr.change_scene("res://scene/game_scene/game/LimitedGame.tscn")
 		GameEnums.TaijiMode.jin:
-			get_tree().change_scene("res://scene/game_scene/game/Game_wujin.tscn")	
+			SceneMgr.change_scene("res://scene/game_scene/game/EndlessGame.tscn")	
 
 
 func update_selection_label():

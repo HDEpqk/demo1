@@ -19,8 +19,8 @@ func _on_MainCountdownTimer_timeout():
 	if current_time <= 0:
 		main_countdown_timer.stop()
 		main_countdown_label.text = "TIME UP!"
-		# 跳转到结束界面
-		SceneMgr.change_scene("res://scene/game_scene/end/GameOverScene.tscn")
+		#触发游戏结束事件
+		EventBus.fire_event("game_over","总时间结束了┗|｀O′|┛ 嗷~~!")
 
 
 # 更新显示

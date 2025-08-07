@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hide_red.png-72384d70b023dd6d8fe417a256d3604e.stex"
+path="res://.import/hide_green_2.png-e4ed10fd45f6a7e06032993ad8ba692c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/lianpu/LianpuHide/hide_red.png"
-dest_files=[ "res://.import/hide_red.png-72384d70b023dd6d8fe417a256d3604e.stex" ]
+source_file="res://art/lianpu/LianpuHide/hide_green_2.png"
+dest_files=[ "res://.import/hide_green_2.png-e4ed10fd45f6a7e06032993ad8ba692c.stex" ]
 
 [params]
 

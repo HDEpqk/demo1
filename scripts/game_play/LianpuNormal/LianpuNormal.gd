@@ -3,9 +3,9 @@ extends "res://scripts/game_play/Lianpu.gd"
 func _ready():
 	._ready()
 	# 获取所有死亡动画的名称
-	for anim in $AnimationPlayer.get_animation_list():
-		if anim.begins_with("death_"):
-			death_animations.append(anim)
+#	for anim in $AnimationPlayer.get_animation_list():
+#		if anim.begins_with("death_"):
+#			death_animations.append(anim)
 	#设置对象属于第2层
 	collision_layer =1<<1
 	# 设置对象检测第1层和第4层
@@ -16,7 +16,7 @@ func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	#初始能量值
 	var	random = RandomNumberGenerator.new()
 	random.randomize()
-	energy=random.randi_range(0,10)
+	energy=random.randi_range(0,0)
 	DebugUtils.log("初始能量："+str(energy))
 	update_energy_label()
 	#开启碰撞体和图片

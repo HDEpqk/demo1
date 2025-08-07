@@ -1,16 +1,13 @@
 extends "res://scripts/game_play/Lianpu.gd"
 
 
+
 func _ready():
-	# mode循环顺序配置
-	taiji_order = [GameEnums.TaijiMode.huo,  # 原Color.red
-	GameEnums.TaijiMode.jin,GameEnums.TaijiMode.mu]# 原Color.yellow 
 	# 安全初始化
-	taiji_mode =taiji_order[0]
+	taiji_mode=GameEnums.TaijiMode.huo
+	energy=1#赋值成1避免除以0
 	#该脸谱应该静止
 	speed=0
-	# 初始化随机数种子
-	randomize()
 	# 获取所有死亡动画的名称
 	for anim in $AnimationPlayer.get_animation_list():
 		if anim.begins_with("death_"):
@@ -40,18 +37,20 @@ func update_texture():
 		GameEnums.TaijiMode.shui:
 			sprite.texture=load("res://art/lianpu/LianpuNormal/blue_shadow_64.png")
 
-func update_operation_type(mode:int):
-	# 根据太极模式设置运算类型
-	match mode:
+func update_selection_label():
+	match taiji_mode:
 		GameEnums.TaijiMode.huo:
-			operation_type=GameEnums.OperationType.jia  # 火对应加
+			$SelectionLabel.text="再次挑战"
+			$SelectionLabel.self_modulate=Color("#e40000")
 		GameEnums.TaijiMode.jin:
-			operation_type=GameEnums.OperationType.jian # 金对应减
+			$SelectionLabel.text="游戏排行"
+			$SelectionLabel.self_modulate=Color("#e6da29")			
 		GameEnums.TaijiMode.mu:
-			operation_type=GameEnums.OperationType.cheng # 木对应乘
+			$SelectionLabel.text="返回选择界面"
+			$SelectionLabel.self_modulate=Color("#28c641")			
 		GameEnums.TaijiMode.shui:
-			operation_type=GameEnums.OperationType.chu   # 水对应除
-
+			$SelectionLabel.text="返回开始界面"
+			$SelectionLabel.self_modulate=Color("#2d93dd")			
 
 func handle_death():
 	#关闭碰撞体和图片
@@ -61,29 +60,19 @@ func handle_death():
 	.handle_death()
 
 
-func cycle_color():
-	.cycle_color()
-	update_selection_label()
-	
-
-func update_selection_label():
-	match taiji_mode:
-		GameEnums.TaijiMode.huo:
-			$SelectionLabel.text="再次挑战"
-			$SelectionLabel.self_modulate=Color("#e40000")
-		GameEnums.TaijiMode.jin:
-			$SelectionLabel.text="返回选择界面"
-			$SelectionLabel.self_modulate=Color("#e6da29")		
-		GameEnums.TaijiMode.mu:
-			$SelectionLabel.text="返回开始界面"
-			$SelectionLabel.self_modulate=Color("#28c641")
 func _on_animation_finished():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
+			Global.reset_data()
+			print("Global 数据已重置")
+			#重新游戏
 			SceneMgr.return_to_previous()
 		GameEnums.TaijiMode.jin:
-			#跳转到选择场景
-			get_tree().change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
+			#显示游戏排行榜
+			SceneMgr.change_scene("res://scene/ui/LeaderBoarder.tscn")
 		GameEnums.TaijiMode.mu:
-			#跳转到开始场景
-			get_tree().change_scene("res://scene/game_scene/start/StartScene.tscn")
+			#跳转到游戏选择界面
+			SceneMgr.change_scene("res://scene/game_scene/choose/ChooseScene.tscn")
+		GameEnums.TaijiMode.shui:
+			#跳转到游戏开始界面
+			SceneMgr.change_scene("res://scene/game_scene/start/StartScene.tscn")

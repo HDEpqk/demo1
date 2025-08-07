@@ -6,7 +6,7 @@ export var base_spawn_interval := 3.0
 export var score_acceleration := 0.98  # 每1000分时间缩短系数
 export var min_spawn_interval: float = 0.3   # 最小生成间隔
 #加速后的生成间隔
-var accelerate_spawn_interval:=1.0
+var accelerate_spawn_interval:=0.3
 #减速后的生成间隔
 var decelerate_spawn_interval:=5.0
 #当前是否是加速状态

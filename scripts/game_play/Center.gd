@@ -99,24 +99,20 @@ func _ready():
 	mu_protect_vfx.visible=false
 
 func _on_body_entered(body):
-	DebugUtils.log("body entered")
+	# 获取敌人的太极模式类型
+	var enemy_type = body.taiji_mode
 	if body.is_in_group("lianpu"):
+		#if Global.taiji_mode==enemy_type:return#如果center和lianpu处于相同模式那么不产生交互
 		if body.is_in_group("lianpu_water"):
 			body.handle_death_water(true)
-		elif body.is_in_group("lianpu_prop"):
-			#当白颜色的脸谱穿过白色中心时不会被销毁,穿过其他中心时会被销毁
+			return
+		if body.is_in_group("lianpu_prop"):
 			if Global.taiji_mode==GameEnums.TaijiMode.yang:
 				return
-			else:
-				body.handle_death()  # 销毁敌人
-		elif body.is_in_group("lianpu_hide"):
-			#当黑颜色的脸谱穿过黑色中心时不会被销毁,穿过其他中心时会被销毁
+		if body.is_in_group("lianpu_hide"):
 			if Global.taiji_mode==GameEnums.TaijiMode.yin:
 				return
-			else:
-				body.handle_death()  # 销毁敌人
-		else:
-			body.handle_death()  # 销毁敌人
+		body.handle_death()  # 销毁敌人
 	
 func _on_area_entered(area):
 	if area.is_in_group("danger_area"):

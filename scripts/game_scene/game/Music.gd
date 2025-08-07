@@ -5,7 +5,9 @@ onready var music_list = []
 var current_index = 0       # 当前播放索引
 var drawer
 onready var music_player =$AudioStreamPlayer
+onready var sfx_player=$AudioStreamPlayerSFX
 var is_bgm_on
+var scene_info
 
 func _ready():
 	#获取音乐完整路径
@@ -14,10 +16,19 @@ func _ready():
 		#从配置文件读取音乐是否被禁用
 	is_bgm_on=DataMgr.get_setting("audio","music_enabled")
 	play_next_song()
-	
+	#绑定游戏结束事件
+	EventBus.connect_event("game_over",self,"_on_game_over")
 	
 
-
+func _on_game_over(info):
+	scene_info=info
+	if music_player.is_playing():
+		music_player.stop()
+	sfx_player.stream=load("res://audio/sfx/GameOverSFX_1.wav")
+	if sfx_player.stream!=null:
+		sfx_player.play()
+	
+	
 
 func play_next_song():
 	if !is_bgm_on:return
@@ -126,3 +137,8 @@ class RandomDrawer:
 	func reset():
 		_index = 0
 		_items=shuffle_array(_items)
+
+
+func _on_AudioStreamPlayerSFX_finished():
+	#跳转到结束界面
+	SceneMgr.change_scene_with_info("res://scene/game_scene/end/GameOverScene.tscn",scene_info)

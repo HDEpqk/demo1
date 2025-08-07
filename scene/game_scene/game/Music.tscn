@@ -9,4 +9,9 @@ script = ExtResource( 1 )
 volume_db = -17.0
 bus = "Music"
 
+[node name="AudioStreamPlayerSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = "SFX"
+
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="AudioStreamPlayerSFX" to="." method="_on_AudioStreamPlayerSFX_finished"]

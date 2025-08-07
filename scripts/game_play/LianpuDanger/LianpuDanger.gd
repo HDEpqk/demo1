@@ -4,9 +4,9 @@ extends "res://scripts/game_play/Lianpu.gd"
 func _ready():
 	._ready()
 	# 获取所有死亡动画的名称
-	for anim in $AnimationPlayer.get_animation_list():
-		if anim.begins_with("death_"):
-			death_animations.append(anim)	
+#	for anim in $AnimationPlayer.get_animation_list():
+#		if anim.begins_with("death_"):
+#			death_animations.append(anim)
 	#设置对象属于第2层
 	collision_layer =1<<1
 	# 设置对象检测第1层和第4层

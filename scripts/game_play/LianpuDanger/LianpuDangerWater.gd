@@ -61,12 +61,12 @@ func handle_energy_operation():
 			new_energy_value=Global.energy*energy
 		GameEnums.OperationType.chu:
 			if energy==0:
+				if Global.is_invincible:return
 				if Global.is_mu_protect_open:
 					EventBus.fire_event("mu_protect_close")
 					return
-				DebugUtils.log("你÷了0所以game over!")
 				#跳转到结束界面
-				SceneMgr.change_scene("res://scene/game_scene/end/GameOverScene.tscn")
+				SceneMgr.change_scene_with_info("res://scene/game_scene/end/GameOverScene.tscn","你÷了0┗|｀O′|┛ 嗷~~!")
 			else:
 				new_energy_value=Global.energy/energy
 	#如果不处于无敌模式则进行能量计算

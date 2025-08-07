@@ -416,6 +416,7 @@ frames = SubResource( 110 )
 animation = "death_04"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
 bus = "SFX"
 
 [node name="EnergyLabel" type="Label" parent="."]
