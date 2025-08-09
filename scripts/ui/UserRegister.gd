@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 
 
@@ -21,9 +21,8 @@ func _ready():
 	
 	#绑定http相关事件
 	EventBus.connect("http_create_user_completed",self,"_on_http_create_user_completed")
-	EventBus.connect("http_read_user_completed",self,"_on_http_read_user_completed")
-
-
+	EventBus.connect("http_read_user_id_by_name_completed",self,"_on_http_read_user_id_by_name_completed")
+	EventBus.connect("network_error",self,"_on_network_error")
 
 func _on_UserRegister_visibility_changed():
 	get_tree().paused=self.visible
@@ -57,15 +56,20 @@ func _on_http_create_user_completed(result):
 		return
 	error_label.visible=false
 	self.visible=false
-	DebugUtils.log("成功保存")
+	
 	#将line_edit中的值存到本地
 	DataMgr.set_setting("user","nick_name",nick_name)
-	DataMgr.read_user()
+	DataMgr.read_user_id_by_name(nick_name)
 	
-func _on_http_read_user_completed(result):
-	var uid=result["objectId"]
+func _on_http_read_user_id_by_name_completed(result):
+	var uid=result
 	DataMgr.set_setting("user","user_id",uid)
+	DebugUtils.log("成功保存用户id")
 
+func _on_network_error(error_msg):
+	$PopupDialog/Label.text=error_msg
+	$PopupDialog.popup()
+	
 func _on_CancelButton_pressed():
 	self.visible=false
 	#SceneMgr.return_to_previous()

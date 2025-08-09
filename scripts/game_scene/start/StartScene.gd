@@ -22,16 +22,27 @@ func _ready():
 	#设置lianpu_user_register位置
 	lianpu_user_register.position.x = viewport_size.x/2
 	lianpu_user_register.position.y = viewport_size.y/2+280
+	
+	user_register.rect_position=viewport_size/2
+	
+	EventBus.connect("network_available",self,"_on_network_available")
+	
+	DataMgr.is_network_available()
+#		if !check_nick_name_exist():
+#		#如果玩家本地昵称不存在并且网络没问题就自动打开用户注册界面
+		
+func _on_network_available(error_msg):
 	if !check_nick_name_exist():
-		#如果玩家本地昵称不存在就打开用户注册界面
+		#如果玩家本地昵称不存在并且网络没问题就自动打开用户注册界面
 		user_register.visible=true
 		
-	
 func check_nick_name_exist() ->bool:
 	#检查玩家本地昵称是否存在
 	var nick_name=DataMgr.get_setting("user","nick_name")
 	if nick_name.empty():return false
 	else:return true
+
+
 
 
 

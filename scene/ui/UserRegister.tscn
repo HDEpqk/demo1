@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=1]
 [ext_resource path="res://new_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scripts/ui/UserRegister.gd" type="Script" id=3]
+[ext_resource path="res://scene/ui/PopupDialog.tscn" type="PackedScene" id=4]
 
-[node name="UserRegister" type="CanvasLayer"]
+[node name="UserRegister" type="Control"]
 pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="BK" type="ColorRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.529412 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -93,6 +97,10 @@ margin_left = -74.0
 margin_top = -22.0
 margin_right = -30.0
 text = "取消"
+
+[node name="PopupDialog" parent="." instance=ExtResource( 4 )]
+margin_top = -259.0
+margin_bottom = -219.0
 
 [connection signal="visibility_changed" from="." to="." method="_on_UserRegister_visibility_changed"]
 [connection signal="pressed" from="BK/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]

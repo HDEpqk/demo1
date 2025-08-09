@@ -14,7 +14,11 @@ func _ready():
 	#该脸谱应该静止
 	speed=0
 	if return_label!= null:
-		return_label.text="修改用户信息"
+		if DataMgr.get_setting("user","nick_name").empty():
+			return_label.text="注册用户"
+		else:
+			#昵称不为空说明用户已注册，销毁自身
+			queue_free()
 	else:
 		printerr("return_label为空")
 	if $AnimationPlayer!=null:

@@ -27,7 +27,11 @@ signal game_over(info)
 signal http_fetch_request_completed(result)
 signal http_update_request_completed(result)
 signal http_create_user_completed(result)
-signal http_read_user_completed(result)
+signal http_read_user_id_by_name_completed(result)
+signal http_read_user_name_by_id_completed(user_id,username)
+signal user_rank_readed(result)
+signal network_error(error_msg)#网络出错
+signal network_available(result)#网络可用
 
 
 func _ready():

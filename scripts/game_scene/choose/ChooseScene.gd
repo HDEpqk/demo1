@@ -19,7 +19,4 @@ func _ready():
 	var scale_y = viewport_size.y / texture_size.y
 	$BG.rect_scale = Vector2(scale_x, scale_y)
 
-func _exit_tree():
-	var global_script = get_node("/root/Global")  # 假设单例名为 Global
-	global_script.reset_data()
-	print("Global 数据已重置")
+

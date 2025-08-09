@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/抓手.png-58ffe851a7bb4bb05c4ab552a6d6f589.stex"
+path="res://.import/warning.png-b554f2b4c42cd587a033455061e4f638.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ui/other/抓手.png"
-dest_files=[ "res://.import/抓手.png-58ffe851a7bb4bb05c4ab552a6d6f589.stex" ]
+source_file="res://art/ui/other/warning.png"
+dest_files=[ "res://.import/warning.png-b554f2b4c42cd587a033455061e4f638.stex" ]
 
 [params]
 

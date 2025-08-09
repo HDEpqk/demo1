@@ -52,9 +52,13 @@ func handle_death():
 func _on_animation_finished():
 	match taiji_mode:
 		GameEnums.TaijiMode.huo:
+			Global.reset_data()
+			print("Global 数据已重置")
 			SceneMgr.change_scene("res://scene/game_scene/game/LimitedGame.tscn")
 		GameEnums.TaijiMode.jin:
-			SceneMgr.change_scene("res://scene/game_scene/game/EndlessGame.tscn")	
+			Global.reset_data()
+			print("Global 数据已重置")
+			SceneMgr.change_scene("res://scene/game_scene/game/EndlessGame.tscn")
 
 
 func update_selection_label():

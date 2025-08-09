@@ -16,10 +16,27 @@ func _ready():
 	#设置center的位置
 	$Center.position.x=viewport_size.x/2
 	$Center.position.y=viewport_size.y/2+130
-	
+	var highest_limited_score
+	var highest_endless_score
 	#UI显示
-	var highest_score=DataMgr.get_setting("user","highest_score")
-	$CanvasLayer/HighestScoreLabel.text="历史最高得分:"+str(DataMgr.get_setting("user","highest_score"))
+	if SceneMgr.game_scene_name=="LimitedGame":
+		highest_limited_score=DataMgr.get_setting("user","highest_limited_score")
+		$CanvasLayer/HighestScoreLabel.text="限时最高得分:"+str(highest_limited_score)
+		if Global.score>highest_limited_score:
+			DataMgr.set_setting("user","highest_limited_score",Global.score)
+			highest_limited_score=DataMgr.get_setting("user","highest_limited_score")
+			$CanvasLayer/HighestScoreLabel.text="限时最高得分:"+str(highest_limited_score)
+			DataMgr.update_leaderboarder_player(DataMgr.LIMITED_BOARDER)
+	elif SceneMgr.game_scene_name=="EndlessGame":
+		highest_endless_score=DataMgr.get_setting("user","highest_endless_score")
+		$CanvasLayer/HighestScoreLabel.text="无尽最高得分:"+str(highest_endless_score)
+		if Global.score>highest_endless_score:
+			DataMgr.set_setting("user","highest_endless_score",Global.score)
+			highest_endless_score=DataMgr.get_setting("user","highest_endless_score")
+			$CanvasLayer/HighestScoreLabel.text="无尽最高得分:"+str(highest_endless_score)
+			DataMgr.update_leaderboarder_player(DataMgr.ENDLESS_BOARDER)
+	
+
 	$CanvasLayer/CurrentScoreLabel.text="本局得分:"+str(Global.score)
 	$CanvasLayer/EndReasonLabel.text="死因:"+str(SceneMgr.scene_info)
 	
@@ -27,18 +44,14 @@ func _ready():
 	EventBus.connect("http_fetch_request_completed",self,"_on_http_fetch_request_completed")
 	EventBus.connect("http_create_user_completed",self,"_on_http_create_user_completed")
 		
-	if Global.score>highest_score:
-		DataMgr.set_setting("user","highest_score",Global.score)
+
 		#第1版设计：获取榜上的最低分，判断当前分数是否能上榜
 #		if SceneMgr.game_scene_name=="LimitedGame":
 #			DataMgr.fetch_leaderboarder_player(DataMgr.LIMITED_BOARDER)
 #		elif SceneMgr.game_scene_name=="EndlessGame":
 #			DataMgr.fetch_leaderboarder_player(DataMgr.ENDLESS_BOARDER)
 		#第2版设计：直接上榜
-		if SceneMgr.game_scene_name=="LimitedGame":
-			DataMgr.update_leaderboarder_player(DataMgr.LIMITED_BOARDER)
-		elif SceneMgr.game_scene_name=="EndlessGame":
-			DataMgr.update_leaderboarder_player(DataMgr.ENDLESS_BOARDER)
+			
 
 func _enter_tree():
 	EventBus.fire_event_2param("global_taiji_mode_changed",Global.taiji_mode,Global.taiji_mode)
@@ -59,7 +72,7 @@ func _on_http_fetch_request_completed(result):
 #			elif last_player_score<Global.score:
 #				DataMgr.delete_leaderboarder_player(DataMgr.LIMITED_BOARDER,last_player_id)
 #				DataMgr.update_leaderboarder_player(DataMgr.LIMITED_BOARDER)
-	DebugUtils.log("_on_http_fetch_request_completed:GameOverScene")
+	pass
 
 func _on_http_create_user_completed(result):
 	DebugUtils.log("_on_http_create_user_completed:GameOverScene")
@@ -67,6 +80,11 @@ func _on_http_create_user_completed(result):
 
 
 
-func sort_rule(a,b):return rank_limited_dic[a]>rank_limited_dic[b]
+# 排序规则：按分数从高到低（假设分数存储在字典的 "score" 键中）
+func sort_rule(a, b):
+	# 从字典中提取具体的分数值（根据实际键名修改 "score"）
+	var score_a = rank_limited_dic[a].get("score", 0)  # 替换 "score" 为实际键名
+	var score_b = rank_limited_dic[b].get("score", 0)
+	return score_a > score_b
 
 

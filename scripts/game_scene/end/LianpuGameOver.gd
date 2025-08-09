@@ -66,7 +66,7 @@ func _on_animation_finished():
 			Global.reset_data()
 			print("Global 数据已重置")
 			#重新游戏
-			SceneMgr.return_to_previous()
+			SceneMgr.change_scene("res://scene/game_scene/game/%s.tscn" % SceneMgr.game_scene_name)
 		GameEnums.TaijiMode.jin:
 			#显示游戏排行榜
 			SceneMgr.change_scene("res://scene/ui/LeaderBoarder.tscn")
