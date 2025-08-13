@@ -58,8 +58,8 @@ func _ready():
 func show_rank_limited():
 	#显示本地玩家信息
 	local_player_name.text="我的昵称:"+DataMgr.get_setting("user","nick_name")
-	var highest_limited_score=DataMgr.get_setting("user","highest_limited_score")
-	local_player_score.text="我的最高分:"+str(highest_limited_score)
+	var upload_limited_score=DataMgr.get_setting("user","upload_limited_score")
+	local_player_score.text="我上传的得分:"+str(upload_limited_score)
 	
 	limited_rank_label.text="排名\n\n"
 	limited_name_label.text="昵称\n\n"
@@ -70,14 +70,14 @@ func show_rank_limited():
 		var score = rank_limited_dic[user_id].get("score", 0)
 		limited_rank_label.text += "%d\n" % (i+1)
 		limited_name_label.text += "%s\n" % current_player_name
-		limited_score_label.text += "%d\n" % score
+		limited_score_label.text += "%.1f\n" % score
 	tab_container.visible = true
 
 func show_rank_endless():
 	#显示本地玩家信息
 	local_player_name.text="我的昵称:"+DataMgr.get_setting("user","nick_name")
-	var highest_endless_score=DataMgr.get_setting("user","highest_endless_score")
-	local_player_score.text="我的最高分:"+str(highest_endless_score)
+	var upload_endless_score=DataMgr.get_setting("user","upload_endless_score")
+	local_player_score.text="我上传的得分:"+str(upload_endless_score)
 	
 	endless_rank_label.text="排名\n\n"
 	endless_name_label.text="昵称\n\n"
@@ -88,7 +88,7 @@ func show_rank_endless():
 		var score = rank_endless_dic[user_id].get("score", 0)
 		endless_rank_label.text += "%d\n" % (i+1)
 		endless_name_label.text += "%s\n" % current_player_name
-		endless_score_label.text += "%d\n" % score
+		endless_score_label.text += "%.1f\n" % score
 	tab_container.visible = true
 
 

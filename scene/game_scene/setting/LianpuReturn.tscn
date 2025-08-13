@@ -279,9 +279,8 @@ visible = false
 frames = SubResource( 86 )
 
 [node name="AnimatedDeath" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( 0, -13 )
 frames = SubResource( 87 )
-animation = "death_02"
+animation = "death_01"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

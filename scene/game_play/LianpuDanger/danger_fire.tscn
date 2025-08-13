@@ -333,6 +333,7 @@ animations = [ {
 radius = 23.0217
 
 [node name="LianpuDangerFire" type="RigidBody2D" groups=["lianpu"]]
+position = Vector2( 532, 276 )
 collision_layer = 2
 gravity_scale = 0.0
 script = ExtResource( 5 )

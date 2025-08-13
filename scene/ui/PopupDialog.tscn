@@ -23,7 +23,7 @@ text = "请检查网络连接"
 align = 1
 valign = 1
 
-[node name="ColorRect" type="TextureRect" parent="."]
+[node name="Icon" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )

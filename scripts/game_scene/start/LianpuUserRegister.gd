@@ -8,7 +8,7 @@ func _ready():
 	taiji_mode=GameEnums.TaijiMode.yin
 	# 安全初始化图片
 	if return_sprite!= null:
-		return_sprite.texture=load("res://art/ui/setting/returnBtn.png")
+		return_sprite.texture=load("res://art/ui/setting/lianpu_register.png")
 	else:
 		printerr("return_sprite为空")
 	#该脸谱应该静止

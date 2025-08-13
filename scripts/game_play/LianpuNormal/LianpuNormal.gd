@@ -16,7 +16,7 @@ func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	#初始能量值
 	var	random = RandomNumberGenerator.new()
 	random.randomize()
-	energy=random.randi_range(0,0)
+	energy=random.randi_range(0,10)
 	DebugUtils.log("初始能量："+str(energy))
 	update_energy_label()
 	#开启碰撞体和图片

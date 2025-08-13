@@ -40,13 +40,13 @@ var current_crazy_time:float=0
 func _ready():
 	pause_btn.connect("pressed", self, "_on_pauseBtn_pressed")
 	#注册面板
-	UiMgr.register_control("PausePanel",pause_panel)
+	#UiMgr.register_control("PausePanel",pause_panel)
 	#注册MainCountdownLabel
-	UiMgr.register_control("MainCountdownLabel",main_countdown_label)
+	#UiMgr.register_control("MainCountdownLabel",main_countdown_label)
 	#注册EnergyCalibration
-	UiMgr.register_control("EnergyCalibration",energy_calibration)
+	#UiMgr.register_control("EnergyCalibration",energy_calibration)
 	#注册TotalScoreLabel
-	UiMgr.register_control("TotalScoreLabel",total_score_label)
+	#UiMgr.register_control("TotalScoreLabel",total_score_label)
 	#订阅玩家能量更新的事件
 	EventBus.connect("global_energy_changed", self, "_update_energy_bar")
 	#订阅玩家分数更新的事件
@@ -76,7 +76,8 @@ func _ready():
 #	bg.rect_scale = Vector2(scale_x, scale_y)
 	
 func _on_pauseBtn_pressed():
-	UiMgr.show_control("PausePanel")
+	#UiMgr.show_control("PausePanel")
+	pause_panel.show()
 
 func _update_energy_bar(new_value: float):
 	energy_calibration.set_energy(new_value)

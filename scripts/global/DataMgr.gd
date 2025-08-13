@@ -14,12 +14,16 @@ const APP_KEY="X-LC-Key: la1EnPLVmpsW5QcWuONzIwj4"
 const MASTER_KEY="X-LC-Key: yWwSlbbhoi4tFSEOYLXnd8lY,master"
 const REST_API="https://omcwyotj.lc-cn-n1-shared.com"#临时的REST API 服务器地址
 
-var CACHE_EXPIRE_SECONDS = 30  # 缓存有效期（一天）测试用30s
-const LIMITED_BOARDER_MAX_NUM:int=11#限时排行榜最大人数
-const ENDLESS_BOARDER_MAX_NUM:int=11#无尽排行榜最大人数
+const BOARDER_CACHE_EXPIRE_SECONDS:= 30  # 排行榜缓存有效期（实际一天或者5min，测试用30s）
+const LIMITED_BOARDER_MAX_NUM:=11#限时排行榜最大人数
+const ENDLESS_BOARDER_MAX_NUM:=11#无尽排行榜最大人数
 #var is_over_LIMITED_BOARDER_MAX_NUM:bool=false#是否超出限时排行榜最大人数
 #var is_over_ENDLESS_BOARDER_MAX_NUM:bool=false#是否超出限时排行榜最大人数
 
+#上传分数相关
+const LIMITED_UPLOAD_TATOL_COUNT:=3#限时上传总次数
+const ENDLESS_UPLOAD_TATOL_COUNT:=3#无尽上传总次数
+const UPLOAD_COUNT_RESET_SECONDS:= 86400  #上传次数重置时间（实际一天，测试用30s）
 
 onready var instance=self
 
@@ -32,22 +36,72 @@ var default_settings = {
 	"user": {
 		"user_id":"",
 		"nick_name":"",
+		"upload_limited_score": 0,#上传的限时得分
+		"upload_endless_score": 0,#上传的无尽得分
 		"highest_limited_score": 0,#最高限时得分
 		"highest_endless_score": 0,#最高无尽得分
 		"rank_limited":-1,#限时排名
-		"rank_endless":-1#无尽排名
+		"rank_endless":-1,#无尽排名
+		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
+		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
+		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点
+		"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
 	},
 	"leancloud": {
 		"cache_limited_obj":{#rank_limited_dic的本地缓存对象
 			"rank_limited_dic":{},
-			"timestamp": 0
+			"timestamp": 0#时间戳
 		},
 		"cache_endless_obj":{#rank_endless_dic的本地缓存对象
 			"rank_endless_dic":{},
-			"timestamp": 0
+			"timestamp": 0#时间戳
 		}
 	}
 }
+
+func first_set_upload_timestamp():
+	#游戏每天第一次启动就记录一下时间戳
+	var is_set_upload_timestamp=get_setting("user","is_set_upload_timestamp")
+	if is_set_upload_timestamp:return
+	else:
+		var current_time = Time.get_unix_time_from_system()
+		DataMgr.set_setting("user","upload_timestamp",current_time)
+		DataMgr.set_setting("user","is_set_upload_timestamp",true)
+
+func check_is_reset_upload_count():
+	#检查是否需要重置upload次数
+	# 获取缓存数据
+	var upload_timestamp = get_setting("user","upload_timestamp")
+	var current_time = Time.get_unix_time_from_system()
+		
+	var cache_timestamp_type=typeof(upload_timestamp)
+	# 验证时间戳是否为有效数字（防止字符串或其他类型）
+	if cache_timestamp_type != TYPE_INT:
+		print("缓存时间戳类型错误，视为无效")
+		return false
+	# 计算时间差（如果缓存时间在未来，强制视为无效）
+	var delta_time = current_time - upload_timestamp
+	if delta_time < 0:
+		print("缓存时间戳在未来（可能系统时间被修改），视为无效")
+		return false
+	if delta_time > UPLOAD_COUNT_RESET_SECONDS:
+		DataMgr.set_setting("user","limited_upload_current_count",LIMITED_UPLOAD_TATOL_COUNT)
+		DataMgr.set_setting("user","endless_upload_current_count",ENDLESS_UPLOAD_TATOL_COUNT)
+		
+	
+
+
+func is_limited_upload_valid() -> bool:
+	#检查限时排行榜是否能上传分数
+	if DataMgr.get_setting("user","limited_upload_current_count")<=0:return false
+	else:return true
+	
+func is_endless_upload_valid() -> bool:
+	#检查无尽排行榜是否能上传分数
+	if DataMgr.get_setting("user","endless_upload_current_count")<=0:return false
+	else:return true
+
+
 func is_limited_cache_valid() -> bool:
 	# 获取缓存数据
 	var cache_data = get_setting("leancloud", "cache_limited_obj")
@@ -75,7 +129,7 @@ func is_limited_cache_valid() -> bool:
 	
 	# 检查数据有效性和过期时间
 	var is_data_valid = !rank_limited_dic.empty()
-	var is_not_expired = delta_time < CACHE_EXPIRE_SECONDS
+	var is_not_expired = delta_time < BOARDER_CACHE_EXPIRE_SECONDS
 	
 	return is_data_valid && is_not_expired
 
@@ -107,7 +161,7 @@ func is_endless_cache_valid() -> bool:
 	
 	# 检查数据有效性和过期时间
 	var is_data_valid = !rank_endless_dic.empty()
-	var is_not_expired = delta_time < CACHE_EXPIRE_SECONDS
+	var is_not_expired = delta_time < BOARDER_CACHE_EXPIRE_SECONDS
 	
 	return is_data_valid && is_not_expired
 	
@@ -270,6 +324,7 @@ func _http_update_request_completed(result, response_code, headers, body,http_re
 		http_request.queue_free()
 		return
 	DebugUtils.log("update success")
+	EventBus.fire_event("http_update_request_completed",Global.score)
 	#清理节点
 	http_request.queue_free()
 
@@ -342,7 +397,7 @@ func _http_create_user_completed(result, response_code, headers, body,http_reque
 	http_request.queue_free()
 
 func read_user_id_by_name(name:String)->bool:
-	DebugUtils.log("read_user")
+	#DebugUtils.log("read_user")
 	var http_request:=HTTPRequest.new()
 	add_child(http_request)
 	http_request.set_pause_mode(PAUSE_MODE_PROCESS)

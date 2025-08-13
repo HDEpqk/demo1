@@ -6,6 +6,9 @@ onready var name_line_edit:LineEdit=$BK/NameLineEdit
 onready var pwd_line_edit:LineEdit=$BK/PwdLineEdit
 
 onready var error_label:Label=$BK/ErrorLabel
+onready var popup_dialog=$PopupDialog
+onready var popup_dialog_label=$PopupDialog/Label
+onready var popup_dialog_icon=$PopupDialog/Icon
 var nick_name
 
 # Called when the node enters the scene tree for the first time.
@@ -65,10 +68,17 @@ func _on_http_read_user_id_by_name_completed(result):
 	var uid=result
 	DataMgr.set_setting("user","user_id",uid)
 	DebugUtils.log("成功保存用户id")
+	popup_dialog_icon.set_visible(false)
+	popup_dialog_label.self_modulate=Color("#19CAAD")
+	popup_dialog_label.text="成功保存用户"
+	popup_dialog.popup()
 
 func _on_network_error(error_msg):
-	$PopupDialog/Label.text=error_msg
-	$PopupDialog.popup()
+	popup_dialog_icon.set_visible(true)
+	popup_dialog_label.self_modulate=Color("#F4606C")
+	popup_dialog_label.text=error_msg
+	popup_dialog.popup()
+	
 	
 func _on_CancelButton_pressed():
 	self.visible=false
