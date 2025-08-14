@@ -284,3 +284,4 @@ frames = SubResource( 87 )
 animation = "death_01"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"

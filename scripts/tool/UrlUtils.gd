@@ -1,4 +1,3 @@
-extends Node
 class_name UrlUtils
 
 # 正确的 URL 编码函数（兼容 Godot 3.6，基于 UTF-8 字节）

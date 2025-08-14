@@ -1107,6 +1107,7 @@ frames = SubResource( 144 )
 animation = "death_02"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuUploadScore"]
+bus = "SFX"
 
 [node name="ConfirmRegister" type="ConfirmationDialog" parent="."]
 pause_mode = 2

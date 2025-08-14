@@ -5,9 +5,13 @@ onready var lianpu_user_register=$LianpuUserRegister
 onready var center = $Center
 onready var viewport_size = get_viewport().size
 onready var user_register=$UserRegister
-
+onready var isSfxOn:bool=DataMgr.get_setting("audio","sound_enabled")
 
 func _ready():
+	if isSfxOn:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), false)#取消静音
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), true)#静音
 	#游戏每天第一次启动就记录一下时间戳
 	DataMgr.first_set_upload_timestamp()
 	lianpu_user_register.visible=false

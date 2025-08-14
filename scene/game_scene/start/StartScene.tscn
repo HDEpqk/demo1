@@ -1121,5 +1121,6 @@ frames = SubResource( 144 )
 animation = "death_02"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuUserRegister"]
+bus = "SFX"
 
 [node name="UserRegister" parent="." instance=ExtResource( 11 )]

@@ -1,18 +1,36 @@
 # DataMgr.gd
 extends Node
 
-const CONFIG_PATH = "user://game_settings.cfg"
-var _config = ConfigFile.new()
+
 
 #leancloud相关
 var rank_limited_dic:Dictionary={}
 var rank_endless_dic:Dictionary={}
 const LIMITED_BOARDER="LimitedTimeScore"#限时排行榜名称
 const ENDLESS_BOARDER="EndlessTimeScore"#无尽排行榜名称
-const APP_ID="X-LC-Id: OMCWyoTJdgvCJxObvbCAISTF-gzGzoHsz"
-const APP_KEY="X-LC-Key: la1EnPLVmpsW5QcWuONzIwj4"
-const MASTER_KEY="X-LC-Key: yWwSlbbhoi4tFSEOYLXnd8lY,master"
-const REST_API="https://omcwyotj.lc-cn-n1-shared.com"#临时的REST API 服务器地址
+# 加密后的敏感信息（从临时脚本的输出复制）
+const ENCRYPTED_APP_ID:=PoolByteArray([106,30,127,34,78,126,7,10,127,40,44,46,50,38,10,101,43,0,86,71,
+38,46,26,119,84,18,90,115,119,44,101,50,112,72,81,67,113,73,93,123,64,27])
+const ENCRYPTED_APP_KEY:=PoolByteArray([106,30,127,34,78,124,6,73,101,71,
+13,12,84,26,11,97,45,50,92,65,22,51,87,105,85,51,77,127,120,31,127,17,92,81])
+const ENCRYPTED_MASTER_KEY:=PoolByteArray([106,30,127,34,78,124,6,73,101,71,24,58,18,
+12,9,83,3,12,94,88,81,16,36,107,115,43,97,124,110,11,82,94,90,60,26,84,87,64,70,86,65])
+const ENCRYPTED_REST_API:=PoolByteArray([90,71,71,17,16,13,76,31,48,10,2,26,28,48,17,91,
+79,8,82,28,6,10,79,86,7,73,75,88,87,23,83,2,24,6,89,84])
+const ENCRYPTED_KEY:=PoolByteArray([70,86,94,17,60,92,6,73,43,2,12,29,58,52,0,72,21,
+1,92,65,58,15,7,65,66,1,85,64,105,14,83,31,66,0,91,73,105,88])
+
+
+
+var app_id
+var key="my_key"
+var dabgjl="ey"
+var app_key
+var adaigkey
+var master_key
+var rest_api#临时的REST API 服务器地址
+var agakmka="te"
+var gjaiofnak="mp_k"
 
 const BOARDER_CACHE_EXPIRE_SECONDS:= 30  # 排行榜缓存有效期（实际一天或者5min，测试用30s）
 const LIMITED_BOARDER_MAX_NUM:=11#限时排行榜最大人数
@@ -27,37 +45,10 @@ const UPLOAD_COUNT_RESET_SECONDS:= 86400  #上传次数重置时间（实际一�
 
 onready var instance=self
 
-# 默认配置（首次运行时初始化）
-var default_settings = {
-	"audio": {
-		"music_enabled": true,
-		"sound_enabled": true,
-	},
-	"user": {
-		"user_id":"",
-		"nick_name":"",
-		"upload_limited_score": 0,#上传的限时得分
-		"upload_endless_score": 0,#上传的无尽得分
-		"highest_limited_score": 0,#最高限时得分
-		"highest_endless_score": 0,#最高无尽得分
-		"rank_limited":-1,#限时排名
-		"rank_endless":-1,#无尽排名
-		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
-		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
-		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点
-		"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
-	},
-	"leancloud": {
-		"cache_limited_obj":{#rank_limited_dic的本地缓存对象
-			"rank_limited_dic":{},
-			"timestamp": 0#时间戳
-		},
-		"cache_endless_obj":{#rank_endless_dic的本地缓存对象
-			"rank_endless_dic":{},
-			"timestamp": 0#时间戳
-		}
-	}
-}
+
+	
+
+
 
 func first_set_upload_timestamp():
 	#游戏每天第一次启动就记录一下时间戳
@@ -201,11 +192,11 @@ func fetch_leaderboarder_player(boarder_name)->bool:
 	http_request.set_pause_mode(PAUSE_MODE_PROCESS)
 	http_request.connect("request_completed", self, "_http_fetch_request_completed",[http_request])
 	# 构造 URL 时添加 ?limit=xxx 参数（注意：如果 URL 已有其他参数，用 & 连接）
-	var url = "%s/1.1/leaderboard/leaderboards/user/%s/ranks?limit=%d" % [REST_API, boarder_name, max_num]
+	var url = "%s/1.1/leaderboard/leaderboards/user/%s/ranks?limit=%d" % [rest_api, boarder_name, max_num]
 	
 	var error = http_request.request(
 		url,
-		[APP_ID, MASTER_KEY]
+		[app_id, app_key]
 	)
 	if error != OK:
 		push_error("fetch_leaderboarder_player请求发生了错误。")
@@ -240,43 +231,46 @@ func _http_fetch_request_completed(result, response_code, headers, body,http_req
 		http_request.queue_free()
 		return
 	DebugUtils.log("fetch finished")
-	#print(body.get_string_from_utf8())
-	var data := parse_json(body.get_string_from_utf8()) as Dictionary
-	var cache_timestamp:int=Time.get_unix_time_from_system()
-#{
-#    "results": [
-#        {
-#            "statisticName": "Score",
-#            "statisticValue": 5,
-#            "rank": 0,
-#            "entity": "user1"
-#        }
-#    ]
-#}
-	var results:=data['results'] as Array
-	if results.empty():
-		push_warning("request请求结果为空")
-		#清理节点
-		http_request.queue_free()
-		return
-	if results[0]['statisticName']==LIMITED_BOARDER:
-		for r in results:
-			rank_limited_dic[r['entity']]={"score":r['statisticValue'],"rank":r['rank']}
-		set_setting("leancloud","cache_limited_obj",
-		{"rank_limited_dic":rank_limited_dic,"timestamp":cache_timestamp})
-#		if check_if_rank_dic_over_max_num(rank_limited_dic,LIMITED_BOARDER_MAX_NUM):
-#			is_over_LIMITED_BOARDER_MAX_NUM=true
-		# 函数执行完毕，发射信号
-		EventBus.fire_event("http_fetch_request_completed")
-	elif results[0]['statisticName']==ENDLESS_BOARDER:
-		for r in results:
-			rank_endless_dic[r['entity']]={"score":r['statisticValue'],"rank":r['rank']}
-		set_setting("leancloud","cache_endless_obj",
-		{"rank_endless_dic":rank_endless_dic,"timestamp":cache_timestamp})
-#		if check_if_rank_dic_over_max_num(rank_endless_dic,ENDLESS_BOARDER_MAX_NUM):
-#			is_over_ENDLESS_BOARDER_MAX_NUM=true
-		# 函数执行完毕，发射信号
-		EventBus.fire_event("http_fetch_request_completed")
+	# 先获取JSON字符串
+	var json_str = body.get_string_from_utf8()
+
+	# 尝试解析JSON
+	var data = parse_json(json_str)
+
+	# 检查解析结果是否为Dictionary
+	if data is Dictionary:
+		# 解析成功且是字典类型，进行后续处理
+		var cache_timestamp:int=Time.get_unix_time_from_system()
+		var results:=data['results'] as Array
+		if results.empty():
+			push_warning("request请求结果为空")
+			#清理节点
+			http_request.queue_free()
+			return
+		if results[0]['statisticName']==LIMITED_BOARDER:
+			for r in results:
+				rank_limited_dic[r['entity']]={"score":r['statisticValue'],"rank":r['rank']}
+			set_setting("leancloud","cache_limited_obj",
+			{"rank_limited_dic":rank_limited_dic,"timestamp":cache_timestamp})
+	#		if check_if_rank_dic_over_max_num(rank_limited_dic,LIMITED_BOARDER_MAX_NUM):
+	#			is_over_LIMITED_BOARDER_MAX_NUM=true
+			# 函数执行完毕，发射信号
+			EventBus.fire_event("http_fetch_request_completed")
+		elif results[0]['statisticName']==ENDLESS_BOARDER:
+			for r in results:
+				rank_endless_dic[r['entity']]={"score":r['statisticValue'],"rank":r['rank']}
+			set_setting("leancloud","cache_endless_obj",
+			{"rank_endless_dic":rank_endless_dic,"timestamp":cache_timestamp})
+	#		if check_if_rank_dic_over_max_num(rank_endless_dic,ENDLESS_BOARDER_MAX_NUM):
+	#			is_over_ENDLESS_BOARDER_MAX_NUM=true
+			# 函数执行完毕，发射信号
+			EventBus.fire_event("http_fetch_request_completed")
+	else:
+		# 处理错误情况
+		print("JSON解析错误或类型不是Dictionary")
+		print("原始JSON字符串: ", json_str)
+		print("解析结果类型: ", typeof(data))
+
 	#清理节点
 	http_request.queue_free()
 
@@ -294,11 +288,11 @@ func update_leaderboarder_player(boarder_name)->bool:
 	#获取uid
 	var uid = get_setting("user", "user_id")
 
-	var url=REST_API+"/1.1/leaderboard/users/%s/statistics" % uid
+	var url="%s/1.1/leaderboard/users/%s/statistics" % [rest_api,uid]
 	var error = http_request.request(
 		url,
-		 [APP_ID,
-		MASTER_KEY,
+		 [app_id,
+		master_key,
 		"Content-Type: application/json"],
 		true,
 		HTTPClient.METHOD_POST, 
@@ -335,11 +329,11 @@ func delete_leaderboarder_player(boarder_name,uid)->bool:
 	http_request.set_pause_mode(PAUSE_MODE_PROCESS)
 	http_request.connect("request_completed", self, "_http_update_request_completed",[http_request])
 
-	var url=REST_API+"/1.1/leaderboard/users/%s/statistics" % uid+"?statistics="+boarder_name
+	var url="%s/1.1/leaderboard/users/%s/statistics?statistics=%s" % [rest_api,uid,boarder_name]
 	var error = http_request.request(
 		url,
-		 [APP_ID,
-		MASTER_KEY,
+		 [app_id,
+		master_key,
 		"Content-Type: application/json"],
 		true,
 		HTTPClient.METHOD_DELETE)
@@ -357,11 +351,11 @@ func create_user(nickname)->bool:
 	add_child(http_request)
 	http_request.set_pause_mode(PAUSE_MODE_PROCESS)
 	http_request.connect("request_completed", self, "_http_create_user_completed",[http_request])
-	var url=REST_API+"/1.1/users"
+	var url="%s/1.1/users" % [rest_api]
 	var error = http_request.request(
 		url,
-		 [APP_ID,
-		MASTER_KEY,
+		 [app_id,
+		master_key,
 		"Content-Type: application/json"],
 		true,
 		HTTPClient.METHOD_POST,
@@ -404,12 +398,12 @@ func read_user_id_by_name(name:String)->bool:
 	http_request.connect("request_completed", self, "_http_read_user_id_by_name_completed",[http_request])
 
 	var encoded_name =UrlUtils.url_encode(name)
-	var url=REST_API+"/1.1/users"+"?where={\"username\":\"%s\"}" % encoded_name
+	var url="%s/1.1/users?where={\"username\":\"%s\"}" % [rest_api,encoded_name]
 	#print("read_user_url:",url)
 	var error = http_request.request(
 		url,
-		 [APP_ID,
-		MASTER_KEY],
+		 [app_id,
+		master_key],
 		true,
 		HTTPClient.METHOD_GET)
 
@@ -457,18 +451,18 @@ func _http_read_user_id_by_name_completed(result, response_code, headers, body,h
 	http_request.queue_free()
 	
 func read_user_name_by_id(uid:String)->bool:
-	DebugUtils.log("read_user")
+	#DebugUtils.log("read_user")
 	var http_request:=HTTPRequest.new()
 	add_child(http_request)
 	http_request.set_pause_mode(PAUSE_MODE_PROCESS)
 	http_request.connect("request_completed", self, "_http_read_user_name_by_id_completed",[http_request])
 
-	var url=REST_API+"/1.1/users"+"?where={\"objectId\":\"%s\"}" % uid
+	var url="%s/1.1/users?where={\"objectId\":\"%s\"}" % [rest_api,uid]
 	#print("read_user_url:",url)
 	var error = http_request.request(
 		url,
-		 [APP_ID,
-		MASTER_KEY],
+		 [app_id,
+		master_key],
 		true,
 		HTTPClient.METHOD_GET)
 
@@ -497,19 +491,6 @@ func _http_read_user_name_by_id_completed(result, response_code, headers, body,h
 		push_error("request请求结果为空")
 		http_request.queue_free()
 		return
-#	{
-#    "results": [
-#        {
-#            "updatedAt": "2025-08-06T11:48:13.548Z",
-#            "objectId": "689340fd9bf5cd01d7aeb520",
-#            "username": "test1",
-#            "shortId": "vqfhjc",
-#            "createdAt": "2025-08-06T11:48:13.548Z",
-#            "emailVerified": false,
-#            "mobilePhoneVerified": false
-#        }
-#    ]
-#}
 	EventBus.fire_event_2param("http_read_user_name_by_id_completed",
 	results[0]["objectId"],results[0]["username"])
 	http_request.queue_free()
@@ -581,7 +562,7 @@ func is_network_available() -> bool:
 	# 连接信号（传递 state 字典）
 	http_request.connect("request_completed", self, "_on_is_network_available_request_completed", [http_request,state])
 	
-	var error = http_request.request(REST_API, [], false, HTTPClient.METHOD_HEAD)
+	var error = http_request.request(rest_api, [], false, HTTPClient.METHOD_HEAD)
 	if error != OK:
 		return false
 	
@@ -612,41 +593,194 @@ func _on_is_network_available_request_completed(result, response_code, headers, 
 	http_request.queue_free()
 
 
-	
-# 单例初始化
-func _ready():
-	# 从本地加载配置
-	load_settings()
+# 辅助函数：将PoolByteArray转为逗号分隔的字符串
+func array_to_string(arr: PoolByteArray) -> String:
+	var parts = []
+	for byte in arr:
+		parts.append(str(byte))
+	return ",".join(parts)
+
+func generate_key():
+	var device_id = OS.get_unique_id()
+
+	# 1. 移除特殊字符（避免干扰）
+	var clean_id = device_id.replace("{", "").replace("}", "").replace("-", "")
 
 	
+	# 2. 确保长度至少8位（不足补0，超长截断）
+	var safe_device_id = clean_id.pad_zeros(8)  # 补全
+	if safe_device_id.length() > 8:
+		safe_device_id = safe_device_id.substr(0, 8)  # 超长则截断前8位
+	
+	# 3. 截取前8位和后8位（此时长度已固定为8位）
+	var part1 = safe_device_id.substr(0, 8)
+	var part2 = clean_id.right(8)  # 因长度固定，实际与part1相同，可换其他逻辑
+	
+	# 4. 拼接密钥（增加固定字符串增强复杂度）
+	var raw_key = part1 + "_game_" + part2 + "_" + str(randi() % 11)
+	return raw_key
+
+# 开发阶段：加密密钥并保存为二进制资源
+func save_encrypted_key():
+	var raw_key = generate_key()
+	var encrypted_key = CryptoUtil.xor_encrypt(raw_key,agakmka+gjaiofnak+dabgjl)
+	var resource = Resource.new()
+	resource.set_meta("encrypted_key", encrypted_key)
+	ResourceSaver.save("res://scripts/tool/encrypted_key.tres", resource)
+
+# 运行阶段：加载并解密密钥
+func load_encrypted_key() -> String:
+	var resource = load("res://scripts/tool/encrypted_key.tres")
+	var encrypted_key = resource.get_meta("encrypted_key") as PoolByteArray
+	var decrypted_key=CryptoUtil.xor_decrypt(encrypted_key,agakmka+gjaiofnak+dabgjl)
+	return decrypted_key
+
+
+
+# 配置文件路径
+const CONFIG_PATH = "user://game_settings.cfg"
+#const BACKUP_PATH = "user://game_settings.cfg.bak"
+
+# 配置对象和默认设置（全局变量）
+#var _config = ConfigFile.new()
+# 默认配置（首次运行时初始化）
+var default_settings = {
+	"audio": {
+		"music_enabled": true,
+		"sound_enabled": true,
+	},
+	"user": {
+		"user_id":"",
+		"nick_name":"",
+		"upload_limited_score": 0,#上传的限时得分
+		"upload_endless_score": 0,#上传的无尽得分
+		"highest_limited_score": 0,#最高限时得分
+		"highest_endless_score": 0,#最高无尽得分
+		"rank_limited":-1,#限时排名
+		"rank_endless":-1,#无尽排名
+		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
+		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
+		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点
+		"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
+	},
+	"leancloud": {
+		"cache_limited_obj":{#rank_limited_dic的本地缓存对象
+			"rank_limited_dic":{},
+			"timestamp": 0#时间戳
+		},
+		"cache_endless_obj":{#rank_endless_dic的本地缓存对象
+			"rank_endless_dic":{},
+			"timestamp": 0#时间戳
+		}
+	}
+}
+
+
+var config_key
+
+# 单例初始化
+func _ready():
+	#save_encrypted_key()
+	if 3208>8023:
+		DebugUtils.log("3208<8023")
+	elif 3208>3209:
+		DebugUtils.log("wsks")
+	while(false):
+		DebugUtils.log("5201314")
+	#adaigkey=load_encrypted_key()
+	
+	adaigkey=CryptoUtil.xor_decrypt(ENCRYPTED_KEY,agakmka+gjaiofnak+dabgjl)
+	app_id=CryptoUtil.xor_decrypt(ENCRYPTED_APP_ID,adaigkey)
+	app_key=CryptoUtil.xor_decrypt(ENCRYPTED_APP_KEY,adaigkey)
+	master_key=CryptoUtil.xor_decrypt(ENCRYPTED_MASTER_KEY,adaigkey)
+	rest_api=CryptoUtil.xor_decrypt(ENCRYPTED_REST_API,adaigkey)
+	
+	config_key=OS.get_unique_id().sha256_text().substr(0, 32) + "S@l7V@lu3"
+	print("config_key:"+config_key)
+	print("=== 配置系统初始化 ===")
+	load_settings()
+
+
+
+# 配置对象和默认设置
+var _config_data = {}  # 不再使用 ConfigFile
+# ... default_settings 保持不变 ...
 
 # 加载配置
 func load_settings():
-	var err = _config.load(CONFIG_PATH)
-	if err == OK:  # 文件存在
-		# 遍历所有section和key，用文件值覆盖默认值
-		for section in default_settings:
-			for key in default_settings[section]:
-				var value = _config.get_value(section, key, default_settings[section][key])
-				default_settings[section][key] = value
-	else:  # 首次运行，创建默认配置
-		save_settings()
+	var file = File.new()
+	
+	# 尝试读取加密文件
+	if file.file_exists(CONFIG_PATH):
+		file.open(CONFIG_PATH, File.READ)
+		var encrypted = file.get_buffer(file.get_len())
+		file.close()
+		
+		# 解密数据
+		var json_str = CryptoUtil.xor_decrypt(encrypted,config_key)
+		if json_str:
+			var parse_result = JSON.parse(json_str)
+			if parse_result.error == OK:
+				_config_data = parse_result.result
+				
+				# 合并数据到默认设置
+				merge_settings(default_settings, _config_data)
+				return
+			else:
+				push_error("JSON 解析错误: " + parse_result.error_string)
+	
+	# 文件不存在或解密失败时使用默认设置
+	_config_data = default_settings.duplicate(true)  # 深拷贝
+	save_settings()
+
+# 递归合并设置数据
+func merge_settings(target, source):
+	for key in source:
+		if target.has(key):
+			if typeof(target[key]) == TYPE_DICTIONARY and typeof(source[key]) == TYPE_DICTIONARY:
+				merge_settings(target[key], source[key])
+			else:
+				target[key] = source[key]
+		else:
+			target[key] = source[key]
 
 # 保存配置
 func save_settings():
-	for section in default_settings:
-		for key in default_settings[section]:
-			_config.set_value(section, key, default_settings[section][key])
-	_config.save(CONFIG_PATH)
+	# 转换为 JSON 并加密
+	var json_str = JSON.print(_config_data)
+	var encrypted = CryptoUtil.xor_encrypt(json_str,config_key)
+	
+	# 写入加密文件
+	var file = File.new()
+	if file.open(CONFIG_PATH, File.WRITE) == OK:
+		file.store_buffer(encrypted)
+		file.close()
+	else:
+		push_error("无法写入配置文件: " + CONFIG_PATH)
 
-# 对外接口：获取设置值
+# 获取设置值
 func get_setting(section, key):
-	return default_settings.get(section, {}).get(key, null)
+	if _config_data.has(section) and _config_data[section].has(key):
+		return _config_data[section][key]
+	return null
 
-# 对外接口：修改设置值（自动保存）
+# 修改设置值（自动保存）
 func set_setting(section, key, value):
-	if section in default_settings and key in default_settings[section]:
-		default_settings[section][key] = value
-		save_settings()
+	if not _config_data.has(section):
+		_config_data[section] = {}
+	
+	_config_data[section][key] = value
+	save_settings()
 
 
+
+
+
+
+
+
+	
+
+
+
+	

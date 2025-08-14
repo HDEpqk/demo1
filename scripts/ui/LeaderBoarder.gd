@@ -96,13 +96,13 @@ func _on_http_fetch_request_completed(result):
 	if current_boarder_name==DataMgr.LIMITED_BOARDER:
 		DebugUtils.log("_on_http_fetch_request_completed_limited:LeaderBoarder")
 		rank_limited_dic = DataMgr.rank_limited_dic
-		print("rank_limited_dic 数据量：", rank_limited_dic.size())  # 新增
+		#print("rank_limited_dic 数据量：", rank_limited_dic.size())  # 新增
 		if !rank_limited_dic.empty():
 			DataMgr.read_user_rank_by_id(DataMgr.get_setting("user","user_id"))
 			limited_player_ids = rank_limited_dic.keys()
 			limited_id_to_name.clear()
 			limited_completed_count = 0
-			print("需要查询的用户ID数量：", limited_player_ids.size())  # 新增
+			#print("需要查询的用户ID数量：", limited_player_ids.size())  # 新增
 			limited_player_ids.sort_custom(self, "sort_rule_limited")
 			for user_id in limited_player_ids:
 				DataMgr.read_user_name_by_id(user_id)
@@ -112,13 +112,13 @@ func _on_http_fetch_request_completed(result):
 	elif current_boarder_name==DataMgr.ENDLESS_BOARDER:
 		DebugUtils.log("_on_http_fetch_request_completed_endless:LeaderBoarder")
 		rank_endless_dic = DataMgr.rank_endless_dic
-		print("rank_endless_dic 数据量：", rank_endless_dic.size())  # 新增
+		#print("rank_endless_dic 数据量：", rank_endless_dic.size())  # 新增
 		if !rank_endless_dic.empty():
 			DataMgr.read_user_rank_by_id(DataMgr.get_setting("user","user_id"))
 			endless_player_ids = rank_endless_dic.keys()
 			endless_id_to_name.clear()
 			endless_completed_count = 0
-			print("需要查询的用户ID数量：", endless_player_ids.size())  # 新增
+			#print("需要查询的用户ID数量：", endless_player_ids.size())  # 新增
 			endless_player_ids.sort_custom(self, "sort_rule_endless")
 			for user_id in endless_player_ids:
 				DataMgr.read_user_name_by_id(user_id)
@@ -147,7 +147,7 @@ func _on_user_rank_readed(result):
 	if current_boarder_name==DataMgr.LIMITED_BOARDER:
 		# 限时榜排名
 		var limited_rank = result[DataMgr.LIMITED_BOARDER]
-		print("limited_rank:",limited_rank)
+		#print("limited_rank:",limited_rank)
 		if limited_rank != -1:
 			DataMgr.set_setting("user","rank_limited",limited_rank)
 			local_player_rank.text="我的排名:"+str(int(limited_rank))
@@ -157,7 +157,7 @@ func _on_user_rank_readed(result):
 	elif current_boarder_name==DataMgr.ENDLESS_BOARDER:
 		# 无尽榜排名
 		var endless_rank = result[DataMgr.ENDLESS_BOARDER]
-		print("endless_rank:",endless_rank)
+		#print("endless_rank:",endless_rank)
 		if endless_rank != -1:
 			DataMgr.set_setting("user","rank_endless",endless_rank)
 			local_player_rank.text="我的排名:"+str(int(endless_rank))

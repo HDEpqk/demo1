@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "CryptoUtil",
+"language": "GDScript",
+"path": "res://scripts/tool/CryptoUtil.gd"
+}, {
+"base": "Reference",
 "class": "DebugUtils",
 "language": "GDScript",
 "path": "res://scripts/tool/DebugUtils.gd"
@@ -19,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/global/Enums.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "UrlUtils",
 "language": "GDScript",
 "path": "res://scripts/tool/UrlUtils.gd"
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://scripts/tool/WeightedRandom.gd"
 } ]
 _global_script_class_icons={
+"CryptoUtil": "",
 "DebugUtils": "",
 "GameEnums": "",
 "UrlUtils": "",

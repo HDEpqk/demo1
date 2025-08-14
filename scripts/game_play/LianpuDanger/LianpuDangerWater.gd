@@ -65,8 +65,8 @@ func handle_energy_operation():
 				if Global.is_mu_protect_open:
 					EventBus.fire_event("mu_protect_close")
 					return
-				#跳转到结束界面
-				SceneMgr.change_scene_with_info("res://scene/game_scene/end/GameOverScene.tscn","你÷了0┗|｀O′|┛ 嗷~~!")
+				#触发游戏结束事件
+				EventBus.fire_event("game_over","你÷了0┗|｀O′|┛ 嗷~~!")
 			else:
 				new_energy_value=Global.energy/energy
 	#如果不处于无敌模式则进行能量计算
