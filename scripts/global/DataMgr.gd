@@ -41,7 +41,7 @@ const ENDLESS_BOARDER_MAX_NUM:=11#无尽排行榜最大人数
 #上传分数相关
 const LIMITED_UPLOAD_TATOL_COUNT:=3#限时上传总次数
 const ENDLESS_UPLOAD_TATOL_COUNT:=3#无尽上传总次数
-const UPLOAD_COUNT_RESET_SECONDS:= 86400  #上传次数重置时间（实际一天，测试用30s）
+const UPLOAD_COUNT_RESET_SECONDS:= 30  #上传次数重置时间（实际一天，测试用30s）
 
 onready var instance=self
 
@@ -50,19 +50,19 @@ onready var instance=self
 
 
 
-func first_set_upload_timestamp():
-	#游戏每天第一次启动就记录一下时间戳
-	var is_set_upload_timestamp=get_setting("user","is_set_upload_timestamp")
-	if is_set_upload_timestamp:return
-	else:
-		var current_time = Time.get_unix_time_from_system()
-		DataMgr.set_setting("user","upload_timestamp",current_time)
-		DataMgr.set_setting("user","is_set_upload_timestamp",true)
+#func first_set_upload_timestamp():
+#	#游戏每天第一次启动就记录一下时间戳
+#	var is_set_upload_timestamp=get_setting("user","is_set_upload_timestamp")
+#	if is_set_upload_timestamp:return
+#	else:
+#		var current_time = Time.get_unix_time_from_system()
+#		DataMgr.set_setting("user","upload_timestamp",current_time)
+#		DataMgr.set_setting("user","is_set_upload_timestamp",true)
 
 func check_is_reset_upload_count():
 	#检查是否需要重置upload次数
 	# 获取缓存数据
-	var upload_timestamp = get_setting("user","upload_timestamp")
+	var upload_timestamp = int(get_setting("user","upload_timestamp"))
 	var current_time = Time.get_unix_time_from_system()
 		
 	var cache_timestamp_type=typeof(upload_timestamp)
@@ -76,8 +76,15 @@ func check_is_reset_upload_count():
 		print("缓存时间戳在未来（可能系统时间被修改），视为无效")
 		return false
 	if delta_time > UPLOAD_COUNT_RESET_SECONDS:
+		DebugUtils.log("delta_time > UPLOAD_COUNT_RESET_SECONDS")
 		DataMgr.set_setting("user","limited_upload_current_count",LIMITED_UPLOAD_TATOL_COUNT)
 		DataMgr.set_setting("user","endless_upload_current_count",ENDLESS_UPLOAD_TATOL_COUNT)
+		#过了规定时间重新记录当前时间为时间戳
+		DataMgr.set_setting("user","upload_timestamp",current_time)
+		#DataMgr.set_setting("user","is_set_upload_timestamp",false)
+	else:
+		DebugUtils.log("delta_time < UPLOAD_COUNT_RESET_SECONDS")
+		
 		
 	
 
@@ -101,7 +108,7 @@ func is_limited_cache_valid() -> bool:
 		print("缓存数据结构不完整，视为无效")
 		return false
 	
-	var cache_timestamp = cache_data["timestamp"]
+	var cache_timestamp = int(cache_data["timestamp"])
 	var rank_limited_dic = cache_data["rank_limited_dic"]
 	var current_time = Time.get_unix_time_from_system()
 	
@@ -133,7 +140,7 @@ func is_endless_cache_valid() -> bool:
 		print("缓存数据结构不完整，视为无效")
 		return false
 	
-	var cache_timestamp = cache_data["timestamp"]
+	var cache_timestamp = int(cache_data["timestamp"])
 	var rank_endless_dic = cache_data["rank_endless_dic"]
 	var current_time = Time.get_unix_time_from_system()
 	
@@ -660,8 +667,7 @@ var default_settings = {
 		"rank_endless":-1,#无尽排名
 		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
 		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
-		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点
-		"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
+		"upload_timestamp": 0#时间戳,用于记录历史某个时间点#"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
 	},
 	"leancloud": {
 		"cache_limited_obj":{#rank_limited_dic的本地缓存对象
@@ -681,12 +687,12 @@ var config_key
 # 单例初始化
 func _ready():
 	#save_encrypted_key()
-	if 3208>8023:
-		DebugUtils.log("3208<8023")
-	elif 3208>3209:
-		DebugUtils.log("wsks")
-	while(false):
-		DebugUtils.log("5201314")
+#	if 3208>8023:
+#		DebugUtils.log("3208<8023")
+#	elif 3208>3209:
+#		DebugUtils.log("wsks")
+#	while(false):
+#		DebugUtils.log("5201314")
 	#adaigkey=load_encrypted_key()
 	
 	adaigkey=CryptoUtil.xor_decrypt(ENCRYPTED_KEY,agakmka+gjaiofnak+dabgjl)
@@ -696,8 +702,8 @@ func _ready():
 	rest_api=CryptoUtil.xor_decrypt(ENCRYPTED_REST_API,adaigkey)
 	
 	config_key=OS.get_unique_id().sha256_text().substr(0, 32) + "S@l7V@lu3"
-	print("config_key:"+config_key)
-	print("=== 配置系统初始化 ===")
+	#print("config_key:"+config_key)
+	#print("=== 配置系统初始化 ===")
 	load_settings()
 
 

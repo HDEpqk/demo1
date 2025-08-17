@@ -358,7 +358,6 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
 frames = SubResource( 11 )
 animation = "begin_attack"
 __meta__ = {

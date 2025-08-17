@@ -1,4 +1,4 @@
-# SceneManager.gd - 作为自动加载的单例
+# SceneMgr.gd - 作为自动加载的单例
 extends Node
 
 var scene_history = []  # 存储场景路径的历史记录

@@ -5,7 +5,7 @@ const SFX_JIN = preload("res://audio/sfx/jin1.wav")
 const SFX_MU = preload("res://audio/sfx/mu1.wav")
 const SFX_SHUI = preload("res://audio/sfx/shui1.wav")
 const SFX_HUO = preload("res://audio/sfx/huo2.wav")
-const SFX_TU = preload("res://audio/sfx/tu.tres")
+const SFX_TU = preload("res://audio/sfx/tu.mp3str")#之前是"res://audio/sfx/tu.tres"
 const SFX_YANG= preload("res://audio/sfx/yang2.wav")
 const SFX_CYCLE_CENTER= preload("res://audio/sfx/cycle_center.wav")
 

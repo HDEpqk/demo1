@@ -6,6 +6,7 @@ extends Node2D
 
 
 func _ready():
+	DataMgr.check_is_reset_upload_count()
 	$UserRegister.visible=false
 	var viewport_size = get_viewport().size
 	#设置场景脸谱的位置

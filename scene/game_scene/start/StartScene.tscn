@@ -1079,8 +1079,6 @@ anims/death_02 = SubResource( 106 )
 anims/death_03 = SubResource( 107 )
 anims/death_04 = SubResource( 108 )
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
-
 [node name="Center" parent="." instance=ExtResource( 6 )]
 
 [node name="LianpuUserRegister" type="RigidBody2D" parent="." groups=["lianpu"]]
@@ -1124,3 +1122,5 @@ animation = "death_02"
 bus = "SFX"
 
 [node name="UserRegister" parent="." instance=ExtResource( 11 )]
+
+[node name="Player" parent="." instance=ExtResource( 5 )]

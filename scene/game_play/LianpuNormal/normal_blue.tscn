@@ -264,7 +264,7 @@ animations = [ {
 script = ExtResource( 4 )
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
-scale = Vector2( 2.348, 2.348 )
+scale = Vector2( 4.696, 4.696 )
 shape = SubResource( 86 )
 disabled = true
 
@@ -297,6 +297,7 @@ anims/death_03 = ExtResource( 5 )
 anims/death_04 = ExtResource( 7 )
 
 [node name="AnimatedDeath" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 92 )
 animation = "death_01"
 

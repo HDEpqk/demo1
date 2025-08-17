@@ -145,7 +145,21 @@ func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	#脸谱能量字体跟随太极模式颜色
 	init_energy_label_color()
 	#初始脸谱能量字体大小
-	$EnergyLabel.set_scale(Vector2( 1.5, 1.5 ))
+	if $EnergyLabel!=null:
+		$EnergyLabel.set_scale($EnergyLabel.get_scale()*1.5)
+	#初始脸谱碰撞器大小
+	if $BodyCollision!=null:
+		#$BodyCollision.set_scale($BodyCollision.get_scale()*2)
+		pass
+	if $Sprite!=null:
+		#$Sprite.set_scale($Sprite.get_scale()*2)
+		pass
+	if $AnimatedSprite!=null:
+		#$AnimatedSprite.set_scale($AnimatedSprite.get_scale()*2)
+		pass
+	if $AnimatedDeath!=null:
+		#$AnimatedDeath.set_scale($AnimatedDeath.get_scale()*2)
+		pass
 
 
 

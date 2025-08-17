@@ -22,7 +22,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
 		{
@@ -31,7 +31,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.jin		
 	},
 		{
@@ -40,7 +40,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.mu		
 	},
 		{
@@ -49,7 +49,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	},
 	{
@@ -94,16 +94,16 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 5,
+		"weight": 3,
 		"reward_score":10,
-		"speed":40,
+		"speed":30,
 		"mode":GameEnums.TaijiMode.jin
 	},
 	{
@@ -112,7 +112,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":40,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
 	{
@@ -121,7 +121,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	},
 	{
@@ -130,7 +130,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
 	{
@@ -139,7 +139,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.jin
 	},
 	{
@@ -148,7 +148,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
 	{
@@ -157,7 +157,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	}
 	
