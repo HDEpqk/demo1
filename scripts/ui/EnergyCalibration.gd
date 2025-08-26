@@ -12,7 +12,7 @@ var current_value: float = 0.0  # 当前值（初始为 0，对应中间位置�
 var half_bg_width: float =bg_width/2
 var is_timming:bool=false
 var current_time: int
-var temp_energy:float=0#临时能量值
+#var temp_energy:float=0#临时能量值
 var isMultipled:bool=false
 var isMultipledTwice:bool=false
 
@@ -24,12 +24,15 @@ onready var max_energy_label=$BG/max
 onready var pointer_texture=$BG/pointer
 onready var bg=$BG
 onready var countdown_label =$BG/CountdownLabel
+onready var countdown_icon =$BG/CountdownIcon
+
 onready var countdown_timer:Timer=$CountdownTimer
 
 func _ready():
 	current_energy_label.text=str(Global.energy)
 	current_time = total_time
 	countdown_label.visible=false
+	countdown_icon.visible=false
 	countdown_timer.wait_time = 1.0  # 每秒触发一次
 	#订阅开始疯狂时间的事件
 	EventBus.connect("crazy_time_begin",self,"_on_crazy_time_begin")
@@ -95,38 +98,40 @@ func check_energy():
 	#检查能量处于什么范围
 	if Global.energy>Global.max_energy or Global.energy<Global.min_energy:
 		if !is_timming:
-			#显示倒计时文本
+			#显示倒计时
 			countdown_label.visible=true
+			countdown_icon.visible=true
 			update_display()
 			#开启计时器
 			countdown_timer.start()
 			is_timming=!is_timming
-			temp_energy=Global.energy
+			#temp_energy=Global.energy
 			#加倍
 			if !isMultipled:
 				Global.set_energy_multiple(2)
 				EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
 				isMultipled=true
-		else:
-			if abs(Global.energy)>abs(temp_energy):
-				temp_energy=Global.energy
+#		else:
+#			if abs(Global.energy)>abs(temp_energy):
+#				temp_energy=Global.energy
 
 	else:
 		if is_timming:
-			#关闭倒计时文本
+			#关闭倒计时
 			countdown_label.visible=false
+			countdown_icon.visible=false
 			#把倒计时文本恢复颜色
 			countdown_label.self_modulate=Color.white
 			#关闭计时器
 			countdown_timer.stop()
 			is_timming=!is_timming
 			current_time = total_time
-			if temp_energy<0:
-				Global.min_energy=temp_energy
-				min_energy_label.text=str(float("%0.1f" % Global.min_energy))
-			elif temp_energy>0:
-				Global.max_energy=temp_energy
-				max_energy_label.text=str(float("%0.1f" % Global.max_energy))
+#			if temp_energy<0:
+#				Global.min_energy=temp_energy
+#				min_energy_label.text=str(float("%0.1f" % Global.min_energy))
+#			elif temp_energy>0:
+#				Global.max_energy=temp_energy
+#				max_energy_label.text=str(float("%0.1f" % Global.max_energy))
 			if isMultipled:
 				Global.set_energy_multiple(1)
 				EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)

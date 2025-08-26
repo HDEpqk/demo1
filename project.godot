@@ -52,7 +52,6 @@ run/main_scene="res://scene/game_scene/start/StartScene.tscn"
 EventBus="*res://scripts/global/EventBus.gd"
 Global="*res://scripts/global/Global.gd"
 DataMgr="*res://scripts/global/DataMgr.gd"
-UiMgr="*res://scripts/global/UIMgr.gd"
 AnimationMgr="*res://scripts/global/AnimationMgr.gd"
 SceneMgr="*res://scripts/global/SceneMgr.gd"
 

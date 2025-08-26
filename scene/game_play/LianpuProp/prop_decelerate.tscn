@@ -380,6 +380,5 @@ margin_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 16, 16 )
-text = "-10"
 align = 1
 valign = 1

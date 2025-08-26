@@ -16,14 +16,18 @@ onready var total_score_label=$TotalScoreLabel
 onready var total_multipleLabel=$TotalMultipleLabel
 onready var multiple_timer_Label=$TotalMultipleLabel/MultipleTimer/MultipleTimerLabel
 onready var multiple_timer=$TotalMultipleLabel/MultipleTimer
+onready var multiple_timer_icon=$TotalMultipleLabel/MultipleTimer/MultipleCountdownIcon
 
 onready var accelerate_spawn_label=$AccelerateSpawnLabel
 onready var accelerate_spawn_timer_Label=$AccelerateSpawnLabel/AccelerateSpawnTimer/AccelerateSpawnTimerLabel
 onready var accelerate_spawn_timer=$AccelerateSpawnLabel/AccelerateSpawnTimer
+onready var accelerate_spawn_timer_icon=$AccelerateSpawnLabel/AccelerateSpawnTimer/AccelerateSpawnCountdownIcon
+
 
 onready var decelerate_spawn_label=$DecelerateSpawnLabel
 onready var decelerate_spawn_timer_Label=$DecelerateSpawnLabel/DecelerateeSpawnTimer/DecelerateSpawnTimerLabel
 onready var decelerate_spawn_timer=$DecelerateSpawnLabel/DecelerateeSpawnTimer
+onready var decelerate_spawn_timer_icon=$DecelerateSpawnLabel/DecelerateeSpawnTimer/DecelerateSpawnCountdownIcon
 
 onready var crazy_time_timer=$CrazyTime/CrazyTimeTimer
 
@@ -55,16 +59,19 @@ func _ready():
 	EventBus.connect("global_multiple_changed", self, "_on_global_multiple_changed")
 	multiple_timer_Label.visible=false
 	multiple_timer_Label.self_modulate=Color("#69db1b")
+	multiple_timer_icon.visible=false
 	#订阅开始加速生成的事件
 	EventBus.connect("accelerate_spawn_begin", self, "_on_accelerate_spawn_begin")
 	accelerate_spawn_label.visible=false
 	accelerate_spawn_timer_Label.visible=false
 	accelerate_spawn_timer_Label.self_modulate=Color.firebrick
+	accelerate_spawn_timer_icon.visible=false
 	#订阅开始减速生成的事件
 	EventBus.connect("decelerate_spawn_begin", self, "_on_decelerate_spawn_begin")
 	decelerate_spawn_label.visible=false
 	decelerate_spawn_timer_Label.visible=false
 	decelerate_spawn_timer_Label.self_modulate=Color.skyblue
+	decelerate_spawn_timer_icon.visible=false
 	#订阅开始疯狂时间的事件
 	EventBus.connect("crazy_time_begin",self,"_on_crazy_time_begin")
 	#隐藏crazyTime背景
@@ -92,6 +99,7 @@ func _on_global_multiple_changed(new_value: int,isTiming:bool,duration:float):
 	total_multipleLabel.text="倍数:X"+str(multiple)
 	if isTiming:
 		multiple_timer_Label.visible=true
+		multiple_timer_icon.visible=true
 		current_multiple_time=duration
 		multiple_timer_Label.text="%d" %current_multiple_time	
 		multiple_timer.start()
@@ -104,6 +112,7 @@ func _on_MultipleTimer_timeout():
 	if current_multiple_time<=0:
 		multiple_timer.stop()
 		multiple_timer_Label.visible=false
+		multiple_timer_icon.visible=false
 		#倒计时结束后要把倍数调回去
 		Global.set_lianpu_multiple(1)
 		EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),false,5)
@@ -114,11 +123,13 @@ func _on_accelerate_spawn_begin(duration):
 	#隐藏减速文本
 	decelerate_spawn_label.visible=false
 	decelerate_spawn_timer_Label.visible=false
+	decelerate_spawn_timer_icon.visible=false
 	#显示加速文本
 	accelerate_spawn_label.text="生成加速中"
 	accelerate_spawn_label.visible=true
 	accelerate_spawn_timer_Label.text=str(duration)
 	accelerate_spawn_timer_Label.visible=true
+	accelerate_spawn_timer_icon.visible=true
 	
 	current_accelerate_spawn_time=duration
 	accelerate_spawn_timer.start()
@@ -130,6 +141,7 @@ func _on_AccelerateSpawnTimer_timeout():
 		accelerate_spawn_timer.stop()
 		accelerate_spawn_label.visible=false
 		accelerate_spawn_timer_Label.visible=false
+		accelerate_spawn_timer_icon.visible=false
 		EventBus.fire_event("accelerate_spawn_end")
 
 func _on_decelerate_spawn_begin(duration):
@@ -137,11 +149,13 @@ func _on_decelerate_spawn_begin(duration):
 	#隐藏加速文本
 	accelerate_spawn_label.visible=false
 	accelerate_spawn_timer_Label.visible=false
+	accelerate_spawn_timer_icon.visible=false
 	#显示减速文本
 	decelerate_spawn_label.text="生成减速中"
 	decelerate_spawn_label.visible=true
 	decelerate_spawn_timer_Label.text=str(duration)
 	decelerate_spawn_timer_Label.visible=true
+	decelerate_spawn_timer_icon.visible=true
 
 	current_decelerate_spawn_time=duration
 	decelerate_spawn_timer.start()
@@ -154,6 +168,7 @@ func _on_DecelerateeSpawnTimer_timeout():
 		decelerate_spawn_timer.stop()
 		decelerate_spawn_label.visible=false
 		decelerate_spawn_timer_Label.visible=false
+		decelerate_spawn_timer_icon.visible=false
 		EventBus.fire_event("decelerate_spawn_end")
 
 func _on_crazy_time_begin(duration):

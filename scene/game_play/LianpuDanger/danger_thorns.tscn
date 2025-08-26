@@ -34,7 +34,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -76,9 +76,8 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 3.37126
-height = 2.52844
+[sub_resource type="CircleShape2D" id=88]
+radius = 10.0499
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
@@ -355,14 +354,22 @@ anims/death_02 = ExtResource( 5 )
 anims/death_03 = ExtResource( 6 )
 anims/death_04 = ExtResource( 7 )
 
+[node name="Area2D" type="Area2D" parent="." groups=["danger_area"]]
+
+[node name="ThornsCollision" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 0, -23.663 )
+rotation = 1.5708
+polygon = PoolVector2Array( -11, 4.80825e-07, -7, -5, -8.337, -15, 1.663, -30, 15.6629, -32.0001, 23.6629, -30.0001, 23.6631, 29.9999, 15.6631, 31.9999, 2.66311, 30, -8.33695, 15, -7, 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
-position = Vector2( -7.52316e-37, -1 )
-scale = Vector2( 4.746, 4.746 )
-shape = SubResource( 3 )
+position = Vector2( 0, 11 )
+shape = SubResource( 88 )
 disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
 frames = SubResource( 10 )
 animation = "begin_attack"
 __meta__ = {
@@ -375,16 +382,6 @@ __meta__ = {
 frames = SubResource( 86 )
 animation = "death_01"
 frame = 10
-
-[node name="Area2D" type="Area2D" parent="." groups=["danger_area"]]
-
-[node name="ThornsCollision" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2( 0, -20 )
-rotation = 1.5708
-polygon = PoolVector2Array( -11, 4.80825e-07, -7, -5, -8, -13, 6, -27, 12, -30, 20, -28, 20, 28, 12, 30, 6, 27, -8, 13, -7, 5 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = "SFX"
@@ -401,6 +398,8 @@ margin_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 16, 16 )
-text = "-10"
 align = 1
 valign = 1
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
