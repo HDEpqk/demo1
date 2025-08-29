@@ -20,6 +20,11 @@ signal decelerate_spawn_begin(duration)
 signal decelerate_spawn_end(value)
 signal crazy_time_begin(duration)
 signal crazy_time_end(value)
+signal combo(combo_count,combo_timeout,lianpu_taiji_mode)#连击
+signal counter(player_taiji_mode)#克制
+signal anti_counter(player_taiji_mode)#被克制
+
+
 signal mu_protect_open(value)#当在木模式开启木保护机制触发的事件
 signal mu_protect_close(value)#当关闭木保护机制时触发的事件
 signal game_over(info)

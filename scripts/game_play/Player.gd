@@ -19,7 +19,7 @@ onready var trail=$Node/Trail
 onready var audio_player = $AudioStreamPlayer
 
 #处理连击
-var combo_count := 0
+var combo_count :int= 0
 var current_combo_type = null
 var first_kill_time:= 0.0
 var last_kill_time := 0.0
@@ -232,24 +232,25 @@ func update_combo(enemy_type, base_score):
 			unique_types[type] = true
 			
 		if unique_types.size() == REQUIRED_UNIQUE_TYPES:
+			EventBus.fire_event_3param("combo",3,COMBO_TIMEOUT,GameEnums.TaijiMode.tu)
 			print("触发土之太极模式")
 			EventBus.fire_event_2param("global_taiji_mode_changed", GameEnums.TaijiMode.tu,Global.taiji_mode)
 			var score_3x = Global.score + base_score * 3*Global.multiple
 			EventBus.fire_event("global_score_changed", score_3x)
 			# 重置连击状态
-			combo_history.clear()
-			combo_history_time.clear()
-			combo_count = 0
+			reset_combo()
 			last_kill_time = current_time  # 更新最后击杀时间
 			return  # 直接返回不执行普通连击逻辑
 
 	# 普通连击逻辑
 	if current_combo_type == enemy_type && (current_time - last_kill_time) <= COMBO_TIMEOUT:
 		combo_count += 1
+		EventBus.fire_event_3param("combo",combo_count,COMBO_TIMEOUT,enemy_type)
 		print("连击次数: ", combo_count)
 	else:
 		combo_count = 1
 		current_combo_type = enemy_type
+		EventBus.fire_event_3param("combo",combo_count,COMBO_TIMEOUT,enemy_type)
 		print("新连击开始")
 
 	# 处理奖励（每次连击更新时判断）
@@ -262,12 +263,17 @@ func update_combo(enemy_type, base_score):
 		EventBus.fire_event("global_score_changed", score_3x)
 		EventBus.fire_event_2param("global_taiji_mode_changed",enemy_type,Global.taiji_mode)
 		# 重置连击状态
-		combo_history.clear()
-		combo_history_time.clear()
-		combo_count = 0
+		reset_combo()
 
 	last_kill_time = current_time
 	
+func reset_combo():
+	# 重置连击状态
+	combo_history.clear()
+	combo_history_time.clear()
+	combo_count = 0
+	
+
 func update_trailSprite_texture(new_value:int,old_value:int=0):
 	match new_value:
 		GameEnums.TaijiMode.yin:

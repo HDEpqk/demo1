@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/LeaderBoarder.gd" type="Script" id=2]
@@ -7,28 +7,30 @@
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scene/ui/PopupDialog.tscn" type="PackedScene" id=7]
+[ext_resource path="res://art/ui/leaderboard/leaderboard_icon_white_64.png" type="Texture" id=8]
+[ext_resource path="res://art/ui/leaderboard/rank_first_icon_256.png" type="Texture" id=9]
+[ext_resource path="res://art/ui/leaderboard/rank_second_icon_256.png" type="Texture" id=10]
+[ext_resource path="res://art/ui/leaderboard/rank_third_icon_256.png" type="Texture" id=11]
 
 [node name="LeaderBoarder" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -24.0
-margin_right = 24.0
-margin_bottom = 16.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 24, 0 )
-theme = ExtResource( 1 )
-text = "排行榜"
+margin_left = -179.0
+margin_right = 179.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 179, 0 )
+texture = ExtResource( 8 )
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -129.0
-margin_top = 35.0
-margin_right = 129.0
-margin_bottom = 374.0
+margin_top = 67.0
+margin_right = 131.0
+margin_bottom = 390.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 129, 0 )
 theme = ExtResource( 1 )
@@ -37,19 +39,22 @@ custom_fonts/font = ExtResource( 3 )
 tab_align = 0
 
 [node name="限时" type="HBoxContainer" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 34.0
+margin_top = 26.0
 margin_right = -4.0
 margin_bottom = -4.0
 theme = ExtResource( 1 )
-custom_constants/separation = 70
+custom_constants/separation = 50
+alignment = 1
 
 [node name="Rank" type="Label" parent="TabContainer/限时"]
-margin_top = 28.0
-margin_right = 32.0
-margin_bottom = 272.0
+margin_left = 20.0
+margin_top = 24.0
+margin_right = 52.0
+margin_bottom = 268.0
 text = "排名
 
 1
@@ -63,12 +68,37 @@ text = "排名
 9
 10
 11"
+align = 1
+
+[node name="FirstIcon" type="TextureRect" parent="TabContainer/限时/Rank"]
+margin_left = -22.26
+margin_top = 30.0
+margin_right = 233.74
+margin_bottom = 286.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 9 )
+
+[node name="SecondIcon" type="TextureRect" parent="TabContainer/限时/Rank"]
+margin_left = -22.26
+margin_top = 51.0
+margin_right = 233.74
+margin_bottom = 307.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 10 )
+
+[node name="ThirdIcon" type="TextureRect" parent="TabContainer/限时/Rank"]
+margin_left = -22.26
+margin_top = 72.0
+margin_right = 233.74
+margin_bottom = 328.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 11 )
 
 [node name="Name" type="Label" parent="TabContainer/限时"]
 margin_left = 102.0
-margin_top = 28.0
+margin_top = 24.0
 margin_right = 150.0
-margin_bottom = 272.0
+margin_bottom = 268.0
 text = "昵称
 
 user1
@@ -82,12 +112,13 @@ user8
 user9
 user10
 user11"
+align = 1
 
 [node name="Score" type="Label" parent="TabContainer/限时"]
-margin_left = 220.0
-margin_top = 28.0
-margin_right = 252.0
-margin_bottom = 272.0
+margin_left = 200.0
+margin_top = 24.0
+margin_right = 232.0
+margin_bottom = 268.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "得分
@@ -106,31 +137,98 @@ text = "得分
 align = 1
 
 [node name="无尽" type="HBoxContainer" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 34.0
+margin_top = 26.0
 margin_right = -4.0
 margin_bottom = -4.0
 theme = ExtResource( 1 )
-custom_constants/separation = 70
+custom_constants/separation = 50
+alignment = 1
 
 [node name="Rank" type="Label" parent="TabContainer/无尽"]
-margin_top = 142.0
-margin_bottom = 158.0
+margin_left = 20.0
+margin_top = 24.0
+margin_right = 52.0
+margin_bottom = 268.0
+text = "排名
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11"
+align = 1
+
+[node name="FirstIcon" type="TextureRect" parent="TabContainer/无尽/Rank"]
+margin_left = -22.26
+margin_top = 30.0
+margin_right = 233.74
+margin_bottom = 286.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 9 )
+
+[node name="SecondIcon" type="TextureRect" parent="TabContainer/无尽/Rank"]
+margin_left = -22.26
+margin_top = 51.0
+margin_right = 233.74
+margin_bottom = 307.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 10 )
+
+[node name="ThirdIcon" type="TextureRect" parent="TabContainer/无尽/Rank"]
+margin_left = -22.26
+margin_top = 72.0
+margin_right = 233.74
+margin_bottom = 328.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 11 )
 
 [node name="Name" type="Label" parent="TabContainer/无尽"]
-margin_left = 70.0
-margin_top = 142.0
-margin_right = 70.0
-margin_bottom = 158.0
+margin_left = 102.0
+margin_top = 24.0
+margin_right = 150.0
+margin_bottom = 268.0
+text = "昵称
+
+user1
+user2
+user3
+user4
+user5
+user6
+user7
+user8
+user9
+user10
+user11"
+align = 1
 
 [node name="Score" type="Label" parent="TabContainer/无尽"]
-margin_left = 140.0
-margin_top = 142.0
-margin_right = 140.0
-margin_bottom = 158.0
+margin_left = 200.0
+margin_top = 24.0
+margin_right = 232.0
+margin_bottom = 268.0
+text = "得分
+
+150
+100
+90
+80
+70
+60
+50
+40
+30
+20
+10"
 align = 1
 
 [node name="LocalPlayerInfo" type="HBoxContainer" parent="."]

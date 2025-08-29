@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/抓手_16.png-4cb2e2a80c3722f97c64acb94269e617.stex"
+path="res://.import/leaderboard_icon_new_64.png-bfb674fdf5c7294137bfe897bd7e2749.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ui/other/抓手_16.png"
-dest_files=[ "res://.import/抓手_16.png-4cb2e2a80c3722f97c64acb94269e617.stex" ]
+source_file="res://art/ui/leaderboard/leaderboard_icon_new_64.png"
+dest_files=[ "res://.import/leaderboard_icon_new_64.png-bfb674fdf5c7294137bfe897bd7e2749.stex" ]
 
 [params]
 

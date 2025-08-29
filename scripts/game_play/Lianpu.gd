@@ -34,7 +34,7 @@ var is_avoiding_center = false
 var exit_direction = Vector2.ZERO
 var screen_margin = 50.0  # 屏幕边界外的销毁距离
 var exit_velocity = Vector2.ZERO
-var exit_speed:float=50
+var exit_speed:float
 
 func start_avoid_center_behavior():
 	if !is_avoiding_center:
@@ -140,6 +140,8 @@ func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	position = pos
 	reward_score=_reward_score
 	speed=_speed
+	exit_speed=speed*2
+	print("exit_speed:",exit_speed)
 	update_operation_type(_mode)
 	DebugUtils.log("初始运算类型："+str(operation_type))
 	#脸谱能量字体跟随太极模式颜色
@@ -261,6 +263,7 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 		# 克制加成
 		var bonus_score = base_score * 2
 		print("五行相克！加成分数: ", bonus_score)
+		EventBus.fire_event("counter",global_mode)
 		return bonus_score
 	elif Global.WUXING_COUNTER.get(enemy_mode) == global_mode:
 		if Global.is_invincible:
@@ -274,6 +277,7 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 		var penalty = base_score / 2
 		print("反被克制！扣除分数: ", penalty)
 		EventBus.fire_event("player_hurt",Global.taiji_mode)
+		EventBus.fire_event("anti_counter",global_mode)
 		DebugUtils.log("反被克制！player hurt")
 		return -penalty
 	else:
@@ -290,7 +294,7 @@ func init_energy_label_color():
 		GameEnums.TaijiMode.mu:
 			$EnergyLabel.self_modulate=Color("#28c641")
 		GameEnums.TaijiMode.shui:
-			$EnergyLabel.self_modulate=Color("#2d93dd")	
+			$EnergyLabel.self_modulate=Color("#2d93dd")
 			
 func _on_death_animation_finished():
 	DebugUtils.log("死亡动画结束的回调")

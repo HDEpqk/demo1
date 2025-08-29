@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/倒计时 .png-870afc33598af2901c88f3bd63a36c63.stex"
+path="res://.import/score_icon_32.png-8829c00bf89aa0d7f894752c11be0664.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ui/other/倒计时 .png"
-dest_files=[ "res://.import/倒计时 .png-870afc33598af2901c88f3bd63a36c63.stex" ]
+source_file="res://art/ui/other/score_icon_32.png"
+dest_files=[ "res://.import/score_icon_32.png-8829c00bf89aa0d7f894752c11be0664.stex" ]
 
 [params]
 
