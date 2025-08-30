@@ -51,4 +51,4 @@ script = ExtResource( 5 )
 
 [node name="MainCamera" parent="." instance=ExtResource( 9 )]
 
-[connection signal="timeout" from="MainCountdown/MainCountdownTimer" to="." method="_on_MainCountdownTimer_timeout"]
+[connection signal="timeout" from="MainCountdown/MainCountdownTimer" to="MainCountdown" method="_on_MainCountdownTimer_timeout"]

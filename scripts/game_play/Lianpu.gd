@@ -224,11 +224,17 @@ func handle_death():
 	handle_energy_operation()#根据运算类型进行不同运算
 	
 func handle_score_operation():
-	#处理加分相关逻辑
-	var actual_score=handle_element_counter_score(Global.taiji_mode,taiji_mode,reward_score)
-	DebugUtils.log("当前的actual_score="+str(actual_score))
-	var new_score=Global.score+actual_score*Global.multiple
-	EventBus.fire_event("global_score_changed",new_score)
+	#处理克制加分与被克制减分相关逻辑
+	var result=handle_element_counter_score(Global.taiji_mode,taiji_mode,reward_score)
+	match result:
+		0:
+			var lianpu_score=reward_score*Global.multiple
+			var new_score=Global.score+lianpu_score
+			EventBus.fire_event("kill_lianpu",lianpu_score)
+			#yield(get_tree().create_timer(1.0), "timeout")
+			EventBus.fire_event("global_score_changed",new_score)
+	
+
 func handle_energy_operation():
 	#根据运算类型进行不同运算
 	var new_energy_value=0
@@ -262,27 +268,36 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 	if counter_target == enemy_mode:
 		# 克制加成
 		var bonus_score = base_score * 2
-		print("五行相克！加成分数: ", bonus_score)
-		EventBus.fire_event("counter",global_mode)
-		return bonus_score
+		var counter_score=bonus_score*Global.multiple
+		print("五行相克！加成分数: ", counter_score)
+		var new_score=Global.score+counter_score
+		EventBus.fire_event_2param("counter",global_mode,counter_score)
+		#yield(get_tree().create_timer(1.0), "timeout")
+		EventBus.fire_event("global_score_changed",new_score)
+		return 1
 	elif Global.WUXING_COUNTER.get(enemy_mode) == global_mode:
 		if Global.is_invincible:
 			DebugUtils.log("无敌时间！无视克制关系销毁敌人")
-			return base_score
+			return 0
 		if Global.is_mu_protect_open:
 			DebugUtils.log("木保护！无视克制关系销毁敌人")
 			EventBus.fire_event("mu_protect_close")
-			return base_score
+			return 0
 		# 被克制惩罚
-		var penalty = base_score / 2
-		print("反被克制！扣除分数: ", penalty)
+		var penalty = base_score * 2
 		EventBus.fire_event("player_hurt",Global.taiji_mode)
-		EventBus.fire_event("anti_counter",global_mode)
-		DebugUtils.log("反被克制！player hurt")
-		return -penalty
+		var anti_counter_score=penalty
+		print("反被克制！扣除分数: ", anti_counter_score)
+		var new_score=max(0,Global.score-anti_counter_score)#确保值不为负数
+		if new_score==0:
+			penalty=0
+		EventBus.fire_event_2param("anti_counter",global_mode,penalty)
+		#yield(get_tree().create_timer(1.0), "timeout")
+		EventBus.fire_event("global_score_changed",new_score)
+		return 1
 	else:
 		# 普通得分
-		return base_score
+		return 0
 	
 #根据太极模式初始化脸谱能量字体
 func init_energy_label_color():

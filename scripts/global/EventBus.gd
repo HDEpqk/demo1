@@ -21,8 +21,10 @@ signal decelerate_spawn_end(value)
 signal crazy_time_begin(duration)
 signal crazy_time_end(value)
 signal combo(combo_count,combo_timeout,lianpu_taiji_mode)#连击
-signal counter(player_taiji_mode)#克制
-signal anti_counter(player_taiji_mode)#被克制
+signal combo_award(combo_score,combo_count)#连击奖励
+signal counter(player_taiji_mode,counter_score)#克制
+signal anti_counter(player_taiji_mode,anti_counter_score)#被克制
+signal kill_lianpu(base_score)#消灭脸谱
 
 
 signal mu_protect_open(value)#当在木模式开启木保护机制触发的事件
@@ -64,3 +66,9 @@ func fire_event_3param(event_name, arg1,arg2,arg3):
 		# 使用解包操作符 * 将参数数组展开为单独的参数
 		call_deferred("emit_signal", event_name, arg1,arg2,arg3)
 		DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2)+"arg3="+str(arg3))
+
+func fire_event_4param(event_name, arg1,arg2,arg3,arg4):
+	if has_signal(event_name):
+		# 使用解包操作符 * 将参数数组展开为单独的参数
+		call_deferred("emit_signal", event_name, arg1,arg2,arg3,arg4)
+		DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2)+"arg3="+str(arg3)+"arg4="+str(arg4))

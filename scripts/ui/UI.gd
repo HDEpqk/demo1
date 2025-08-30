@@ -11,29 +11,36 @@ onready var pause_panel=$PausePanel
 
 onready var main_countdown_label=$MainCountdownLabel
 
-onready var total_score_label=$TotalScoreLabel
 
+#加倍相关
 onready var total_multipleLabel=$TotalMultipleLabel
 onready var multiple_timer_Label=$TotalMultipleLabel/MultipleTimerLabel
 onready var multiple_timer=$TotalMultipleLabel/MultipleTimer
 onready var multiple_timer_icon=$TotalMultipleLabel/MultipleCountdownIcon
 
-
+#加速相关
 onready var accelerate_spawn_label=$AccelerateSpawnLabel
 onready var accelerate_spawn_timer_Label=$AccelerateSpawnLabel/AccelerateSpawnTimerLabel
 onready var accelerate_spawn_timer=$AccelerateSpawnLabel/AccelerateSpawnTimer
 onready var accelerate_spawn_timer_icon=$AccelerateSpawnLabel/AccelerateSpawnCountdownIcon
 
-
+#减速相关
 onready var decelerate_spawn_label=$DecelerateSpawnLabel
 onready var decelerate_spawn_timer_Label=$DecelerateSpawnLabel/DecelerateSpawnTimerLabel
 onready var decelerate_spawn_timer=$DecelerateSpawnLabel/DecelerateeSpawnTimer
 onready var decelerate_spawn_timer_icon=$DecelerateSpawnLabel/DecelerateSpawnCountdownIcon
 
 onready var crazy_time_timer=$CrazyTime/CrazyTimeTimer
-
 onready var combo_label=$ComboLabel
-onready var counter_label=$CounterLabel
+onready var counter_rich_label=$CounterLabel
+
+#得分相关
+onready var total_score_rich_label=$TotalScore/TotalScoreLabel
+onready var base_award_rich_label=$TotalScore/ScoreDetail/BaseAward
+onready var two_combo_award_rich_label=$TotalScore/ScoreDetail/TwoComboAward
+onready var three_combo_award_rich_label=$TotalScore/ScoreDetail/ThreeComboAward
+onready var counter_award_rich_label=$TotalScore/ScoreDetail/CounterAward
+onready var anti_counter_punishment_rich_label=$TotalScore/ScoreDetail/AntiCounterPunishment
 
 var current_multiple_time:float=0
 
@@ -87,9 +94,26 @@ func _ready():
 	combo_label.hide()
 	#订阅克制事件
 	EventBus.connect("counter",self,"_on_counter")
-	counter_label.hide()
+	counter_rich_label.hide()
 	#订阅被克制事件
 	EventBus.connect("anti_counter",self,"_on_anti_counter")
+	#订阅消灭脸谱事件
+	EventBus.connect("kill_lianpu",self,"_on_kill_lianpu")
+	#订阅连击奖励事件
+	EventBus.connect("combo_award",self,"_on_combo_award")
+	base_award_rich_label.hide()
+	two_combo_award_rich_label.hide()
+	three_combo_award_rich_label.hide()
+	counter_award_rich_label.hide()
+	anti_counter_punishment_rich_label.hide()
+	total_score_rich_label.bbcode_enabled=true
+	two_combo_award_rich_label.bbcode_enabled=true
+	three_combo_award_rich_label.bbcode_enabled=true
+	counter_rich_label.bbcode_enabled=true
+	counter_award_rich_label.bbcode_enabled=true
+	counter_rich_label.bbcode_enabled=true
+	anti_counter_punishment_rich_label.bbcode_enabled=true
+	base_award_rich_label.bbcode_enabled=true
 	#设置背景的缩放
 #	var texture_size = bg.get_size()
 #	var scale_x = viewport_size.x / texture_size.x
@@ -105,7 +129,7 @@ func _update_energy_bar(new_value: float):
 	#DebugUtils.log("能量UI已更新")
 
 func _update_score_label(new_value: float):
-	total_score_label.text="得分:"+str(new_value)
+	total_score_rich_label.set_score(new_value)
 	#DebugUtils.log("分数UI已更新")
 
 func _on_global_multiple_changed(new_value: int,isTiming:bool,duration:float):
@@ -231,51 +255,105 @@ func _on_combo(combo_count,combo_timeout,lianpu_taiji_mode):
 			combo_label.self_modulate=modulate.darkened(0.2)
 		_:
 			combo_label.self_modulate=modulate
+
 	combo_label.text="连击×%d" % combo_count
 	combo_label.show()
 	var tween = combo_label.get_node("Tween")
 	tween.interpolate_property(combo_label, "rect_scale",
-	Vector2(4, 4), Vector2(3, 3), 0.1,
+	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.interpolate_callback(combo_label,combo_timeout,"hide")
 	tween.start()
+	
+func _on_combo_award(combo_score,combo_count):
 
-func _on_counter(player_taiji_mode):
-	counter_label.bbcode_enabled=true
+	match combo_count:
+		2:
+			two_combo_award_rich_label.bbcode_text="二连击奖励:+"+str(combo_score)#显示连击得分详情
+			two_combo_award_rich_label.show()
+			var tween = two_combo_award_rich_label.get_node("Tween")
+			tween.interpolate_property(two_combo_award_rich_label, "rect_scale",
+			Vector2(3, 3), Vector2(2, 2), 0.1,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+			tween.interpolate_callback(two_combo_award_rich_label,2,"hide")
+			tween.start()
+		3:
+			three_combo_award_rich_label.bbcode_text="三连击奖励:+"+str(combo_score)#显示连击得分详情
+			three_combo_award_rich_label.show()
+			var tween = three_combo_award_rich_label.get_node("Tween")
+			tween.interpolate_property(three_combo_award_rich_label, "rect_scale",
+			Vector2(3, 3), Vector2(2, 2), 0.1,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+			tween.interpolate_callback(three_combo_award_rich_label,2,"hide")
+			tween.start()
+
+			
+func _on_counter(player_taiji_mode,counter_score):
+
 	match player_taiji_mode:
 		GameEnums.TaijiMode.huo:
-			counter_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"克"+"[color=#e6da29]"+"金"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"克"+"[color=#e6da29]"+"金"+"[/color]"
 		GameEnums.TaijiMode.jin:
-			counter_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"克"+"[color=#28c641]"+"木"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"克"+"[color=#28c641]"+"木"+"[/color]"
 		GameEnums.TaijiMode.shui:
-			counter_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"克"+"[color=#e40000]"+"火"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"克"+"[color=#e40000]"+"火"+"[/color]"
 		GameEnums.TaijiMode.tu:
-			counter_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"克"+"[color=#2d93dd]"+"水"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"克"+"[color=#2d93dd]"+"水"+"[/color]"
 
-	counter_label.show()
-	var tween = counter_label.get_node("Tween")
-	tween.interpolate_property(counter_label, "rect_scale",
-	Vector2(4, 4), Vector2(3, 3), 0.1,
+	counter_rich_label.show()
+	var tween = counter_rich_label.get_node("Tween")
+	tween.interpolate_property(counter_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.interpolate_callback(counter_label,1,"hide")
+	tween.interpolate_callback(counter_rich_label,2,"hide")
 	tween.start()
 	
-func _on_anti_counter(player_taiji_mode):
-	counter_label.bbcode_enabled=true
+	#克制加分详情
+	counter_award_rich_label.bbcode_text="克制奖励:+"+str(counter_score)
+	counter_award_rich_label.show()
+	var tween2 = counter_award_rich_label.get_node("Tween")
+	tween2.interpolate_property(counter_award_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween2.interpolate_callback(counter_award_rich_label,2,"hide")
+	tween2.start()
+	
+func _on_anti_counter(player_taiji_mode,anti_counter_score):
+
 	match player_taiji_mode:
 		GameEnums.TaijiMode.huo:
-			counter_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"被"+"[color=#2d93dd]"+"水"+"[/color]"+"克"
+			counter_rich_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"被"+"[color=#2d93dd]"+"水"+"[/color]"+"克"
 		GameEnums.TaijiMode.jin:
-			counter_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"被"+"[color=#e40000]"+"火"+"[/color]"+"克"
+			counter_rich_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"被"+"[color=#e40000]"+"火"+"[/color]"+"克"
 		GameEnums.TaijiMode.shui:
-			counter_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"被"+"[color=#b36d41]"+"土"+"[/color]"+"克"
+			counter_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"被"+"[color=#b36d41]"+"土"+"[/color]"+"克"
 		GameEnums.TaijiMode.tu:
-			counter_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"被"+"[color=#28c641]"+"木"+"[/color]"+"克"
+			counter_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"被"+"[color=#28c641]"+"木"+"[/color]"+"克"
 
-	counter_label.show()
-	var tween = counter_label.get_node("Tween")
-	tween.interpolate_property(counter_label, "rect_scale",
-	Vector2(4, 4), Vector2(3, 3), 0.1,
+	counter_rich_label.show()
+	var tween = counter_rich_label.get_node("Tween")
+	tween.interpolate_property(counter_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	tween.interpolate_callback(counter_label,1,"hide")
+	tween.interpolate_callback(counter_rich_label,2,"hide")
+	tween.start()
+	
+	#被克制减分详情
+	anti_counter_punishment_rich_label.bbcode_text="被克制惩罚:-"+str(anti_counter_score)
+	anti_counter_punishment_rich_label.show()
+	var tween2 = anti_counter_punishment_rich_label.get_node("Tween")
+	tween2.interpolate_property(anti_counter_punishment_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween2.interpolate_callback(anti_counter_punishment_rich_label,2,"hide")
+	tween2.start()
+
+func _on_kill_lianpu(base_score):
+	base_award_rich_label.bbcode_text="消灭脸谱奖励:+"+str(base_score)
+	base_award_rich_label.show()
+	var tween = base_award_rich_label.get_node("Tween")
+	tween.interpolate_property(base_award_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_callback(base_award_rich_label,2,"hide")
 	tween.start()
