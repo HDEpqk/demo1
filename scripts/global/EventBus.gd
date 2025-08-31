@@ -9,7 +9,7 @@ signal event_triggered(event_name, event_args)
 
 signal global_energy_changed(new_value)
 signal global_score_changed(new_value)
-signal global_taiji_mode_changed(new_value,old_value)
+signal global_taiji_mode_changed(new_value,old_value,is_new_mode)
 signal cycle_lianpu(dic)
 signal player_hurt(mode)
 signal player_recovery(mode)
@@ -24,8 +24,9 @@ signal combo(combo_count,combo_timeout,lianpu_taiji_mode)#连击
 signal combo_award(combo_score,combo_count)#连击奖励
 signal counter(player_taiji_mode,counter_score)#克制
 signal anti_counter(player_taiji_mode,anti_counter_score)#被克制
-signal kill_lianpu(base_score)#消灭脸谱
-
+signal kill_lianpu_award(base_score)#消灭脸谱奖励分数
+signal use_wuxing(player_taiji_mode)#使用五行
+signal use_five_elements()#使用五行
 
 signal mu_protect_open(value)#当在木模式开启木保护机制触发的事件
 signal mu_protect_close(value)#当关闭木保护机制时触发的事件

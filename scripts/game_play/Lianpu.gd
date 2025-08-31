@@ -183,6 +183,7 @@ func queue_free():
 
 func handle_death():
 	if is_dying:return#如果正在死亡则退出避免重复调用
+	EventBus.fire_event("use_wuxing",Global.taiji_mode)
 	is_dying=true
 	# 切换到死亡层（Player 不检测此层）
 	if has_node("Area2D"):
@@ -230,7 +231,7 @@ func handle_score_operation():
 		0:
 			var lianpu_score=reward_score*Global.multiple
 			var new_score=Global.score+lianpu_score
-			EventBus.fire_event("kill_lianpu",lianpu_score)
+			EventBus.fire_event("kill_lianpu_award",lianpu_score)
 			#yield(get_tree().create_timer(1.0), "timeout")
 			EventBus.fire_event("global_score_changed",new_score)
 	

@@ -127,8 +127,8 @@ const ENEMY_CONFIG := [
 	{
 		"type": "hide_red",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_red.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 3,
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"weight": 2,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
@@ -136,8 +136,8 @@ const ENEMY_CONFIG := [
 	{
 		"type": "hide_yellow",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_yellow.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 3,
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"weight": 2,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.jin
@@ -145,8 +145,8 @@ const ENEMY_CONFIG := [
 	{
 		"type": "hide_green",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_green.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 3,
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"weight": 2,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
@@ -154,8 +154,8 @@ const ENEMY_CONFIG := [
 	{
 		"type": "hide_blue",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_blue.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 3,
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"weight": 2,
 		"reward_score":5,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui

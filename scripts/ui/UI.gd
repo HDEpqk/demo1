@@ -98,7 +98,7 @@ func _ready():
 	#订阅被克制事件
 	EventBus.connect("anti_counter",self,"_on_anti_counter")
 	#订阅消灭脸谱事件
-	EventBus.connect("kill_lianpu",self,"_on_kill_lianpu")
+	EventBus.connect("kill_lianpu_award",self,"_on_kill_lianpu_award")
 	#订阅连击奖励事件
 	EventBus.connect("combo_award",self,"_on_combo_award")
 	base_award_rich_label.hide()
@@ -167,7 +167,7 @@ func _on_accelerate_spawn_begin(duration):
 	decelerate_spawn_timer_Label.hide()
 	decelerate_spawn_timer_icon.hide()
 	#显示加速文本
-	accelerate_spawn_label.text="加速..."
+	accelerate_spawn_label.text="加速生成"
 	accelerate_spawn_label.show()
 	accelerate_spawn_timer_Label.text=str(duration)
 	accelerate_spawn_timer_Label.show()
@@ -193,7 +193,7 @@ func _on_decelerate_spawn_begin(duration):
 	accelerate_spawn_timer_Label.hide()
 	accelerate_spawn_timer_icon.hide()
 	#显示减速文本
-	decelerate_spawn_label.text="减速..."
+	decelerate_spawn_label.text="减速生成"
 	decelerate_spawn_label.show()
 	decelerate_spawn_timer_Label.text=str(duration)
 	decelerate_spawn_timer_Label.show()
@@ -348,7 +348,7 @@ func _on_anti_counter(player_taiji_mode,anti_counter_score):
 	tween2.interpolate_callback(anti_counter_punishment_rich_label,2,"hide")
 	tween2.start()
 
-func _on_kill_lianpu(base_score):
+func _on_kill_lianpu_award(base_score):
 	base_award_rich_label.bbcode_text="消灭脸谱奖励:+"+str(base_score)
 	base_award_rich_label.show()
 	var tween = base_award_rich_label.get_node("Tween")

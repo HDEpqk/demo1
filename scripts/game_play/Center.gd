@@ -155,7 +155,7 @@ const TEXTURE_SHUI = preload("res://art/ui/game/taiji_shui.png")
 const TEXTURE_HUO = preload("res://art/ui/game/taiji_huo.png")
 const TEXTURE_TU = preload("res://art/ui/game/taiji_tu.png")
 
-func update_yinyang_image(new_value: int,old_value: int=0) -> void:
+func update_yinyang_image(new_value: int,old_value: int=0,is_new_mode:=true) -> void:
 	var texture = get_texture_by_mode(new_value)
 	
 	if texture:

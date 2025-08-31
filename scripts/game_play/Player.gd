@@ -141,9 +141,9 @@ func _on_area_entered(area):
 	if area.is_in_group("center"):
 		match Global.taiji_mode:
 			GameEnums.TaijiMode.yang:
-				EventBus.fire_event_2param("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode)
+				EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode,true)
 			_:	
-				EventBus.fire_event_2param("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode)
+				EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode,true)
 		audio_player.stream=SFX_CYCLE_CENTER
 		audio_player.play()
 		DebugUtils.log("播放了cycle_center音效")
@@ -234,13 +234,15 @@ func update_combo(enemy_type, base_score):
 		if unique_types.size() == REQUIRED_UNIQUE_TYPES:
 			EventBus.fire_event_3param("combo",3,COMBO_TIMEOUT,GameEnums.TaijiMode.tu)
 			print("触发土之太极模式")
-			EventBus.fire_event_2param("global_taiji_mode_changed", GameEnums.TaijiMode.tu,Global.taiji_mode)
+			EventBus.fire_event_3param("global_taiji_mode_changed", GameEnums.TaijiMode.tu,Global.taiji_mode,true)
+			#提前记录倍数防止等待后倍数变了
+			var multiple=Global.multiple
 			yield(get_tree().create_timer(1.0), "timeout")
-			var combo_score=base_score * 3*Global.multiple
+			var combo_score=base_score * 3*multiple
 			var score_3x = Global.score + combo_score
 			
-			EventBus.fire_event_2param("combo_award",combo_score,3)
 			EventBus.fire_event("global_score_changed", score_3x)
+			EventBus.fire_event_2param("combo_award",combo_score,3)
 			# 重置连击状态
 			reset_combo()
 			last_kill_time = current_time  # 更新最后击杀时间
@@ -259,19 +261,23 @@ func update_combo(enemy_type, base_score):
 
 	# 处理奖励（每次连击更新时判断）
 	if combo_count == 2:
+		#提前记录倍数防止等待后倍数变了
+		var multiple=Global.multiple
 		yield(get_tree().create_timer(0.5), "timeout")
 		DebugUtils.log("Global.score:"+str(Global.score))
-		var combo_score=base_score * 2*Global.multiple
+		var combo_score=base_score * 2*multiple
 		var score_2x = Global.score + combo_score
-		EventBus.fire_event_2param("combo_award",combo_score,combo_count)
 		EventBus.fire_event("global_score_changed", score_2x)
+		EventBus.fire_event_2param("combo_award",combo_score,2)
 	elif combo_count >= 3:
-		EventBus.fire_event_2param("global_taiji_mode_changed",enemy_type,Global.taiji_mode)
+		#提前记录倍数防止等待后倍数变了
+		var multiple=Global.multiple
+		EventBus.fire_event_3param("global_taiji_mode_changed",enemy_type,Global.taiji_mode,true)
 		yield(get_tree().create_timer(1.0), "timeout")
-		var combo_score=base_score * 3*Global.multiple
+		var combo_score=base_score * 3*multiple
 		var score_3x = Global.score + combo_score
-		EventBus.fire_event_2param("combo_award",combo_score,combo_count)
 		EventBus.fire_event("global_score_changed", score_3x)
+		EventBus.fire_event_2param("combo_award",combo_score,3)
 		# 重置连击状态
 		reset_combo()
 
@@ -284,7 +290,7 @@ func reset_combo():
 	combo_count = 0
 	
 
-func update_trailSprite_texture(new_value:int,old_value:int=0):
+func update_trailSprite_texture(new_value:int,old_value:int=0,is_new_mode:=true):
 	match new_value:
 		GameEnums.TaijiMode.yin:
 			trail.default_color=Color.black
@@ -307,7 +313,7 @@ func update_trailSprite_texture(new_value:int,old_value:int=0):
 
 
 
-func play_taiji_mode_sound(new_value: int,old_value:int) -> void:
+func play_taiji_mode_sound(new_value: int,old_value:int,is_new_mode:=true) -> void:
 	var sound_stream = null
 	
 	match new_value:

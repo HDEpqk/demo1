@@ -72,7 +72,7 @@ func _on_energy_changed(new_value: float):
 	energy = new_value
 	DebugUtils.log("全局能量已更新："+str(energy))
 	
-func _on_taiji_mode_changed(new_value:int,old_value:int):
+func _on_taiji_mode_changed(new_value:int,old_value:int,is_new_mode):
 	taiji_mode = new_value
 	DebugUtils.log("全局模式已更新,新的值为："+str(taiji_mode)+"旧的值为："+str(old_value))
 	#如果太极模式是木，触发木保护开启事件

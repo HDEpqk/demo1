@@ -2,8 +2,9 @@ extends "res://scripts/game_play/LianpuDanger/LianpuDanger.gd"
 
 
 
-func handle_death_water(isCenter:bool):
-	if isCenter:
+func handle_death_water(isKill:bool):
+	if isKill:
+		EventBus.fire_event("use_wuxing",Global.taiji_mode)
 		#根据taiji_mode改变死亡动画的颜色
 		match taiji_mode:
 			GameEnums.TaijiMode.huo:
