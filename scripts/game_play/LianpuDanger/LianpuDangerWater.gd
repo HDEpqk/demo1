@@ -4,7 +4,7 @@ extends "res://scripts/game_play/LianpuDanger/LianpuDanger.gd"
 
 func handle_death_water(isKill:bool):
 	if isKill:
-		EventBus.fire_event("use_wuxing",Global.taiji_mode)
+		#EventBus.fire_event("use_wuxing",Global.taiji_mode)
 		#根据taiji_mode改变死亡动画的颜色
 		match taiji_mode:
 			GameEnums.TaijiMode.huo:
@@ -45,6 +45,9 @@ func handle_death_water(isKill:bool):
 		$AudioStreamPlayer.play()
 		if Global.taiji_mode==GameEnums.TaijiMode.huo:
 			#如果当前太极模式是火触发克制惩罚
+			handle_score_operation()
+		elif Global.taiji_mode==GameEnums.TaijiMode.jin:
+			#金生水
 			handle_score_operation()
 
 func _on_dodge_animation_finished():

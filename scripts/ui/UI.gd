@@ -32,7 +32,8 @@ onready var decelerate_spawn_timer_icon=$DecelerateSpawnLabel/DecelerateSpawnCou
 
 onready var crazy_time_timer=$CrazyTime/CrazyTimeTimer
 onready var combo_label=$ComboLabel
-onready var counter_rich_label=$CounterLabel
+onready var counter_rich_label=$CounterRichLabel
+onready var generation_rich_label=$GenerationRichLabel
 
 #得分相关
 onready var total_score_rich_label=$TotalScore/TotalScoreLabel
@@ -101,15 +102,21 @@ func _ready():
 	EventBus.connect("kill_lianpu_award",self,"_on_kill_lianpu_award")
 	#订阅连击奖励事件
 	EventBus.connect("combo_award",self,"_on_combo_award")
+	#订阅玩家生脸谱事件
+	EventBus.connect("wuxing_generation_available",self,"_on_wuxing_generation_available")
+	#订阅脸谱生玩家事件
+	EventBus.connect("anti_wuxing_generation",self,"_on_anti_wuxing_generation")
 	base_award_rich_label.hide()
 	two_combo_award_rich_label.hide()
 	three_combo_award_rich_label.hide()
 	counter_award_rich_label.hide()
+	generation_rich_label.hide()
 	anti_counter_punishment_rich_label.hide()
 	total_score_rich_label.bbcode_enabled=true
 	two_combo_award_rich_label.bbcode_enabled=true
 	three_combo_award_rich_label.bbcode_enabled=true
 	counter_rich_label.bbcode_enabled=true
+	generation_rich_label.bbcode_enabled=true
 	counter_award_rich_label.bbcode_enabled=true
 	counter_rich_label.bbcode_enabled=true
 	anti_counter_punishment_rich_label.bbcode_enabled=true
@@ -260,7 +267,7 @@ func _on_combo(combo_count,combo_timeout,lianpu_taiji_mode):
 	combo_label.show()
 	var tween = combo_label.get_node("Tween")
 	tween.interpolate_property(combo_label, "rect_scale",
-	Vector2(3, 3), Vector2(2, 2), 0.1,
+	Vector2(4, 4), Vector2(3, 3), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.interpolate_callback(combo_label,combo_timeout,"hide")
 	tween.start()
@@ -292,13 +299,13 @@ func _on_counter(player_taiji_mode,counter_score):
 
 	match player_taiji_mode:
 		GameEnums.TaijiMode.huo:
-			counter_rich_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"克"+"[color=#e6da29]"+"金"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"[color=#000000]克[/color]"+"[color=#e6da29]"+"金"+"[/color]"
 		GameEnums.TaijiMode.jin:
-			counter_rich_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"克"+"[color=#28c641]"+"木"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"[color=#000000]克[/color]"+"[color=#28c641]"+"木"+"[/color]"
 		GameEnums.TaijiMode.shui:
-			counter_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"克"+"[color=#e40000]"+"火"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"[color=#000000]克[/color]"+"[color=#e40000]"+"火"+"[/color]"
 		GameEnums.TaijiMode.tu:
-			counter_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"克"+"[color=#2d93dd]"+"水"+"[/color]"
+			counter_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"[color=#000000]克[/color]"+"[color=#2d93dd]"+"水"+"[/color]"
 
 	counter_rich_label.show()
 	var tween = counter_rich_label.get_node("Tween")
@@ -329,6 +336,8 @@ func _on_anti_counter(player_taiji_mode,anti_counter_score):
 			counter_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"被"+"[color=#b36d41]"+"土"+"[/color]"+"克"
 		GameEnums.TaijiMode.tu:
 			counter_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"被"+"[color=#28c641]"+"木"+"[/color]"+"克"
+		GameEnums.TaijiMode.mu:
+			counter_rich_label.bbcode_text="[color=#28c641]"+"木"+"[/color]"+"被"+"[color=#e6da29]"+"金"+"[/color]"+"克"
 
 	counter_rich_label.show()
 	var tween = counter_rich_label.get_node("Tween")
@@ -356,4 +365,43 @@ func _on_kill_lianpu_award(base_score):
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.interpolate_callback(base_award_rich_label,2,"hide")
+	tween.start()
+
+func _on_wuxing_generation_available(lianpu_data):
+	var player_taiji_mode=lianpu_data["player_mode"]
+	match player_taiji_mode:
+		GameEnums.TaijiMode.mu:
+			generation_rich_label.bbcode_text="[color=#28c641]"+"木"+"[/color]"+"生"+"[color=#e40000]"+"火"+"[/color]"
+		GameEnums.TaijiMode.jin:
+			generation_rich_label.bbcode_text="[color=#e6da29]"+"金"+"[/color]"+"生"+"[color=#2d93dd]"+"水"+"[/color]"
+		GameEnums.TaijiMode.shui:
+			generation_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"生"+"[color=#28c641]"+"木"+"[/color]"
+		GameEnums.TaijiMode.tu:
+			generation_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"生"+"[color=#e6da29]"+"金"+"[/color]"
+
+	generation_rich_label.show()
+	var tween = generation_rich_label.get_node("Tween")
+	tween.interpolate_property(generation_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_callback(generation_rich_label,2,"hide")
+	tween.start()
+
+func _on_anti_wuxing_generation(player_taiji_mode):
+	match player_taiji_mode:
+		GameEnums.TaijiMode.mu:
+			generation_rich_label.bbcode_text="[color=#28c641]"+"木"+"[/color]"+"被"+"[color=#2d93dd]"+"水"+"[/color]"+"生"
+		GameEnums.TaijiMode.huo:
+			generation_rich_label.bbcode_text="[color=#e40000]"+"火"+"[/color]"+"被"+"[color=#28c641]"+"木"+"[/color]"+"生"
+		GameEnums.TaijiMode.shui:
+			generation_rich_label.bbcode_text="[color=#2d93dd]"+"水"+"[/color]"+"被"+"[color=#e6da29]"+"金"+"[/color]"+"生"
+		GameEnums.TaijiMode.tu:
+			generation_rich_label.bbcode_text="[color=#b36d41]"+"土"+"[/color]"+"被"+"[color=#e40000]"+"火"+"[/color]"+"生"
+
+	generation_rich_label.show()
+	var tween = generation_rich_label.get_node("Tween")
+	tween.interpolate_property(generation_rich_label, "rect_scale",
+	Vector2(3, 3), Vector2(2, 2), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_callback(generation_rich_label,2,"hide")
 	tween.start()

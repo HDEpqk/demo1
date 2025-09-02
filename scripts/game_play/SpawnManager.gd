@@ -15,7 +15,7 @@ var is_accelerate:=false
 var is_decelerate:=false
 
 # 敌人配置（类型、场景、最小分数、权重）
-const ENEMY_CONFIG := [
+const LIANPU_CONFIG := [
 	{
 		"type": "normal_red",
 		"scene": preload("res://scene/game_play/LianpuNormal/normal_red.tscn"),
@@ -93,26 +93,26 @@ const ENEMY_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
-		"reward_score":5,
-		"speed":20,
+		"reward_score":10,
+		"speed":30,
 		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 2,
-		"reward_score":10,
-		"speed":30,
+		"weight": 1,
+		"reward_score":30,
+		"speed":40,
 		"mode":GameEnums.TaijiMode.jin
 	},
 	{
 		"type": "prop_multiple",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 4,
-		"reward_score":5,
-		"speed":20,
+		"weight": 3,
+		"reward_score":10,
+		"speed":30,
 		"mode":GameEnums.TaijiMode.mu
 	},
 	{
@@ -121,7 +121,7 @@ const ENEMY_CONFIG := [
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
 		"reward_score":5,
-		"speed":20,
+		"speed":30,
 		"mode":GameEnums.TaijiMode.shui
 	},
 	{
@@ -129,7 +129,7 @@ const ENEMY_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_red.tscn"),
 		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
-		"reward_score":5,
+		"reward_score":10,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
@@ -138,7 +138,7 @@ const ENEMY_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_yellow.tscn"),
 		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
-		"reward_score":5,
+		"reward_score":10,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.jin
 	},
@@ -147,7 +147,7 @@ const ENEMY_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_green.tscn"),
 		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
-		"reward_score":5,
+		"reward_score":10,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
@@ -156,7 +156,7 @@ const ENEMY_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_blue.tscn"),
 		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
-		"reward_score":5,
+		"reward_score":10,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	}
@@ -165,7 +165,7 @@ const ENEMY_CONFIG := [
 
 onready var timer = $SpawnTimer
 var current_score := 0
-onready var enemy_container=$SpawnedEnemies
+onready var lianpu_container=$SpawnedLianpus
 
 func _ready():
 	update_spawn_speed()
@@ -175,6 +175,7 @@ func _ready():
 	EventBus.connect("accelerate_spawn_end", self, "_on_accelerate_spawn_end")
 	EventBus.connect("decelerate_spawn_begin", self, "_on_decelerate_spawn_begin")
 	EventBus.connect("decelerate_spawn_end", self, "_on_decelerate_spawn_end")
+	EventBus.connect("wuxing_generation_available",self,"_on_wuxing_generation_available")
 	
 func _on_score_changed(new_score: int):
 	current_score = new_score
@@ -198,23 +199,29 @@ func update_spawn_speed():
 		timer.start()
 
 func _on_SpawnTimer_timeout():
-	var enemy_data = _select_enemy()
-	var enemy = enemy_data.scene.instance()
-	enemy_container.add_child(enemy)
+	var lianpu_dic = _select_lianpu_random()
+	var lianpu = lianpu_dic.scene.instance()
+	lianpu_container.add_child(lianpu)
 	
 	# 初始化位置和模式和奖励分数
 	var pos = _get_spawn_position()
-	var mode = enemy_data["mode"]
-	var reward_score=enemy_data["reward_score"]
-	var speed=enemy_data["speed"]
-	
-	if enemy.has_method("init"):
-		enemy.init(mode, pos,reward_score,speed)
+	var mode = lianpu_dic["mode"]
+	var reward_score=lianpu_dic["reward_score"]
+	var speed=lianpu_dic["speed"]
+	var lianpu_type=lianpu_dic["type"]
+	var dic:={"mode":mode,
+	"pos":pos,
+	"reward_score":reward_score,
+	"speed":speed,
+	"lianpu_type":lianpu_type}
 
-func _select_enemy() -> Dictionary:
-	# 筛选符合条件的敌人
+	if lianpu.has_method("init"):
+		lianpu.init(dic)		
+
+func _select_lianpu_random() -> Dictionary:
+	# 随机筛选符合条件的脸谱
 	var available = []
-	for config in ENEMY_CONFIG:
+	for config in LIANPU_CONFIG:
 		if config.min_score <= current_score:
 			available.append(config)
  
@@ -227,6 +234,8 @@ func _select_enemy() -> Dictionary:
 	var selected_index = WeightedRandom.get_item(weight_dict)
 	
 	return available[selected_index]
+
+
 
 # 新增配置参数
 export var spawn_margin := 100.0    # 生成点与屏幕边缘的距离
@@ -296,31 +305,36 @@ func _on_cycle_lianpu(event_data: Dictionary):
 	var next_type = cycle_order[next_index]
 	
 	# 通用生成逻辑
-	var target_config = _find_enemy_config(next_type)
+	var target_config = _select_lianpu_by_type(next_type)
 	if target_config:
 		_spawn_replacement(target_config, spawn_pos)
 
 # 辅助方法：查找敌人配置
-func _find_enemy_config(type_name: String) -> Dictionary:
-	for config in ENEMY_CONFIG:
+func _select_lianpu_by_type(type_name: String) -> Dictionary:
+	# 通过脸谱类型筛选脸谱(type_name: String) -> Dictionary:
+	for config in LIANPU_CONFIG:
 		if config["type"] == type_name:
 			return config
 	printerr("未找到敌人配置：", type_name)
 	return {}
 
 # 辅助方法：生成替换敌人
-func _spawn_replacement(config: Dictionary, pos: Vector2):
-	var new_enemy = config["scene"].instance()
-	enemy_container.add_child(new_enemy)
-	new_enemy.global_position = pos
+func _spawn_replacement(lianpu_dic: Dictionary, pos: Vector2):
+	var new_lianpu = lianpu_dic["scene"].instance()
+	lianpu_container.add_child(new_lianpu)
+	#new_lianpu.global_position = pos
+	var mode = lianpu_dic["mode"]
+	var reward_score=lianpu_dic["reward_score"]
+	var speed=lianpu_dic["speed"]
+	var lianpu_type=lianpu_dic["type"]
+	var dic:={"mode":mode,
+	"pos":pos,
+	"reward_score":reward_score,
+	"speed":speed,
+	"lianpu_type":lianpu_type}
 	
-	if new_enemy.has_method("init"):
-		new_enemy.init(
-			config["mode"],
-			pos,
-			config["reward_score"],
-			config["speed"]
-		)
+	if new_lianpu.has_method("init"):
+		new_lianpu.init(dic)	
 	 #添加渐入动画
 #	new_enemy.modulate = Color.transparent
 #	var tween=new_enemy.get_node("Tween")
@@ -351,3 +365,28 @@ func _on_decelerate_spawn_end(value):
 	DebugUtils.log("end decelerate!:SpawnMgr")
 	is_decelerate=false
 	update_spawn_speed()	
+
+func _on_wuxing_generation_available(lianpu_data):
+	DebugUtils.log("_on_wuxing_generation_available:SpawnManager")
+	# 初始化位置和模式和奖励分数
+	var org_pos=lianpu_data["position"]
+	var type=lianpu_data["lianpu_type"]
+	var pos=get_random_circle_point(org_pos,100)
+	# 通用生成逻辑
+	var target_config = _select_lianpu_by_type(type)
+	if target_config:
+		_spawn_replacement(target_config, pos)
+
+
+# 生成圆周随机坐标的工具函数
+func get_random_circle_point(center: Vector2, radius: float) -> Vector2:
+	# 1. 生成0~2π的随机角度（对应360°，randf()生成0~1的随机数）
+	var random_angle = randf() * PI * 2.0
+	
+	# 2. 极坐标转直角坐标：计算偏移量
+	var offset_x = radius * cos(random_angle)
+	var offset_y = radius * sin(random_angle)
+	var offset = Vector2(offset_x, offset_y)
+	
+	# 3. 圆心坐标 + 偏移量 = 圆周随机坐标
+	return center + offset

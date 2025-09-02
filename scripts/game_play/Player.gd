@@ -51,17 +51,30 @@ func _ready():
 	area.collision_mask = (1 << 1) | (1 << 2) | (1 << 3)
 	
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+	if !(event is InputEventMouseButton):return
+	if event.button_index == BUTTON_LEFT:
 		if event.pressed:
 			press_timer = 0.0
-			#node2d.visible = false  # 按下瞬间隐藏
 		else:
 			is_long_pressed = false
 			trail.clear_points()
-			#node2d.visible = false  # 松开时强制隐藏
-			
-			update_trailSprite_texture(Global.taiji_mode)
-			
+		
+
+	elif event.button_index == BUTTON_RIGHT:
+		if event.pressed:
+			press_timer = 0.0
+			match Global.taiji_mode:
+				GameEnums.TaijiMode.yang:
+					EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode,true)
+				_:	
+					EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode,true)
+			audio_player.stream=SFX_CYCLE_CENTER
+			audio_player.play()
+			DebugUtils.log("播放了cycle_center音效")
+		else:
+			is_long_pressed = false
+			trail.clear_points()
+		
 
 func _physics_process(delta):
 	# 平滑跟随鼠标
@@ -75,6 +88,12 @@ func _physics_process(delta):
 			is_long_pressed = true
 			#node2d.visible = true  # 长按成功时显示
 			area2d.global_position = target_pos  # 保持与鼠标同步
+#	elif Input.is_mouse_button_pressed(BUTTON_RIGHT) and Global.taiji_mode==GameEnums.TaijiMode.yang:
+#		press_timer += delta
+#		if press_timer >= long_press_threshold:
+#			is_long_pressed = true
+#			#node2d.visible = true  # 长按成功时显示
+#			area2d.global_position = target_pos  # 保持与鼠标同步
 	
 	# 拖尾动态更新
 	if is_long_pressed:

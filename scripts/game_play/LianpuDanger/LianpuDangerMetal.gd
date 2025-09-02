@@ -6,8 +6,8 @@ export var loop_duration := 2    # loop_attack持续时间
 export var end_duration := 2     # end_attack持续时间
 
 
-func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
-	.init(_mode,pos,_reward_score,_speed)
+func init(dic:Dictionary):
+	.init(dic)
 	# 初始化计时器（替代动态创建方案）
 	$LoopTimer.wait_time = loop_duration
 	$EndTimer.wait_time = end_duration

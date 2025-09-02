@@ -22,8 +22,13 @@ signal crazy_time_begin(duration)
 signal crazy_time_end(value)
 signal combo(combo_count,combo_timeout,lianpu_taiji_mode)#连击
 signal combo_award(combo_score,combo_count)#连击奖励
-signal counter(player_taiji_mode,counter_score)#克制
-signal anti_counter(player_taiji_mode,anti_counter_score)#被克制
+signal counter(player_taiji_mode,counter_score)#玩家五行克制脸谱
+signal anti_counter(player_taiji_mode,anti_counter_score)#玩家五行被脸谱克制
+signal wuxing_generation(lianpu_data)#玩家五行生脸谱
+signal wuxing_generation_available(lianpu_data)#玩家有足够的五行次数去生脸谱
+signal anti_wuxing_generation(player_taiji_mode)#玩家五行被脸谱生
+
+
 signal kill_lianpu_award(base_score)#消灭脸谱奖励分数
 signal use_wuxing(player_taiji_mode)#使用五行
 signal use_five_elements()#使用五行

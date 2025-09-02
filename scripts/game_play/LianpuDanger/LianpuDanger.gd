@@ -12,11 +12,10 @@ func _ready():
 	# 设置对象检测第1层和第4层
 	collision_mask = 1 | (1 << 3)
 	
-func init(_mode:int, pos:Vector2, _reward_score:float, _speed:float):
-	.init(_mode, pos, _reward_score, _speed)
-	#初始能量值
+func init(dic:Dictionary):
+	.init(dic)
 	var	random = RandomNumberGenerator.new()
 	random.randomize()
 	energy=random.randi_range(0,10)
-	DebugUtils.log("初始能量："+str(energy))
+	DebugUtils.log("能量："+str(energy))
 	update_energy_label()

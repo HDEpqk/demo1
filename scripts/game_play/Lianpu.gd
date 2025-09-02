@@ -21,7 +21,7 @@ var is_dying = false#当前是否正在死亡
 
 
 var reward_score:float#消除的基础奖励分数
-#var actual_score:float=reward_score#消除的最终奖励分数，默认等于基础奖励分数
+var lianpu_type:String
 
 #寻路相关
 onready var center_position = get_viewport().size/2
@@ -125,7 +125,12 @@ func _ready():
 			if anim.begins_with("death_"):
 				death_animations.append(anim)
 
-func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
+func init(dic:Dictionary):
+	var _mode=dic["mode"]
+	var pos=dic["pos"]
+	var _reward_score=dic["reward_score"]
+	var _speed=dic["speed"]
+	var _lianpu_type=dic["lianpu_type"]
 	# 验证模式有效性
 	if not taiji_order.has(_mode):
 		printerr("无效的太极模式:", _mode)
@@ -135,9 +140,10 @@ func init(_mode:int, pos:Vector2,_reward_score:float,_speed:float):
 	$AnimatedDeath.visible=false
 	#开启普通动画
 	$AnimatedSprite.visible=true
+	lianpu_type=_lianpu_type
 	taiji_mode = _mode
 	DebugUtils.log("初始模式："+str(taiji_mode))
-	position = pos
+	global_position = pos
 	reward_score=_reward_score
 	speed=_speed
 	exit_speed=speed*2
@@ -183,7 +189,7 @@ func queue_free():
 
 func handle_death():
 	if is_dying:return#如果正在死亡则退出避免重复调用
-	EventBus.fire_event("use_wuxing",Global.taiji_mode)
+	
 	is_dying=true
 	# 切换到死亡层（Player 不检测此层）
 	if has_node("Area2D"):
@@ -220,13 +226,16 @@ func handle_death():
 	else:
 		print("No death animations found.")
 	
+	
 	handle_element_counter_sfx()#播放死亡音效
 	handle_score_operation()#加分
 	handle_energy_operation()#根据运算类型进行不同运算
 	
+	
 func handle_score_operation():
+	handle_element_generation(Global.taiji_mode,taiji_mode,reward_score)#处理五行相生
 	#处理克制加分与被克制减分相关逻辑
-	var result=handle_element_counter_score(Global.taiji_mode,taiji_mode,reward_score)
+	var result=handle_element_counter(Global.taiji_mode,taiji_mode,reward_score)
 	match result:
 		0:
 			var lianpu_score=reward_score*Global.multiple
@@ -262,11 +271,11 @@ func handle_energy_operation():
 		
 
 #在敌人处理逻辑中添加分数调整
-func handle_element_counter_score(global_mode, enemy_mode, base_score):
+func handle_element_counter(global_mode, lianpu_mode, base_score):
 	# 获取克制关系
 	var counter_target = Global.WUXING_COUNTER.get(global_mode)
 	
-	if counter_target == enemy_mode:
+	if counter_target == lianpu_mode:
 		# 克制加成
 		var bonus_score = base_score * 2
 		var counter_score=bonus_score*Global.multiple
@@ -276,7 +285,7 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 		#yield(get_tree().create_timer(1.0), "timeout")
 		EventBus.fire_event("global_score_changed",new_score)
 		return 1
-	elif Global.WUXING_COUNTER.get(enemy_mode) == global_mode:
+	elif Global.WUXING_COUNTER.get(lianpu_mode) == global_mode:
 		if Global.is_invincible:
 			DebugUtils.log("无敌时间！无视克制关系销毁敌人")
 			return 0
@@ -299,7 +308,25 @@ func handle_element_counter_score(global_mode, enemy_mode, base_score):
 	else:
 		# 普通得分
 		return 0
+
+func handle_element_generation(global_mode,lianpu_mode,base_score):
+		# 获取相生关系
+	var generation_target = Global.WUXING_GENERATION.get(global_mode)
 	
+	#global_position-=Vector2(100,0)
+	if generation_target == lianpu_mode:
+		DebugUtils.log("玩家生脸谱")
+		EventBus.fire_event("wuxing_generation",{
+		"position": global_position,
+		"lianpu_type":lianpu_type,
+		"player_mode":global_mode
+	})
+		return
+	if Global.WUXING_GENERATION.get(lianpu_mode) == global_mode:
+		DebugUtils.log("玩家被脸谱生")
+		EventBus.fire_event("anti_wuxing_generation",global_mode)
+		return
+	EventBus.fire_event("use_wuxing",Global.taiji_mode)
 #根据太极模式初始化脸谱能量字体
 func init_energy_label_color():
 	match taiji_mode:
@@ -371,3 +398,5 @@ func update_energy_label():
 			$EnergyLabel.text="×"+str(energy)
 		GameEnums.OperationType.chu:
 			$EnergyLabel.text="÷"+str(energy)
+
+

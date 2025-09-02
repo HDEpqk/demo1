@@ -317,18 +317,31 @@ text = "连击×1"
 
 [node name="Tween" type="Tween" parent="ComboLabel"]
 
-[node name="CounterLabel" type="RichTextLabel" parent="."]
+[node name="CounterRichLabel" type="RichTextLabel" parent="."]
 margin_top = 119.0
 margin_right = 100.0
 margin_bottom = 136.0
 theme = ExtResource( 5 )
 custom_fonts/normal_font = ExtResource( 10 )
 bbcode_enabled = true
-bbcode_text = "[color=#2d93dd]水[/color]克[color=#e40000]火[/color]"
+bbcode_text = "[color=#2d93dd]水[/color][color=#000000]克[/color][color=#e40000]火[/color]"
 text = "水克火"
 fit_content_height = true
 
-[node name="Tween" type="Tween" parent="CounterLabel"]
+[node name="Tween" type="Tween" parent="CounterRichLabel"]
+
+[node name="GenerationRichLabel" type="RichTextLabel" parent="."]
+margin_top = 160.0
+margin_right = 100.0
+margin_bottom = 136.0
+theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 10 )
+bbcode_enabled = true
+bbcode_text = "[color=#2d93dd]水[/color]生[color=#28c641]木[/color]"
+text = "水生木"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="GenerationRichLabel"]
 
 [node name="FiveElementsAccumulation" type="Control" parent="."]
 anchor_left = 0.5
@@ -338,6 +351,7 @@ anchor_bottom = 1.0
 margin_left = -20.0
 margin_top = -40.0
 margin_right = 20.0
+rect_scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 12 )
 
 [node name="TextureRect" type="TextureRect" parent="FiveElementsAccumulation"]
@@ -352,13 +366,17 @@ rect_pivot_offset = Vector2( 139, 273 )
 texture = ExtResource( 13 )
 
 [node name="JinControl" type="Control" parent="FiveElementsAccumulation"]
-margin_left = 29.0
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/JinControl"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 19.0
+margin_left = 32.0
 margin_top = 5.0
 margin_right = 30.0
 margin_bottom = 19.0
@@ -366,7 +384,7 @@ rect_scale = Vector2( 2, 2 )
 text = "Q"
 
 [node name="CountLabel" type="Label" parent="FiveElementsAccumulation/JinControl"]
-margin_left = 82.0
+margin_left = 95.0
 margin_top = 8.0
 margin_right = 90.0
 margin_bottom = 22.0
@@ -376,21 +394,25 @@ text = "0"
 [node name="Tween" type="Tween" parent="FiveElementsAccumulation/JinControl/CountLabel"]
 
 [node name="MuControl" type="Control" parent="FiveElementsAccumulation"]
-margin_left = 29.0
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/MuControl"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -138.0
-margin_top = -180.0
+margin_left = -129.0
+margin_top = -175.0
 margin_right = -127.0
 margin_bottom = -166.0
 rect_scale = Vector2( 2, 2 )
 text = "W"
 
 [node name="CountLabel" type="Label" parent="FiveElementsAccumulation/MuControl"]
-margin_left = -141.0
+margin_left = -126.0
 margin_top = -102.0
 margin_right = -133.0
 margin_bottom = -88.0
@@ -400,21 +422,25 @@ text = "0"
 [node name="Tween" type="Tween" parent="FiveElementsAccumulation/MuControl/CountLabel"]
 
 [node name="ShuiControl" type="Control" parent="FiveElementsAccumulation"]
-margin_left = 29.0
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/ShuiControl"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -124.0
-margin_top = 5.0
-margin_right = -113.0
-margin_bottom = 17.0
+margin_left = -105.0
+margin_top = 8.0
+margin_right = -106.0
+margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
 text = "E"
 
 [node name="CountLabel" type="Label" parent="FiveElementsAccumulation/ShuiControl"]
-margin_left = -61.0
+margin_left = -50.0
 margin_top = 8.0
 margin_right = -53.0
 margin_bottom = 20.0
@@ -424,13 +450,17 @@ text = "0"
 [node name="Tween" type="Tween" parent="FiveElementsAccumulation/ShuiControl/CountLabel"]
 
 [node name="HuoControl" type="Control" parent="FiveElementsAccumulation"]
-margin_left = 29.0
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/HuoControl"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -53.0
+margin_left = -40.0
 margin_top = -219.0
 margin_right = -42.0
 margin_bottom = -205.0
@@ -438,10 +468,9 @@ rect_scale = Vector2( 2, 2 )
 text = "R"
 
 [node name="CountLabel" type="Label" parent="FiveElementsAccumulation/HuoControl"]
-margin_left = 10.0
-margin_top = -216.0
-margin_right = 18.0
-margin_bottom = -202.0
+margin_left = 24.0
+margin_top = -220.0
+margin_bottom = -499.0
 rect_scale = Vector2( 2, 2 )
 text = "0"
 
@@ -456,8 +485,8 @@ margin_top = -40.0
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/TuControl"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 104.0
-margin_top = -177.0
+margin_left = 106.0
+margin_top = -173.0
 margin_bottom = -163.0
 rect_scale = Vector2( 2, 2 )
 text = "T"

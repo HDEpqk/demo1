@@ -29,13 +29,21 @@ func get_lianpu_multiple():
 #	is_multiple_timer_timming=value
 #func get_is_multiple_timer_timming():
 #	return is_multiple_timer_timming
-# 在Global.gd或独立配置文件中定义五行相克关系
+#五行相克关系
 const WUXING_COUNTER = {
 	GameEnums.TaijiMode.huo: GameEnums.TaijiMode.jin,   # 火克金
 	GameEnums.TaijiMode.mu: GameEnums.TaijiMode.tu,     # 木克土
 	GameEnums.TaijiMode.tu: GameEnums.TaijiMode.shui,   # 土克水
 	GameEnums.TaijiMode.shui: GameEnums.TaijiMode.huo,  # 水克火
 	GameEnums.TaijiMode.jin: GameEnums.TaijiMode.mu     # 金克木
+}
+#五行相生关系
+const WUXING_GENERATION = {
+	GameEnums.TaijiMode.huo: GameEnums.TaijiMode.tu,   	# 火生土
+	GameEnums.TaijiMode.mu: GameEnums.TaijiMode.huo,     # 木生火
+	GameEnums.TaijiMode.tu: GameEnums.TaijiMode.jin,   # 土生金
+	GameEnums.TaijiMode.shui: GameEnums.TaijiMode.mu,  # 水生木
+	GameEnums.TaijiMode.jin: GameEnums.TaijiMode.shui     # 金生水
 }
 
 var mode_status={

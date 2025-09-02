@@ -34,13 +34,14 @@ func _ready():
 		push_warning("未找到tween")
 
 
-func init(_mode:int, pos:Vector2, _reward_score:float, _speed:float):
-	.init(_mode, pos, _reward_score, _speed)
-	#初始能量值
+func init(dic:Dictionary):
+	.init(dic)
+
 	var	random = RandomNumberGenerator.new()
 	random.randomize()
 	energy=random.randi_range(0,10)
-	DebugUtils.log("初始能量："+str(energy))
+
+	DebugUtils.log("能量："+str(energy))
 	update_energy_label()
 	#开启碰撞体
 	$BodyCollision.set("disabled", false)

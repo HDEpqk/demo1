@@ -38,42 +38,51 @@ onready var tu_count_label_tween=$TuControl/CountLabel/Tween
 onready var tu_key_label=$TuControl/KeyLabel
 onready var tu_color=Color("#b36d41")
 
+
+
 func _ready():
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	EventBus.connect("use_wuxing",self,"_on_use_wuxing")
 	EventBus.connect("mu_protect_close",self,"_on_mu_protect_close")
+	EventBus.connect("anti_counter",self,"_on_anti_counter")
+	EventBus.connect("anti_wuxing_generation",self,"_on_anti_wuxing_generation")
+	EventBus.connect("wuxing_generation",self,"_on_wuxing_generation")
 	
-
 func _input(event):
-	if Input.is_physical_key_pressed(KEY_Q):
+	if !(event is InputEventKey):return
+	if event.pressed and event.scancode == KEY_Q:
 		jin_key_label.self_modulate=jin_color
 		if elements_dic[GameEnums.TaijiMode.jin]["count"]>0:
 			EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.jin,Global.taiji_mode,false)
-	else:
+	elif !event.pressed and event.scancode == KEY_Q:
 		jin_key_label.self_modulate=black_color
-	if Input.is_physical_key_pressed(KEY_W):
+		
+	if event.pressed and event.scancode == KEY_W:
 		mu_key_label.self_modulate=mu_color
 		if elements_dic[GameEnums.TaijiMode.mu]["count"]>0:
 			EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.mu,Global.taiji_mode,false)
-	else:
+	elif !event.pressed and event.scancode == KEY_W:
 		mu_key_label.self_modulate=black_color
-	if Input.is_physical_key_pressed(KEY_E):
+		
+	if event.pressed and event.scancode == KEY_E:
 		shui_key_label.self_modulate=shui_color
 		if elements_dic[GameEnums.TaijiMode.shui]["count"]>0:
 			EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.shui,Global.taiji_mode,false)
-	else:
+	elif !event.pressed and event.scancode == KEY_E:
 		shui_key_label.self_modulate=black_color
-	if Input.is_physical_key_pressed(KEY_R):
+		
+	if event.pressed and event.scancode == KEY_R:
 		huo_key_label.self_modulate=huo_color
 		if elements_dic[GameEnums.TaijiMode.huo]["count"]>0:
 			EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.huo,Global.taiji_mode,false)
-	else:
+	elif !event.pressed and event.scancode == KEY_R:
 		huo_key_label.self_modulate=black_color
-	if Input.is_physical_key_pressed(KEY_T):
+
+	if event.pressed and event.scancode == KEY_T:
 		tu_key_label.self_modulate=tu_color
 		if elements_dic[GameEnums.TaijiMode.tu]["count"]>0:
 			EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.tu,Global.taiji_mode,false)
-	else:
+	elif !event.pressed and event.scancode == KEY_T:
 		tu_key_label.self_modulate=black_color
 
 func _on_global_taiji_mode_changed(new_value,old_value,is_new_mode):
@@ -83,31 +92,26 @@ func _on_global_taiji_mode_changed(new_value,old_value,is_new_mode):
 			elements_dic[GameEnums.TaijiMode.jin]["count"]+=1
 			elements_dic[GameEnums.TaijiMode.jin]["is_current_used"]=false
 			#显示相关
-			jin_count_label.self_modulate=jin_color
 			display_jin()
 		GameEnums.TaijiMode.mu:
 			elements_dic[GameEnums.TaijiMode.mu]["count"]+=1
 			elements_dic[GameEnums.TaijiMode.mu]["is_current_used"]=false
 			#显示相关
-			mu_count_label.self_modulate=mu_color
 			display_mu()
 		GameEnums.TaijiMode.shui:
 			elements_dic[GameEnums.TaijiMode.shui]["count"]+=1
 			elements_dic[GameEnums.TaijiMode.shui]["is_current_used"]=false
 			#显示相关
-			shui_count_label.self_modulate=shui_color
 			display_shui()
 		GameEnums.TaijiMode.huo:
 			elements_dic[GameEnums.TaijiMode.huo]["count"]+=1
 			elements_dic[GameEnums.TaijiMode.huo]["is_current_used"]=false
 			#显示相关
-			huo_count_label.self_modulate=huo_color
 			display_huo()
 		GameEnums.TaijiMode.tu:
 			elements_dic[GameEnums.TaijiMode.tu]["count"]+=1
 			elements_dic[GameEnums.TaijiMode.tu]["is_current_used"]=false
 			#显示相关
-			tu_count_label.self_modulate=tu_color
 			display_tu()
 		_:
 			elements_dic[GameEnums.TaijiMode.jin]["is_current_used"]=false
@@ -119,74 +123,203 @@ func _on_use_wuxing(player_taiji_mode):
 	match player_taiji_mode:
 		GameEnums.TaijiMode.jin:
 			if elements_dic[GameEnums.TaijiMode.jin]["is_current_used"]:return
+			if elements_dic[GameEnums.TaijiMode.jin]["count"]<1:return
+			
 			elements_dic[GameEnums.TaijiMode.jin]["count"]-=1
 			elements_dic[GameEnums.TaijiMode.jin]["is_current_used"]=true
 			#显示相关
-			jin_count_label.self_modulate=white_color
 			display_jin()
 		GameEnums.TaijiMode.mu:
 			if elements_dic[GameEnums.TaijiMode.mu]["is_current_used"]:return
+			if elements_dic[GameEnums.TaijiMode.mu]["count"]<1:return
+			
 			elements_dic[GameEnums.TaijiMode.mu]["count"]-=1
 			elements_dic[GameEnums.TaijiMode.mu]["is_current_used"]=true
 			#显示相关
-			mu_count_label.self_modulate=white_color
 			display_mu()
 		GameEnums.TaijiMode.shui:
 			if elements_dic[GameEnums.TaijiMode.shui]["is_current_used"]:return
+			if elements_dic[GameEnums.TaijiMode.shui]["count"]<1:return
+			
 			elements_dic[GameEnums.TaijiMode.shui]["count"]-=1
 			elements_dic[GameEnums.TaijiMode.shui]["is_current_used"]=true
 			#显示相关
-			shui_count_label.self_modulate=white_color
 			display_shui()
 		GameEnums.TaijiMode.huo:
 			if elements_dic[GameEnums.TaijiMode.huo]["is_current_used"]:return
+			if elements_dic[GameEnums.TaijiMode.huo]["count"]<1:return
+			
 			elements_dic[GameEnums.TaijiMode.huo]["count"]-=1
 			elements_dic[GameEnums.TaijiMode.huo]["is_current_used"]=true
 			#显示相关
-			huo_count_label.self_modulate=white_color
 			display_huo()
 		GameEnums.TaijiMode.tu:
 			if elements_dic[GameEnums.TaijiMode.tu]["is_current_used"]:return
+			if elements_dic[GameEnums.TaijiMode.tu]["count"]<1:return
+			
 			elements_dic[GameEnums.TaijiMode.tu]["count"]-=1
 			elements_dic[GameEnums.TaijiMode.tu]["is_current_used"]=true
 			#显示相关
-			tu_count_label.self_modulate=white_color
 			display_tu()
 			
 func _on_mu_protect_close(value):
-	if elements_dic[GameEnums.TaijiMode.mu]["count"]>=1:
-		elements_dic[GameEnums.TaijiMode.mu]["count"]-=1
-		elements_dic[GameEnums.TaijiMode.mu]["is_current_used"]=true
-		#显示相关
-		mu_count_label.self_modulate=white_color
-		display_mu()
+	if elements_dic[GameEnums.TaijiMode.mu]["count"]<1:return
+	elements_dic[GameEnums.TaijiMode.mu]["count"]-=1
+	elements_dic[GameEnums.TaijiMode.mu]["is_current_used"]=true
+	#显示相关
+	display_mu()
+
+func _on_anti_counter(player_taiji_mode,anti_counter_score):
+	match player_taiji_mode:
+		GameEnums.TaijiMode.jin:
+			if elements_dic[GameEnums.TaijiMode.jin]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.jin]["count"]-=1
+			#显示相关
+			display_jin()
+		GameEnums.TaijiMode.mu:
+			if elements_dic[GameEnums.TaijiMode.mu]["count"]<1:return
+			#DebugUtils.log("GameEnums.TaijiMode.mu:count:"+str(elements_dic[GameEnums.TaijiMode.mu]["count"]))
+			elements_dic[GameEnums.TaijiMode.mu]["count"]-=1
+			#显示相关
+			display_mu()
+		GameEnums.TaijiMode.shui:
+			if elements_dic[GameEnums.TaijiMode.shui]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.shui]["count"]-=1
+			#显示相关
+			display_shui()
+		GameEnums.TaijiMode.huo:
+			if elements_dic[GameEnums.TaijiMode.huo]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.huo]["count"]-=1
+			#显示相关
+			display_huo()
+		GameEnums.TaijiMode.tu:
+			if elements_dic[GameEnums.TaijiMode.tu]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.tu]["count"]-=1
+			#显示相关
+			display_tu()
+
+func _on_wuxing_generation(lianpu_data):
+	DebugUtils.log("_on_wuxing_generation:FiveElementsAccumulation")
+	var player_taiji_mode=lianpu_data["player_mode"]
+	match player_taiji_mode:
+		GameEnums.TaijiMode.jin:
+			if elements_dic[GameEnums.TaijiMode.jin]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.jin]["count"]-=1
+			#显示相关
+			display_jin()
+		GameEnums.TaijiMode.mu:
+			if elements_dic[GameEnums.TaijiMode.mu]["count"]<1:return
+			#DebugUtils.log("GameEnums.TaijiMode.mu:count:"+str(elements_dic[GameEnums.TaijiMode.mu]["count"]))
+			elements_dic[GameEnums.TaijiMode.mu]["count"]-=1
+			#显示相关
+			display_mu()
+		GameEnums.TaijiMode.shui:
+			if elements_dic[GameEnums.TaijiMode.shui]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.shui]["count"]-=1
+			#显示相关
+			display_shui()
+		GameEnums.TaijiMode.huo:
+			if elements_dic[GameEnums.TaijiMode.huo]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.huo]["count"]-=1
+			#显示相关
+			display_huo()
+		GameEnums.TaijiMode.tu:
+			if elements_dic[GameEnums.TaijiMode.tu]["count"]<1:return
+			
+			elements_dic[GameEnums.TaijiMode.tu]["count"]-=1
+			#显示相关
+			display_tu()
+	EventBus.fire_event("wuxing_generation_available",lianpu_data)
+func _on_anti_wuxing_generation(player_taiji_mode):
+	match player_taiji_mode:
+		GameEnums.TaijiMode.jin:
+			elements_dic[GameEnums.TaijiMode.jin]["count"]+=1
+			#elements_dic[GameEnums.TaijiMode.jin]["is_current_used"]=false
+			#显示相关
+			display_jin()
+		GameEnums.TaijiMode.mu:
+			elements_dic[GameEnums.TaijiMode.mu]["count"]+=1
+			#elements_dic[GameEnums.TaijiMode.mu]["is_current_used"]=false
+			#显示相关
+			display_mu()
+		GameEnums.TaijiMode.shui:
+			elements_dic[GameEnums.TaijiMode.shui]["count"]+=1
+			#elements_dic[GameEnums.TaijiMode.shui]["is_current_used"]=false
+			#显示相关
+			display_shui()
+		GameEnums.TaijiMode.huo:
+			elements_dic[GameEnums.TaijiMode.huo]["count"]+=1
+			#elements_dic[GameEnums.TaijiMode.huo]["is_current_used"]=false
+			#显示相关
+			display_huo()
+		GameEnums.TaijiMode.tu:
+			elements_dic[GameEnums.TaijiMode.tu]["count"]+=1
+			#elements_dic[GameEnums.TaijiMode.tu]["is_current_used"]=false
+			#显示相关
+			display_tu()
 
 func display_jin():
+	var count=elements_dic[GameEnums.TaijiMode.jin]["count"]
+	if count<=0:
+		jin_count_label.self_modulate=white_color
+	else:
+		jin_count_label.self_modulate=jin_color
+	jin_count_label.text=str(count)
 	jin_count_label.text=str(elements_dic[GameEnums.TaijiMode.jin]["count"])
 	jin_count_label_tween.interpolate_property(jin_count_label, "rect_scale",
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	jin_count_label_tween.start()
 func display_mu():
+	var count=elements_dic[GameEnums.TaijiMode.mu]["count"]
+	if count<=0:
+		mu_count_label.self_modulate=white_color
+	else:
+		mu_count_label.self_modulate=mu_color
+	mu_count_label.text=str(count)
 	mu_count_label.text=str(elements_dic[GameEnums.TaijiMode.mu]["count"])
 	mu_count_label_tween.interpolate_property(mu_count_label, "rect_scale",
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	mu_count_label_tween.start()
 func display_shui():
+	var count=elements_dic[GameEnums.TaijiMode.shui]["count"]
+	if count<=0:
+		shui_count_label.self_modulate=white_color
+	else:
+		shui_count_label.self_modulate=shui_color
+	shui_count_label.text=str(count)
 	shui_count_label.text=str(elements_dic[GameEnums.TaijiMode.shui]["count"])
 	shui_count_label_tween.interpolate_property(shui_count_label, "rect_scale",
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	shui_count_label_tween.start()
 func display_huo():
+	var count=elements_dic[GameEnums.TaijiMode.huo]["count"]
+	if count<=0:
+		huo_count_label.self_modulate=white_color
+	else:
+		huo_count_label.self_modulate=huo_color
+	huo_count_label.text=str(count)
 	huo_count_label.text=str(elements_dic[GameEnums.TaijiMode.huo]["count"])
 	huo_count_label_tween.interpolate_property(huo_count_label, "rect_scale",
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	huo_count_label_tween.start()
 func display_tu():
-	tu_count_label.text=str(elements_dic[GameEnums.TaijiMode.tu]["count"])
+	var count=elements_dic[GameEnums.TaijiMode.tu]["count"]
+	if count<=0:
+		tu_count_label.self_modulate=white_color
+	else:
+		tu_count_label.self_modulate=tu_color
+	tu_count_label.text=str(count)
 	tu_count_label_tween.interpolate_property(tu_count_label, "rect_scale",
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
