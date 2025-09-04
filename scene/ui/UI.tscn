@@ -74,13 +74,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="EnergyCalibration" parent="." instance=ExtResource( 2 )]
+margin_bottom = 25.0
+rect_scale = Vector2( 1.2, 1.2 )
 
 [node name="PauseButton" type="TextureButton" parent="."]
 self_modulate = Color( 100, 100, 100, 1 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -48.0
-margin_top = 25.0
+margin_top = 30.0
 margin_right = -30.0
 margin_bottom = 48.0
 grow_horizontal = 2
@@ -91,7 +93,7 @@ texture_normal = ExtResource( 4 )
 
 [node name="TotalScore" type="Control" parent="."]
 margin_left = 174.0
-margin_top = 25.0
+margin_top = 30.0
 margin_right = 374.0
 margin_bottom = 225.0
 rect_scale = Vector2( 1.2, 1.2 )
@@ -175,7 +177,7 @@ fit_content_height = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -230.0
-margin_top = 25.0
+margin_top = 30.0
 margin_right = -174.0
 margin_bottom = 41.0
 rect_scale = Vector2( 1.2, 1.2 )
@@ -228,7 +230,7 @@ anims/multiple_loop = ExtResource( 9 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -230.0
-margin_top = 50.0
+margin_top = 55.0
 margin_right = -166.0
 margin_bottom = 66.0
 rect_scale = Vector2( 1.2, 1.2 )
@@ -265,7 +267,7 @@ visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -230.0
-margin_top = 50.0
+margin_top = 55.0
 margin_right = -166.0
 margin_bottom = 66.0
 rect_scale = Vector2( 1.2, 1.2 )
@@ -310,7 +312,7 @@ grow_vertical = 2
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -64.0
-margin_top = 119.0
+margin_top = 124.0
 rect_pivot_offset = Vector2( 64, 0 )
 theme = ExtResource( 5 )
 text = "连击×1"
@@ -318,7 +320,7 @@ text = "连击×1"
 [node name="Tween" type="Tween" parent="ComboLabel"]
 
 [node name="CounterRichLabel" type="RichTextLabel" parent="."]
-margin_top = 119.0
+margin_top = 124.0
 margin_right = 100.0
 margin_bottom = 136.0
 theme = ExtResource( 5 )
@@ -331,7 +333,7 @@ fit_content_height = true
 [node name="Tween" type="Tween" parent="CounterRichLabel"]
 
 [node name="GenerationRichLabel" type="RichTextLabel" parent="."]
-margin_top = 160.0
+margin_top = 165.0
 margin_right = 100.0
 margin_bottom = 136.0
 theme = ExtResource( 5 )

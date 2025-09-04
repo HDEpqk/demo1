@@ -16,7 +16,7 @@ gradient = SubResource( 1 )
 [node name="EnergyCalibration" type="Control"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_top = 25.0
+margin_top = 30.0
 theme = ExtResource( 3 )
 script = ExtResource( 2 )
 
@@ -71,14 +71,14 @@ anchor_left = 0.75
 anchor_top = 1.0
 anchor_right = 0.75
 anchor_bottom = 1.0
-margin_left = -8.00003
+margin_left = 4.0
 margin_right = 7.99997
 margin_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 12, 0 )
-text = "+10"
+text = "10"
 align = 1
 valign = 1
 
@@ -100,12 +100,15 @@ rect_scale = Vector2( 8, 8 )
 
 [node name="current" type="Label" parent="BG/pointer/Node"]
 self_modulate = Color( 0, 0, 0, 1 )
+margin_top = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 3 )
 text = "+4"
 align = 1
 valign = 1
+
+[node name="Tween" type="Tween" parent="BG/pointer/Node/current"]
 
 [node name="CountdownLabel" type="Label" parent="BG"]
 anchor_left = 1.0

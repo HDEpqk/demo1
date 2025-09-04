@@ -78,20 +78,35 @@ func set_energy(new_value: float):
 	#处理负数问题
 	if original_new_value<0:
 		formatted ="-"+"%0.1f" % abs(original_new_value)
-		#DebugUtils.log("formatted="+formatted)
+		current_energy_label.text=formatted.replace(".0", "")
+	elif original_new_value>0:
+		formatted = "%0.1f" % original_new_value
+		current_energy_label.text=formatted.replace(".0", "")
 	else:
-		formatted = "+"+"%0.1f" % original_new_value
-	# 处理负零和正零问题
-	if formatted.begins_with("-0"):
-		formatted = formatted.replace("-", "")
-	elif formatted.begins_with("+0"):
-		formatted = formatted.replace("+", "")
-	elif formatted.begins_with("+-0"):
-		formatted = formatted.replace("+-", "")
-	elif formatted.begins_with("-+0"):
-		formatted = formatted.replace("-+", "")
-	current_energy_label.text=formatted.replace(".0", "")
-	#DebugUtils.log("current_energy_label="+current_energy_label.text)
+		current_energy_label.text="0"
+#	# 处理负零问题
+#	if formatted.begins_with("-0"):
+#		formatted = formatted.replace("-", "")
+#	elif formatted.begins_with("+0"):
+#		formatted = formatted.replace("+", "")
+#	elif formatted.begins_with("+-0"):
+#		formatted = formatted.replace("+-", "")
+#	elif formatted.begins_with("-+0"):
+#		formatted = formatted.replace("-+", "")
+	if original_new_value<Global.min_energy:
+		current_energy_label.self_modulate=Color.red.darkened(0.5)
+	elif original_new_value>Global.max_energy:
+		current_energy_label.self_modulate=Color.red
+	else:
+		current_energy_label.self_modulate=Color.black
+	
+	var tween = current_energy_label.get_node("Tween")
+	tween.interpolate_property(current_energy_label, "rect_scale",
+	Vector2(2, 2), Vector2(1, 1), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+
+	tween.start()
+	
 	check_energy()
 
 func check_energy():
