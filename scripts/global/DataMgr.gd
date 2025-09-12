@@ -667,7 +667,8 @@ var default_settings = {
 		"rank_endless":-1,#无尽排名
 		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
 		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
-		"upload_timestamp": 0#时间戳,用于记录历史某个时间点#"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
+		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点#"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
+
 	},
 	"leancloud": {
 		"cache_limited_obj":{#rank_limited_dic的本地缓存对象
@@ -678,6 +679,19 @@ var default_settings = {
 			"rank_endless_dic":{},
 			"timestamp": 0#时间戳
 		}
+	},
+	"tutorial": {
+		"is_first_tutorial":true,#是否进行第一次新手教程
+		"is_passed_level_1":true,#是否通过了第一关
+		"is_passed_level_2":false,
+		"is_passed_level_3":false,
+		"is_passed_level_4":false,
+		"is_passed_level_5":false,
+		"is_passed_level_6":false,
+		"is_passed_level_7":false,
+		"is_passed_level_8":false,
+		"is_passed_level_9":false,
+		"is_passed_level_10":false
 	}
 }
 

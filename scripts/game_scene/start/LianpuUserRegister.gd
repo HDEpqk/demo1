@@ -72,7 +72,7 @@ func handle_death():
 
 func _on_death_animation_finished():
 	#打开用户上榜注册
-	$"../UserRegister".visible=true
+	$"../CanvasLayer/UserRegister".visible=true
 	#开启碰撞体和图片
 	$BodyCollision.set("disabled", false)
 	$Sprite.visible=true

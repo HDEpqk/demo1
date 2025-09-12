@@ -13,6 +13,8 @@ var nick_name
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	
 	#密码相关暂时不用
 	$BK/PwdLabel.visible=false
 	pwd_line_edit.visible=false
@@ -29,6 +31,7 @@ func _ready():
 
 func _on_UserRegister_visibility_changed():
 	get_tree().paused=self.visible
+	
 
 
 func _on_ConfirmButton_pressed():

@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://art/tutorial/tutorial_icon_64.png" type="Texture" id=1]
+[ext_resource path="res://art/tutorial/右箭头_64.png" type="Texture" id=2]
+[ext_resource path="res://art/tutorial/close_64.png" type="Texture" id=3]
+[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=4]
+[ext_resource path="res://new_theme.tres" type="Theme" id=5]
+[ext_resource path="res://scripts/tutorial/TeachingDisplay.gd" type="Script" id=7]
+[ext_resource path="res://scripts/tutorial/PassLevelTutorial.gd" type="Script" id=8]
+
+[node name="TeachingDisplay" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 7 )
+
+[node name="PassLevelConditionLabel" type="Label" parent="."]
+margin_top = 124.0
+margin_right = 174.0
+margin_bottom = 209.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 5 )
+text = "
+"
+
+[node name="PassLevelTutorial" type="Control" parent="."]
+margin_left = 38.0
+margin_right = 107.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 40, 0 )
+script = ExtResource( 8 )
+
+[node name="TutorialBtn" type="TextureButton" parent="PassLevelTutorial"]
+margin_right = 64.0
+margin_bottom = 64.0
+theme = ExtResource( 5 )
+texture_normal = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="PassLevelTutorial/TutorialBtn"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = 1.0
+margin_right = 32.0
+text = "过关教程"
+align = 1
+valign = 1
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VideoPlayer" type="VideoPlayer" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_right = 320.0
+margin_bottom = 360.0
+volume_db = -80.0
+autoplay = true
+loop = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -319.0
+margin_top = -314.0
+margin_right = 319.0
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+
+[node name="CloseTextureButton" type="TextureButton" parent="Panel"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 3 )
+
+[node name="RightTextureButton" type="TextureButton" parent="Panel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -32.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 2 )
+
+[node name="LeftTextureButton" type="TextureButton" parent="Panel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -32.0
+margin_right = 64.0
+margin_bottom = 32.0
+rect_rotation = -180.0
+rect_pivot_offset = Vector2( 32, 32 )
+texture_normal = ExtResource( 2 )
+
+[connection signal="button_down" from="PassLevelTutorial/TutorialBtn" to="PassLevelTutorial" method="_on_TutorialBtn_button_down"]
+[connection signal="button_up" from="PassLevelTutorial/TutorialBtn" to="PassLevelTutorial" method="_on_TutorialBtn_button_up"]
+[connection signal="mouse_entered" from="PassLevelTutorial/TutorialBtn" to="PassLevelTutorial" method="_on_TutorialBtn_mouse_entered"]
+[connection signal="mouse_exited" from="PassLevelTutorial/TutorialBtn" to="PassLevelTutorial" method="_on_TutorialBtn_mouse_exited"]
+[connection signal="pressed" from="PassLevelTutorial/TutorialBtn" to="PassLevelTutorial" method="_on_TutorialBtn_pressed"]
+[connection signal="visibility_changed" from="Panel" to="." method="_on_Panel_visibility_changed"]
+[connection signal="pressed" from="Panel/CloseTextureButton" to="." method="_on_CloseTextureButton_pressed"]
+[connection signal="pressed" from="Panel/RightTextureButton" to="." method="_on_RightTextureButton_pressed"]
+[connection signal="pressed" from="Panel/LeftTextureButton" to="." method="_on_LeftTextureButton_pressed"]

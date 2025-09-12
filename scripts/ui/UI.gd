@@ -2,14 +2,14 @@
 extends CanvasLayer
 
 onready var viewport_size = get_viewport().size
-onready var bg:TextureRect=$BG
+
 onready var crazy_time_bg=$CrazyTimeBG
 onready var energy_calibration=$EnergyCalibration
 
 onready var pause_btn=$PauseButton
 onready var pause_panel=$PausePanel
 
-onready var main_countdown_label=$MainCountdownLabel
+
 
 
 #加倍相关
@@ -121,11 +121,7 @@ func _ready():
 	counter_rich_label.bbcode_enabled=true
 	anti_counter_punishment_rich_label.bbcode_enabled=true
 	base_award_rich_label.bbcode_enabled=true
-	#设置背景的缩放
-#	var texture_size = bg.get_size()
-#	var scale_x = viewport_size.x / texture_size.x
-#	var scale_y = viewport_size.y / texture_size.y
-#	bg.rect_scale = Vector2(scale_x, scale_y)
+
 	
 func _on_pauseBtn_pressed():
 	#UiMgr.show_control("PausePanel")
@@ -227,7 +223,7 @@ func _on_crazy_time_begin(duration):
 	crazy_time_bg.color=Color.gold
 	crazy_time_bg.color.a=0.4
 	crazy_time_bg.show()
-	DebugUtils.log("显示BG,当前BG的visible="+str($BG.visible))
+
 	#开始加速
 	EventBus.fire_event("accelerate_spawn_begin",current_crazy_time)
 	#开始加倍

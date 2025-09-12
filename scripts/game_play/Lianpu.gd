@@ -124,6 +124,12 @@ func _ready():
 		for anim in $AnimationPlayer.get_animation_list():
 			if anim.begins_with("death_"):
 				death_animations.append(anim)
+	if $AnimatedDeath!=null:
+		#关闭死亡动画sprite
+		$AnimatedDeath.visible=false
+	if $AnimatedSprite!=null:
+		#开启普通动画
+		$AnimatedSprite.visible=true
 
 func init(dic:Dictionary):
 	var _mode=dic["mode"]
@@ -136,10 +142,7 @@ func init(dic:Dictionary):
 		printerr("无效的太极模式:", _mode)
 		_mode = taiji_order[0]  # 默认火模式
 		
-	#关闭死亡动画sprite
-	$AnimatedDeath.visible=false
-	#开启普通动画
-	$AnimatedSprite.visible=true
+
 	lianpu_type=_lianpu_type
 	taiji_mode = _mode
 	DebugUtils.log("初始模式："+str(taiji_mode))
@@ -156,18 +159,18 @@ func init(dic:Dictionary):
 	if $EnergyLabel!=null:
 		$EnergyLabel.set_scale($EnergyLabel.get_scale()*1.5)
 	#初始脸谱碰撞器大小
-	if $BodyCollision!=null:
-		#$BodyCollision.set_scale($BodyCollision.get_scale()*2)
-		pass
-	if $Sprite!=null:
-		#$Sprite.set_scale($Sprite.get_scale()*2)
-		pass
-	if $AnimatedSprite!=null:
-		#$AnimatedSprite.set_scale($AnimatedSprite.get_scale()*2)
-		pass
-	if $AnimatedDeath!=null:
-		#$AnimatedDeath.set_scale($AnimatedDeath.get_scale()*2)
-		pass
+#	if $BodyCollision!=null:
+#		#$BodyCollision.set_scale($BodyCollision.get_scale()*2)
+#		pass
+#	if $Sprite!=null:
+#		#$Sprite.set_scale($Sprite.get_scale()*2)
+#		pass
+#	if $AnimatedSprite!=null:
+#		#$AnimatedSprite.set_scale($AnimatedSprite.get_scale()*2)
+#		pass
+#	if $AnimatedDeath!=null:
+#		#$AnimatedDeath.set_scale($AnimatedDeath.get_scale()*2)
+#		pass
 
 
 

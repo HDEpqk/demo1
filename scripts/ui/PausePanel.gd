@@ -1,4 +1,4 @@
-extends "res://scripts/ui/UIBasePanel.gd"
+extends Control
 
 # 回到开始场景按钮
 onready var back_to_start_button=$CenterContainer/VBoxContainer/BackToStartButton
