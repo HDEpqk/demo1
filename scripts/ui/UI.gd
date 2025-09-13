@@ -30,11 +30,6 @@ onready var decelerate_spawn_timer_Label=$DecelerateSpawnLabel/DecelerateSpawnTi
 onready var decelerate_spawn_timer=$DecelerateSpawnLabel/DecelerateeSpawnTimer
 onready var decelerate_spawn_timer_icon=$DecelerateSpawnLabel/DecelerateSpawnCountdownIcon
 
-onready var crazy_time_timer=$CrazyTime/CrazyTimeTimer
-onready var combo_label=$ComboLabel
-onready var counter_rich_label=$CounterRichLabel
-onready var generation_rich_label=$GenerationRichLabel
-
 #得分相关
 onready var total_score_rich_label=$TotalScore/TotalScoreLabel
 onready var base_award_rich_label=$TotalScore/ScoreDetail/BaseAward
@@ -42,6 +37,12 @@ onready var two_combo_award_rich_label=$TotalScore/ScoreDetail/TwoComboAward
 onready var three_combo_award_rich_label=$TotalScore/ScoreDetail/ThreeComboAward
 onready var counter_award_rich_label=$TotalScore/ScoreDetail/CounterAward
 onready var anti_counter_punishment_rich_label=$TotalScore/ScoreDetail/AntiCounterPunishment
+
+#其他
+onready var crazy_time_timer=$CrazyTime/CrazyTimeTimer
+onready var combo_label=$ComboLabel
+onready var counter_rich_label=$CounterRichLabel
+onready var generation_rich_label=$GenerationRichLabel
 
 var current_multiple_time:float=0
 

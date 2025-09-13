@@ -14,6 +14,8 @@ func _ready():
 
 
 func _on_PassedLevelPanel_visibility_changed():
+#	if panel.visible==true:
+#		$"../TeachingDisplay".pause_mode=Node.PAUSE_MODE_INHERIT
 	get_tree().paused=panel.visible
 
 

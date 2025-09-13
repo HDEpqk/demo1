@@ -34,7 +34,7 @@ func _on_LeftTextureButton_pressed():
 	change_page(current_page)
 	right_btn.disabled=false
 	right_btn.visible=true
-	if current_page>=0:
+	if current_page<=0:
 		left_btn.disabled=true
 		left_btn.visible=false
 
@@ -50,8 +50,9 @@ func _on_RightTextureButton_pressed():
 
 func change_page(page_index:int):
 	#过场动画
-	
-	video_player.stream=video_list[page_index]["video"]
+	if video_player.is_playing():
+		video_player.stop()
+	video_player.set_stream(video_list[page_index]["video"])
 	video_player.play()
 	rich_label.bbcode_text=video_list[page_index]["text"]
 	

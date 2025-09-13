@@ -1,0 +1,1726 @@
+[gd_scene load_steps=81 format=2]
+
+[ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=1]
+[ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=2]
+[ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=3]
+[ext_resource path="res://new_theme.tres" type="Theme" id=4]
+[ext_resource path="res://art/ui/other/countdown_icon.png" type="Texture" id=5]
+[ext_resource path="res://art/ui/pause/pauseBtn.png" type="Texture" id=6]
+[ext_resource path="res://art/ui/game/FiveElementsRelationship.png" type="Texture" id=7]
+[ext_resource path="res://scene/ui/EnergyCalibration.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scene/turorial/PassedLevel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scene/ui/PausePanel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scene/turorial/TeachingDisplay.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scripts/tutorial/levels/TutorialLianpuLevel5.gd" type="Script" id=14]
+[ext_resource path="res://scripts/tutorial/levels/TutorialUILevel5.gd" type="Script" id=15]
+[ext_resource path="res://scripts/game_play/FiveElementsAccumulation.gd" type="Script" id=16]
+[ext_resource path="res://scripts/tutorial/levels/level_5.gd" type="Script" id=17]
+[ext_resource path="res://scripts/tutorial/TutorialSpawnManager.gd" type="Script" id=18]
+[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=19]
+
+[sub_resource type="CapsuleShape2D" id=86]
+radius = 8.94378
+height = 6.81431
+
+[sub_resource type="Animation" id=87]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=88]
+resource_name = "born"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=89]
+resource_name = "death_01"
+length = 0.2
+step = 0.02
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_01" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedDeath:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=90]
+resource_name = "death_02"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_02" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=91]
+resource_name = "death_03"
+length = 0.18
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_03" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.18 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=92]
+resource_name = "death_04"
+length = 0.22
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_04" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.22 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="AtlasTexture" id=57]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=65]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=66]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=67]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=58]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=59]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=68]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=60]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=69]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=61]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=62]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=63]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=64]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=70]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=71]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=72]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 320, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=73]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=74]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=75]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=76]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 576, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=77]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=78]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=79]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=80]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=81]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=82]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 320, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=83]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=84]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=85]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 256, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=51]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 320, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=52]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 384, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=53]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 448, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=54]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 512, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=55]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 576, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=56]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 640, 446, 64, 63 )
+
+[sub_resource type="SpriteFrames" id=93]
+animations = [ {
+"frames": [ SubResource( 57 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 58 ), SubResource( 59 ), SubResource( 68 ), SubResource( 60 ), SubResource( 69 ), SubResource( 61 ), null ],
+"loop": true,
+"name": "death_01",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), null ],
+"loop": true,
+"name": "death_02",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), null ],
+"loop": true,
+"name": "death_03",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), null ],
+"loop": true,
+"name": "death_04",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=94]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=95]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=96]
+resource_name = "born"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=97]
+resource_name = "death_01"
+length = 0.2
+step = 0.02
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_01" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedDeath:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=98]
+resource_name = "death_02"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_02" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=99]
+resource_name = "death_03"
+length = 0.18
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_03" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.18 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=100]
+resource_name = "death_04"
+length = 0.22
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_04" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.22 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=101]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=102]
+resource_name = "born"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=103]
+resource_name = "death_01"
+length = 0.2
+step = 0.02
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_01" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedDeath:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=104]
+resource_name = "death_02"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_02" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=105]
+resource_name = "death_03"
+length = 0.18
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_03" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.18 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=106]
+resource_name = "death_04"
+length = 0.22
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_04" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.22 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="level_5" type="Node2D"]
+script = ExtResource( 17 )
+
+[node name="Player" parent="." instance=ExtResource( 11 )]
+
+[node name="Center" parent="." instance=ExtResource( 9 )]
+position = Vector2( 640, 360 )
+
+[node name="TutorialLianpuLevel5" type="RigidBody2D" parent="." groups=["lianpu"]]
+position = Vector2( 640, 212 )
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 14 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel5"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel5"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel5"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel5"]
+autoplay = "born"
+anims/RESET = SubResource( 87 )
+anims/born = SubResource( 88 )
+anims/death_01 = SubResource( 89 )
+anims/death_02 = SubResource( 90 )
+anims/death_03 = SubResource( 91 )
+anims/death_04 = SubResource( 92 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel5"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel5"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel5"]
+visible = false
+frames = SubResource( 94 )
+
+[node name="TutorialLianpuLevel5_1" type="RigidBody2D" parent="." groups=["lianpu"]]
+position = Vector2( 426, 363 )
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 14 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel5_1"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel5_1"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel5_1"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel5_1"]
+autoplay = "born"
+anims/RESET = SubResource( 95 )
+anims/born = SubResource( 96 )
+anims/death_01 = SubResource( 97 )
+anims/death_02 = SubResource( 98 )
+anims/death_03 = SubResource( 99 )
+anims/death_04 = SubResource( 100 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel5_1"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel5_1"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel5_1"]
+visible = false
+frames = SubResource( 94 )
+
+[node name="TutorialLianpuLevel5_2" type="RigidBody2D" parent="." groups=["lianpu"]]
+position = Vector2( 857, 363 )
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 14 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel5_2"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel5_2"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel5_2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel5_2"]
+autoplay = "born"
+anims/RESET = SubResource( 101 )
+anims/born = SubResource( 102 )
+anims/death_01 = SubResource( 103 )
+anims/death_02 = SubResource( 104 )
+anims/death_03 = SubResource( 105 )
+anims/death_04 = SubResource( 106 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel5_2"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel5_2"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel5_2"]
+visible = false
+frames = SubResource( 94 )
+
+[node name="TutorialSpawnManager" type="Node2D" parent="."]
+script = ExtResource( 18 )
+
+[node name="SpawnedLianpus" type="Node2D" parent="TutorialSpawnManager"]
+
+[node name="PassedLevel" parent="." instance=ExtResource( 10 )]
+
+[node name="TutorialUILevel5" type="CanvasLayer" parent="."]
+offset = Vector2( 0, 5 )
+transform = Transform2D( 1, 0, 0, 1, 0, 5 )
+script = ExtResource( 15 )
+
+[node name="BG" type="TextureRect" parent="TutorialUILevel5"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+
+[node name="PauseButton" type="TextureButton" parent="TutorialUILevel5"]
+self_modulate = Color( 100, 100, 100, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -48.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 48, 0 )
+texture_normal = ExtResource( 6 )
+
+[node name="TotalMultipleLabel" type="Label" parent="TutorialUILevel5"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -230.0
+margin_top = 30.0
+margin_right = -174.0
+margin_bottom = 41.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 4 )
+text = "倍数:×1"
+valign = 1
+
+[node name="MultipleTimerLabel" type="Label" parent="TutorialUILevel5/TotalMultipleLabel"]
+self_modulate = Color( 0.411765, 0.858824, 0.105882, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 28.0
+margin_right = 36.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 8, 0 )
+theme = ExtResource( 4 )
+text = "5"
+
+[node name="MultipleCountdownIcon" type="TextureRect" parent="TutorialUILevel5/TotalMultipleLabel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 11.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 16, 0 )
+texture = ExtResource( 5 )
+
+[node name="MultipleTimer" type="Timer" parent="TutorialUILevel5/TotalMultipleLabel"]
+
+[node name="PausePanel" parent="TutorialUILevel5" instance=ExtResource( 12 )]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EnergyCalibration" parent="TutorialUILevel5" instance=ExtResource( 8 )]
+margin_bottom = 25.0
+rect_scale = Vector2( 1.2, 1.2 )
+
+[node name="FiveElementsAccumulation" type="Control" parent="TutorialUILevel5"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+rect_scale = Vector2( 0.8, 0.8 )
+script = ExtResource( 16 )
+
+[node name="TextureRect" type="TextureRect" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -139.0
+margin_top = -278.0
+margin_right = 139.0
+rect_pivot_offset = Vector2( 139, 273 )
+texture = ExtResource( 7 )
+
+[node name="JinControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 32.0
+margin_top = 5.0
+margin_right = 30.0
+margin_bottom = 19.0
+rect_scale = Vector2( 2, 2 )
+text = "Q"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
+margin_left = 95.0
+margin_top = 8.0
+margin_right = 90.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl/CountLabel"]
+
+[node name="MuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -129.0
+margin_top = -175.0
+margin_right = -127.0
+margin_bottom = -166.0
+rect_scale = Vector2( 2, 2 )
+text = "W"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
+margin_left = -126.0
+margin_top = -102.0
+margin_right = -133.0
+margin_bottom = -88.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl/CountLabel"]
+
+[node name="ShuiControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -105.0
+margin_top = 8.0
+margin_right = -106.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+text = "E"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
+margin_left = -50.0
+margin_top = 8.0
+margin_right = -53.0
+margin_bottom = 20.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl/CountLabel"]
+
+[node name="HuoControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -40.0
+margin_top = -219.0
+margin_right = -42.0
+margin_bottom = -205.0
+rect_scale = Vector2( 2, 2 )
+text = "R"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
+margin_left = 24.0
+margin_top = -220.0
+margin_bottom = -499.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl/CountLabel"]
+
+[node name="TuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = -40.0
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 106.0
+margin_top = -173.0
+margin_bottom = -163.0
+rect_scale = Vector2( 2, 2 )
+text = "T"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
+margin_left = 106.0
+margin_top = -105.0
+margin_right = 114.0
+margin_bottom = -91.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl/CountLabel"]
+
+[node name="ComboLabel" type="Label" parent="TutorialUILevel5"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_top = 124.0
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 4 )
+text = "连击×1"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/ComboLabel"]
+
+[node name="CounterRichLabel" type="RichTextLabel" parent="TutorialUILevel5"]
+margin_top = 124.0
+margin_right = 100.0
+margin_bottom = 136.0
+theme = ExtResource( 4 )
+custom_fonts/normal_font = ExtResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[color=#2d93dd]水[/color][color=#000000]克[/color][color=#e40000]火[/color]"
+text = "水克火"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/CounterRichLabel"]
+
+[node name="GenerationRichLabel" type="RichTextLabel" parent="TutorialUILevel5"]
+margin_top = 165.0
+margin_right = 100.0
+margin_bottom = 136.0
+theme = ExtResource( 4 )
+custom_fonts/normal_font = ExtResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[color=#2d93dd]水[/color]生[color=#28c641]木[/color]"
+text = "水生木"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/GenerationRichLabel"]
+
+[node name="TeachingDisplay" parent="." instance=ExtResource( 13 )]

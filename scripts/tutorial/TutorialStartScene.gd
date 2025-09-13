@@ -15,7 +15,7 @@ func _ready():
 	for i in range(level_list.size()):
 		if DataMgr.get_setting("tutorial","is_passed_level_%d"% (i+1))==true:
 			level_list[i].set_button_icon(LEVEL_ICON)
-			level_list[i].get_node("Label").set_text(str(i+1))
+			level_list[i].get_node("LevelIndex").set_text(str(i+1))
 			level_list[i].disabled=false
 			level_list[i].connect("button_down",self,"_on_button_down",[i])
 			level_list[i].connect("button_up",self,"_on_button_up",[i])

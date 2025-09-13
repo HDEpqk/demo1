@@ -24,7 +24,7 @@ signal combo(combo_count,combo_timeout,lianpu_taiji_mode)#连击
 signal combo_award(combo_score,combo_count)#连击奖励
 signal counter(player_taiji_mode,counter_score)#玩家五行克制脸谱
 signal anti_counter(player_taiji_mode,anti_counter_score)#玩家五行被脸谱克制
-signal wuxing_generation(lianpu_data)#玩家五行生脸谱
+signal wuxing_generation(lianpu_data)#满足玩家五行生脸谱条件时触发，具体能不能生依靠wuxing_generation_available判断
 signal wuxing_generation_available(lianpu_data)#玩家有足够的五行次数去生脸谱
 signal anti_wuxing_generation(player_taiji_mode)#玩家五行被脸谱生
 

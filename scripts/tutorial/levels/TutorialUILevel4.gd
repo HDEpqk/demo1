@@ -17,6 +17,8 @@ onready var multiple_timer=$TotalMultipleLabel/MultipleTimer
 onready var multiple_timer_icon=$TotalMultipleLabel/MultipleCountdownIcon
 var current_multiple_time:float=0
 
+#连击
+onready var combo_label=$ComboLabel
 
 
 func _ready():
@@ -29,7 +31,10 @@ func _ready():
 	multiple_timer_Label.hide()
 	multiple_timer_Label.self_modulate=Color("#69db1b")
 	multiple_timer_icon.hide()
-
+	
+	#订阅连击事件
+	EventBus.connect("combo",self,"_on_combo")
+	combo_label.hide()
 
 	
 func _on_pauseBtn_pressed():
@@ -71,4 +76,32 @@ func _on_MultipleTimer_timeout():
 		total_multipleLabel.text="倍数:×"+str(Global.get_multiple())
 
 
+func _on_combo(combo_count,combo_timeout,lianpu_taiji_mode):
+	match lianpu_taiji_mode:
+		GameEnums.TaijiMode.huo:
+			combo_label.self_modulate=Color("#e40000")
+		GameEnums.TaijiMode.jin:
+			combo_label.self_modulate=Color("#e6da29")
+		GameEnums.TaijiMode.mu:
+			combo_label.self_modulate=Color("#28c641")
+		GameEnums.TaijiMode.shui:
+			combo_label.self_modulate=Color("#2d93dd")
+		GameEnums.TaijiMode.tu:
+			combo_label.self_modulate=Color("#b36d41")
+	var modulate=combo_label.self_modulate
+	match combo_count:
+		1:
+			combo_label.self_modulate=modulate.darkened(0.4)
+		2:
+			combo_label.self_modulate=modulate.darkened(0.2)
+		_:
+			combo_label.self_modulate=modulate
 
+	combo_label.text="连击×%d" % combo_count
+	combo_label.show()
+	var tween = combo_label.get_node("Tween")
+	tween.interpolate_property(combo_label, "rect_scale",
+	Vector2(4, 4), Vector2(3, 3), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.interpolate_callback(combo_label,combo_timeout,"hide")
+	tween.start()
