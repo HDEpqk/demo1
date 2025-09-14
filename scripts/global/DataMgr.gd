@@ -32,7 +32,7 @@ var rest_api#临时的REST API 服务器地址
 var agakmka="te"
 var gjaiofnak="mp_k"
 
-const BOARDER_CACHE_EXPIRE_SECONDS:= 30  # 排行榜缓存有效期（实际一天或者5min，测试用30s）
+const BOARDER_CACHE_EXPIRE_SECONDS:= 0  # 排行榜缓存有效期（实际一天或者5min，测试用0s）
 const LIMITED_BOARDER_MAX_NUM:=11#限时排行榜最大人数
 const ENDLESS_BOARDER_MAX_NUM:=11#无尽排行榜最大人数
 #var is_over_LIMITED_BOARDER_MAX_NUM:bool=false#是否超出限时排行榜最大人数
@@ -688,10 +688,7 @@ var default_settings = {
 		"is_passed_level_4":false,
 		"is_passed_level_5":false,
 		"is_passed_level_6":false,
-		"is_passed_level_7":false,
-		"is_passed_level_8":false,
-		"is_passed_level_9":false,
-		"is_passed_level_10":false
+		"is_passed_level_7":false
 	}
 }
 

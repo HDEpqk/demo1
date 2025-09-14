@@ -15,7 +15,7 @@ func _ready():
 
 
 func _on_TutorialBtn_pressed():
-	SceneMgr.change_scene("res://scene/turorial/TutorialStartScene.tscn")
+	SceneMgr.change_scene("res://scene/tutorial/TutorialStartScene.tscn")
 
 
 func _on_TutorialBtn_button_down():

@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/tutorial/PassedLevel.gd" type="Script" id=4]
 
 [node name="PassedLevel" type="CanvasLayer"]
+pause_mode = 2
 visible = false
 script = ExtResource( 4 )
 

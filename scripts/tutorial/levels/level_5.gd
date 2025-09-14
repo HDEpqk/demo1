@@ -15,25 +15,25 @@ onready var lianpu3=$TutorialLianpuLevel5_2
 
 #玩家生脸谱
 var player_jin_born_lianpu_shui:=0
-var player_mu_born_lianpu_huo:=1
-var player_shui_born_lianpu_mu:=1
-var player_tu_born_lianpu_jin:=1
+var player_mu_born_lianpu_huo:=0
+var player_shui_born_lianpu_mu:=0
+var player_tu_born_lianpu_jin:=0
 #脸谱生玩家
-var lianpu_jin_born_player_shui:=1
-var lianpu_mu_born_player_huo:=1
-var lianpu_shui_born_player_mu:=1
-var lianpu_huo_born_player_tu:=1
+var lianpu_jin_born_player_shui:=0
+var lianpu_mu_born_player_huo:=0
+var lianpu_shui_born_player_mu:=0
+var lianpu_huo_born_player_tu:=0
 
 #玩家克脸谱
-var player_jin_counter_lianpu_mu:=1
-var player_shui_counter_lianpu_huo:=1
-var player_huo_counter_lianpu_jin:=1
-var player_tu_counter_lianpu_shui:=1
+var player_jin_counter_lianpu_mu:=0
+var player_shui_counter_lianpu_huo:=0
+var player_huo_counter_lianpu_jin:=0
+var player_tu_counter_lianpu_shui:=0
 #脸谱克玩家
-var lianpu_jin_counter_player_mu:=1
-var lianpu_mu_counter_player_tu:=1
-var lianpu_shui_counter_player_huo:=1
-var lianpu_huo_counter_player_jin:=1
+var lianpu_jin_counter_player_mu:=0
+var lianpu_mu_counter_player_tu:=0
+var lianpu_shui_counter_player_huo:=0
+var lianpu_huo_counter_player_jin:=0
 
 onready var viewport_size = get_viewport().size
 
@@ -85,25 +85,18 @@ func _ready():
 func check_is_passed_level():
 	show_pass_condition()
 	
-	if player_jin_born_lianpu_shui >=1 and player_mu_born_lianpu_huo >=1 and player_shui_born_lianpu_mu >=1 and player_tu_born_lianpu_jin >=1 and\
-	lianpu_jin_born_player_shui >=1 and lianpu_mu_born_player_huo >=1 and lianpu_shui_born_player_mu >=1 and lianpu_huo_born_player_tu >=1 and\
-	player_jin_counter_lianpu_mu >=1 and player_shui_counter_lianpu_huo >=1 and player_huo_counter_lianpu_jin >=1 and player_tu_counter_lianpu_shui >=1 and\
-	lianpu_jin_counter_player_mu >=1 and lianpu_mu_counter_player_tu >=1 and lianpu_shui_counter_player_huo >=1 and lianpu_huo_counter_player_jin >=1:
+	if player_shui_born_lianpu_mu >=1 and lianpu_jin_born_player_shui >=1 \
+	and player_huo_counter_lianpu_jin >=1 and lianpu_shui_counter_player_huo >=1:
 		if DataMgr.get_setting("tutorial","is_passed_level_5")==false:
 			DataMgr.set_setting("tutorial","is_passed_level_5",true)
-		DebugUtils.log("passed level")
 		$PassedLevel.visible=true
 	
 func show_pass_condition():
 	var label=$TeachingDisplay.get_node("PassLevelConditionLabel")
-	label.text="过关条件：\n玩家生脸谱\n1.金生水（%d/1）\n2.木生火（%d/1）\n3.水生木（%d/1）\n4.土生金（%d/1）" \
-	% [player_jin_born_lianpu_shui,player_mu_born_lianpu_huo,player_shui_born_lianpu_mu,player_tu_born_lianpu_jin] \
-	+ "\n玩家被脸谱生\n1.木被水生（%d/1）\n2.火被木生（%d/1）\n3.水被金生（%d/1）\n4.土被火生（%d/1）"\
-	% [lianpu_shui_born_player_mu,lianpu_mu_born_player_huo,lianpu_jin_born_player_shui,lianpu_huo_born_player_tu]\
-	+ "\n玩家克脸谱\n1.金克木（%d/1）\n2.水克火（%d/1）\n3.火克金（%d/1）\n4.土克水（%d/1）"\
-	% [player_jin_counter_lianpu_mu,player_shui_counter_lianpu_huo,player_huo_counter_lianpu_jin,player_tu_counter_lianpu_shui]\
-	+ "\n玩家被脸谱克\n1.金被火克（%d/1）\n2.木被金克（%d/1）\n3.火被水克（%d/1）\n4.土被木克（%d/1）"\
-	% [lianpu_huo_counter_player_jin,lianpu_jin_counter_player_mu,lianpu_shui_counter_player_huo,lianpu_mu_counter_player_tu]\
+	label.text="过关条件：\n\n玩家生脸谱\n1.水生木（%d/1）\n" % [player_shui_born_lianpu_mu]\
+	+ "\n玩家被脸谱生\n1.水被金生（%d/1）\n"% [lianpu_jin_born_player_shui]\
+	+ "\n玩家克脸谱\n1.火克金（%d/1）\n"% [player_huo_counter_lianpu_jin]\
+	+ "\n玩家被脸谱克\n1.火被水克（%d/1）"% [lianpu_shui_counter_player_huo]
 
 func _on_wuxing_generation_available(lianpu_data):
 	var player_taiji_mode=lianpu_data["player_mode"]

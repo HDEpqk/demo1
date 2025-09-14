@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 onready var panel=$PassedLevelPanel
-var i:=0
+var i:=1
 
 func _ready():
 	self.hide()
@@ -21,18 +21,20 @@ func _on_PassedLevelPanel_visibility_changed():
 
 func _on_NextLevelButton_pressed():
 	var next=i+1
-	if next<Global.TUTORIAL_TOTAL_LEVEL:
-		DataMgr.set_setting("tutorial","is_passed_level_%d"%next,true)
-		SceneMgr.change_scene("res://scene/turorial/level_%d.tscn" % (next))
+	if next<=Global.TUTORIAL_TOTAL_LEVEL:
+		if !DataMgr.get_setting("tutorial","is_passed_level_%d"%next):
+			DataMgr.set_setting("tutorial","is_passed_level_%d"%next,true)
+		SceneMgr.change_scene("res://scene/tutorial/levels/level_%d.tscn" % next)
 	else:
-		SceneMgr.change_scene("res://scene/turorial/TutorialStartScene.tscn")
+		SceneMgr.change_scene("res://scene/tutorial/TutorialStartScene.tscn")
 
 
 func _on_BackToTutorialStartButton_pressed():
 	var next=i+1
-	if next<Global.TUTORIAL_TOTAL_LEVEL:
-		DataMgr.set_setting("tutorial","is_passed_level_%d"%next,true)
-	SceneMgr.change_scene("res://scene/turorial/TutorialStartScene.tscn")
+	if next<=Global.TUTORIAL_TOTAL_LEVEL:
+		if !DataMgr.get_setting("tutorial","is_passed_level_%d"%next):
+			DataMgr.set_setting("tutorial","is_passed_level_%d"%next,true)
+	SceneMgr.change_scene("res://scene/tutorial/TutorialStartScene.tscn")
 
 func init_passed_level(current_i:int):
 	i=current_i

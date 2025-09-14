@@ -16,5 +16,4 @@ func _ready():
 	teaching_display.init_video(list)
 	lianpu.position.x = viewport_size.x/2
 	lianpu.position.y = viewport_size.y/2+130
-	
 

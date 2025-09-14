@@ -50,6 +50,8 @@ func _ready():
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	EventBus.connect("use_wuxing",self,"_on_use_wuxing")
 	EventBus.connect("wuxing_generation",self,"_on_wuxing_generation")
+	#订阅消灭脸谱事件
+	EventBus.connect("kill_lianpu_award",self,"_on_kill_lianpu_award")
 	show_pass_condition()
 
 func _on_global_taiji_mode_changed(new_value: int,old_value: int=0,is_new_mode:=true):
@@ -101,6 +103,20 @@ func show_pass_condition():
 func _on_wuxing_generation(lianpu_data):
 	var player_taiji_mode=lianpu_data["player_mode"]
 	match player_taiji_mode:
+		GameEnums.TaijiMode.jin:
+			use_jin_count+=1
+		GameEnums.TaijiMode.mu:
+			use_mu_count+=1
+		GameEnums.TaijiMode.shui:
+			use_shui_count+=1
+		GameEnums.TaijiMode.huo:
+			use_huo_count+=1
+		GameEnums.TaijiMode.tu:
+			use_tu_count+=1
+	check_is_passed_level()
+
+func _on_kill_lianpu_award(base_score):
+	match Global.taiji_mode:
 		GameEnums.TaijiMode.jin:
 			use_jin_count+=1
 		GameEnums.TaijiMode.mu:

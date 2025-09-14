@@ -64,14 +64,14 @@ func cycle_taiji_mode():
 
 func check_is_passed_level():
 	show_pass_condition()
-	if over_count >=4 and back_count >=4:
+	if over_count >=4 and back_count >=2:
 		if DataMgr.get_setting("tutorial","is_passed_level_3")==false:
 			DataMgr.set_setting("tutorial","is_passed_level_3",true)
 		$"../PassedLevel".visible=true
 	
 func show_pass_condition():
 	var label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
-	label.text="过关条件：\n1.能量超限四次（%d/4）\n2.能量回到限制区间四次（%d/4）" % [over_count,back_count]
+	label.text="过关条件：\n1.能量超限四次（%d/4）\n2.能量回到限制区间两次（%d/2）" % [over_count,back_count]
 
 
 func update_texture():

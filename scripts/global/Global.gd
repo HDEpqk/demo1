@@ -1,7 +1,7 @@
 # Global.gd
 extends Node
 
-const TUTORIAL_TOTAL_LEVEL:=2
+const TUTORIAL_TOTAL_LEVEL:=7
 var taiji_mode=GameEnums.TaijiMode.yin
 var energy:float=0
 var score:float=0

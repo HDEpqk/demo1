@@ -2,9 +2,9 @@
 
 [ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=1]
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scene/turorial/TeachingDisplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/tutorial/TeachingDisplay.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scene/turorial/PassedLevel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/tutorial/PassedLevel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=6]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=7]
 [ext_resource path="res://scripts/tutorial/levels/level_3.gd" type="Script" id=8]
@@ -655,8 +655,6 @@ bus = "SFX"
 visible = false
 frames = SubResource( 94 )
 
-[node name="PassedLevel" parent="." instance=ExtResource( 5 )]
-
 [node name="TutorialUILevel3" type="CanvasLayer" parent="."]
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
@@ -728,3 +726,5 @@ margin_bottom = 25.0
 rect_scale = Vector2( 1.2, 1.2 )
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 3 )]
+
+[node name="PassedLevel" parent="." instance=ExtResource( 5 )]

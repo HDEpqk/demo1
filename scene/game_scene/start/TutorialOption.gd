@@ -15,12 +15,12 @@ func _ready():
 func _on_Button_pressed():
 	self.visible=false
 	DataMgr.set_setting("tutorial","is_first_tutorial",false)
-	SceneMgr.change_scene("res://scene/turorial/TutorialStartScene.tscn")
+	SceneMgr.change_scene("res://scene/tutorial/TutorialStartScene.tscn")
 
 func _on_Button2_pressed():
 	self.visible=false
 	DataMgr.set_setting("tutorial","is_first_tutorial",false)
-
+	SceneMgr.change_scene("res://scene/game_scene/start/StartScene.tscn")
 
 func _on_TutorialOption_visibility_changed():
 	#print("self.visible:",self.visible)

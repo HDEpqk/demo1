@@ -2,9 +2,9 @@
 
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scene/turorial/PassedLevel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/tutorial/PassedLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/ui/UI.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scene/turorial/TeachingDisplay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/tutorial/TeachingDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/tutorial/levels/level_6.gd" type="Script" id=6]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=7]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=8]

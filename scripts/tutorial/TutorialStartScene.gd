@@ -10,7 +10,10 @@ onready var turotiral_back_main_btn=$CanvasLayer/TutorialBackMainBtn
 
 
 func _ready():
-	#DataMgr.set_setting("tutorial","is_passed_level_1",true)
+	#DataMgr.set_setting("tutorial","is_passed_level_2",true)
+	#取消暂停
+	get_tree().paused=false
+
 	level_list=$CanvasLayer/GridContainer.get_children()
 	for i in range(level_list.size()):
 		if DataMgr.get_setting("tutorial","is_passed_level_%d"% (i+1))==true:
@@ -24,13 +27,13 @@ func _ready():
 			level_list[i].connect("pressed",self,"_on_button_pressed",[i])
 		else:
 			level_list[i].set_button_icon(LOCK_ICON)
-			level_list[i].get_node("Label").set_text("")
+			level_list[i].get_node("LevelIndex").set_text("")
 			level_list[i].disabled=true
 		
 
 
 func _on_button_pressed(i):
-	SceneMgr.change_scene("res://scene/turorial/level_%d.tscn" % (i+1))
+	SceneMgr.change_scene("res://scene/tutorial/levels/level_%d.tscn" % (i+1))
 
 
 func _on_button_down(i):

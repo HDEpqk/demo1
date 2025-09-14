@@ -12,8 +12,7 @@ onready var is_first_tutorial:bool=true
 func _ready():
 	turorial_option.visible=false
 	user_register.visible=false
-
-
+	$CanvasLayer/OperationTipLabel.visible=false
 	if DataMgr.get_setting("tutorial","is_first_tutorial")==null:
 		DataMgr.set_setting("tutorial","is_first_tutorial",true)
 		turorial_option.visible=true
@@ -33,6 +32,8 @@ func _ready():
 				user_register.queue_free()
 			lianpu_start_scene.visible=true
 			center.visible=true
+			#显示操作提示label
+			$CanvasLayer/OperationTipLabel.visible=true
 
 	
 	isSfxOn=DataMgr.get_setting("audio","sound_enabled")
@@ -54,6 +55,7 @@ func _ready():
 	#设置center的位置
 	center.position.x = viewport_size.x/2
 	center.position.y = viewport_size.y/2+130
+	
 	#设置lianpu_user_register位置
 	lianpu_user_register.position.x = viewport_size.x/2
 	lianpu_user_register.position.y = viewport_size.y/2+280

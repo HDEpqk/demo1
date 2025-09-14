@@ -14,7 +14,8 @@ func _ready():
 		var level_number = int(parts[1])  # 转换为整数 1
 		if $PassedLevel !=null:
 			$PassedLevel.init_passed_level(level_number)
-
+	#取消暂停
+	get_tree().paused=false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
