@@ -45,7 +45,9 @@ _global_script_class_icons={
 [application]
 
 config/name="mydemo1"
-run/main_scene="res://scene/game_scene/start/StartScene.tscn"
+run/main_scene="res://scene/game_scene/start/GameStart.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+config/windows_native_icon="res://art/lianpu/LianpuBoss/icon.ico"
 
 [autoload]
 

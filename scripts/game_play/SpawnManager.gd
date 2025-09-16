@@ -55,7 +55,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "danger_fire",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_fire.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
 		"speed":20,
@@ -64,7 +64,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "danger_metal",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_metal.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 30,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":10,
 		"speed":20,
@@ -73,7 +73,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "danger_thorns",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_thorns.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
 		"speed":20,
@@ -82,7 +82,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "danger_water",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_water.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 50,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
 		"speed":20,
@@ -91,7 +91,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "prop_accelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
 		"reward_score":10,
 		"speed":30,
@@ -100,7 +100,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
 		"weight": 1,
 		"reward_score":30,
 		"speed":40,
@@ -109,7 +109,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "prop_multiple",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
 		"reward_score":10,
 		"speed":30,
@@ -118,7 +118,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "prop_decelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
 		"reward_score":5,
 		"speed":30,
@@ -127,7 +127,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "hide_red",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_red.tscn"),
-		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"min_score": 200,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
 		"reward_score":10,
 		"speed":20,
@@ -136,7 +136,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "hide_yellow",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_yellow.tscn"),
-		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"min_score": 200,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
 		"reward_score":10,
 		"speed":20,
@@ -145,7 +145,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "hide_green",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_green.tscn"),
-		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"min_score": 200,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
 		"reward_score":10,
 		"speed":20,
@@ -154,7 +154,7 @@ const LIANPU_CONFIG := [
 	{
 		"type": "hide_blue",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_blue.tscn"),
-		"min_score": 20,#全局分数达到该分数才生成该lianpu
+		"min_score": 200,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
 		"reward_score":10,
 		"speed":20,
@@ -189,7 +189,11 @@ func update_spawn_speed():
 	var acceleration = pow(score_acceleration, floor(current_score / 1000.0))
 	var current_spawn_interval= max(base_spawn_interval * acceleration, min_spawn_interval)
 	if is_accelerate:
-		current_spawn_interval=min(accelerate_spawn_interval, current_spawn_interval)
+		#疯狂时间加速生成更快
+		if Global.is_invincible:
+			current_spawn_interval=min_spawn_interval
+		else:
+			current_spawn_interval=min(accelerate_spawn_interval, current_spawn_interval)
 	elif is_decelerate:
 		current_spawn_interval=decelerate_spawn_interval
 

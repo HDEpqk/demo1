@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://art/tutorial/tutorial_icon_64.png" type="Texture" id=1]
-[ext_resource path="res://art/tutorial/右箭头_64.png" type="Texture" id=2]
-[ext_resource path="res://art/tutorial/close_64.png" type="Texture" id=3]
+[ext_resource path="res://art/tutorial/白色右箭头.png" type="Texture" id=2]
+[ext_resource path="res://art/tutorial/close_white_64.png" type="Texture" id=3]
 [ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=4]
 [ext_resource path="res://new_theme.tres" type="Theme" id=5]
 [ext_resource path="res://scripts/tutorial/TeachingDisplay.gd" type="Script" id=7]
@@ -21,6 +21,8 @@ margin_bottom = 42.5
 theme = ExtResource( 5 )
 text = "
 "
+
+[node name="Tween" type="Tween" parent="PassLevelConditionLabel"]
 
 [node name="PassLevelTutorial" type="Control" parent="."]
 margin_left = 38.0
@@ -48,7 +50,6 @@ align = 1
 valign = 1
 
 [node name="Panel" type="Panel" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -73,7 +74,6 @@ custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 
 [node name="CloseTextureButton" type="TextureButton" parent="Panel"]
-self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -64.0

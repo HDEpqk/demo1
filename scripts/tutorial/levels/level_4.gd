@@ -40,11 +40,11 @@ func _ready():
 	lianpu1.position.x = viewport_size.x/2
 	lianpu1.position.y = viewport_size.y/2-130
 	
-	lianpu2.position.x = viewport_size.x/2+130
-	lianpu2.position.y = viewport_size.y/2
+	lianpu2.position.x = viewport_size.x/2+200
+	lianpu2.position.y = viewport_size.y/2-130
 	
-	lianpu3.position.x = viewport_size.x/2-130
-	lianpu3.position.y = viewport_size.y/2
+	lianpu3.position.x = viewport_size.x/2-200
+	lianpu3.position.y = viewport_size.y/2-130
 	
 	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
@@ -94,12 +94,17 @@ func check_is_passed_level():
 		$PassedLevel.visible=true
 	
 func show_pass_condition():
-	var label=$TeachingDisplay.get_node("PassLevelConditionLabel")
-	label.text="过关条件：\n\n三连击相同五行属性脸谱生五行\n1.五行生金（%d/1）\n2.五行生木（%d/1）\n3.五行生水（%d/1）\n4.五行生火（%d/1）\n5.五行生土（%d/1）" \
+	var condition_label=$TeachingDisplay.get_node("PassLevelConditionLabel")
+	var text="过关条件：\n\n三连击相同五行属性脸谱生五行\n1.五行生金（%d/1）\n2.五行生木（%d/1）\n3.五行生水（%d/1）\n4.五行生火（%d/1）\n5.五行生土（%d/1）" \
 	% [jin_count,mu_count,shui_count,huo_count,tu_count] \
 	+ "\n\n使用积攒的五行\n1.按Q切换到金并划过一个脸谱（%d/1）\n2.按W切换到木并划过一个脸谱（%d/1）\n3.按E切换到水并划过一个脸谱（%d/1）\n4.按R切换到火并划过一个脸谱（%d/1）\n5.按T切换到土并划过一个脸谱（%d/1）"\
 	% [use_jin_count,use_mu_count,use_shui_count,use_huo_count,use_tu_count]
-
+	condition_label.set_text(text)
+	var tween = condition_label.get_node("Tween")
+	tween.interpolate_property(condition_label, "rect_scale",
+	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
 func _on_wuxing_generation(lianpu_data):
 	var player_taiji_mode=lianpu_data["player_mode"]
 	match player_taiji_mode:

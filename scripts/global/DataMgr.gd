@@ -41,7 +41,7 @@ const ENDLESS_BOARDER_MAX_NUM:=11#无尽排行榜最大人数
 #上传分数相关
 const LIMITED_UPLOAD_TATOL_COUNT:=3#限时上传总次数
 const ENDLESS_UPLOAD_TATOL_COUNT:=3#无尽上传总次数
-const UPLOAD_COUNT_RESET_SECONDS:= 30  #上传次数重置时间（实际一天，测试用30s）
+const UPLOAD_COUNT_RESET_SECONDS:= 86400  #上传次数重置时间（实际一天，测试用30s）
 
 onready var instance=self
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/右箭头_64.png-0128d4b12c3df94e2d05f6bf6bd73988.stex"
+path="res://.import/白色右箭头.png-8019dd79e787dedaad380ba09ea405fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tutorial/右箭头_64.png"
-dest_files=[ "res://.import/右箭头_64.png-0128d4b12c3df94e2d05f6bf6bd73988.stex" ]
+source_file="res://art/tutorial/白色右箭头.png"
+dest_files=[ "res://.import/白色右箭头.png-8019dd79e787dedaad380ba09ea405fa.stex" ]
 
 [params]
 

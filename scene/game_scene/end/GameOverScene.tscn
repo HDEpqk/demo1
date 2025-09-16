@@ -1203,6 +1203,17 @@ text = "死因:"
 align = 1
 valign = 1
 
+[node name="UploadTip" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -16.0
+margin_right = 80.0
+theme = ExtResource( 1 )
+text = "每天仅有三次上传机会"
+
 [connection signal="confirmed" from="ConfirmRegister" to="LianpuUploadScore" method="_on_ConfirmRegister_confirmed"]
 [connection signal="visibility_changed" from="ConfirmRegister" to="LianpuUploadScore" method="_on_ConfirmRegister_visibility_changed"]
 [connection signal="confirmed" from="ConfirmBeforeUpload" to="LianpuUploadScore" method="_on_ConfirmBeforeUpload_confirmed"]

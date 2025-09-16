@@ -1,9 +1,9 @@
-[gd_scene load_steps=127 format=2]
+[gd_scene load_steps=140 format=2]
 
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/tutorial/PassedLevel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scene/ui/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/ui/PausePanel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scene/tutorial/TeachingDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/tutorial/levels/level_6.gd" type="Script" id=6]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=7]
@@ -20,6 +20,17 @@
 [ext_resource path="res://scene/game_scene/game/MainCamera.tscn" type="PackedScene" id=18]
 [ext_resource path="res://art/lianpu/LianpuProp/decelerate.png" type="Texture" id=19]
 [ext_resource path="res://scripts/tutorial/levels/Tutorialprop_decelerate.gd" type="Script" id=20]
+[ext_resource path="res://scripts/ui/EnergyCalibration.gd" type="Script" id=21]
+[ext_resource path="res://scripts/game_play/FiveElementsAccumulation.gd" type="Script" id=22]
+[ext_resource path="res://scripts/ui/SmoothScore.gd" type="Script" id=23]
+[ext_resource path="res://scripts/ui/UI.gd" type="Script" id=24]
+[ext_resource path="res://art/ui/game/scaleNeedle.png" type="Texture" id=25]
+[ext_resource path="res://art/ui/other/countdown_icon.png" type="Texture" id=26]
+[ext_resource path="res://art/ui/pause/pauseBtn.png" type="Texture" id=27]
+[ext_resource path="res://art/ui/game/FiveElementsRelationship.png" type="Texture" id=28]
+[ext_resource path="res://art/ui/other/score_icon_32.png" type="Texture" id=29]
+[ext_resource path="res://new_theme.tres" type="Theme" id=30]
+[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=31]
 
 [sub_resource type="Animation" id=12]
 length = 0.001
@@ -662,6 +673,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="Gradient" id=142]
+interpolation_mode = 1
+offsets = PoolRealArray( 0, 0.238532, 0.497207, 0.770642 )
+colors = PoolColorArray( 0.717647, 0, 0, 1, 0, 0.596078, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=143]
+gradient = SubResource( 142 )
+
 [node name="level_6" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -796,6 +815,553 @@ valign = 1
 
 [node name="PassedLevel" parent="." instance=ExtResource( 3 )]
 
-[node name="UI" parent="." instance=ExtResource( 4 )]
+[node name="UI" type="CanvasLayer" parent="."]
+offset = Vector2( 0, 5 )
+transform = Transform2D( 1, 0, 0, 1, 0, 5 )
+script = ExtResource( 24 )
+
+[node name="CrazyTimeBG" type="ColorRect" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnergyCalibration" type="Control" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 30.0
+margin_bottom = 25.0
+rect_scale = Vector2( 1.2, 1.2 )
+theme = ExtResource( 30 )
+script = ExtResource( 21 )
+
+[node name="BG" type="TextureRect" parent="UI/EnergyCalibration"]
+self_modulate = Color( 0.768627, 0.768627, 0.768627, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_right = 200.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 200, 0 )
+texture = SubResource( 143 )
+expand = true
+
+[node name="min" type="Label" parent="UI/EnergyCalibration/BG"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.25
+anchor_top = 1.0
+anchor_right = 0.25
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 12, 0 )
+text = "-10"
+align = 1
+valign = 1
+
+[node name="mid" type="Label" parent="UI/EnergyCalibration/BG"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -4.00002
+margin_top = -6.0
+margin_right = 3.99998
+margin_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 4, 0 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="max" type="Label" parent="UI/EnergyCalibration/BG"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.75
+anchor_top = 1.0
+anchor_right = 0.75
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = 7.99997
+margin_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 12, 0 )
+text = "10"
+align = 1
+valign = 1
+
+[node name="pointer" type="TextureRect" parent="UI/EnergyCalibration/BG"]
+self_modulate = Color( 0, 0, 1, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_right = 10.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 25 )
+expand = true
+
+[node name="Node" type="Control" parent="UI/EnergyCalibration/BG/pointer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = -48.0
+rect_scale = Vector2( 8, 8 )
+
+[node name="current" type="Label" parent="UI/EnergyCalibration/BG/pointer/Node"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_top = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 30 )
+text = "+4"
+align = 1
+valign = 1
+
+[node name="Tween" type="Tween" parent="UI/EnergyCalibration/BG/pointer/Node/current"]
+
+[node name="CountdownLabel" type="Label" parent="UI/EnergyCalibration/BG"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 60.0
+margin_top = -9.0
+margin_right = 76.0
+margin_bottom = 7.0
+rect_scale = Vector2( 2, 2 )
+text = "20"
+align = 1
+valign = 1
+
+[node name="CountdownIcon" type="TextureRect" parent="UI/EnergyCalibration/BG"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 25.0
+margin_top = -7.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 26 )
+
+[node name="CountdownTimer" type="Timer" parent="UI/EnergyCalibration"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/EnergyCalibration"]
+volume_db = -80.0
+
+[node name="PauseButton" type="TextureButton" parent="UI"]
+self_modulate = Color( 100, 100, 100, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -48.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 48, 0 )
+texture_normal = ExtResource( 27 )
+
+[node name="TotalScore" type="Control" parent="UI"]
+margin_left = 174.0
+margin_top = 30.0
+margin_right = 374.0
+margin_bottom = 225.0
+rect_scale = Vector2( 1.2, 1.2 )
+theme = ExtResource( 30 )
+
+[node name="TotalScoreLabel" type="RichTextLabel" parent="UI/TotalScore"]
+margin_right = 220.0
+margin_bottom = 17.0
+custom_fonts/normal_font = ExtResource( 31 )
+bbcode_enabled = true
+bbcode_text = "得分:0"
+text = "得分:0"
+fit_content_height = true
+script = ExtResource( 23 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/TotalScore/TotalScoreLabel"]
+
+[node name="TextureRect" type="TextureRect" parent="UI/TotalScore"]
+margin_left = -25.0
+margin_top = -6.0
+margin_right = -7.0
+margin_bottom = 11.0
+texture = ExtResource( 29 )
+
+[node name="ScoreDetail" type="Control" parent="UI/TotalScore"]
+margin_top = 41.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="BaseAward" type="RichTextLabel" parent="UI/TotalScore/ScoreDetail"]
+margin_right = 400.0
+margin_bottom = 17.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "消灭脸谱奖励:+5"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/TotalScore/ScoreDetail/BaseAward"]
+
+[node name="TwoComboAward" type="RichTextLabel" parent="UI/TotalScore/ScoreDetail"]
+margin_top = 40.0
+margin_right = 400.0
+margin_bottom = 57.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "二连击奖励:+5"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/TotalScore/ScoreDetail/TwoComboAward"]
+
+[node name="ThreeComboAward" type="RichTextLabel" parent="UI/TotalScore/ScoreDetail"]
+margin_top = 80.0
+margin_right = 400.0
+margin_bottom = 97.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "三连击奖励:+10"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/TotalScore/ScoreDetail/ThreeComboAward"]
+
+[node name="CounterAward" type="RichTextLabel" parent="UI/TotalScore/ScoreDetail"]
+margin_top = 120.0
+margin_right = 400.0
+margin_bottom = 137.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "克制奖励:+10"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/TotalScore/ScoreDetail/CounterAward"]
+
+[node name="AntiCounterPunishment" type="RichTextLabel" parent="UI/TotalScore/ScoreDetail"]
+margin_top = 160.0
+margin_right = 400.0
+margin_bottom = 177.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "被克制惩罚:-2.5"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/TotalScore/ScoreDetail/AntiCounterPunishment"]
+
+[node name="TotalMultipleLabel" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -230.0
+margin_top = 30.0
+margin_right = -174.0
+margin_bottom = 41.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 30 )
+text = "倍数:×1"
+valign = 1
+
+[node name="MultipleTimerLabel" type="Label" parent="UI/TotalMultipleLabel"]
+self_modulate = Color( 0.411765, 0.858824, 0.105882, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 28.0
+margin_right = 36.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 8, 0 )
+theme = ExtResource( 30 )
+text = "5"
+
+[node name="MultipleCountdownIcon" type="TextureRect" parent="UI/TotalMultipleLabel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 11.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 16, 0 )
+texture = ExtResource( 26 )
+
+[node name="MultipleTimer" type="Timer" parent="UI/TotalMultipleLabel"]
+
+[node name="AccelerateSpawnLabel" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -230.0
+margin_top = 55.0
+margin_right = -166.0
+margin_bottom = 66.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 30 )
+text = "加速生成"
+valign = 1
+
+[node name="AccelerateSpawnTimerLabel" type="Label" parent="UI/AccelerateSpawnLabel"]
+self_modulate = Color( 0.411765, 0.858824, 0.105882, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 28.0
+margin_right = 36.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 8, 0 )
+theme = ExtResource( 30 )
+text = "5"
+
+[node name="AccelerateSpawnCountdownIcon" type="TextureRect" parent="UI/AccelerateSpawnLabel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 11.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 16, 0 )
+texture = ExtResource( 26 )
+
+[node name="AccelerateSpawnTimer" type="Timer" parent="UI/AccelerateSpawnLabel"]
+
+[node name="DecelerateSpawnLabel" type="Label" parent="UI"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -230.0
+margin_top = 55.0
+margin_right = -166.0
+margin_bottom = 66.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 30 )
+valign = 1
+
+[node name="DecelerateSpawnTimerLabel" type="Label" parent="UI/DecelerateSpawnLabel"]
+self_modulate = Color( 0.411765, 0.858824, 0.105882, 1 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 28.0
+margin_right = 36.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 8, 0 )
+theme = ExtResource( 30 )
+text = "5"
+
+[node name="DecelerateSpawnCountdownIcon" type="TextureRect" parent="UI/DecelerateSpawnLabel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 11.0
+margin_right = 27.0
+margin_bottom = 16.0
+rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 16, 0 )
+texture = ExtResource( 26 )
+
+[node name="DecelerateeSpawnTimer" type="Timer" parent="UI/DecelerateSpawnLabel"]
+
+[node name="PausePanel" parent="UI" instance=ExtResource( 4 )]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CrazyTime" type="Node2D" parent="UI"]
+
+[node name="CrazyTimeTimer" type="Timer" parent="UI/CrazyTime"]
+
+[node name="ComboLabel" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_top = 124.0
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 30 )
+text = "连击×1"
+
+[node name="Tween" type="Tween" parent="UI/ComboLabel"]
+
+[node name="CounterRichLabel" type="RichTextLabel" parent="UI"]
+margin_top = 124.0
+margin_right = 100.0
+margin_bottom = 136.0
+theme = ExtResource( 30 )
+custom_fonts/normal_font = ExtResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[color=#2d93dd]水[/color][color=#000000]克[/color][color=#e40000]火[/color]"
+text = "水克火"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/CounterRichLabel"]
+
+[node name="GenerationRichLabel" type="RichTextLabel" parent="UI"]
+margin_top = 165.0
+margin_right = 100.0
+margin_bottom = 136.0
+theme = ExtResource( 30 )
+custom_fonts/normal_font = ExtResource( 31 )
+bbcode_enabled = true
+bbcode_text = "[color=#2d93dd]水[/color]生[color=#28c641]木[/color]"
+text = "水生木"
+fit_content_height = true
+
+[node name="Tween" type="Tween" parent="UI/GenerationRichLabel"]
+
+[node name="FiveElementsAccumulation" type="Control" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+rect_scale = Vector2( 0.8, 0.8 )
+script = ExtResource( 22 )
+
+[node name="TextureRect" type="TextureRect" parent="UI/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -139.0
+margin_top = -278.0
+margin_right = 139.0
+rect_pivot_offset = Vector2( 139, 273 )
+texture = ExtResource( 28 )
+
+[node name="JinControl" type="Control" parent="UI/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="UI/FiveElementsAccumulation/JinControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 32.0
+margin_top = 5.0
+margin_right = 30.0
+margin_bottom = 19.0
+rect_scale = Vector2( 2, 2 )
+text = "Q"
+
+[node name="CountLabel" type="Label" parent="UI/FiveElementsAccumulation/JinControl"]
+margin_left = 95.0
+margin_top = 8.0
+margin_right = 90.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="UI/FiveElementsAccumulation/JinControl/CountLabel"]
+
+[node name="MuControl" type="Control" parent="UI/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="UI/FiveElementsAccumulation/MuControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -129.0
+margin_top = -175.0
+margin_right = -127.0
+margin_bottom = -166.0
+rect_scale = Vector2( 2, 2 )
+text = "W"
+
+[node name="CountLabel" type="Label" parent="UI/FiveElementsAccumulation/MuControl"]
+margin_left = -126.0
+margin_top = -102.0
+margin_right = -133.0
+margin_bottom = -88.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="UI/FiveElementsAccumulation/MuControl/CountLabel"]
+
+[node name="ShuiControl" type="Control" parent="UI/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="UI/FiveElementsAccumulation/ShuiControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -105.0
+margin_top = 8.0
+margin_right = -106.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+text = "E"
+
+[node name="CountLabel" type="Label" parent="UI/FiveElementsAccumulation/ShuiControl"]
+margin_left = -50.0
+margin_top = 8.0
+margin_right = -53.0
+margin_bottom = 20.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="UI/FiveElementsAccumulation/ShuiControl/CountLabel"]
+
+[node name="HuoControl" type="Control" parent="UI/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = 5.5
+
+[node name="KeyLabel" type="Label" parent="UI/FiveElementsAccumulation/HuoControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -40.0
+margin_top = -219.0
+margin_right = -42.0
+margin_bottom = -205.0
+rect_scale = Vector2( 2, 2 )
+text = "R"
+
+[node name="CountLabel" type="Label" parent="UI/FiveElementsAccumulation/HuoControl"]
+margin_left = 24.0
+margin_top = -220.0
+margin_bottom = -499.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="UI/FiveElementsAccumulation/HuoControl/CountLabel"]
+
+[node name="TuControl" type="Control" parent="UI/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = -40.0
+
+[node name="KeyLabel" type="Label" parent="UI/FiveElementsAccumulation/TuControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 106.0
+margin_top = -173.0
+margin_bottom = -163.0
+rect_scale = Vector2( 2, 2 )
+text = "T"
+
+[node name="CountLabel" type="Label" parent="UI/FiveElementsAccumulation/TuControl"]
+margin_left = 106.0
+margin_top = -105.0
+margin_right = 114.0
+margin_bottom = -91.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="UI/FiveElementsAccumulation/TuControl/CountLabel"]
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 5 )]
+
+[connection signal="timeout" from="UI/EnergyCalibration/CountdownTimer" to="UI/EnergyCalibration" method="_on_CountdownTimer_timeout"]
+[connection signal="timeout" from="UI/TotalMultipleLabel/MultipleTimer" to="UI" method="_on_MultipleTimer_timeout"]
+[connection signal="timeout" from="UI/AccelerateSpawnLabel/AccelerateSpawnTimer" to="UI" method="_on_AccelerateSpawnTimer_timeout"]
+[connection signal="timeout" from="UI/DecelerateSpawnLabel/DecelerateeSpawnTimer" to="UI" method="_on_DecelerateeSpawnTimer_timeout"]
+[connection signal="timeout" from="UI/CrazyTime/CrazyTimeTimer" to="UI" method="_on_CrazyTimeTimer_timeout"]

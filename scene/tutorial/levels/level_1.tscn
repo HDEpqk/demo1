@@ -67,6 +67,8 @@ rect_pivot_offset = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 5 )
 text = "过关条件：切换阴阳4次（0/4）"
 
+[node name="Tween" type="Tween" parent="TutorialSpotlight/count"]
+
 [node name="TutorialUILevel1" type="CanvasLayer" parent="."]
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )

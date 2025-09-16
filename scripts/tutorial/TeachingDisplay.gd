@@ -7,6 +7,7 @@ onready var left_btn=$Panel/LeftTextureButton
 onready var right_btn=$Panel/RightTextureButton
 
 onready var passed_level_panel=$PassedLevelPanel
+onready var condition_label:Label=$PassLevelConditionLabel
 
 var current_page:=0
 var total_page:=0
@@ -15,9 +16,15 @@ var video_list:=[]
 
 func _ready():
 	rich_label.bbcode_enabled=true
-	panel.hide()
+	#panel.hide()
 
-
+#func update_condition_label(text:String):
+#	condition_label.set_text(text)
+#	var tween = condition_label.get_node("Tween")
+#	tween.interpolate_property(condition_label, "rect_scale",
+#	Vector2(2, 2), Vector2(1, 1), 0.1,
+#	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+#	tween.start()
 
 
 

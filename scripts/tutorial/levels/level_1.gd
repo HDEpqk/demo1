@@ -22,7 +22,14 @@ func _ready():
 	
 func _on_global_taiji_mode_changed(new_value: int,old_value: int=0,is_new_mode:=true):
 	taiji_change_count+=1
-	$TutorialSpotlight/count.text="过关条件：切换阴阳4次（%d/4）" % taiji_change_count
+	var condition_label=$TutorialSpotlight/count
+	condition_label.set_text("过关条件：切换阴阳4次（%d/4）" % taiji_change_count)
+	var tween = condition_label.get_node("Tween")
+	tween.interpolate_property(condition_label, "rect_scale",
+	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+
 	if taiji_change_count>=4:
 		$PassedLevel.visible=true
 

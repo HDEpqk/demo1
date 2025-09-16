@@ -60,20 +60,20 @@ func _input(event):
 			trail.clear_points()
 		
 
-	elif event.button_index == BUTTON_RIGHT:
-		if event.pressed:
-			press_timer = 0.0
-			match Global.taiji_mode:
-				GameEnums.TaijiMode.yang:
-					EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode,true)
-				_:	
-					EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode,true)
-			audio_player.stream=SFX_CYCLE_CENTER
-			audio_player.play()
-			DebugUtils.log("播放了cycle_center音效")
-		else:
-			is_long_pressed = false
-			trail.clear_points()
+#	elif event.button_index == BUTTON_RIGHT:
+#		if event.pressed:
+#			press_timer = 0.0
+#			match Global.taiji_mode:
+#				GameEnums.TaijiMode.yang:
+#					EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yin,Global.taiji_mode,true)
+#				_:	
+#					EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.yang,Global.taiji_mode,true)
+#			audio_player.stream=SFX_CYCLE_CENTER
+#			audio_player.play()
+#			DebugUtils.log("播放了cycle_center音效")
+#		else:
+#			is_long_pressed = false
+#			trail.clear_points()
 		
 
 func _physics_process(delta):

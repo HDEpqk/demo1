@@ -56,11 +56,11 @@ func _ready():
 	lianpu1.position.x = viewport_size.x/2
 	lianpu1.position.y = viewport_size.y/2-130
 	
-	lianpu2.position.x = viewport_size.x/2+130
-	lianpu2.position.y = viewport_size.y/2
+	lianpu2.position.x = viewport_size.x/2+200
+	lianpu2.position.y = viewport_size.y/2-130
 	
-	lianpu3.position.x = viewport_size.x/2-130
-	lianpu3.position.y = viewport_size.y/2
+	lianpu3.position.x = viewport_size.x/2-200
+	lianpu3.position.y = viewport_size.y/2-130
 	
 	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
@@ -92,11 +92,17 @@ func check_is_passed_level():
 		$PassedLevel.visible=true
 	
 func show_pass_condition():
-	var label=$TeachingDisplay.get_node("PassLevelConditionLabel")
-	label.text="过关条件：\n\n玩家生脸谱\n1.水生木（%d/1）\n" % [player_shui_born_lianpu_mu]\
+	var condition_label=$TeachingDisplay.get_node("PassLevelConditionLabel")
+	var text="过关条件：\n\n玩家生脸谱\n1.水生木（%d/1）\n" % [player_shui_born_lianpu_mu]\
 	+ "\n玩家被脸谱生\n1.水被金生（%d/1）\n"% [lianpu_jin_born_player_shui]\
 	+ "\n玩家克脸谱\n1.火克金（%d/1）\n"% [player_huo_counter_lianpu_jin]\
 	+ "\n玩家被脸谱克\n1.火被水克（%d/1）"% [lianpu_shui_counter_player_huo]
+	condition_label.set_text(text)
+	var tween = condition_label.get_node("Tween")
+	tween.interpolate_property(condition_label, "rect_scale",
+	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
 
 func _on_wuxing_generation_available(lianpu_data):
 	var player_taiji_mode=lianpu_data["player_mode"]

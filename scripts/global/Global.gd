@@ -79,25 +79,25 @@ func _ready():
 	
 func _on_energy_changed(new_value: float):
 	energy = new_value
-	DebugUtils.log("全局能量已更新："+str(energy))
+	#DebugUtils.log("全局能量已更新："+str(energy))
 	
 func _on_taiji_mode_changed(new_value:int,old_value:int,is_new_mode):
 	taiji_mode = new_value
-	DebugUtils.log("全局模式已更新,新的值为："+str(taiji_mode)+"旧的值为："+str(old_value))
+	#DebugUtils.log("全局模式已更新,新的值为："+str(taiji_mode)+"旧的值为："+str(old_value))
 	#如果太极模式是木，触发木保护开启事件
 	if taiji_mode==GameEnums.TaijiMode.mu:
 		EventBus.fire_event("mu_protect_open")
 
 func _on_score_changed(new_value: float):
 	score=new_value
-	DebugUtils.log("全局分数已更新："+str(score))
+	#DebugUtils.log("全局分数已更新："+str(score))
 
 func _on_multiple_changed(new_value: int,isTiming:bool,duration:float):
 	multiple= clamp(new_value,1,8)
-	DebugUtils.log("全局倍数已更新："+str(multiple))
+	#DebugUtils.log("全局倍数已更新："+str(multiple))
 
 func _on_player_hurt(global_mode):
-	DebugUtils.log("玩家受伤时做的事global")
+	#DebugUtils.log("玩家受伤时做的事global")
 	match global_mode:
 		GameEnums.TaijiMode.yin:
 			mode_status[GameEnums.TaijiMode.yin]["isActive"]=false
@@ -133,19 +133,19 @@ func _on_player_recovery(global_mode):
 			mode_status[GameEnums.TaijiMode.tu]["isActive"]=true
 
 func _on_crazy_time_begin(duration):
-	DebugUtils.log("_on_crazy_time_begin: Global")
+	#DebugUtils.log("_on_crazy_time_begin: Global")
 	is_invincible=true
 
 func _on_crazy_time_end(value):
-	DebugUtils.log("_on_crazy_time_end: Global")
+	#DebugUtils.log("_on_crazy_time_end: Global")
 	is_invincible=false
 
 func _on_mu_protect_open(value):
-	DebugUtils.log("_on_mu_protect_open: Global")
+	#DebugUtils.log("_on_mu_protect_open: Global")
 	is_mu_protect_open=true
 
 func _on_mu_protect_close(value):
-	DebugUtils.log("_on_mu_protect_close: Global")
+	#DebugUtils.log("_on_mu_protect_close: Global")
 	is_mu_protect_open=false
 
 func reset_data():

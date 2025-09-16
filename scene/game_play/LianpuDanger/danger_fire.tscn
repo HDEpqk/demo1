@@ -352,7 +352,6 @@ anims/loop_attack = ExtResource( 3 )
 position = Vector2( -2.11758e-22, -15 )
 scale = Vector2( 4.746, 4.746 )
 shape = SubResource( 1 )
-disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -380,7 +379,6 @@ __meta__ = {
 [node name="FireCollision" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 23 )
 shape = SubResource( 14 )
-disabled = true
 __meta__ = {
 "_edit_lock_": true
 }

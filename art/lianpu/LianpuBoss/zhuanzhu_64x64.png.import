@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/close_64.png-fc410adf2653d8e47e484b676454fcf8.stex"
+path="res://.import/zhuanzhu_64x64.png-9240bdccfd42ef458acda73101f624f4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tutorial/close_64.png"
-dest_files=[ "res://.import/close_64.png-fc410adf2653d8e47e484b676454fcf8.stex" ]
+source_file="res://art/lianpu/LianpuBoss/zhuanzhu_64x64.png"
+dest_files=[ "res://.import/zhuanzhu_64x64.png-9240bdccfd42ef458acda73101f624f4.stex" ]
 
 [params]
 

@@ -56,8 +56,14 @@ func check_is_passed_level():
 	
 
 func show_pass_condition():
-	var label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
-	label.text="过关条件：\n1.用阴状态消灭脸谱四次（%d/4）\n2.用阳状态切换脸谱四次（%d/4）" % [yin_count,yang_count]
+	var condition_label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
+	condition_label.set_text("过关条件：\n1.用阴状态消灭脸谱四次（%d/4）\n2.用阳状态切换脸谱四次（%d/4）" % [yin_count,yang_count])
+	var tween = condition_label.get_node("Tween")
+	tween.interpolate_property(condition_label, "rect_scale",
+	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	tween.start()
+	
 func update_texture():
 	# 根据太极模式加载对应贴图
 	match taiji_mode:
