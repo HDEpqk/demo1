@@ -47,6 +47,8 @@ func _ready():
 	EventBus.connect("anti_counter",self,"_on_anti_counter")
 	EventBus.connect("anti_wuxing_generation",self,"_on_anti_wuxing_generation")
 	EventBus.connect("wuxing_generation",self,"_on_wuxing_generation")
+	EventBus.connect("change_wuxing_calibration_rectscale",self,"_on_change_wuxing_calibration_rectscale")
+	
 	
 func _input(event):
 	if !(event is InputEventKey):return
@@ -324,3 +326,6 @@ func display_tu():
 	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tu_count_label_tween.start()
+
+func _on_change_wuxing_calibration_rectscale(value):
+	self.rect_scale=Vector2(value,value)

@@ -36,6 +36,9 @@ signal use_five_elements()#使用五行
 signal mu_protect_open(value)#当在木模式开启木保护机制触发的事件
 signal mu_protect_close(value)#当关闭木保护机制时触发的事件
 signal game_over(info)
+
+signal change_wuxing_calibration_rectscale(value)
+
 #http相关
 signal http_fetch_request_completed(result)
 signal http_update_request_completed(result)

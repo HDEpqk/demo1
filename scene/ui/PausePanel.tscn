@@ -29,9 +29,9 @@ margin_bottom = 360.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 561.0
-margin_top = 294.0
+margin_top = 284.0
 margin_right = 719.0
-margin_bottom = 426.0
+margin_bottom = 436.0
 
 [node name="TitleLable" type="Label" parent="CenterContainer/VBoxContainer"]
 margin_right = 158.0
@@ -53,4 +53,27 @@ margin_bottom = 132.0
 text = "返回开始场景"
 icon = ExtResource( 4 )
 
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer"]
+margin_top = 136.0
+margin_right = 158.0
+margin_bottom = 152.0
+max_value = 1.2
+step = 0.1
+value = 1.0
+scrollable = false
+tick_count = 13
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HSlider"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 6.0
+margin_top = -8.0
+margin_bottom = 8.0
+rect_pivot_offset = Vector2( 0, 8 )
+text = "1"
+
 [connection signal="visibility_changed" from="." to="." method="_on_PausePanel_visibility_changed"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]

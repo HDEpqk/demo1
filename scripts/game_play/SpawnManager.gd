@@ -101,7 +101,7 @@ const LIANPU_CONFIG := [
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
 		"min_score": 100,#全局分数达到该分数才生成该lianpu
-		"weight": 1,
+		"weight": 2,
 		"reward_score":30,
 		"speed":40,
 		"mode":GameEnums.TaijiMode.jin

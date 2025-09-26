@@ -287,6 +287,9 @@ func handle_element_counter(global_mode, lianpu_mode, base_score):
 		EventBus.fire_event_2param("counter",global_mode,counter_score)
 		#yield(get_tree().create_timer(1.0), "timeout")
 		EventBus.fire_event("global_score_changed",new_score)
+		Engine.time_scale=0.01
+		yield(get_tree().create_timer(0.001), "timeout")
+		Engine.time_scale=1
 		return 1
 	elif Global.WUXING_COUNTER.get(lianpu_mode) == global_mode:
 		if Global.is_invincible:

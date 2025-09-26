@@ -725,11 +725,6 @@ texture = ExtResource( 20 )
 
 [node name="MultipleTimer" type="Timer" parent="TutorialUILevel3/TotalMultipleLabel"]
 
-[node name="PausePanel" parent="TutorialUILevel3" instance=ExtResource( 10 )]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="EnergyCalibration" type="Control" parent="TutorialUILevel3"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -853,6 +848,11 @@ texture = ExtResource( 20 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel3/EnergyCalibration"]
 volume_db = -80.0
+
+[node name="PausePanel" parent="TutorialUILevel3" instance=ExtResource( 10 )]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 3 )]
 

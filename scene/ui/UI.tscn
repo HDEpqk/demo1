@@ -7,10 +7,10 @@
 [ext_resource path="res://new_theme.tres" type="Theme" id=5]
 [ext_resource path="res://art/ui/other/countdown_icon.png" type="Texture" id=6]
 [ext_resource path="res://art/ui/other/score_icon_32.png" type="Texture" id=7]
+[ext_resource path="res://art/ui/five_elements_calibration/五行积攒图.png" type="Texture" id=8]
 [ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=10]
 [ext_resource path="res://scripts/ui/SmoothScore.gd" type="Script" id=11]
 [ext_resource path="res://scripts/game_play/FiveElementsAccumulation.gd" type="Script" id=12]
-[ext_resource path="res://art/ui/game/FiveElementsRelationship.png" type="Texture" id=13]
 
 [node name="UI" type="CanvasLayer"]
 offset = Vector2( 0, 5 )
@@ -231,11 +231,6 @@ texture = ExtResource( 6 )
 
 [node name="DecelerateeSpawnTimer" type="Timer" parent="DecelerateSpawnLabel"]
 
-[node name="PausePanel" parent="." instance=ExtResource( 3 )]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="CrazyTime" type="Node2D" parent="."]
 
 [node name="CrazyTimeTimer" type="Timer" parent="CrazyTime"]
@@ -282,7 +277,8 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-rect_scale = Vector2( 0.6, 0.6 )
+margin_top = -6.0
+margin_bottom = -22.0
 script = ExtResource( 12 )
 
 [node name="TextureRect" type="TextureRect" parent="FiveElementsAccumulation"]
@@ -294,7 +290,8 @@ margin_left = -139.0
 margin_top = -278.0
 margin_right = 139.0
 rect_pivot_offset = Vector2( 139, 273 )
-texture = ExtResource( 13 )
+texture = ExtResource( 8 )
+expand = true
 
 [node name="JinControl" type="Control" parent="FiveElementsAccumulation"]
 anchor_left = 0.5
@@ -303,12 +300,13 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/JinControl"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 32.0
-margin_top = 5.0
+margin_top = 10.0
 margin_right = 30.0
 margin_bottom = 19.0
 rect_scale = Vector2( 2, 2 )
@@ -316,7 +314,7 @@ text = "Q"
 
 [node name="CountLabel" type="Label" parent="FiveElementsAccumulation/JinControl"]
 margin_left = 95.0
-margin_top = 8.0
+margin_top = 10.0
 margin_right = 90.0
 margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
@@ -331,7 +329,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/MuControl"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -359,12 +358,13 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/ShuiControl"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = -105.0
-margin_top = 8.0
+margin_top = 10.0
 margin_right = -106.0
 margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
@@ -372,7 +372,7 @@ text = "E"
 
 [node name="CountLabel" type="Label" parent="FiveElementsAccumulation/ShuiControl"]
 margin_left = -50.0
-margin_top = 8.0
+margin_top = 10.0
 margin_right = -53.0
 margin_bottom = 20.0
 rect_scale = Vector2( 2, 2 )
@@ -387,7 +387,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/HuoControl"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -413,6 +414,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_top = -40.0
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="FiveElementsAccumulation/TuControl"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -431,6 +433,11 @@ rect_scale = Vector2( 2, 2 )
 text = "0"
 
 [node name="Tween" type="Tween" parent="FiveElementsAccumulation/TuControl/CountLabel"]
+
+[node name="PausePanel" parent="." instance=ExtResource( 3 )]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="TotalMultipleLabel/MultipleTimer" to="." method="_on_MultipleTimer_timeout"]
 [connection signal="timeout" from="AccelerateSpawnLabel/AccelerateSpawnTimer" to="." method="_on_AccelerateSpawnTimer_timeout"]

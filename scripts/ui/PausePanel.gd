@@ -42,3 +42,8 @@ func _on_ResumeGameButton_pressed():
 func _on_PausePanel_visibility_changed():
 	get_tree().paused=visible
 
+
+
+func _on_HSlider_value_changed(value):
+	EventBus.fire_event("change_wuxing_calibration_rectscale",value)
+	$CenterContainer/VBoxContainer/HSlider/Label.text=str(value)

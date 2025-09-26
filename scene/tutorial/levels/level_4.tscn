@@ -15,7 +15,7 @@
 [ext_resource path="res://scripts/tutorial/levels/TutorialLianpuLevel4.gd" type="Script" id=13]
 [ext_resource path="res://scripts/tutorial/levels/TutorialUILevel4.gd" type="Script" id=14]
 [ext_resource path="res://scripts/tutorial/levels/level_4.gd" type="Script" id=15]
-[ext_resource path="res://art/ui/game/FiveElementsRelationship.png" type="Texture" id=16]
+[ext_resource path="res://art/ui/five_elements_calibration/五行积攒图.png" type="Texture" id=16]
 [ext_resource path="res://scripts/game_play/FiveElementsAccumulation.gd" type="Script" id=17]
 [ext_resource path="res://art/ui/game/scaleNeedle.png" type="Texture" id=18]
 
@@ -1521,11 +1521,6 @@ texture = ExtResource( 5 )
 
 [node name="MultipleTimer" type="Timer" parent="TutorialUILevel4/TotalMultipleLabel"]
 
-[node name="PausePanel" parent="TutorialUILevel4" instance=ExtResource( 11 )]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="EnergyCalibration" type="Control" parent="TutorialUILevel4"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -1650,15 +1645,24 @@ texture = ExtResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel4/EnergyCalibration"]
 volume_db = -80.0
 
+[node name="ComboLabel" type="Label" parent="TutorialUILevel4"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_top = 124.0
+rect_pivot_offset = Vector2( 64, 0 )
+theme = ExtResource( 4 )
+text = "连击×1"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel4/ComboLabel"]
+
 [node name="FiveElementsAccumulation" type="Control" parent="TutorialUILevel4"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -20.0
-margin_top = -40.0
-margin_right = 20.0
-rect_scale = Vector2( 0.8, 0.8 )
+margin_top = -6.0
+margin_bottom = -6.0
 script = ExtResource( 17 )
 
 [node name="TextureRect" type="TextureRect" parent="TutorialUILevel4/FiveElementsAccumulation"]
@@ -1671,6 +1675,7 @@ margin_top = -278.0
 margin_right = 139.0
 rect_pivot_offset = Vector2( 139, 273 )
 texture = ExtResource( 16 )
+expand = true
 
 [node name="JinControl" type="Control" parent="TutorialUILevel4/FiveElementsAccumulation"]
 anchor_left = 0.5
@@ -1679,12 +1684,13 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/JinControl"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 32.0
-margin_top = 5.0
+margin_top = 10.0
 margin_right = 30.0
 margin_bottom = 19.0
 rect_scale = Vector2( 2, 2 )
@@ -1692,7 +1698,7 @@ text = "Q"
 
 [node name="CountLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/JinControl"]
 margin_left = 95.0
-margin_top = 8.0
+margin_top = 10.0
 margin_right = 90.0
 margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
@@ -1707,7 +1713,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/MuControl"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -1735,12 +1742,13 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/ShuiControl"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = -105.0
-margin_top = 8.0
+margin_top = 10.0
 margin_right = -106.0
 margin_bottom = 22.0
 rect_scale = Vector2( 2, 2 )
@@ -1748,7 +1756,7 @@ text = "E"
 
 [node name="CountLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/ShuiControl"]
 margin_left = -50.0
-margin_top = 8.0
+margin_top = 10.0
 margin_right = -53.0
 margin_bottom = 20.0
 rect_scale = Vector2( 2, 2 )
@@ -1763,7 +1771,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -5.5
 margin_top = -40.0
-margin_right = 5.5
+margin_right = -5.5
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/HuoControl"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -1789,6 +1798,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_top = -40.0
+margin_bottom = -40.0
 
 [node name="KeyLabel" type="Label" parent="TutorialUILevel4/FiveElementsAccumulation/TuControl"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -1808,16 +1818,10 @@ text = "0"
 
 [node name="Tween" type="Tween" parent="TutorialUILevel4/FiveElementsAccumulation/TuControl/CountLabel"]
 
-[node name="ComboLabel" type="Label" parent="TutorialUILevel4"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -64.0
-margin_top = 124.0
-rect_pivot_offset = Vector2( 64, 0 )
-theme = ExtResource( 4 )
-text = "连击×1"
-
-[node name="Tween" type="Tween" parent="TutorialUILevel4/ComboLabel"]
+[node name="PausePanel" parent="TutorialUILevel4" instance=ExtResource( 11 )]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 8 )]
 

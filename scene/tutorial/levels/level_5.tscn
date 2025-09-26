@@ -6,7 +6,7 @@
 [ext_resource path="res://new_theme.tres" type="Theme" id=4]
 [ext_resource path="res://art/ui/other/countdown_icon.png" type="Texture" id=5]
 [ext_resource path="res://art/ui/pause/pauseBtn.png" type="Texture" id=6]
-[ext_resource path="res://art/ui/game/FiveElementsRelationship.png" type="Texture" id=7]
+[ext_resource path="res://art/ui/five_elements_calibration/五行积攒图.png" type="Texture" id=7]
 [ext_resource path="res://scripts/ui/EnergyCalibration.gd" type="Script" id=8]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/tutorial/PassedLevel.tscn" type="PackedScene" id=10]
@@ -1528,11 +1528,6 @@ texture = ExtResource( 5 )
 
 [node name="MultipleTimer" type="Timer" parent="TutorialUILevel5/TotalMultipleLabel"]
 
-[node name="PausePanel" parent="TutorialUILevel5" instance=ExtResource( 12 )]
-visible = false
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="EnergyCalibration" type="Control" parent="TutorialUILevel5"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -1657,164 +1652,6 @@ texture = ExtResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel5/EnergyCalibration"]
 volume_db = -80.0
 
-[node name="FiveElementsAccumulation" type="Control" parent="TutorialUILevel5"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -20.0
-margin_top = -40.0
-margin_right = 20.0
-rect_scale = Vector2( 0.8, 0.8 )
-script = ExtResource( 16 )
-
-[node name="TextureRect" type="TextureRect" parent="TutorialUILevel5/FiveElementsAccumulation"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -139.0
-margin_top = -278.0
-margin_right = 139.0
-rect_pivot_offset = Vector2( 139, 273 )
-texture = ExtResource( 7 )
-
-[node name="JinControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -5.5
-margin_top = -40.0
-margin_right = 5.5
-
-[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 32.0
-margin_top = 5.0
-margin_right = 30.0
-margin_bottom = 19.0
-rect_scale = Vector2( 2, 2 )
-text = "Q"
-
-[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
-margin_left = 95.0
-margin_top = 8.0
-margin_right = 90.0
-margin_bottom = 22.0
-rect_scale = Vector2( 2, 2 )
-text = "0"
-
-[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl/CountLabel"]
-
-[node name="MuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -5.5
-margin_top = -40.0
-margin_right = 5.5
-
-[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -129.0
-margin_top = -175.0
-margin_right = -127.0
-margin_bottom = -166.0
-rect_scale = Vector2( 2, 2 )
-text = "W"
-
-[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
-margin_left = -126.0
-margin_top = -102.0
-margin_right = -133.0
-margin_bottom = -88.0
-rect_scale = Vector2( 2, 2 )
-text = "0"
-
-[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl/CountLabel"]
-
-[node name="ShuiControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -5.5
-margin_top = -40.0
-margin_right = 5.5
-
-[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -105.0
-margin_top = 8.0
-margin_right = -106.0
-margin_bottom = 22.0
-rect_scale = Vector2( 2, 2 )
-text = "E"
-
-[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
-margin_left = -50.0
-margin_top = 8.0
-margin_right = -53.0
-margin_bottom = 20.0
-rect_scale = Vector2( 2, 2 )
-text = "0"
-
-[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl/CountLabel"]
-
-[node name="HuoControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -5.5
-margin_top = -40.0
-margin_right = 5.5
-
-[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -40.0
-margin_top = -219.0
-margin_right = -42.0
-margin_bottom = -205.0
-rect_scale = Vector2( 2, 2 )
-text = "R"
-
-[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
-margin_left = 24.0
-margin_top = -220.0
-margin_bottom = -499.0
-rect_scale = Vector2( 2, 2 )
-text = "0"
-
-[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl/CountLabel"]
-
-[node name="TuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_top = -40.0
-
-[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 106.0
-margin_top = -173.0
-margin_bottom = -163.0
-rect_scale = Vector2( 2, 2 )
-text = "T"
-
-[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
-margin_left = 106.0
-margin_top = -105.0
-margin_right = 114.0
-margin_bottom = -91.0
-rect_scale = Vector2( 2, 2 )
-text = "0"
-
-[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl/CountLabel"]
-
 [node name="ComboLabel" type="Label" parent="TutorialUILevel5"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1851,6 +1688,173 @@ text = "水生木"
 fit_content_height = true
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/GenerationRichLabel"]
+
+[node name="FiveElementsAccumulation" type="Control" parent="TutorialUILevel5"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = -6.0
+margin_bottom = -6.0
+script = ExtResource( 16 )
+
+[node name="TextureRect" type="TextureRect" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -139.0
+margin_top = -278.0
+margin_right = 139.0
+rect_pivot_offset = Vector2( 139, 273 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="JinControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = -5.5
+margin_bottom = -40.0
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 32.0
+margin_top = 10.0
+margin_right = 30.0
+margin_bottom = 19.0
+rect_scale = Vector2( 2, 2 )
+text = "Q"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
+margin_left = 95.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl/CountLabel"]
+
+[node name="MuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = -5.5
+margin_bottom = -40.0
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -129.0
+margin_top = -175.0
+margin_right = -127.0
+margin_bottom = -166.0
+rect_scale = Vector2( 2, 2 )
+text = "W"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
+margin_left = -126.0
+margin_top = -102.0
+margin_right = -133.0
+margin_bottom = -88.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl/CountLabel"]
+
+[node name="ShuiControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = -5.5
+margin_bottom = -40.0
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -105.0
+margin_top = 10.0
+margin_right = -106.0
+margin_bottom = 22.0
+rect_scale = Vector2( 2, 2 )
+text = "E"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
+margin_left = -50.0
+margin_top = 10.0
+margin_right = -53.0
+margin_bottom = 20.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl/CountLabel"]
+
+[node name="HuoControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.5
+margin_top = -40.0
+margin_right = -5.5
+margin_bottom = -40.0
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = -40.0
+margin_top = -219.0
+margin_right = -42.0
+margin_bottom = -205.0
+rect_scale = Vector2( 2, 2 )
+text = "R"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
+margin_left = 24.0
+margin_top = -220.0
+margin_bottom = -499.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl/CountLabel"]
+
+[node name="TuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_bottom = -40.0
+
+[node name="KeyLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 106.0
+margin_top = -173.0
+margin_bottom = -163.0
+rect_scale = Vector2( 2, 2 )
+text = "T"
+
+[node name="CountLabel" type="Label" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
+margin_left = 106.0
+margin_top = -105.0
+margin_right = 114.0
+margin_bottom = -91.0
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl/CountLabel"]
+
+[node name="PausePanel" parent="TutorialUILevel5" instance=ExtResource( 12 )]
+visible = false
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 13 )]
 
