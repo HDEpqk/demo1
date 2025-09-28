@@ -41,6 +41,10 @@ onready var tu_color=Color("#b36d41")
 
 
 func _ready():
+	#获取玩家保存的ui设置
+	var value=DataMgr.get_setting("user","wuxing_calibration_rect_scale")
+	self.rect_scale=Vector2(value,value)	
+	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	EventBus.connect("use_wuxing",self,"_on_use_wuxing")
 	EventBus.connect("mu_protect_close",self,"_on_mu_protect_close")
@@ -329,3 +333,4 @@ func display_tu():
 
 func _on_change_wuxing_calibration_rectscale(value):
 	self.rect_scale=Vector2(value,value)
+	DataMgr.set_setting("user","wuxing_calibration_rect_scale",value)

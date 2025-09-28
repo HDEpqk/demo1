@@ -32,7 +32,7 @@ var rest_api#临时的REST API 服务器地址
 var agakmka="te"
 var gjaiofnak="mp_k"
 
-const BOARDER_CACHE_EXPIRE_SECONDS:= 0  # 排行榜缓存有效期（实际一天或者5min，测试用0s）
+const BOARDER_CACHE_EXPIRE_SECONDS:= 86400  # 排行榜缓存有效期（实际一天或者5min，测试用0s）
 const LIMITED_BOARDER_MAX_NUM:=11#限时排行榜最大人数
 const ENDLESS_BOARDER_MAX_NUM:=11#无尽排行榜最大人数
 #var is_over_LIMITED_BOARDER_MAX_NUM:bool=false#是否超出限时排行榜最大人数
@@ -291,7 +291,7 @@ func update_leaderboarder_player(boarder_name)->bool:
 	var http_request:=HTTPRequest.new()
 	add_child(http_request)
 	http_request.set_pause_mode(PAUSE_MODE_PROCESS)
-	http_request.connect("request_completed", self, "_http_update_request_completed",[http_request])
+	http_request.connect("request_completed", self, "_http_update_request_completed",[http_request,boarder_name])
 	#获取uid
 	var uid = get_setting("user", "user_id")
 
@@ -311,7 +311,7 @@ func update_leaderboarder_player(boarder_name)->bool:
 	else:
 		return true
 
-func _http_update_request_completed(result, response_code, headers, body,http_request):
+func _http_update_request_completed(result, response_code, headers, body,http_request,boarder_name):
 	# 先检查是否为网络错误
 	if is_network_error(result):
 		#清理节点
@@ -326,8 +326,35 @@ func _http_update_request_completed(result, response_code, headers, body,http_re
 		return
 	DebugUtils.log("update success")
 	EventBus.fire_event("http_update_request_completed",Global.score)
+	
+	#更新排行榜后刷新排行榜信息
+	var max_num = 0
+	if boarder_name == LIMITED_BOARDER:
+		max_num = LIMITED_BOARDER_MAX_NUM
+	elif boarder_name == ENDLESS_BOARDER:
+		max_num = ENDLESS_BOARDER_MAX_NUM
+	else:
+		push_error("未知的排行榜名称")
+		return false
 	#清理节点
 	http_request.queue_free()
+	DebugUtils.log("更新排行榜后刷新排行榜信息")
+	var http_request2 := HTTPRequest.new()
+	add_child(http_request2)
+	http_request2.set_pause_mode(PAUSE_MODE_PROCESS)
+	http_request2.connect("request_completed", self, "_http_fetch_request_completed",[http_request2])
+	# 构造 URL 时添加 ?limit=xxx 参数（注意：如果 URL 已有其他参数，用 & 连接）
+	var url = "%s/1.1/leaderboard/leaderboards/user/%s/ranks?limit=%d" % [rest_api, boarder_name, max_num]
+	
+	var error = http_request2.request(
+		url,
+		[app_id, app_key]
+	)
+	if error != OK:
+		push_error("fetch_leaderboarder_player请求发生了错误。")
+		return false
+	else:
+		return true
 
 func delete_leaderboarder_player(boarder_name,uid)->bool:
 	DebugUtils.log("delete request")
@@ -654,7 +681,7 @@ const CONFIG_PATH = "user://game_settings.cfg"
 var default_settings = {
 	"audio": {
 		"music_enabled": true,
-		"sound_enabled": true,
+		"sound_enabled": true
 	},
 	"user": {
 		"user_id":"",
@@ -668,7 +695,7 @@ var default_settings = {
 		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
 		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
 		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点#"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
-
+		"wuxing_calibration_rect_scale":1
 	},
 	"leancloud": {
 		"cache_limited_obj":{#rank_limited_dic的本地缓存对象

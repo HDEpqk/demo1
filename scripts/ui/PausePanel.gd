@@ -15,6 +15,10 @@ func _ready():
 	back_to_start_button.connect("pressed", self, "_on_BackToStartButton_pressed")
 	resume_game_button.connect("pressed", self, "_on_ResumeGameButton_pressed")
 
+	var value=DataMgr.get_setting("user","wuxing_calibration_rect_scale")
+	$CenterContainer/VBoxContainer/HSlider.value=value
+	$CenterContainer/VBoxContainer/HSlider/Label.text=str(value)
+
 func _input(event):
 	# 检查是否按下了绑定的“toggle_pause”动作对应的按键
 	if Input.is_action_just_pressed("ui_pause"):
