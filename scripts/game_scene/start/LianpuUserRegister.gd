@@ -73,6 +73,12 @@ func handle_death():
 func _on_death_animation_finished():
 	#打开用户上榜注册
 	$"../CanvasLayer/UserRegister".visible=true
+	#隐藏其他界面
+#	$"../CanvasLayer/OperationTipLabel".visible=false
+#	$"../LianpuStartScene".visible=false
+#	$"../CanvasLayer/TutorialControl".visible=false
+#	$"../Center".visible=false
+#	self.visible=false
 	#开启碰撞体和图片
 	$BodyCollision.set("disabled", false)
 	$Sprite.visible=true

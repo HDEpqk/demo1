@@ -23,7 +23,7 @@ var use_shui_count:=0
 var use_huo_count:=0
 var use_tu_count:=0
 
-
+var last_label:String
 onready var viewport_size = get_viewport().size
 func _ready():
 	._ready()
@@ -100,11 +100,17 @@ func show_pass_condition():
 	+ "\n\n使用积攒的五行\n1.按Q切换到金并划过一个脸谱（%d/1）\n2.按W切换到木并划过一个脸谱（%d/1）\n3.按E切换到水并划过一个脸谱（%d/1）\n4.按R切换到火并划过一个脸谱（%d/1）\n5.按T切换到土并划过一个脸谱（%d/1）"\
 	% [use_jin_count,use_mu_count,use_shui_count,use_huo_count,use_tu_count]
 	condition_label.set_text(text)
+	
+	#当前label和上次label不一致时才产生动画效果
+	if last_label==condition_label.text:return
+	
+	last_label=condition_label.text
 	var tween = condition_label.get_node("Tween")
 	tween.interpolate_property(condition_label, "rect_scale",
 	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.start()
+	
 func _on_wuxing_generation(lianpu_data):
 	var player_taiji_mode=lianpu_data["player_mode"]
 	match player_taiji_mode:

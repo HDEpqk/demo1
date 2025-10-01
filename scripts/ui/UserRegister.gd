@@ -2,28 +2,28 @@ extends Control
 
 
 
-onready var name_line_edit:LineEdit=$BK/NameLineEdit
-onready var pwd_line_edit:LineEdit=$BK/PwdLineEdit
+onready var name_line_edit:LineEdit=$PanelContainer/VBoxContainer/NameLineEdit
+#onready var pwd_line_edit:LineEdit=$BK/PwdLineEdit
 
-onready var error_label:Label=$BK/ErrorLabel
+onready var error_label:Label=$PanelContainer/VBoxContainer/ErrorLabel
 onready var popup_dialog=$PopupDialog
 onready var popup_dialog_label=$PopupDialog/Label
 onready var popup_dialog_icon=$PopupDialog/Icon
 var nick_name
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	
+
 	
 	#密码相关暂时不用
-	$BK/PwdLabel.visible=false
-	pwd_line_edit.visible=false
+#	$BK/PwdLabel.visible=false
+#	pwd_line_edit.visible=false
 	
 	
 	error_label.visible=false
 	error_label.self_modulate=Color.red
 	#如果玩家有资格上榜,就打开注册面板，暂停游戏场景其他物体
-	
+
 	#绑定http相关事件
 	EventBus.connect("http_create_user_completed",self,"_on_http_create_user_completed")
 	EventBus.connect("http_read_user_id_by_name_completed",self,"_on_http_read_user_id_by_name_completed")
@@ -85,4 +85,14 @@ func _on_network_error(error_msg):
 	
 func _on_CancelButton_pressed():
 	self.visible=false
-	#SceneMgr.return_to_previous()
+	#打开其他界面
+#	if $"../OperationTipLabel"!=null:
+#		$"../OperationTipLabel".visible=true
+#	if $"../../LianpuStartScene"!=null:
+#		$"../../LianpuStartScene".visible=true
+#	if $"../TutorialControl"!=null:
+#		$"../TutorialControl".visible=true
+#	if $"../../Center"!=null:
+#		$"../../Center".visible=true
+#	if $"../../LianpuUserRegister"!=null:
+#		$"../../LianpuUserRegister".visible=true

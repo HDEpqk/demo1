@@ -10,6 +10,11 @@ onready var turotiral_back_main_btn=$CanvasLayer/TutorialBackMainBtn
 
 
 func _ready():
+	#设置背景的缩放
+	var texture_size = $BG.get_size()
+	var scale_x = viewport_size.x / texture_size.x
+	var scale_y = viewport_size.y / texture_size.y
+	$BG.rect_scale = Vector2(scale_x, scale_y)
 	#DataMgr.set_setting("tutorial","is_passed_level_2",true)
 	#取消暂停
 	get_tree().paused=false

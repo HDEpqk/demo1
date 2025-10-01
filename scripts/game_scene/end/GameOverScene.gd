@@ -7,7 +7,7 @@ extends Node2D
 
 func _ready():
 	DataMgr.check_is_reset_upload_count()
-	$UserRegister.visible=false
+	$CanvasLayer/UserRegister.visible=false
 	var viewport_size = get_viewport().size
 	#设置场景脸谱的位置
 	$LianpuGameOver.position=viewport_size/2
@@ -15,14 +15,11 @@ func _ready():
 	$LianpuUploadScore.position.x=viewport_size.x/2
 	$LianpuUploadScore.position.y=viewport_size.y/2+280
 	#设置确认注册对话框的位置
-	$ConfirmRegister.rect_position=viewport_size/2
-	$ConfirmRegister.dialog_text="上传分数需要注册用户，立即注册？"
+	$CanvasLayer/ConfirmRegister.dialog_text="上传分数需要注册用户，立即注册？"
 	#设置确认上传对话框的位置
-	$ConfirmBeforeUpload.rect_position=viewport_size/2
-	$ConfirmBeforeUpload.dialog_text="上传本局分数会覆盖上次上传分数，立即上传？"
+	$CanvasLayer/ConfirmBeforeUpload.dialog_text="上传本局分数会覆盖上次上传分数，立即上传？"
 	
-	#设置用户注册面板的位置
-	$UserRegister.rect_position=viewport_size/2
+
 	#设置center的位置
 	$Center.position.x=viewport_size.x/2
 	$Center.position.y=viewport_size.y/2+130

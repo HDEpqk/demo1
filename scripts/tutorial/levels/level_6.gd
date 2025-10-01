@@ -15,7 +15,7 @@ onready var viewport_size = get_viewport().size
 
 var hurt_count:=0
 var game_over:=0
-
+var last_label:String
 func _ready():
 	._ready()
 
@@ -51,6 +51,11 @@ func show_pass_condition():
 	var condition_label=$TeachingDisplay.get_node("PassLevelConditionLabel")
 	var text="过关条件：\n1.受伤两次（%d/2）\n2.让游戏结束两次（%d/2）" % [hurt_count,game_over]
 	condition_label.set_text(text)
+	
+	#当前label和上次label不一致时才产生动画效果
+	if last_label==condition_label.text:return
+	
+	last_label=condition_label.text
 	var tween = condition_label.get_node("Tween")
 	tween.interpolate_property(condition_label, "rect_scale",
 	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,

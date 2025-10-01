@@ -37,7 +37,7 @@ var lianpu_huo_counter_player_jin:=0
 
 onready var viewport_size = get_viewport().size
 
-
+var last_label:String
 func _ready():
 	._ready()
 
@@ -98,6 +98,11 @@ func show_pass_condition():
 	+ "\n玩家克脸谱\n1.火克金（%d/1）\n"% [player_huo_counter_lianpu_jin]\
 	+ "\n玩家被脸谱克\n1.火被水克（%d/1）"% [lianpu_shui_counter_player_huo]
 	condition_label.set_text(text)
+
+	#当前label和上次label不一致时才产生动画效果
+	if last_label==condition_label.text:return
+	
+	last_label=condition_label.text
 	var tween = condition_label.get_node("Tween")
 	tween.interpolate_property(condition_label, "rect_scale",
 	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,

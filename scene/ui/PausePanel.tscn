@@ -1,23 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/ui/PausePanel.gd" type="Script" id=1]
 [ext_resource path="res://new_theme.tres" type="Theme" id=2]
 [ext_resource path="res://art/ui/pause/lamb-back.png" type="Texture" id=3]
 [ext_resource path="res://art/ui/pause/lamb-home.png" type="Texture" id=4]
+[ext_resource path="res://ttf/c16xcnb2.tres" type="DynamicFont" id=5]
 
 [node name="PausePanel" type="Control"]
 pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.164706 )
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -26,37 +16,68 @@ margin_left = -640.0
 margin_top = -360.0
 margin_right = 640.0
 margin_bottom = 360.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 561.0
-margin_top = 284.0
-margin_right = 719.0
-margin_bottom = 436.0
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.164706 )
 
-[node name="TitleLable" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 158.0
-margin_bottom = 16.0
-text = "暂停"
-align = 1
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color( 1, 1, 1, 0.972549 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -171.0
+margin_top = -185.0
+margin_right = 171.0
+margin_bottom = 85.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 171, 135 )
+theme_type_variation = "pause_panel"
 
-[node name="ResumeGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 20.0
-margin_right = 158.0
-margin_bottom = 74.0
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 317.0
+margin_bottom = 245.0
+custom_constants/margin_right = 30
+custom_constants/margin_left = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 30.0
+margin_right = 262.0
+margin_bottom = 220.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="ResumeGameButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_right = 232.0
+margin_bottom = 98.0
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 5 )
 text = "继续游戏"
 icon = ExtResource( 3 )
 
-[node name="BackToStartButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 78.0
-margin_right = 158.0
-margin_bottom = 132.0
+[node name="BackToStartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 102.0
+margin_right = 232.0
+margin_bottom = 200.0
+size_flags_horizontal = 0
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 5 )
 text = "返回开始场景"
 icon = ExtResource( 4 )
 
-[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer"]
-margin_top = 136.0
-margin_right = 158.0
-margin_bottom = 152.0
+[node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 204.0
+margin_right = 232.0
+margin_bottom = 220.0
+size_flags_vertical = 2
+size_flags_stretch_ratio = 2.0
 max_value = 1.2
 step = 0.1
 value = 1.0
@@ -64,7 +85,7 @@ scrollable = false
 tick_count = 13
 ticks_on_borders = true
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HSlider"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HSlider"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -72,8 +93,9 @@ anchor_bottom = 0.5
 margin_left = 6.0
 margin_top = -8.0
 margin_bottom = 8.0
+rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 0, 8 )
 text = "1"
 
 [connection signal="visibility_changed" from="." to="." method="_on_PausePanel_visibility_changed"]
-[connection signal="value_changed" from="CenterContainer/VBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]

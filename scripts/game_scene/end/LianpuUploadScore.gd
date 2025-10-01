@@ -2,12 +2,12 @@ extends "res://scripts/game_play/Lianpu.gd"
 
 onready var return_sprite=$Sprite
 onready var return_label=$SelectionLabel
-onready var confirm_register=$"../ConfirmRegister"
-onready var user_register=$"../UserRegister"
-onready var popup_dialog=$"../PopupDialog"
-onready var popup_dialog_label=$"../PopupDialog/Label"
-onready var popup_dialog_icon=$"../PopupDialog/Icon"
-onready var confirm_before_upload=$"../ConfirmBeforeUpload"
+onready var confirm_register=$"../CanvasLayer/ConfirmRegister"
+onready var user_register=$"../CanvasLayer/UserRegister"
+onready var popup_dialog=$"../CanvasLayer/PopupDialog"
+onready var popup_dialog_label=$"../CanvasLayer/PopupDialog/Label"
+onready var popup_dialog_icon=$"../CanvasLayer/PopupDialog/Icon"
+onready var confirm_before_upload=$"../CanvasLayer/ConfirmBeforeUpload"
 onready var viewport_size=get_viewport().size
 
 func _ready():

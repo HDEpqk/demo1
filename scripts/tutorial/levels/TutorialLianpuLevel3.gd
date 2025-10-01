@@ -7,6 +7,7 @@ var back_count:=0
 
 var player_energy:=0
 
+var last_label:String
 func _ready():
 	# 安全初始化
 	taiji_mode=GameEnums.TaijiMode.huo
@@ -70,14 +71,20 @@ func check_is_passed_level():
 		$"../PassedLevel".visible=true
 	
 func show_pass_condition():
+	
 	var condition_label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
 	condition_label.set_text("过关条件：\n1.能量超限四次（%d/4）\n2.能量回到限制区间两次（%d/2）" % [over_count,back_count])
+	
+	#当前label和上次label不一致时才产生动画效果
+	if last_label==condition_label.text:return
+	
+	last_label=condition_label.text
 	var tween = condition_label.get_node("Tween")
 	tween.interpolate_property(condition_label, "rect_scale",
 	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.start()
-
+	
 func update_texture():
 	# 根据太极模式加载对应贴图
 	match taiji_mode:

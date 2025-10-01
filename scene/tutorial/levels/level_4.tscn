@@ -1458,8 +1458,6 @@ bus = "SFX"
 visible = false
 frames = SubResource( 94 )
 
-[node name="PassedLevel" parent="." instance=ExtResource( 12 )]
-
 [node name="TutorialUILevel4" type="CanvasLayer" parent="."]
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
@@ -1824,5 +1822,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 8 )]
+
+[node name="PassedLevel" parent="." instance=ExtResource( 12 )]
 
 [connection signal="timeout" from="TutorialUILevel4/EnergyCalibration/CountdownTimer" to="TutorialUILevel4/EnergyCalibration" method="_on_CountdownTimer_timeout"]

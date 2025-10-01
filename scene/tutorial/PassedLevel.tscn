@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://art/ui/pause/lamb-home.png" type="Texture" id=2]
 [ext_resource path="res://art/tutorial/next_level_32.png" type="Texture" id=3]
 [ext_resource path="res://scripts/tutorial/PassedLevel.gd" type="Script" id=4]
+[ext_resource path="res://ttf/c16xcnb2.tres" type="DynamicFont" id=5]
 
 [node name="PassedLevel" type="CanvasLayer"]
 pause_mode = 2
@@ -21,43 +22,46 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="PassedLevelPanel"]
+[node name="PanelContainer" type="PanelContainer" parent="PassedLevelPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
+margin_left = -148.0
+margin_top = -173.0
+margin_right = 148.0
+margin_bottom = 173.0
+theme_type_variation = "passed_level_panel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PassedLevelPanel/CenterContainer"]
-margin_left = 561.0
-margin_top = 281.0
-margin_right = 719.0
-margin_bottom = 439.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PassedLevelPanel/PanelContainer"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 246.0
+margin_bottom = 303.0
 custom_constants/separation = 25
 
-[node name="TitleLable" type="Label" parent="PassedLevelPanel/CenterContainer/VBoxContainer"]
-margin_right = 158.0
-margin_bottom = 16.0
+[node name="TitleLable" type="Label" parent="PassedLevelPanel/PanelContainer/VBoxContainer"]
+margin_right = 196.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 5 )
 text = "过关！！！"
 align = 1
 
-[node name="NextLevelButton" type="Button" parent="PassedLevelPanel/CenterContainer/VBoxContainer"]
-margin_top = 41.0
-margin_right = 158.0
-margin_bottom = 79.0
+[node name="NextLevelButton" type="Button" parent="PassedLevelPanel/PanelContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 196.0
+margin_bottom = 130.0
 text = "下一关"
 icon = ExtResource( 3 )
 
-[node name="BackToTutorialStartButton" type="Button" parent="PassedLevelPanel/CenterContainer/VBoxContainer"]
-margin_top = 104.0
-margin_right = 158.0
-margin_bottom = 158.0
+[node name="BackToTutorialStartButton" type="Button" parent="PassedLevelPanel/PanelContainer/VBoxContainer"]
+margin_top = 155.0
+margin_right = 196.0
+margin_bottom = 253.0
 text = "教学选择场景"
 icon = ExtResource( 2 )
 
 [connection signal="visibility_changed" from="PassedLevelPanel" to="." method="_on_PassedLevelPanel_visibility_changed"]
-[connection signal="pressed" from="PassedLevelPanel/CenterContainer/VBoxContainer/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
-[connection signal="pressed" from="PassedLevelPanel/CenterContainer/VBoxContainer/BackToTutorialStartButton" to="." method="_on_BackToTutorialStartButton_pressed"]
+[connection signal="pressed" from="PassedLevelPanel/PanelContainer/VBoxContainer/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
+[connection signal="pressed" from="PassedLevelPanel/PanelContainer/VBoxContainer/BackToTutorialStartButton" to="." method="_on_BackToTutorialStartButton_pressed"]

@@ -1109,36 +1109,7 @@ animation = "death_02"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuUploadScore"]
 bus = "SFX"
 
-[node name="ConfirmRegister" type="ConfirmationDialog" parent="."]
-pause_mode = 2
-anchor_left = 0.5
-anchor_right = 0.5
-margin_right = 272.0
-margin_bottom = 70.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 136, 35 )
-theme = ExtResource( 1 )
-popup_exclusive = true
-window_title = ""
-dialog_text = "上传分数需要注册用户，立即注册？"
-
-[node name="UserRegister" parent="." instance=ExtResource( 11 )]
-
-[node name="PopupDialog" parent="." instance=ExtResource( 12 )]
-
-[node name="ConfirmBeforeUpload" type="ConfirmationDialog" parent="."]
-pause_mode = 2
-margin_right = 352.0
-margin_bottom = 70.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 176, 35 )
-theme = ExtResource( 1 )
-popup_exclusive = true
-window_title = ""
-dialog_text = "上传本局分数会覆盖上次上传分数，立即上传？"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -1214,7 +1185,46 @@ margin_right = 80.0
 theme = ExtResource( 1 )
 text = "每天仅有三次上传机会"
 
-[connection signal="confirmed" from="ConfirmRegister" to="LianpuUploadScore" method="_on_ConfirmRegister_confirmed"]
-[connection signal="visibility_changed" from="ConfirmRegister" to="LianpuUploadScore" method="_on_ConfirmRegister_visibility_changed"]
-[connection signal="confirmed" from="ConfirmBeforeUpload" to="LianpuUploadScore" method="_on_ConfirmBeforeUpload_confirmed"]
-[connection signal="visibility_changed" from="ConfirmBeforeUpload" to="LianpuUploadScore" method="_on_ConfirmBeforeUpload_visibility_changed"]
+[node name="ConfirmRegister" type="ConfirmationDialog" parent="CanvasLayer"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -136.0
+margin_top = -53.0
+margin_right = 136.0
+margin_bottom = 53.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 136, 35 )
+theme = ExtResource( 1 )
+popup_exclusive = true
+window_title = ""
+dialog_text = "上传分数需要注册用户，立即注册？"
+
+[node name="UserRegister" parent="CanvasLayer" instance=ExtResource( 11 )]
+
+[node name="PopupDialog" parent="CanvasLayer" instance=ExtResource( 12 )]
+visible = false
+
+[node name="ConfirmBeforeUpload" type="ConfirmationDialog" parent="CanvasLayer"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -176.0
+margin_top = -53.0
+margin_right = 176.0
+margin_bottom = 53.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 176, 35 )
+theme = ExtResource( 1 )
+popup_exclusive = true
+window_title = ""
+dialog_text = "上传本局分数会覆盖上次上传分数，立即上传？"
+
+[connection signal="confirmed" from="CanvasLayer/ConfirmRegister" to="LianpuUploadScore" method="_on_ConfirmRegister_confirmed"]
+[connection signal="visibility_changed" from="CanvasLayer/ConfirmRegister" to="LianpuUploadScore" method="_on_ConfirmRegister_visibility_changed"]
+[connection signal="confirmed" from="CanvasLayer/ConfirmBeforeUpload" to="LianpuUploadScore" method="_on_ConfirmBeforeUpload_confirmed"]
+[connection signal="visibility_changed" from="CanvasLayer/ConfirmBeforeUpload" to="LianpuUploadScore" method="_on_ConfirmBeforeUpload_visibility_changed"]

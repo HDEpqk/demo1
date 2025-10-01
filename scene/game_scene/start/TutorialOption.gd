@@ -1,8 +1,8 @@
 extends Control
 
 
-onready var btn1=$BK/Button
-onready var btn2=$BK/Button2
+onready var btn1=$Button
+onready var btn2=$Button2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

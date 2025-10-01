@@ -1465,8 +1465,6 @@ script = ExtResource( 18 )
 
 [node name="SpawnedLianpus" type="Node2D" parent="TutorialSpawnManager"]
 
-[node name="PassedLevel" parent="." instance=ExtResource( 10 )]
-
 [node name="TutorialUILevel5" type="CanvasLayer" parent="."]
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
@@ -1857,5 +1855,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 13 )]
+
+[node name="PassedLevel" parent="." instance=ExtResource( 10 )]
 
 [connection signal="timeout" from="TutorialUILevel5/EnergyCalibration/CountdownTimer" to="TutorialUILevel5/EnergyCalibration" method="_on_CountdownTimer_timeout"]
