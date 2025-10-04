@@ -133,5 +133,7 @@ texture = ExtResource( 4 )
 [node name="CountdownTimer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = "SFX"
 
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]

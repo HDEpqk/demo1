@@ -2,9 +2,11 @@ extends Node2D
 
 const LOCK_ICON=preload("res://art/tutorial/lock_64.png")
 const LEVEL_ICON=preload("res://art/tutorial/level_icon.png")
+#sfx
+const SELECT_SFX=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3str")
+const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
 
 onready var viewport_size = get_viewport().size
-
 onready var level_list:=[]
 onready var turotiral_back_main_btn=$CanvasLayer/TutorialBackMainBtn
 
@@ -42,6 +44,9 @@ func _on_button_pressed(i):
 
 
 func _on_button_down(i):
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
 	#按下btn时候把btn变小
 	level_list[i].rect_scale=Vector2(1,1)
 
@@ -52,7 +57,9 @@ func _on_button_up(i):
 func _on_mouse_entered(i):
 	#鼠标进入让btn变大
 	level_list[i].rect_scale=Vector2(1.1,1.1)
-
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
 
 func _on_mouse_exited(i):
 	#鼠标离开让btn变小
@@ -66,6 +73,9 @@ func _on_mouse_exited(i):
 
 
 func _on_TutorialBackMainBtn_button_down():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
 	turotiral_back_main_btn.rect_scale=Vector2(1,1)
 
 
@@ -79,7 +89,9 @@ func _on_TutorialBackMainBtn_pressed():
 
 func _on_TutorialBackMainBtn_mouse_entered():
 	turotiral_back_main_btn.rect_scale=Vector2(1.1,1.1)
-
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
 
 func _on_TutorialBackMainBtn_mouse_exited():
 	turotiral_back_main_btn.rect_scale=Vector2(1,1)

@@ -31,10 +31,10 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -171.0
-margin_top = -185.0
+margin_top = -135.0
 margin_right = 171.0
-margin_bottom = 85.0
-rect_scale = Vector2( 0.8, 0.8 )
+margin_bottom = 135.0
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 171, 135 )
 theme_type_variation = "pause_panel"
 
@@ -97,5 +97,14 @@ rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 0, 8 )
 text = "1"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+pitch_scale = 3.0
+bus = "SFX"
+
 [connection signal="visibility_changed" from="." to="." method="_on_PausePanel_visibility_changed"]
+[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/ResumeGameButton" to="." method="_on_ResumeGameButton_button_down"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/ResumeGameButton" to="." method="_on_ResumeGameButton_mouse_entered"]
+[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/BackToStartButton" to="." method="_on_BackToStartButton_button_down"]
+[connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/BackToStartButton" to="." method="_on_BackToStartButton_mouse_entered"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]

@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+const CURSOR_CLICK_2=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 2.mp3str")
 onready var panel=$Panel
 onready var video_player=$Panel/VideoPlayer
 onready var rich_label=$Panel/RichTextLabel
@@ -29,6 +29,9 @@ func _ready():
 
 
 func _on_CloseTextureButton_pressed():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_2
+	$AudioStreamPlayer.play()
 	panel.hide()
 
 
@@ -37,6 +40,9 @@ func _on_Panel_visibility_changed():
 
 
 func _on_LeftTextureButton_pressed():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_2
+	$AudioStreamPlayer.play()
 	current_page-=1
 	change_page(current_page)
 	right_btn.disabled=false
@@ -47,6 +53,9 @@ func _on_LeftTextureButton_pressed():
 
 
 func _on_RightTextureButton_pressed():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_2
+	$AudioStreamPlayer.play()
 	current_page+=1
 	change_page(current_page)
 	left_btn.disabled=false

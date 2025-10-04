@@ -1,5 +1,7 @@
 extends Control
 
+const SELECT_SFX=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3str")
+const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
 # 回到开始场景按钮
 onready var back_to_start_button=$PanelContainer/MarginContainer/VBoxContainer/BackToStartButton
 # 返回游戏按钮
@@ -54,3 +56,31 @@ func _on_PausePanel_visibility_changed():
 func _on_HSlider_value_changed(value):
 	EventBus.fire_event("change_wuxing_calibration_rectscale",value)
 	slider_label.text=str(value)
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
+
+func _on_ResumeGameButton_mouse_entered():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
+
+
+func _on_BackToStartButton_mouse_entered():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
+
+
+
+
+
+func _on_ResumeGameButton_button_down():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
+
+func _on_BackToStartButton_button_down():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()

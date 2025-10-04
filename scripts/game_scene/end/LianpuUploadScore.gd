@@ -89,10 +89,10 @@ func _on_death_animation_finished():
 		#弹出一个对话框提示玩家是否需要注册
 		#设置确认注册对话框的位置
 		confirm_register.rect_position=viewport_size/2
-		confirm_register.popup()
+		confirm_register.show()
 	else:
 		confirm_before_upload.rect_position=viewport_size/2
-		confirm_before_upload.popup()
+		confirm_before_upload.show()
 		
 	#开启碰撞体和图片
 	$BodyCollision.set("disabled", false)
@@ -124,33 +124,5 @@ func _on_http_update_request_completed(score):
 	popup_dialog.popup()
 
 
-func _on_ConfirmRegister_confirmed():
-	user_register.visible=true
 
 
-func _on_ConfirmBeforeUpload_confirmed():
-	#判断当前模式是否能上传分数
-	if SceneMgr.game_scene_name=="LimitedGame":
-		if DataMgr.is_limited_upload_valid():
-			DataMgr.update_leaderboarder_player(DataMgr.LIMITED_BOARDER)
-		else:
-			popup_dialog_icon.set_visible(true)
-			popup_dialog_label.self_modulate=Color("#F4606C")
-			popup_dialog_label.text="今日限时排行榜上传次数已耗光"
-			popup_dialog.popup()
-	elif SceneMgr.game_scene_name=="EndlessGame":
-		if DataMgr.is_endless_upload_valid():
-			DataMgr.update_leaderboarder_player(DataMgr.ENDLESS_BOARDER)
-		else:
-			popup_dialog_icon.set_visible(true)
-			popup_dialog_label.self_modulate=Color("#F4606C")
-			popup_dialog_label.text="今日限时排行榜上传次数已耗光"
-			popup_dialog.popup()
-
-
-func _on_ConfirmRegister_visibility_changed():
-	get_tree().paused=confirm_register.visible
-
-
-func _on_ConfirmBeforeUpload_visibility_changed():
-	get_tree().paused=confirm_before_upload.visible

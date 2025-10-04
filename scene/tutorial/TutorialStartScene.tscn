@@ -291,6 +291,10 @@ grow_vertical = 2
 texture = ExtResource( 2 )
 expand = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = "SFX"
+
 [connection signal="button_down" from="CanvasLayer/TutorialBackMainBtn" to="." method="_on_TutorialBackMainBtn_button_down"]
 [connection signal="button_up" from="CanvasLayer/TutorialBackMainBtn" to="." method="_on_TutorialBackMainBtn_button_up"]
 [connection signal="mouse_entered" from="CanvasLayer/TutorialBackMainBtn" to="." method="_on_TutorialBackMainBtn_mouse_entered"]

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-
+const SELECT_SFX=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3str")
+const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
 onready var panel=$PassedLevelPanel
 var i:=1
 
@@ -38,3 +39,25 @@ func _on_BackToTutorialStartButton_pressed():
 
 func init_passed_level(current_i:int):
 	i=current_i
+
+
+func _on_NextLevelButton_mouse_entered():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
+
+func _on_BackToTutorialStartButton_mouse_entered():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
+
+
+func _on_NextLevelButton_button_down():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
+
+func _on_BackToTutorialStartButton_button_down():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()

@@ -1,7 +1,7 @@
 extends Control
 
-
-
+const SELECT_SFX=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3str")
+const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
 onready var name_line_edit:LineEdit=$PanelContainer/VBoxContainer/NameLineEdit
 #onready var pwd_line_edit:LineEdit=$BK/PwdLineEdit
 
@@ -35,6 +35,9 @@ func _on_UserRegister_visibility_changed():
 
 
 func _on_ConfirmButton_pressed():
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
 	nick_name=name_line_edit.get_text()
 	#var pwd=pwd_line_edit.get_text()
 	#判断name_line_edit中的值是否合法和是否为空
@@ -85,14 +88,17 @@ func _on_network_error(error_msg):
 	
 func _on_CancelButton_pressed():
 	self.visible=false
-	#打开其他界面
-#	if $"../OperationTipLabel"!=null:
-#		$"../OperationTipLabel".visible=true
-#	if $"../../LianpuStartScene"!=null:
-#		$"../../LianpuStartScene".visible=true
-#	if $"../TutorialControl"!=null:
-#		$"../TutorialControl".visible=true
-#	if $"../../Center"!=null:
-#		$"../../Center".visible=true
-#	if $"../../LianpuUserRegister"!=null:
-#		$"../../LianpuUserRegister".visible=true
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
+
+
+func _on_ConfirmButton_mouse_entered():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()
+
+func _on_CancelButton_mouse_entered():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()

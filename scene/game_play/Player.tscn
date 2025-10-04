@@ -34,4 +34,5 @@ end_cap_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 5 )
+volume_db = -10.0
 bus = "SFX"

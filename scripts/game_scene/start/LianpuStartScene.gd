@@ -44,13 +44,13 @@ func update_selection_label():
 			$SelectionLabel.self_modulate=Color("#e40000")
 		GameEnums.TaijiMode.jin:
 			$SelectionLabel.text="游戏排行"
-			$SelectionLabel.self_modulate=Color("#e6da29")			
+			$SelectionLabel.self_modulate=Color("#e6da29")
 		GameEnums.TaijiMode.mu:
 			$SelectionLabel.text="游戏设置"
-			$SelectionLabel.self_modulate=Color("#28c641")			
+			$SelectionLabel.self_modulate=Color.green.darkened(0.2)
 		GameEnums.TaijiMode.shui:
-			$SelectionLabel.text="开发名单"
-			$SelectionLabel.self_modulate=Color("#2d93dd")			
+			$SelectionLabel.text="游戏致谢"
+			$SelectionLabel.self_modulate=Color("#002FA7")#克莱因蓝
 
 func handle_death():
 	#关闭碰撞体和图片

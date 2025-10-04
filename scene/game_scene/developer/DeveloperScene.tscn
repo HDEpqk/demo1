@@ -502,9 +502,9 @@ texture = ExtResource( 6 )
 
 [node name="SelectionLabel" type="Label" parent="LianpuDeveloperScene"]
 margin_left = -30.0
-margin_top = -49.0
+margin_top = -60.0
 margin_right = 34.0
-margin_bottom = -27.0
+margin_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 1 )

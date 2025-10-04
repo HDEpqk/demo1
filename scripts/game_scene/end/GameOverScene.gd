@@ -14,10 +14,7 @@ func _ready():
 	#设置上传分数脸谱的位置
 	$LianpuUploadScore.position.x=viewport_size.x/2
 	$LianpuUploadScore.position.y=viewport_size.y/2+280
-	#设置确认注册对话框的位置
-	$CanvasLayer/ConfirmRegister.dialog_text="上传分数需要注册用户，立即注册？"
-	#设置确认上传对话框的位置
-	$CanvasLayer/ConfirmBeforeUpload.dialog_text="上传本局分数会覆盖上次上传分数，立即上传？"
+
 	
 
 	#设置center的位置

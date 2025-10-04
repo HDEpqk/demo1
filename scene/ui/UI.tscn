@@ -59,6 +59,8 @@ fit_content_height = true
 script = ExtResource( 11 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TotalScore/TotalScoreLabel"]
+volume_db = -10.0
+bus = "SFX"
 
 [node name="TextureRect" type="TextureRect" parent="TotalScore"]
 margin_left = -25.0

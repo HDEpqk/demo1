@@ -62,6 +62,15 @@ margin_bottom = 253.0
 text = "教学选择场景"
 icon = ExtResource( 2 )
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+pitch_scale = 3.0
+bus = "SFX"
+
 [connection signal="visibility_changed" from="PassedLevelPanel" to="." method="_on_PassedLevelPanel_visibility_changed"]
+[connection signal="button_down" from="PassedLevelPanel/PanelContainer/VBoxContainer/NextLevelButton" to="." method="_on_NextLevelButton_button_down"]
+[connection signal="mouse_entered" from="PassedLevelPanel/PanelContainer/VBoxContainer/NextLevelButton" to="." method="_on_NextLevelButton_mouse_entered"]
 [connection signal="pressed" from="PassedLevelPanel/PanelContainer/VBoxContainer/NextLevelButton" to="." method="_on_NextLevelButton_pressed"]
+[connection signal="button_down" from="PassedLevelPanel/PanelContainer/VBoxContainer/BackToTutorialStartButton" to="." method="_on_BackToTutorialStartButton_button_down"]
+[connection signal="mouse_entered" from="PassedLevelPanel/PanelContainer/VBoxContainer/BackToTutorialStartButton" to="." method="_on_BackToTutorialStartButton_mouse_entered"]
 [connection signal="pressed" from="PassedLevelPanel/PanelContainer/VBoxContainer/BackToTutorialStartButton" to="." method="_on_BackToTutorialStartButton_pressed"]

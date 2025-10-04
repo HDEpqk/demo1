@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
+
 onready var lianpu_return = $LianpuReturn
 onready var center = $Center
 onready var viewport_size = get_viewport().size
@@ -186,7 +188,18 @@ func _on_TabContainer_tab_selected(tab):
 	elif tab==1:
 		current_boarder_name=DataMgr.ENDLESS_BOARDER		
 		DataMgr.fetch_leaderboarder_player("EndlessTimeScore")
+	#播放音效
+	$AudioStreamPlayer.stream=CURSOR_CLICK_1
+	$AudioStreamPlayer.play()
+	
 
 func _on_network_error(error_msg):
 	$PopupDialog/Label.text=error_msg
 	$PopupDialog.popup()
+
+
+
+
+
+
+

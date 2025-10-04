@@ -30,6 +30,11 @@ text = "新手教程"
 align = 1
 valign = 1
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+pitch_scale = 2.0
+bus = "SFX"
+
 [connection signal="button_down" from="TutorialBtn" to="." method="_on_TutorialBtn_button_down"]
 [connection signal="button_up" from="TutorialBtn" to="." method="_on_TutorialBtn_button_up"]
 [connection signal="mouse_entered" from="TutorialBtn" to="." method="_on_TutorialBtn_mouse_entered"]

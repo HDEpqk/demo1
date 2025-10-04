@@ -93,6 +93,13 @@ margin_right = 241.0
 margin_bottom = 66.0
 text = "取消"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+pitch_scale = 3.0
+bus = "SFX"
+
 [connection signal="visibility_changed" from="." to="." method="_on_UserRegister_visibility_changed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

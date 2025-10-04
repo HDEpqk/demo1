@@ -19,7 +19,7 @@ func _ready():
 		sfxLable.text="音效"
 	else:
 		printerr("sfxLable为空")
-	$SelectionLabel.self_modulate=Color.black
+	#$SelectionLabel.self_modulate=Color.black
 
 
 

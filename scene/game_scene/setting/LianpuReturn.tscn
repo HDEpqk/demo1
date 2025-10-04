@@ -244,7 +244,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="LianpuReturn" type="RigidBody2D" groups=["lianpu"]]
+[node name="LianpuReturn" type="RigidBody2D" groups=["lianpu", "lianpu_prop"]]
 pause_mode = 2
 position = Vector2( 840, 352 )
 mode = 1

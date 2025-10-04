@@ -130,6 +130,8 @@ func _ready():
 	if $AnimatedSprite!=null:
 		#开启普通动画
 		$AnimatedSprite.visible=true
+#	if $AudioStreamPlayer!=null:
+#		$AudioStreamPlayer.set_volume_db(-10)
 
 func init(dic:Dictionary):
 	var _mode=dic["mode"]
