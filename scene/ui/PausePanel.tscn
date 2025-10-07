@@ -102,6 +102,7 @@ volume_db = -10.0
 pitch_scale = 3.0
 bus = "SFX"
 
+[connection signal="draw" from="." to="." method="_on_PausePanel_draw"]
 [connection signal="visibility_changed" from="." to="." method="_on_PausePanel_visibility_changed"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/ResumeGameButton" to="." method="_on_ResumeGameButton_button_down"]
 [connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/ResumeGameButton" to="." method="_on_ResumeGameButton_mouse_entered"]

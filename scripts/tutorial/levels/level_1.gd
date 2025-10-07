@@ -1,13 +1,10 @@
 extends "res://scripts/tutorial/levels/level.gd"
 
 
-# 在新手教程管理器中
-onready var spotlight = $TutorialSpotlight  # 聚光灯节点路径
-onready var rich_label=$TutorialSpotlight/RichTextLabel
 onready var cursor_icon=$TutorialSpotlight/CursorIcon
 
 var taiji_change_count:=0#改变太极状态的次数
-
+onready var condition_label=$TutorialSpotlight/count
 
 func _ready():
 	._ready()
@@ -19,11 +16,11 @@ func _ready():
 	tween.start()
 	#订阅太极模式变化的事件
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
+	condition_label.text="过关条件：\n1.切换阴阳（%d/4）" % taiji_change_count
 	
 func _on_global_taiji_mode_changed(new_value: int,old_value: int=0,is_new_mode:=true):
 	taiji_change_count+=1
-	var condition_label=$TutorialSpotlight/count
-	condition_label.set_text("过关条件：切换阴阳4次（%d/4）" % taiji_change_count)
+	condition_label.text="过关条件：\n1.切换阴阳（%d/4）" % taiji_change_count
 	var tween = condition_label.get_node("Tween")
 	tween.interpolate_property(condition_label, "rect_scale",
 	Vector2(1.1, 1.1), Vector2(1, 1), 0.1,

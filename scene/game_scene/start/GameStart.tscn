@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://art/lianpu/LianpuBoss/zhuanzhu_64x64.png" type="Texture" id=1]
 [ext_resource path="res://scripts/game_scene/start/GameStart.gd" type="Script" id=2]
+[ext_resource path="res://audio/start/游戏启动音.wav" type="AudioStream" id=3]
 [ext_resource path="res://new_theme.tres" type="Theme" id=4]
 
 [sub_resource type="Animation" id=1]
@@ -119,3 +120,6 @@ rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 44, 8 )
 theme = ExtResource( 4 )
 text = "HEJI STUDIO"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

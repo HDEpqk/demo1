@@ -73,7 +73,7 @@ func check_is_passed_level():
 func show_pass_condition():
 	
 	var condition_label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
-	condition_label.set_text("过关条件：\n1.能量超限四次（%d/4）\n2.能量回到限制区间两次（%d/2）" % [over_count,back_count])
+	condition_label.set_text("过关条件：\n1.能量超限（%d/4）\n2.能量回到限制区间（%d/2）" % [over_count,back_count])
 	
 	#当前label和上次label不一致时才产生动画效果
 	if last_label==condition_label.text:return

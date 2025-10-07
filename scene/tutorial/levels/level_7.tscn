@@ -1,12 +1,236 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scene/tutorial/TeachingDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/ui/UI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/tutorial/levels/level_7.gd" type="Script" id=3]
+[ext_resource path="res://ttf/SourceHanSansCN-Regular.tres" type="DynamicFont" id=4]
+[ext_resource path="res://art/lianpu/LianpuDanger/fire/fire_shadow_attck.png" type="Texture" id=5]
+[ext_resource path="res://art/lianpu/LianpuDanger/thorns/thorns_shadow_64_attack.png" type="Texture" id=6]
+[ext_resource path="res://art/lianpu/LianpuProp/accelerate.png" type="Texture" id=7]
+[ext_resource path="res://art/lianpu/LianpuDanger/water/water_shadow_64.png" type="Texture" id=8]
+[ext_resource path="res://art/lianpu/LianpuProp/decelerate.png" type="Texture" id=9]
+[ext_resource path="res://art/lianpu/LianpuProp/multiple.png" type="Texture" id=10]
+[ext_resource path="res://art/lianpu/LianpuDanger/metal/metal_shadow_64_begin_attack.png" type="Texture" id=11]
+[ext_resource path="res://art/lianpu/LianpuProp/crazy.png" type="Texture" id=12]
+[ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=13]
+[ext_resource path="res://art/lianpu/LianpuNormal/yellow_shadow_64.png" type="Texture" id=14]
+[ext_resource path="res://art/lianpu/LianpuNormal/green_shadow_64.png" type="Texture" id=15]
+[ext_resource path="res://art/lianpu/LianpuNormal/blue_shadow_64.png" type="Texture" id=16]
+[ext_resource path="res://new_theme.tres" type="Theme" id=17]
+[ext_resource path="res://art/lianpu/LianpuHide/hide_blue_2.png" type="Texture" id=18]
+[ext_resource path="res://art/lianpu/LianpuHide/hide_yellow_2.png" type="Texture" id=19]
+[ext_resource path="res://art/lianpu/LianpuHide/hide_red_2.png" type="Texture" id=20]
+[ext_resource path="res://art/lianpu/LianpuHide/hide_green_2.png" type="Texture" id=21]
+[ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=23]
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 64, 96, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 11 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 256, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=97]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=108]
+flags = 4
+atlas = ExtResource( 12 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=109]
+flags = 4
+atlas = ExtResource( 10 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=93]
+flags = 4
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 64, 64 )
 
 [node name="level_7" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="Player" parent="." instance=ExtResource( 23 )]
+
+[node name="Center" parent="." instance=ExtResource( 22 )]
+
 [node name="UI" parent="." instance=ExtResource( 2 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -121.5
+margin_top = 145.0
+margin_right = 121.5
+margin_bottom = 50.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 121, 0 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "所有教学关卡到此结束，请少侠带着所学知识去实战吧！"
+text = "所有教学关卡到此结束，请少侠带着所学知识去实战吧！"
+fit_content_height = true
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -190.0
+margin_right = 268.0
+margin_bottom = 190.0
+theme = ExtResource( 17 )
+
+[node name="Label" type="Label" parent="CanvasLayer/GridContainer"]
+margin_right = 268.0
+margin_bottom = 16.0
+text = "普通脸谱："
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GridContainer"]
+margin_top = 20.0
+margin_right = 268.0
+margin_bottom = 84.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 13 )
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 14 )
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 15 )
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+texture = ExtResource( 16 )
+
+[node name="Label2" type="Label" parent="CanvasLayer/GridContainer"]
+margin_top = 88.0
+margin_right = 268.0
+margin_bottom = 104.0
+text = "危险脸谱："
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/GridContainer"]
+margin_top = 108.0
+margin_right = 268.0
+margin_bottom = 204.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer2"]
+margin_right = 64.0
+margin_bottom = 96.0
+texture = SubResource( 7 )
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 96.0
+texture = SubResource( 13 )
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer2"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 96.0
+texture = SubResource( 9 )
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer2"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 96.0
+texture = SubResource( 33 )
+
+[node name="Label3" type="Label" parent="CanvasLayer/GridContainer"]
+margin_top = 208.0
+margin_right = 268.0
+margin_bottom = 224.0
+text = "道具脸谱："
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/GridContainer"]
+margin_top = 228.0
+margin_right = 268.0
+margin_bottom = 292.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer3"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = SubResource( 97 )
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer3"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = SubResource( 108 )
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer3"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = SubResource( 109 )
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer3"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+texture = SubResource( 93 )
+
+[node name="Label4" type="Label" parent="CanvasLayer/GridContainer"]
+margin_top = 296.0
+margin_right = 268.0
+margin_bottom = 312.0
+text = "隐身脸谱："
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/GridContainer"]
+margin_top = 316.0
+margin_right = 268.0
+margin_bottom = 380.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer4"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 20 )
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer4"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 19 )
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer4"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 21 )
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/HBoxContainer4"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+texture = ExtResource( 18 )
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 1 )]

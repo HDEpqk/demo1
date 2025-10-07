@@ -326,6 +326,7 @@ visible = false
 frames = SubResource( 87 )
 
 [node name="TutorialUILevel1" type="CanvasLayer" parent="."]
+pause_mode = 2
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
 script = ExtResource( 15 )
@@ -340,9 +341,10 @@ margin_right = -30.0
 margin_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.2, 1.2 )
-rect_pivot_offset = Vector2( 48, 0 )
+rect_pivot_offset = Vector2( 24, 24 )
 texture_normal = ExtResource( 16 )
+
+[node name="Tween" type="Tween" parent="TutorialUILevel1/PauseButton"]
 
 [node name="PausePanel" parent="TutorialUILevel1" instance=ExtResource( 17 )]
 visible = false

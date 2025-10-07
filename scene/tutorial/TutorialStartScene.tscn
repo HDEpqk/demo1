@@ -30,6 +30,7 @@ columns = 7
 [node name="Button" type="Button" parent="CanvasLayer/GridContainer"]
 margin_right = 76.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -62,6 +63,7 @@ text = "1"
 margin_left = 186.0
 margin_right = 262.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -94,6 +96,7 @@ text = "1"
 margin_left = 372.0
 margin_right = 448.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -126,6 +129,7 @@ text = "1"
 margin_left = 558.0
 margin_right = 634.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -158,6 +162,7 @@ text = "1"
 margin_left = 744.0
 margin_right = 820.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -190,6 +195,7 @@ text = "1"
 margin_left = 930.0
 margin_right = 1006.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -222,6 +228,7 @@ text = "1"
 margin_left = 1116.0
 margin_right = 1192.0
 margin_bottom = 70.0
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 1 )
 flat = true
 
@@ -260,6 +267,7 @@ margin_top = -70.0
 margin_right = 38.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_pivot_offset = Vector2( 38, 35 )
 icon = ExtResource( 3 )
 flat = true
 icon_align = 1

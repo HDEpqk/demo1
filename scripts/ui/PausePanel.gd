@@ -84,3 +84,9 @@ func _on_BackToStartButton_button_down():
 	#播放音效
 	$AudioStreamPlayer.stream=CURSOR_CLICK_1
 	$AudioStreamPlayer.play()
+
+
+func _on_PausePanel_draw():
+	#播放音效
+	$AudioStreamPlayer.stream=SELECT_SFX
+	$AudioStreamPlayer.play()

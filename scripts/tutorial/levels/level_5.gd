@@ -43,13 +43,13 @@ func _ready():
 
 	var list=[
 		{"video":LEVEL_5_0,
-		"text":"玩家生脸谱：当玩家五行和脸谱满足相生条件，在划过脸谱后会生成一个同样类型的脸谱，如视频的水生木。"},
+		"text":"玩家生脸谱：\n\t\t当玩家五行和脸谱满足相生条件，在划过脸谱后会生成一个同样类型的脸谱，如视频的水生木。"},
 		{"video":LEVEL_5_1,
-		"text":"脸谱生玩家：当脸谱和玩家五行满足相生条件，在划过脸谱后会增加玩家相应五行积攒次数，如视频的水被金生。"},
+		"text":"脸谱生玩家：\n\t\t当脸谱和玩家五行满足相生条件，在划过脸谱后会增加玩家相应五行积攒次数，如视频的水被金生。"},
 		{"video":LEVEL_5_2,
-		"text":"玩家克脸谱：当玩家五行和脸谱满足相克条件，可以无视危险区域消灭脸谱，并且触发克制奖励加分，如视频的火克金。"},
+		"text":"玩家克脸谱：\n\t\t当玩家五行和脸谱满足相克条件，可以无视危险区域消灭脸谱，并且触发克制奖励加分，如视频的火克金。"},
 		{"video":LEVEL_5_3,
-		"text":"脸谱克玩家：当脸谱和玩家五行满足相克条件，在划过脸谱时玩家会受伤，并且触发被克制惩罚减分，如视频的火被水克。"}
+		"text":"脸谱克玩家：\n\t\t当脸谱和玩家五行满足相克条件，在划过脸谱时玩家会受伤，并且触发被克制惩罚减分，如视频的火被水克。"}
 	]
 
 	teaching_display.init_video(list)
@@ -93,10 +93,10 @@ func check_is_passed_level():
 	
 func show_pass_condition():
 	var condition_label=$TeachingDisplay.get_node("PassLevelConditionLabel")
-	var text="过关条件：\n\n玩家生脸谱\n1.水生木（%d/1）\n" % [player_shui_born_lianpu_mu]\
-	+ "\n玩家被脸谱生\n1.水被金生（%d/1）\n"% [lianpu_jin_born_player_shui]\
-	+ "\n玩家克脸谱\n1.火克金（%d/1）\n"% [player_huo_counter_lianpu_jin]\
-	+ "\n玩家被脸谱克\n1.火被水克（%d/1）"% [lianpu_shui_counter_player_huo]
+	var text="过关条件：\n1.玩家生脸谱：水生木（%d/1）" % [player_shui_born_lianpu_mu]\
+	+ "\n2.玩家被脸谱生：水被金生（%d/1）"% [lianpu_jin_born_player_shui]\
+	+ "\n3.玩家克脸谱：火克金（%d/1）"% [player_huo_counter_lianpu_jin]\
+	+ "\n4.玩家被脸谱克：火被水克（%d/1）"% [lianpu_shui_counter_player_huo]
 	condition_label.set_text(text)
 
 	#当前label和上次label不一致时才产生动画效果

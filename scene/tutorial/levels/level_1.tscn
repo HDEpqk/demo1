@@ -4,7 +4,7 @@
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/tutorial/PassedLevel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ttf/SourceHanSansCN-Regular.tres" type="DynamicFont" id=5]
 [ext_resource path="res://art/tutorial/cursor_icon_32.png" type="Texture" id=6]
 [ext_resource path="res://scripts/tutorial/levels/TutorialUILevel1.gd" type="Script" id=7]
 [ext_resource path="res://art/ui/pause/pauseBtn.png" type="Texture" id=8]
@@ -23,15 +23,16 @@ position = Vector2( 640, 360 )
 [node name="RichTextLabel" type="RichTextLabel" parent="TutorialSpotlight"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -112.0
+margin_left = -121.5
 margin_top = 145.0
-margin_right = 131.0
+margin_right = 121.5
+margin_bottom = 50.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 121, 0 )
 custom_fonts/normal_font = ExtResource( 5 )
 bbcode_enabled = true
-bbcode_text = "长按[color=#000000]鼠标左键[/color]移动，可以与鼠标碰到的物体进行交互。"
-text = "长按鼠标左键移动，可以与鼠标碰到的物体进行交互。"
+bbcode_text = "长按鼠标左键划过中心太极,切换阴阳状态，[color=#000000]黑色为阴[/color]，白色为阳。"
+text = "长按鼠标左键划过中心太极,切换阴阳状态，黑色为阴，白色为阳。"
 fit_content_height = true
 
 [node name="CursorIcon" type="TextureRect" parent="TutorialSpotlight"]
@@ -43,33 +44,18 @@ texture = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="TutorialSpotlight/CursorIcon"]
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TutorialSpotlight"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -112.0
-margin_top = 521.0
-margin_right = 131.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 121, 0 )
-custom_fonts/normal_font = ExtResource( 5 )
-bbcode_enabled = true
-bbcode_text = "长按[color=#000000]鼠标左键[/color]划过中心太极,切换阴阳状态，[color=#000000]黑色为阴[/color]，白色为阳。"
-text = "长按鼠标左键划过中心太极,切换阴阳状态，黑色为阴，白色为阳。"
-fit_content_height = true
-
 [node name="count" type="Label" parent="TutorialSpotlight"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -8.0
+margin_top = -12.0
 margin_right = 224.0
-margin_bottom = 8.0
-rect_pivot_offset = Vector2( 0, 8 )
+margin_bottom = 12.0
 custom_fonts/font = ExtResource( 5 )
-text = "过关条件：切换阴阳4次（0/4）"
 
 [node name="Tween" type="Tween" parent="TutorialSpotlight/count"]
 
 [node name="TutorialUILevel1" type="CanvasLayer" parent="."]
+pause_mode = 2
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
 script = ExtResource( 7 )
@@ -84,9 +70,10 @@ margin_right = -30.0
 margin_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 1.2, 1.2 )
-rect_pivot_offset = Vector2( 48, 0 )
+rect_pivot_offset = Vector2( 24, 24 )
 texture_normal = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="TutorialUILevel1/PauseButton"]
 
 [node name="PausePanel" parent="TutorialUILevel1" instance=ExtResource( 9 )]
 visible = false
