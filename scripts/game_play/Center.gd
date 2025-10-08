@@ -160,7 +160,7 @@ func update_yinyang_image(new_value: int,old_value: int=0,is_new_mode:=true) -> 
 	
 	if texture:
 		sprite.texture = texture
-		DebugUtils.log("已更新阴阳图像为: " + str(new_value))
+		#DebugUtils.log("已更新阴阳图像为: " + str(new_value))
 	else:
 		DebugUtils.log("错误: 未知的阴阳模式或纹理缺失 - " + str(new_value))
 	
@@ -194,7 +194,7 @@ func get_texture_by_mode(mode: int) -> Texture:
 const SFX_HURT=preload("res://audio/sfx/hurt.wav")
 
 func _on_player_hurt(mode):
-	DebugUtils.log("玩家受伤时做的事")
+	#DebugUtils.log("玩家受伤时做的事")
 	#播放受伤音效
 	$AudioStreamPlayer.stream=SFX_HURT
 	$AudioStreamPlayer.play()
@@ -341,7 +341,7 @@ func hide_time_label(mode:int):
 			label_tu.visible=false
 
 func _on_mu_protect_open(value):
-	DebugUtils.log("_on_mu_protect_open: Center")
+	#DebugUtils.log("_on_mu_protect_open: Center")
 	#显示MuProtectVFX
 	mu_protect_vfx.visible=true
 	#播放MuProtectVFX的动画
@@ -352,10 +352,10 @@ func _on_mu_protect_open(value):
 		DebugUtils.log("未找到mu_protect_vfx的AnimationPlayer")
 
 func _on_mu_protect_close(value):
-	DebugUtils.log("_on_mu_protect_close: Center")
+	#DebugUtils.log("_on_mu_protect_close: Center")
 	#隐藏MuProtectVFX
 	mu_protect_vfx.visible=false
 	#播放木保护关闭的音效
-	DebugUtils.log("播放木保护关闭的音效")
+	#DebugUtils.log("播放木保护关闭的音效")
 func reset_center():
 	pass

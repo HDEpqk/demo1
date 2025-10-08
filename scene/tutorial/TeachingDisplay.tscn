@@ -31,15 +31,26 @@ text = "
 [node name="Tween" type="Tween" parent="PassLevelConditionLabel"]
 
 [node name="PassLevelTutorial" type="Control" parent="."]
-margin_left = 38.0
-margin_right = 107.0
-margin_bottom = 26.0
-rect_pivot_offset = Vector2( 40, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -565.0
+margin_top = -309.0
+margin_right = -565.0
+margin_bottom = -309.0
 script = ExtResource( 8 )
 
 [node name="TutorialBtn" type="TextureButton" parent="PassLevelTutorial"]
-margin_right = 64.0
-margin_bottom = 64.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 32, 32 )
 theme = ExtResource( 5 )
 texture_normal = ExtResource( 1 )
 

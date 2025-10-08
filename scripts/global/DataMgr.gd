@@ -238,19 +238,23 @@ func _http_fetch_request_completed(result, response_code, headers, body,http_req
 		http_request.queue_free()
 		return
 	DebugUtils.log("fetch finished")
-	# 先获取JSON字符串
-	var json_str = body.get_string_from_utf8()
-
-	# 尝试解析JSON
-	var data = parse_json(json_str)
+	var json_str=body.get_string_from_utf8() as String
+	var data :Dictionary={}
+	data = parse_json(json_str) as Dictionary
 
 	# 检查解析结果是否为Dictionary
 	if data is Dictionary:
 		# 解析成功且是字典类型，进行后续处理
 		var cache_timestamp:int=Time.get_unix_time_from_system()
-		var results:=data['results'] as Array
+		var results: Array = []  # 默认为空数组，避免后续使用时报错
+		# 判断data包含 'results' 键，且对应的值是数组
+		if data.has("results"):
+			results = data["results"] as Array
+		else:
+			# 可选：处理键不存在或类型错误的情况（如打印日志）
+			push_error("数据中没有有效的 'results' 数组")
 		if results.empty():
-			push_warning("request请求结果为空")
+			push_error("request请求结果为空")
 			#清理节点
 			http_request.queue_free()
 			return
@@ -274,9 +278,9 @@ func _http_fetch_request_completed(result, response_code, headers, body,http_req
 			EventBus.fire_event("http_fetch_request_completed")
 	else:
 		# 处理错误情况
-		print("JSON解析错误或类型不是Dictionary")
-		print("原始JSON字符串: ", json_str)
-		print("解析结果类型: ", typeof(data))
+		push_error("JSON解析错误或类型不是Dictionary")
+		push_error("原始JSON字符串: "+json_str)
+		push_error("解析结果类型: "+str(typeof(data)))
 
 	#清理节点
 	http_request.queue_free()
@@ -460,12 +464,18 @@ func _http_read_user_id_by_name_completed(result, response_code, headers, body,h
 		#清理节点
 		http_request.queue_free()
 		return
-		
-	print(body.get_string_from_utf8())
-	var data := parse_json(body.get_string_from_utf8()) as Dictionary
-	var results:=data['results'] as Array
+	var json_str=body.get_string_from_utf8() as String
+	var data :Dictionary={}
+	data = parse_json(json_str) as Dictionary
+	var results: Array = []  # 默认为空数组，避免后续使用时报错
+	# 先判断 data 是有效的字典，且包含 'results' 键，且对应的值是数组
+	if data is Dictionary and data.has("results"):
+		results = data["results"] as Array
+	else:
+		# 可选：处理键不存在或类型错误的情况（如打印日志）
+		push_error("数据中没有有效的 'results' 数组")
 	if results.empty():
-		push_warning("request请求结果为空")
+		push_error("request请求结果为空")
 		http_request.queue_free()
 		return
 #	{
@@ -519,8 +529,17 @@ func _http_read_user_name_by_id_completed(result, response_code, headers, body,h
 		#清理节点
 		http_request.queue_free()
 		return
-	var data := parse_json(body.get_string_from_utf8()) as Dictionary
-	var results:=data['results'] as Array
+	var json_str=body.get_string_from_utf8() as String
+	#print(json_str)
+	var data :Dictionary={}
+	data = parse_json(json_str) as Dictionary
+	var results: Array = []  # 默认为空数组，避免后续使用时报错
+	# 先判断 data 是有效的字典，且包含 'results' 键，且对应的值是数组
+	if data is Dictionary and data.has("results"):
+		results = data["results"] as Array
+	else:
+		# 可选：处理键不存在或类型错误的情况（如打印日志）
+		push_error("数据中没有有效的 'results' 数组")
 	if results.empty():
 		push_error("request请求结果为空")
 		http_request.queue_free()

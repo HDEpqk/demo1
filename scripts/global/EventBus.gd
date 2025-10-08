@@ -5,6 +5,7 @@ extends Node
 var instance = null  # 改用普通成员变量
 
 # 基础事件信号
+# warning-ignore:unused_signal
 signal event_triggered(event_name, event_args)
 
 signal global_energy_changed(new_value)
@@ -68,16 +69,16 @@ func fire_event_2param(event_name, arg1,arg2):
 	if has_signal(event_name):
 		# 使用解包操作符 * 将参数数组展开为单独的参数
 		call_deferred("emit_signal", event_name, arg1,arg2)
-		DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2))
+		#DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2))
 		
 func fire_event_3param(event_name, arg1,arg2,arg3):
 	if has_signal(event_name):
 		# 使用解包操作符 * 将参数数组展开为单独的参数
 		call_deferred("emit_signal", event_name, arg1,arg2,arg3)
-		DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2)+"arg3="+str(arg3))
+		#DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2)+"arg3="+str(arg3))
 
 func fire_event_4param(event_name, arg1,arg2,arg3,arg4):
 	if has_signal(event_name):
 		# 使用解包操作符 * 将参数数组展开为单独的参数
 		call_deferred("emit_signal", event_name, arg1,arg2,arg3,arg4)
-		DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2)+"arg3="+str(arg3)+"arg4="+str(arg4))
+		#DebugUtils.log("arg1="+str(arg1)+"\n"+"arg2="+str(arg2)+"arg3="+str(arg3)+"arg4="+str(arg4))

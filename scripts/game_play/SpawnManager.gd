@@ -22,7 +22,7 @@ const LIANPU_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":20,
+		"speed":15,
 		"mode":GameEnums.TaijiMode.huo
 	},
 		{
@@ -31,7 +31,7 @@ const LIANPU_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":20,
+		"speed":15,
 		"mode":GameEnums.TaijiMode.jin		
 	},
 		{
@@ -40,7 +40,7 @@ const LIANPU_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":20,
+		"speed":15,
 		"mode":GameEnums.TaijiMode.mu		
 	},
 		{
@@ -49,114 +49,114 @@ const LIANPU_CONFIG := [
 		"min_score": 0,
 		"weight": 10,
 		"reward_score":1,
-		"speed":20,
+		"speed":15,
 		"mode":GameEnums.TaijiMode.shui
 	},
 	{
 		"type": "danger_fire",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_fire.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":20,
+		"speed":10,
 		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "danger_metal",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_metal.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":10,
-		"speed":20,
+		"speed":10,
 		"mode":GameEnums.TaijiMode.jin
 	},
 	{
 		"type": "danger_thorns",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_thorns.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":20,
+		"speed":10,
 		"mode":GameEnums.TaijiMode.mu
 	},
 	{
 		"type": "danger_water",
 		"scene": preload("res://scene/game_play/LianpuDanger/danger_water.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 20,#全局分数达到该分数才生成该lianpu
 		"weight": 5,
 		"reward_score":5,
-		"speed":20,
+		"speed":10,
 		"mode":GameEnums.TaijiMode.shui
 	},
 	{
 		"type": "prop_accelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 50,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
 		"reward_score":10,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 50,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
 		"reward_score":30,
-		"speed":40,
+		"speed":25,
 		"mode":GameEnums.TaijiMode.jin
 	},
 	{
 		"type": "prop_multiple",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 50,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
 		"reward_score":10,
-		"speed":30,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
 	{
 		"type": "prop_decelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
+		"min_score": 50,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
-		"reward_score":5,
-		"speed":30,
+		"reward_score":10,
+		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	},
 	{
 		"type": "hide_red",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_red.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 2,
-		"reward_score":10,
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
+		"weight": 1,
+		"reward_score":40,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
 	{
 		"type": "hide_yellow",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_yellow.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 2,
-		"reward_score":10,
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
+		"weight": 1,
+		"reward_score":40,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.jin
 	},
 	{
 		"type": "hide_green",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_green.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 2,
-		"reward_score":10,
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
+		"weight": 1,
+		"reward_score":40,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
 	{
 		"type": "hide_blue",
 		"scene": preload("res://scene/game_play/LianpuHide/hide_blue.tscn"),
-		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 2,
-		"reward_score":10,
+		"min_score": 100,#全局分数达到该分数才生成该lianpu
+		"weight": 1,
+		"reward_score":40,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	}
@@ -204,6 +204,10 @@ func update_spawn_speed():
 
 func _on_SpawnTimer_timeout():
 	var lianpu_dic = _select_lianpu_random()
+	if Global.is_invincible:
+		#在疯狂时间内不再生成疯狂脸谱
+		while lianpu_dic["type"]=="prop_crazy":
+			lianpu_dic = _select_lianpu_random()
 	var lianpu = lianpu_dic.scene.instance()
 	lianpu_container.add_child(lianpu)
 	

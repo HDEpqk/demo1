@@ -1466,7 +1466,6 @@ script = ExtResource( 18 )
 [node name="SpawnedLianpus" type="Node2D" parent="TutorialSpawnManager"]
 
 [node name="TutorialUILevel5" type="CanvasLayer" parent="."]
-pause_mode = 2
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
 script = ExtResource( 15 )
@@ -1478,6 +1477,7 @@ anchor_bottom = 1.0
 expand = true
 
 [node name="PauseButton" type="TextureButton" parent="TutorialUILevel5"]
+pause_mode = 2
 self_modulate = Color( 100, 100, 100, 1 )
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1651,6 +1651,7 @@ texture = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel5/EnergyCalibration"]
 volume_db = -80.0
+bus = "SFX"
 
 [node name="ComboLabel" type="Label" parent="TutorialUILevel5"]
 anchor_left = 1.0

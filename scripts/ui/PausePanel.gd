@@ -50,7 +50,8 @@ func _on_ResumeGameButton_pressed():
 	
 func _on_PausePanel_visibility_changed():
 	get_tree().paused=visible
-
+	if $"../../Center"!=null:
+		$"../../Center".visible=!visible
 
 
 func _on_HSlider_value_changed(value):

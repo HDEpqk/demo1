@@ -94,7 +94,7 @@ func _on_score_changed(new_value: float):
 
 func _on_multiple_changed(new_value: int,isTiming:bool,duration:float):
 	multiple= clamp(new_value,1,8)
-	#DebugUtils.log("全局倍数已更新："+str(multiple))
+
 
 func _on_player_hurt(global_mode):
 	#DebugUtils.log("玩家受伤时做的事global")
@@ -115,7 +115,7 @@ func _on_player_hurt(global_mode):
 			mode_status[GameEnums.TaijiMode.tu]["isActive"]=false
 
 func _on_player_recovery(global_mode):
-	DebugUtils.log("玩家恢复时做的事global")
+	#DebugUtils.log("玩家恢复时做的事global")
 	match global_mode:
 		GameEnums.TaijiMode.yin:
 			mode_status[GameEnums.TaijiMode.yin]["isActive"]=true
