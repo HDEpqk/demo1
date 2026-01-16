@@ -24,7 +24,7 @@ var reward_score:float#消除的基础奖励分数
 var lianpu_type:String
 
 #寻路相关
-onready var center_position = get_viewport().size/2
+var center_position:Vector2
 var waypoint_distance = 200  # 路径点到中心的距离
 var waypoint = Vector2.ZERO
 var at_waypoint = false
@@ -114,6 +114,12 @@ var taiji_order = [
 onready var sprite:Sprite = $Sprite
 
 func _ready():
+	var node=get_node("../../../UI/Control")
+	if  node!=null:
+		center_position=node.rect_position
+	else:
+		center_position=get_viewport().size/2
+	#print("center_position:"+str(center_position))
 	 # 为每个刚体生成随机路径点（围绕中心点）
 	var angle = randf() * TAU
 	waypoint = center_position + Vector2.RIGHT.rotated(angle) * waypoint_distance

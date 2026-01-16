@@ -8,6 +8,8 @@ var back_count:=0
 var player_energy:=0
 
 var last_label:String
+onready var pass_level=$"../../../../PassedLevel"
+onready var teaching_display=$"../../../../TeachingDisplay"
 func _ready():
 	# 安全初始化
 	taiji_mode=GameEnums.TaijiMode.huo
@@ -68,11 +70,11 @@ func check_is_passed_level():
 	if over_count >=4 and back_count >=2:
 		if DataMgr.get_setting("tutorial","is_passed_level_3")==false:
 			DataMgr.set_setting("tutorial","is_passed_level_3",true)
-		$"../PassedLevel".visible=true
+		pass_level.visible=true
 	
 func show_pass_condition():
 	
-	var condition_label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
+	var condition_label=teaching_display.get_node("PassLevelConditionLabel")
 	condition_label.set_text("过关条件：\n1.能量超限（%d/4）\n2.能量回到限制区间（%d/2）" % [over_count,back_count])
 	
 	#当前label和上次label不一致时才产生动画效果

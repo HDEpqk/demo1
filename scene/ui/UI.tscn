@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://scene/ui/EnergyCalibration.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://art/ui/other/countdown_icon.png" type="Texture" id=6]
 [ext_resource path="res://art/ui/other/score_icon_32.png" type="Texture" id=7]
 [ext_resource path="res://art/ui/five_elements_calibration/五行积攒图.png" type="Texture" id=8]
+[ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=10]
 [ext_resource path="res://scripts/ui/SmoothScore.gd" type="Script" id=11]
 [ext_resource path="res://scripts/game_play/FiveElementsAccumulation.gd" type="Script" id=12]
@@ -438,6 +439,14 @@ rect_scale = Vector2( 2, 2 )
 text = "0"
 
 [node name="Tween" type="Tween" parent="FiveElementsAccumulation/TuControl/CountLabel"]
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Center" parent="Control" instance=ExtResource( 9 )]
 
 [node name="PausePanel" parent="." instance=ExtResource( 3 )]
 visible = false

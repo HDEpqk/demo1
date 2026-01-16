@@ -7,10 +7,10 @@ const LEVEL_4_2=preload("res://video/五行积攒水.webm")
 const LEVEL_4_3=preload("res://video/木保护防止一次危险区域伤害.webm")
 
 onready var teaching_display=$TeachingDisplay
-onready var lianpu1=$TutorialLianpuLevel4
-onready var lianpu2=$TutorialLianpuLevel4_1
-onready var lianpu3=$TutorialLianpuLevel4_2
-onready var danger_fire_lianpu=$TutorialDangerFire
+#onready var lianpu1=$TutorialLianpuLevel4
+#onready var lianpu2=$TutorialLianpuLevel4_1
+#onready var lianpu3=$TutorialLianpuLevel4_2
+#onready var danger_fire_lianpu=$TutorialDangerFire
 
 var jin_count:=0
 var mu_count:=0
@@ -27,7 +27,7 @@ var use_tu_count:=0
 var mu_protect_count:=0
 
 var last_label:String
-onready var viewport_size = get_viewport().size
+#onready var viewport_size = get_viewport().size
 func _ready():
 	._ready()
 
@@ -41,17 +41,17 @@ func _ready():
 		{"video":LEVEL_4_3,"text":"木保护：\n\t\t当中心太极状态为木时，可以防止一次危险区域伤害或者÷0危险。"}
 	]
 	teaching_display.init_video(list)
-	lianpu1.position.x = viewport_size.x/2
-	lianpu1.position.y = viewport_size.y/2-130
-	
-	lianpu2.position.x = viewport_size.x/2+200
-	lianpu2.position.y = viewport_size.y/2-130
-	
-	lianpu3.position.x = viewport_size.x/2-200
-	lianpu3.position.y = viewport_size.y/2-130
-	
-	danger_fire_lianpu.position.x = viewport_size.x/2+400
-	danger_fire_lianpu.position.y = viewport_size.y/2-130
+#	lianpu1.position.x = viewport_size.x/2
+#	lianpu1.position.y = viewport_size.y/2-130
+#
+#	lianpu2.position.x = viewport_size.x/2+200
+#	lianpu2.position.y = viewport_size.y/2-130
+#
+#	lianpu3.position.x = viewport_size.x/2-200
+#	lianpu3.position.y = viewport_size.y/2-130
+#
+#	danger_fire_lianpu.position.x = viewport_size.x/2+400
+#	danger_fire_lianpu.position.y = viewport_size.y/2-130
 	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	EventBus.connect("use_wuxing",self,"_on_use_wuxing")

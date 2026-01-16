@@ -2,9 +2,8 @@ extends CanvasLayer
 
 const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
 
-onready var lianpu_return = $LianpuReturn
-onready var center = $Center
-onready var viewport_size = get_viewport().size
+
+onready var viewport_size = GuiAutoload.viewport_size
 
 onready var tab_container = $"TabContainer"
 # 限时相关
@@ -37,11 +36,7 @@ var endless_completed_count: int = 0  # 无尽排行榜已完成查询的数量
 var current_boarder_name#当前操作的排行榜
 
 func _ready():
-	center.position.x = viewport_size.x/2 + 500
-	center.position.y = viewport_size.y/2 + 130
-	
-	lianpu_return.position.x = viewport_size.x / 2 + 500
-	lianpu_return.position.y = viewport_size.y - 60
+
 	tab_container.visible = false
 	
 	# 连接信号（注意：需要确保信号能传递用户ID）

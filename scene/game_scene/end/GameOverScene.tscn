@@ -1033,20 +1033,30 @@ script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
-[node name="Center" parent="." instance=ExtResource( 2 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="LianpuGameOver" type="RigidBody2D" parent="." groups=["lianpu"]]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_bottom = 300.0
+custom_constants/separation = 150
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+
+[node name="LianpuGameOver" type="RigidBody2D" parent="CanvasLayer/VBoxContainer/Control" groups=["lianpu"]]
 mode = 1
 script = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LianpuGameOver"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/VBoxContainer/Control/LianpuGameOver"]
 scale = Vector2( 2.348, 2.348 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="LianpuGameOver"]
+[node name="Sprite" type="Sprite" parent="CanvasLayer/VBoxContainer/Control/LianpuGameOver"]
 texture = ExtResource( 4 )
 
-[node name="SelectionLabel" type="Label" parent="LianpuGameOver"]
+[node name="SelectionLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control/LianpuGameOver"]
 margin_left = -30.0
 margin_top = -49.0
 margin_right = 34.0
@@ -1057,31 +1067,41 @@ theme = ExtResource( 1 )
 align = 1
 valign = 1
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="LianpuGameOver"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="CanvasLayer/VBoxContainer/Control/LianpuGameOver"]
 frames = SubResource( 103 )
 animation = "death_01"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuGameOver"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/VBoxContainer/Control/LianpuGameOver"]
 bus = "SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LianpuGameOver"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/VBoxContainer/Control/LianpuGameOver"]
 anims/RESET = SubResource( 104 )
 anims/death_01 = SubResource( 105 )
 anims/death_02 = SubResource( 106 )
 anims/death_03 = SubResource( 107 )
 anims/death_04 = SubResource( 108 )
 
-[node name="LianpuUploadScore" type="RigidBody2D" parent="." groups=["lianpu", "lianpu_prop"]]
+[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_top = 150.0
+margin_bottom = 150.0
+
+[node name="Center" parent="CanvasLayer/VBoxContainer/Control2" instance=ExtResource( 2 )]
+
+[node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_top = 300.0
+margin_bottom = 300.0
+
+[node name="LianpuUploadScore" type="RigidBody2D" parent="CanvasLayer/VBoxContainer/Control3" groups=["lianpu", "lianpu_prop"]]
 script = ExtResource( 9 )
 
-[node name="BodyCollision" type="CollisionShape2D" parent="LianpuUploadScore"]
+[node name="BodyCollision" type="CollisionShape2D" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 scale = Vector2( 2.348, 2.348 )
 shape = SubResource( 138 )
 disabled = true
 
-[node name="Sprite" type="Sprite" parent="LianpuUploadScore"]
+[node name="Sprite" type="Sprite" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 
-[node name="SelectionLabel" type="Label" parent="LianpuUploadScore"]
+[node name="SelectionLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 margin_left = -30.0
 margin_top = -49.0
 margin_right = 34.0
@@ -1092,26 +1112,24 @@ theme = ExtResource( 1 )
 align = 1
 valign = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LianpuUploadScore"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 anims/death_01 = SubResource( 139 )
 anims/death_02 = SubResource( 140 )
 anims/death_03 = SubResource( 141 )
 anims/death_04 = SubResource( 142 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="LianpuUploadScore"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 visible = false
 frames = SubResource( 143 )
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="LianpuUploadScore"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 visible = false
 position = Vector2( 0, -13 )
 frames = SubResource( 144 )
 animation = "death_02"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuUploadScore"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]
 bus = "SFX"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -1191,7 +1209,6 @@ text = "每天仅有三次上传机会"
 visible = false
 
 [node name="PopupDialog" parent="CanvasLayer" instance=ExtResource( 12 )]
-visible = false
 
 [node name="ConfirmRegister" type="Control" parent="CanvasLayer"]
 pause_mode = 2

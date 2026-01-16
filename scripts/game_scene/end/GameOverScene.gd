@@ -8,18 +8,18 @@ extends Node2D
 func _ready():
 	DataMgr.check_is_reset_upload_count()
 	$CanvasLayer/UserRegister.visible=false
-	var viewport_size = get_viewport().size
-	#设置场景脸谱的位置
-	$LianpuGameOver.position=viewport_size/2
-	#设置上传分数脸谱的位置
-	$LianpuUploadScore.position.x=viewport_size.x/2
-	$LianpuUploadScore.position.y=viewport_size.y/2+280
-
-	
-
-	#设置center的位置
-	$Center.position.x=viewport_size.x/2
-	$Center.position.y=viewport_size.y/2+130
+#	var viewport_size = GuiAutoload.viewport_size
+#	#设置场景脸谱的位置
+#	$LianpuGameOver.position=viewport_size/2
+#	#设置上传分数脸谱的位置
+#	$LianpuUploadScore.position.x=viewport_size.x/2
+#	$LianpuUploadScore.position.y=viewport_size.y/2+280
+#
+#
+#
+#	#设置center的位置
+#	$Center.position.x=viewport_size.x/2
+#	$Center.position.y=viewport_size.y/2+130
 	var highest_limited_score
 	var highest_endless_score
 	#UI显示

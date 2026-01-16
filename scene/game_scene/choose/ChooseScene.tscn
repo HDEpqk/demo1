@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://art/ui/start/startSceneBG.png" type="Texture" id=4]
 [ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=5]
 [ext_resource path="res://scripts/game_scene/choose/LianpuChooseScene.gd" type="Script" id=6]
-[ext_resource path="res://scripts/game_scene/choose/ChooseScene.gd" type="Script" id=7]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=8]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=9]
 [ext_resource path="res://scene/game_scene/setting/LianpuReturn.tscn" type="PackedScene" id=10]
@@ -475,34 +474,41 @@ tracks/3/keys = {
 }
 
 [node name="ChooseScene" type="Node2D"]
-script = ExtResource( 7 )
 
-[node name="BG" type="TextureRect" parent="."]
-margin_left = 2.0
-margin_right = 1026.0
-margin_bottom = 600.0
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="BG" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 4 )
 expand = true
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+custom_constants/separation = 150
 
-[node name="Center" parent="." instance=ExtResource( 2 )]
-position = Vector2( 486, 461 )
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
 
-[node name="LianpuChooseScene" type="RigidBody2D" parent="." groups=["lianpu"]]
+[node name="LianpuChooseScene" type="RigidBody2D" parent="CanvasLayer/VBoxContainer/Control" groups=["lianpu"]]
 mode = 1
 script = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LianpuChooseScene"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/VBoxContainer/Control/LianpuChooseScene"]
 scale = Vector2( 2.348, 2.348 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="LianpuChooseScene"]
+[node name="Sprite" type="Sprite" parent="CanvasLayer/VBoxContainer/Control/LianpuChooseScene"]
 texture = ExtResource( 5 )
 
-[node name="SelectionLabel" type="Label" parent="LianpuChooseScene"]
+[node name="SelectionLabel" type="Label" parent="CanvasLayer/VBoxContainer/Control/LianpuChooseScene"]
 margin_left = -30.0
 margin_top = -49.0
 margin_right = 34.0
@@ -514,18 +520,29 @@ text = "5分钟限时挑战"
 align = 1
 valign = 1
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="LianpuChooseScene"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="CanvasLayer/VBoxContainer/Control/LianpuChooseScene"]
 frames = SubResource( 103 )
 animation = "death_01"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LianpuChooseScene"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/VBoxContainer/Control/LianpuChooseScene"]
 bus = "SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LianpuChooseScene"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/VBoxContainer/Control/LianpuChooseScene"]
 anims/RESET = SubResource( 104 )
 anims/death_01 = SubResource( 105 )
 anims/death_02 = SubResource( 106 )
 anims/death_03 = SubResource( 107 )
 anims/death_04 = SubResource( 108 )
 
-[node name="LianpuReturn" parent="." instance=ExtResource( 10 )]
+[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_top = 150.0
+margin_bottom = 150.0
+
+[node name="Center" parent="CanvasLayer/VBoxContainer/Control2" instance=ExtResource( 2 )]
+
+[node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_top = 300.0
+margin_bottom = 300.0
+
+[node name="LianpuReturn" parent="CanvasLayer/VBoxContainer/Control3" instance=ExtResource( 10 )]
+position = Vector2( 0, 0 )

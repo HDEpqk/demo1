@@ -2,13 +2,13 @@ extends "res://scripts/game_play/Lianpu.gd"
 
 onready var return_sprite=$Sprite
 onready var return_label=$SelectionLabel
-onready var confirm_register=$"../CanvasLayer/ConfirmRegister"
-onready var user_register=$"../CanvasLayer/UserRegister"
-onready var popup_dialog=$"../CanvasLayer/PopupDialog"
-onready var popup_dialog_label=$"../CanvasLayer/PopupDialog/Label"
-onready var popup_dialog_icon=$"../CanvasLayer/PopupDialog/Icon"
-onready var confirm_before_upload=$"../CanvasLayer/ConfirmBeforeUpload"
-onready var viewport_size=get_viewport().size
+onready var confirm_register=$"../../../ConfirmRegister"
+onready var user_register=$"../../../UserRegister"
+onready var popup_dialog=$"../../../PopupDialog"
+onready var popup_dialog_label=$"../../../PopupDialog/Label"
+onready var popup_dialog_icon=$"../../../PopupDialog/Icon"
+onready var confirm_before_upload=$"../../../ConfirmBeforeUpload"
+#onready var viewport_size=get_viewport().size
 
 func _ready():
 	#检查是否需要重置upload次数
@@ -88,10 +88,10 @@ func _on_death_animation_finished():
 	if DataMgr.get_setting("user","nick_name").empty():
 		#弹出一个对话框提示玩家是否需要注册
 		#设置确认注册对话框的位置
-		confirm_register.rect_position=viewport_size/2
+		#confirm_register.rect_position=viewport_size/2
 		confirm_register.show()
 	else:
-		confirm_before_upload.rect_position=viewport_size/2
+		#confirm_before_upload.rect_position=viewport_size/2
 		confirm_before_upload.show()
 		
 	#开启碰撞体和图片

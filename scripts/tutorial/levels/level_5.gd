@@ -7,9 +7,9 @@ const LEVEL_5_2=preload("res://video/火克危险金.webm")
 const LEVEL_5_3=preload("res://video/火被水克.webm")
 
 onready var teaching_display=$TeachingDisplay
-onready var lianpu1=$TutorialLianpuLevel5
-onready var lianpu2=$TutorialLianpuLevel5_1
-onready var lianpu3=$TutorialLianpuLevel5_2
+#onready var lianpu1=$TutorialLianpuLevel5
+#onready var lianpu2=$TutorialLianpuLevel5_1
+#onready var lianpu3=$TutorialLianpuLevel5_2
 
 
 
@@ -35,7 +35,7 @@ var lianpu_mu_counter_player_tu:=0
 var lianpu_shui_counter_player_huo:=0
 var lianpu_huo_counter_player_jin:=0
 
-onready var viewport_size = get_viewport().size
+#onready var viewport_size = get_viewport().size
 
 var last_label:String
 func _ready():
@@ -53,14 +53,14 @@ func _ready():
 	]
 
 	teaching_display.init_video(list)
-	lianpu1.position.x = viewport_size.x/2
-	lianpu1.position.y = viewport_size.y/2-130
-	
-	lianpu2.position.x = viewport_size.x/2+200
-	lianpu2.position.y = viewport_size.y/2-130
-	
-	lianpu3.position.x = viewport_size.x/2-200
-	lianpu3.position.y = viewport_size.y/2-130
+#	lianpu1.position.x = viewport_size.x/2
+#	lianpu1.position.y = viewport_size.y/2-130
+#
+#	lianpu2.position.x = viewport_size.x/2+200
+#	lianpu2.position.y = viewport_size.y/2-130
+#
+#	lianpu3.position.x = viewport_size.x/2-200
+#	lianpu3.position.y = viewport_size.y/2-130
 	
 	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")

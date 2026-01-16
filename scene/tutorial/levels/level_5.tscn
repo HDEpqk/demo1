@@ -1310,156 +1310,6 @@ script = ExtResource( 17 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
 
-[node name="Center" parent="." instance=ExtResource( 9 )]
-position = Vector2( 640, 360 )
-
-[node name="TutorialLianpuLevel5" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 640, 212 )
-collision_layer = 2
-gravity_scale = 0.0
-script = ExtResource( 14 )
-
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel5"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 86 )
-disabled = true
-
-[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel5"]
-texture = ExtResource( 3 )
-
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel5"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_pivot_offset = Vector2( 16, 16 )
-align = 1
-valign = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel5"]
-autoplay = "born"
-anims/RESET = SubResource( 87 )
-anims/born = SubResource( 88 )
-anims/death_01 = SubResource( 89 )
-anims/death_02 = SubResource( 90 )
-anims/death_03 = SubResource( 91 )
-anims/death_04 = SubResource( 92 )
-
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel5"]
-frames = SubResource( 93 )
-animation = "death_01"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel5"]
-bus = "SFX"
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel5"]
-visible = false
-frames = SubResource( 94 )
-
-[node name="TutorialLianpuLevel5_1" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 426, 363 )
-collision_layer = 2
-gravity_scale = 0.0
-script = ExtResource( 14 )
-
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel5_1"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 86 )
-disabled = true
-
-[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel5_1"]
-texture = ExtResource( 3 )
-
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel5_1"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_pivot_offset = Vector2( 16, 16 )
-align = 1
-valign = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel5_1"]
-autoplay = "born"
-anims/RESET = SubResource( 95 )
-anims/born = SubResource( 96 )
-anims/death_01 = SubResource( 97 )
-anims/death_02 = SubResource( 98 )
-anims/death_03 = SubResource( 99 )
-anims/death_04 = SubResource( 100 )
-
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel5_1"]
-frames = SubResource( 93 )
-animation = "death_01"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel5_1"]
-bus = "SFX"
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel5_1"]
-visible = false
-frames = SubResource( 94 )
-
-[node name="TutorialLianpuLevel5_2" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 857, 363 )
-collision_layer = 2
-gravity_scale = 0.0
-script = ExtResource( 14 )
-
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel5_2"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 86 )
-disabled = true
-
-[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel5_2"]
-texture = ExtResource( 3 )
-
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel5_2"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_pivot_offset = Vector2( 16, 16 )
-align = 1
-valign = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel5_2"]
-autoplay = "born"
-anims/RESET = SubResource( 101 )
-anims/born = SubResource( 102 )
-anims/death_01 = SubResource( 103 )
-anims/death_02 = SubResource( 104 )
-anims/death_03 = SubResource( 105 )
-anims/death_04 = SubResource( 106 )
-
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel5_2"]
-frames = SubResource( 93 )
-animation = "death_01"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel5_2"]
-bus = "SFX"
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel5_2"]
-visible = false
-frames = SubResource( 94 )
-
 [node name="TutorialSpawnManager" type="Node2D" parent="."]
 script = ExtResource( 18 )
 
@@ -1469,6 +1319,180 @@ script = ExtResource( 18 )
 offset = Vector2( 0, 5 )
 transform = Transform2D( 1, 0, 0, 1, 0, 5 )
 script = ExtResource( 15 )
+
+[node name="Control" type="Control" parent="TutorialUILevel5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Center" parent="TutorialUILevel5/Control" instance=ExtResource( 9 )]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialUILevel5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -225.0
+margin_top = -150.0
+margin_right = 225.0
+margin_bottom = -150.0
+rect_pivot_offset = Vector2( 225, 0 )
+custom_constants/separation = 225
+
+[node name="Control" type="Control" parent="TutorialUILevel5/HBoxContainer"]
+
+[node name="TutorialLianpuLevel5" type="RigidBody2D" parent="TutorialUILevel5/HBoxContainer/Control" groups=["lianpu"]]
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 14 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+autoplay = "born"
+anims/RESET = SubResource( 87 )
+anims/born = SubResource( 88 )
+anims/death_01 = SubResource( 89 )
+anims/death_02 = SubResource( 90 )
+anims/death_03 = SubResource( 91 )
+anims/death_04 = SubResource( 92 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel5/HBoxContainer/Control/TutorialLianpuLevel5"]
+visible = false
+frames = SubResource( 94 )
+
+[node name="Control2" type="Control" parent="TutorialUILevel5/HBoxContainer"]
+margin_left = 225.0
+margin_right = 225.0
+
+[node name="TutorialLianpuLevel5_1" type="RigidBody2D" parent="TutorialUILevel5/HBoxContainer/Control2" groups=["lianpu"]]
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 14 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+autoplay = "born"
+anims/RESET = SubResource( 95 )
+anims/born = SubResource( 96 )
+anims/death_01 = SubResource( 97 )
+anims/death_02 = SubResource( 98 )
+anims/death_03 = SubResource( 99 )
+anims/death_04 = SubResource( 100 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel5/HBoxContainer/Control2/TutorialLianpuLevel5_1"]
+visible = false
+frames = SubResource( 94 )
+
+[node name="Control3" type="Control" parent="TutorialUILevel5/HBoxContainer"]
+margin_left = 450.0
+margin_right = 450.0
+
+[node name="TutorialLianpuLevel5_2" type="RigidBody2D" parent="TutorialUILevel5/HBoxContainer/Control3" groups=["lianpu"]]
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 14 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+autoplay = "born"
+anims/RESET = SubResource( 101 )
+anims/born = SubResource( 102 )
+anims/death_01 = SubResource( 103 )
+anims/death_02 = SubResource( 104 )
+anims/death_03 = SubResource( 105 )
+anims/death_04 = SubResource( 106 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel5/HBoxContainer/Control3/TutorialLianpuLevel5_2"]
+visible = false
+frames = SubResource( 94 )
 
 [node name="BG" type="TextureRect" parent="TutorialUILevel5"]
 visible = false

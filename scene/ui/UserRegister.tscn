@@ -20,7 +20,6 @@ grow_vertical = 0
 script = ExtResource( 3 )
 
 [node name="PopupDialog" parent="." instance=ExtResource( 4 )]
-visible = false
 margin_bottom = 40.0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

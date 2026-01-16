@@ -38,9 +38,9 @@ onready var mode_timer={
 
 func _ready():
 	# 获取视口（屏幕）的尺寸
-	var viewport_size = get_viewport().size
+	#var viewport_size = GuiAutoload.viewport_size
 	# 将节点位置设置为屏幕中心
-	position = viewport_size / 2
+	#position = viewport_size / 2
 	# 连接信号
 	connect("body_entered", self, "_on_body_entered")
 	connect("area_entered", self, "_on_area_entered")	

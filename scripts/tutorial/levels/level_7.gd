@@ -19,7 +19,7 @@ const LEVEL_7_3_TEXT="[center]隐身脸谱[/center]\n\n普通属性：\n\t\t同�
 
 onready var teaching_display=$TeachingDisplay
 
-onready var viewport_size = get_viewport().size
+#onready var viewport_size = get_viewport().size
 func _ready():
 	._ready()
 

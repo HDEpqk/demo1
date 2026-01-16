@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var lianpu_start_scene=$LianpuStartScene
-onready var lianpu_user_register=$LianpuUserRegister
-onready var center = $Center
-onready var viewport_size = get_viewport().size
+onready var lianpu_start_scene=$CanvasLayer/VBoxContainer/Control/LianpuStartScene
+onready var lianpu_user_register=$CanvasLayer/VBoxContainer/Control3/LianpuUserRegister
+onready var center = $CanvasLayer/VBoxContainer/Control2/Center
+onready var viewport_size = GuiAutoload.viewport_size
 onready var user_register=$CanvasLayer/UserRegister
 onready var turorial_option=$CanvasLayer/TutorialOption
 onready var isSfxOn:bool=true
@@ -12,7 +12,6 @@ onready var is_first_tutorial:bool=true
 func _ready():
 	turorial_option.visible=false
 	user_register.visible=false
-	$CanvasLayer/OperationTipLabel.visible=false
 	if DataMgr.get_setting("tutorial","is_first_tutorial")==null:
 		DataMgr.set_setting("tutorial","is_first_tutorial",true)
 		turorial_option.visible=true
@@ -33,7 +32,7 @@ func _ready():
 			lianpu_start_scene.visible=true
 			center.visible=true
 			#显示操作提示label
-			$CanvasLayer/OperationTipLabel.visible=true
+			#$CanvasLayer/OperationTipLabel.visible=true
 
 	
 	isSfxOn=DataMgr.get_setting("audio","sound_enabled")
@@ -45,20 +44,16 @@ func _ready():
 	#DataMgr.first_set_upload_timestamp()
 
 	
-	#设置背景的缩放
-	var texture_size = $BG.get_size()
-	var scale_x = viewport_size.x / texture_size.x
-	var scale_y = viewport_size.y / texture_size.y
-	$BG.rect_scale = Vector2(scale_x, scale_y)
+
 	#设置场景脸谱的位置
-	lianpu_start_scene.position=viewport_size/2
+	#lianpu_start_scene.position=viewport_size/2
 	#设置center的位置
-	center.position.x = viewport_size.x/2
-	center.position.y = viewport_size.y/2+130
+#	center.position.x = viewport_size.x/2
+#	center.position.y = viewport_size.y/2+130
 	
 	#设置lianpu_user_register位置
-	lianpu_user_register.position.x = viewport_size.x/2
-	lianpu_user_register.position.y = viewport_size.y/2+280
+#	lianpu_user_register.position.x = viewport_size.x/2
+#	lianpu_user_register.position.y = viewport_size.y/2+280
 	
 	#user_register.rect_position=viewport_size/2
 	#turorial_option.rect_position=viewport_size/2

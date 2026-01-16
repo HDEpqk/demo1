@@ -273,24 +273,42 @@ script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
 
-[node name="Center" parent="." instance=ExtResource( 10 )]
-position = Vector2( 640, 360 )
+[node name="TutorialUILevel1" type="CanvasLayer" parent="."]
+pause_mode = 2
+offset = Vector2( 0, 5 )
+transform = Transform2D( 1, 0, 0, 1, 0, 5 )
+script = ExtResource( 15 )
 
-[node name="TutorialLianpuNormal" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 646, 563 )
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialUILevel1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_bottom = 150.0
+custom_constants/separation = 150
+
+[node name="Control" type="Control" parent="TutorialUILevel1/VBoxContainer"]
+
+[node name="Center" parent="TutorialUILevel1/VBoxContainer/Control" instance=ExtResource( 10 )]
+
+[node name="Control2" type="Control" parent="TutorialUILevel1/VBoxContainer"]
+margin_top = 150.0
+margin_bottom = 150.0
+
+[node name="TutorialLianpuNormal" type="RigidBody2D" parent="TutorialUILevel1/VBoxContainer/Control2" groups=["lianpu"]]
 collision_layer = 2
 gravity_scale = 0.0
 script = ExtResource( 14 )
 
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuNormal"]
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="Sprite" type="Sprite" parent="TutorialLianpuNormal"]
+[node name="Sprite" type="Sprite" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 texture = ExtResource( 2 )
 
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuNormal"]
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -305,7 +323,7 @@ rect_pivot_offset = Vector2( 16, 16 )
 align = 1
 valign = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuNormal"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 autoplay = "born"
 anims/RESET = SubResource( 2 )
 anims/born = ExtResource( 6 )
@@ -314,22 +332,16 @@ anims/death_02 = ExtResource( 5 )
 anims/death_03 = ExtResource( 8 )
 anims/death_04 = ExtResource( 9 )
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuNormal"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 frames = SubResource( 45 )
 animation = "death_01"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuNormal"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 bus = "SFX"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuNormal"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel1/VBoxContainer/Control2/TutorialLianpuNormal"]
 visible = false
 frames = SubResource( 87 )
-
-[node name="TutorialUILevel1" type="CanvasLayer" parent="."]
-pause_mode = 2
-offset = Vector2( 0, 5 )
-transform = Transform2D( 1, 0, 0, 1, 0, 5 )
-script = ExtResource( 15 )
 
 [node name="PauseButton" type="TextureButton" parent="TutorialUILevel1"]
 self_modulate = Color( 100, 100, 100, 1 )

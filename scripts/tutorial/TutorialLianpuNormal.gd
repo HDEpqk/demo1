@@ -3,6 +3,8 @@ extends "res://scripts/game_play/LianpuNormal/LianpuNormal.gd"
 
 var yin_count:=0
 var yang_count:=0
+onready var pass_level=$"../../../../PassedLevel"
+onready var teaching_display=$"../../../../TeachingDisplay"
 
 func _ready():
 	# 安全初始化
@@ -52,11 +54,11 @@ func check_is_passed_level():
 	if yin_count >=4 and yang_count >=4:
 		if DataMgr.get_setting("tutorial","is_passed_level_2")==false:
 			DataMgr.set_setting("tutorial","is_passed_level_2",true)
-		$"../PassedLevel".visible=true
+		pass_level.visible=true
 	
 
 func show_pass_condition():
-	var condition_label=$"../TeachingDisplay".get_node("PassLevelConditionLabel")
+	var condition_label=teaching_display.get_node("PassLevelConditionLabel")
 	condition_label.set_text("过关条件：\n1.用阴状态消灭脸谱（%d/4）\n2.用阳状态切换脸谱（%d/4）" % [yin_count,yang_count])
 	var tween = condition_label.get_node("Tween")
 	tween.interpolate_property(condition_label, "rect_scale",

@@ -8,10 +8,10 @@ const LEVEL_6_2=preload("res://video/能量倒计时结束.webm")
 
 
 onready var teaching_display=$TeachingDisplay
-onready var lianpu_danger_fire=$TutorialDangerFire
-onready var lianpu_prop_decelerate=$Tutorialprop_decelerate
+#onready var lianpu_danger_fire=$TutorialDangerFire
+#onready var lianpu_prop_decelerate=$Tutorialprop_decelerate
 
-onready var viewport_size = get_viewport().size
+#onready var viewport_size = get_viewport().size
 
 var hurt_count:=0
 var game_over:=0
@@ -25,11 +25,11 @@ func _ready():
 		{"video":LEVEL_6_2,"text":"游戏结束条件：\n\t\t能量超限，玩家能量条倒计时结束游戏结束。"}
 	]
 	teaching_display.init_video(list)
-	lianpu_danger_fire.position.x = viewport_size.x/2-200
-	lianpu_danger_fire.position.y = viewport_size.y/2-130
-	
-	lianpu_prop_decelerate.position.x = viewport_size.x/2+200
-	lianpu_prop_decelerate.position.y = viewport_size.y/2-130
+#	lianpu_danger_fire.position.x = viewport_size.x/2-200
+#	lianpu_danger_fire.position.y = viewport_size.y/2-130
+#
+#	lianpu_prop_decelerate.position.x = viewport_size.x/2+200
+#	lianpu_prop_decelerate.position.y = viewport_size.y/2-130
 	
 	#订阅player受伤的事件
 	EventBus.connect("player_hurt",self,"_on_player_hurt")

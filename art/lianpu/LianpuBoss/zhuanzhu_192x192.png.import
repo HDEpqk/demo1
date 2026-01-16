@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bgmOff.png-f6827203a8a0db20e693f6f663d73dbc.stex"
+path="res://.import/zhuanzhu_192x192.png-e0348f140c10fc14b68676c5d55dd511.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ui/setting/bgmOff.png"
-dest_files=[ "res://.import/bgmOff.png-f6827203a8a0db20e693f6f663d73dbc.stex" ]
+source_file="res://art/lianpu/LianpuBoss/zhuanzhu_192x192.png"
+dest_files=[ "res://.import/zhuanzhu_192x192.png-e0348f140c10fc14b68676c5d55dd511.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,6 +30,6 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
-size_limit=128
+size_limit=0
 detect_3d=true
 svg/scale=1.0

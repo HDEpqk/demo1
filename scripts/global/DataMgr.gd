@@ -735,6 +735,11 @@ var default_settings = {
 		"is_passed_level_5":false,
 		"is_passed_level_6":false,
 		"is_passed_level_7":false
+	},
+	"display":{
+		"is_full_screen":false,
+		"is_borderless_window":false,
+		"resolution":0
 	}
 }
 

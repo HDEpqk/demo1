@@ -26,584 +26,6 @@
 radius = 8.94378
 height = 6.81431
 
-[sub_resource type="Animation" id=87]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=88]
-resource_name = "born"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("BodyCollision:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=89]
-resource_name = "death_01"
-length = 0.2
-step = 0.02
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_death_animation_finished"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_01" ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedDeath:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BodyCollision:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=90]
-resource_name = "death_02"
-length = 0.2
-step = 0.02
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_02" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_death_animation_finished"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BodyCollision:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=91]
-resource_name = "death_03"
-length = 0.18
-step = 0.02
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_03" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.18 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_death_animation_finished"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BodyCollision:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=92]
-resource_name = "death_04"
-length = 0.22
-step = 0.02
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedDeath:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death_04" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedDeath:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.22 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_on_death_animation_finished"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedDeath:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BodyCollision:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="AtlasTexture" id=57]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=65]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=66]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=67]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=58]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=59]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=68]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=60]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=69]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 512, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=61]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=62]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=63]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 64, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=64]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=70]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 192, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=71]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 256, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=72]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 320, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=73]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 384, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=74]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 448, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=75]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 512, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=76]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 576, 128, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=77]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=78]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 64, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=79]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=80]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 192, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=81]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 256, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=82]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 320, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=83]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 384, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=84]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 448, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=85]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 512, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=46]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=47]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 64, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=48]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 128, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=49]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 192, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=50]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 256, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=51]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 320, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=52]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 384, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=53]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 448, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=54]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 512, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=55]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 576, 446, 64, 63 )
-
-[sub_resource type="AtlasTexture" id=56]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 640, 446, 64, 63 )
-
-[sub_resource type="SpriteFrames" id=93]
-animations = [ {
-"frames": [ SubResource( 57 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 58 ), SubResource( 59 ), SubResource( 68 ), SubResource( 60 ), SubResource( 69 ), SubResource( 61 ), null ],
-"loop": true,
-"name": "death_01",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), null ],
-"loop": true,
-"name": "death_02",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), null ],
-"loop": true,
-"name": "death_03",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), null ],
-"loop": true,
-"name": "death_04",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=94]
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
 [sub_resource type="Animation" id=95]
 length = 0.001
 tracks/0/type = "value"
@@ -951,6 +373,237 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="AtlasTexture" id=57]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=65]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=66]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=67]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=58]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=59]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=68]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=60]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=69]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=61]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=62]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=63]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=64]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=70]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=71]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=72]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 320, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=73]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=74]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=75]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=76]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 576, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=77]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=78]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=79]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=80]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=81]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=82]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 320, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=83]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=84]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 448, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=85]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 256, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=51]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 320, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=52]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 384, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=53]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 448, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=54]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 512, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=55]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 576, 446, 64, 63 )
+
+[sub_resource type="AtlasTexture" id=56]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 640, 446, 64, 63 )
+
+[sub_resource type="SpriteFrames" id=93]
+animations = [ {
+"frames": [ SubResource( 57 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 58 ), SubResource( 59 ), SubResource( 68 ), SubResource( 60 ), SubResource( 69 ), SubResource( 61 ), null ],
+"loop": true,
+"name": "death_01",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), null ],
+"loop": true,
+"name": "death_02",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), null ],
+"loop": true,
+"name": "death_03",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), null ],
+"loop": true,
+"name": "death_04",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=94]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [sub_resource type="Animation" id=101]
 length = 0.001
 tracks/0/type = "value"
@@ -1220,6 +873,353 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id=106]
+resource_name = "death_04"
+length = 0.22
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_04" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.22 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=87]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=88]
+resource_name = "born"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=89]
+resource_name = "death_01"
+length = 0.2
+step = 0.02
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_01" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedDeath:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=90]
+resource_name = "death_02"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_02" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=91]
+resource_name = "death_03"
+length = 0.18
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedDeath:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death_03" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedDeath:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.18 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_death_animation_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedDeath:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=92]
 resource_name = "death_04"
 length = 0.22
 step = 0.02
@@ -2042,24 +2042,47 @@ script = ExtResource( 15 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 
-[node name="Center" parent="." instance=ExtResource( 9 )]
-position = Vector2( 640, 360 )
+[node name="TutorialUILevel4" type="CanvasLayer" parent="."]
+offset = Vector2( 0, 5 )
+transform = Transform2D( 1, 0, 0, 1, 0, 5 )
+script = ExtResource( 14 )
 
-[node name="TutorialLianpuLevel4" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 640, 212 )
+[node name="Control" type="Control" parent="TutorialUILevel4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Center" parent="TutorialUILevel4/Control" instance=ExtResource( 9 )]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialUILevel4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -225.0
+margin_top = -150.0
+margin_right = 225.0
+margin_bottom = -150.0
+rect_pivot_offset = Vector2( 225, 0 )
+custom_constants/separation = 150
+
+[node name="Control" type="Control" parent="TutorialUILevel4/HBoxContainer"]
+
+[node name="TutorialLianpuLevel4_1" type="RigidBody2D" parent="TutorialUILevel4/HBoxContainer/Control" groups=["lianpu"]]
 collision_layer = 2
 gravity_scale = 0.0
 script = ExtResource( 13 )
 
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel4"]
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 86 )
 disabled = true
 
-[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel4"]
+[node name="Sprite" type="Sprite" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 texture = ExtResource( 3 )
 
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel4"]
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -2074,56 +2097,7 @@ rect_pivot_offset = Vector2( 16, 16 )
 align = 1
 valign = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel4"]
-autoplay = "born"
-anims/RESET = SubResource( 87 )
-anims/born = SubResource( 88 )
-anims/death_01 = SubResource( 89 )
-anims/death_02 = SubResource( 90 )
-anims/death_03 = SubResource( 91 )
-anims/death_04 = SubResource( 92 )
-
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel4"]
-frames = SubResource( 93 )
-animation = "death_01"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel4"]
-bus = "SFX"
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel4"]
-visible = false
-frames = SubResource( 94 )
-
-[node name="TutorialLianpuLevel4_1" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 426, 363 )
-collision_layer = 2
-gravity_scale = 0.0
-script = ExtResource( 13 )
-
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel4_1"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 86 )
-disabled = true
-
-[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel4_1"]
-texture = ExtResource( 3 )
-
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel4_1"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_pivot_offset = Vector2( 16, 16 )
-align = 1
-valign = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel4_1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 autoplay = "born"
 anims/RESET = SubResource( 95 )
 anims/born = SubResource( 96 )
@@ -2132,32 +2106,36 @@ anims/death_02 = SubResource( 98 )
 anims/death_03 = SubResource( 99 )
 anims/death_04 = SubResource( 100 )
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel4_1"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 frames = SubResource( 93 )
 animation = "death_01"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel4_1"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 bus = "SFX"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel4_1"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control/TutorialLianpuLevel4_1"]
 visible = false
 frames = SubResource( 94 )
 
-[node name="TutorialLianpuLevel4_2" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 857, 363 )
+[node name="Control2" type="Control" parent="TutorialUILevel4/HBoxContainer"]
+margin_left = 150.0
+margin_right = 150.0
+
+[node name="TutorialLianpuLevel4_2" type="RigidBody2D" parent="TutorialUILevel4/HBoxContainer/Control2" groups=["lianpu"]]
+position = Vector2( -4, 0 )
 collision_layer = 2
 gravity_scale = 0.0
 script = ExtResource( 13 )
 
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialLianpuLevel4_2"]
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 86 )
 disabled = true
 
-[node name="Sprite" type="Sprite" parent="TutorialLianpuLevel4_2"]
+[node name="Sprite" type="Sprite" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 texture = ExtResource( 3 )
 
-[node name="EnergyLabel" type="Label" parent="TutorialLianpuLevel4_2"]
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -2172,7 +2150,7 @@ rect_pivot_offset = Vector2( 16, 16 )
 align = 1
 valign = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialLianpuLevel4_2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 autoplay = "born"
 anims/RESET = SubResource( 101 )
 anims/born = SubResource( 102 )
@@ -2181,24 +2159,81 @@ anims/death_02 = SubResource( 104 )
 anims/death_03 = SubResource( 105 )
 anims/death_04 = SubResource( 106 )
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialLianpuLevel4_2"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 frames = SubResource( 93 )
 animation = "death_01"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialLianpuLevel4_2"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 bus = "SFX"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialLianpuLevel4_2"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control2/TutorialLianpuLevel4_2"]
 visible = false
 frames = SubResource( 94 )
 
-[node name="TutorialDangerFire" type="RigidBody2D" parent="." groups=["lianpu"]]
-position = Vector2( 532, 276 )
+[node name="Control3" type="Control" parent="TutorialUILevel4/HBoxContainer"]
+margin_left = 300.0
+margin_right = 300.0
+
+[node name="TutorialLianpuLevel4" type="RigidBody2D" parent="TutorialUILevel4/HBoxContainer/Control3" groups=["lianpu"]]
+position = Vector2( -8, 0 )
+collision_layer = 2
+gravity_scale = 0.0
+script = ExtResource( 13 )
+
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 86 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+texture = ExtResource( 3 )
+
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 16, 16 )
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+autoplay = "born"
+anims/RESET = SubResource( 87 )
+anims/born = SubResource( 88 )
+anims/death_01 = SubResource( 89 )
+anims/death_02 = SubResource( 90 )
+anims/death_03 = SubResource( 91 )
+anims/death_04 = SubResource( 92 )
+
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+frames = SubResource( 93 )
+animation = "death_01"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+bus = "SFX"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control3/TutorialLianpuLevel4"]
+visible = false
+frames = SubResource( 94 )
+
+[node name="Control4" type="Control" parent="TutorialUILevel4/HBoxContainer"]
+margin_left = 450.0
+margin_right = 450.0
+
+[node name="TutorialDangerFire" type="RigidBody2D" parent="TutorialUILevel4/HBoxContainer/Control4" groups=["lianpu"]]
+position = Vector2( -12, 0 )
 collision_layer = 2
 gravity_scale = 0.0
 script = ExtResource( 21 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialDangerFire"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 autoplay = "begin_attack"
 anims/RESET = SubResource( 107 )
 anims/begin_attack = SubResource( 108 )
@@ -2208,7 +2243,7 @@ anims/death_03 = SubResource( 111 )
 anims/death_04 = SubResource( 112 )
 anims/loop_attack = SubResource( 113 )
 
-[node name="BodyCollision" type="CollisionShape2D" parent="TutorialDangerFire"]
+[node name="BodyCollision" type="CollisionShape2D" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 position = Vector2( -2.11758e-22, -15 )
 scale = Vector2( 4.746, 4.746 )
 shape = SubResource( 114 )
@@ -2217,36 +2252,36 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialDangerFire"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 frames = SubResource( 115 )
 animation = "begin_attack"
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Tween" type="Tween" parent="TutorialDangerFire"]
+[node name="Tween" type="Tween" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 
-[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialDangerFire"]
+[node name="AnimatedDeath" type="AnimatedSprite" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 position = Vector2( 0, -13 )
 frames = SubResource( 156 )
 animation = "death_01"
 
-[node name="Area2D" type="Area2D" parent="TutorialDangerFire" groups=["danger_area"]]
+[node name="Area2D" type="Area2D" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire" groups=["danger_area"]]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="FireCollision" type="CollisionShape2D" parent="TutorialDangerFire/Area2D"]
+[node name="FireCollision" type="CollisionShape2D" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire/Area2D"]
 position = Vector2( 0, 23 )
 shape = SubResource( 157 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialDangerFire"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 bus = "SFX"
 
-[node name="EnergyLabel" type="Label" parent="TutorialDangerFire"]
+[node name="EnergyLabel" type="Label" parent="TutorialUILevel4/HBoxContainer/Control4/TutorialDangerFire"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -2260,11 +2295,6 @@ grow_vertical = 2
 rect_pivot_offset = Vector2( 16, 16 )
 align = 1
 valign = 1
-
-[node name="TutorialUILevel4" type="CanvasLayer" parent="."]
-offset = Vector2( 0, 5 )
-transform = Transform2D( 1, 0, 0, 1, 0, 5 )
-script = ExtResource( 14 )
 
 [node name="BG" type="TextureRect" parent="TutorialUILevel4"]
 visible = false

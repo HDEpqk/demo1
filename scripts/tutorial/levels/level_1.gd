@@ -5,12 +5,18 @@ onready var cursor_icon=$TutorialSpotlight/CursorIcon
 
 var taiji_change_count:=0#改变太极状态的次数
 onready var condition_label=$TutorialSpotlight/count
+var center_position:Vector2
 
 func _ready():
 	._ready()
+	var node=get_node("TutorialSpotlight/Control")
+	if  node!=null:
+		center_position=node.rect_position
+	else:
+		center_position=get_viewport().size/2
 	var tween = cursor_icon.get_node("Tween")
 	tween.interpolate_property(cursor_icon, "rect_position",
-	Vector2(800, get_viewport().size.y/2), Vector2(400, get_viewport().size.y/2), 1,
+	center_position+Vector2(100,0), center_position-Vector2(100,0), 1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.set_repeat(true)
 	tween.start()
