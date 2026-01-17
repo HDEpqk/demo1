@@ -34,9 +34,9 @@ func _ready():
 		"text":LEVEL_7_3_TEXT}
 	]
 	teaching_display.init_video(list)
-	var panel=$TeachingDisplay.get_node("Panel")
-	if panel != null:
-		panel.show()
+#	var panel=$TeachingDisplay.get_node("Panel")
+#	if panel != null:
+#		panel.show()
 
 	
 

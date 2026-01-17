@@ -15,7 +15,7 @@ var video_list:=[]
 
 
 func _ready():
-	self.show()
+	panel.hide()
 	
 #func update_condition_label(text:String):
 #	condition_label.set_text(text)
@@ -31,11 +31,17 @@ func _on_CloseTextureButton_pressed():
 	#播放音效
 	$AudioStreamPlayer.stream=CURSOR_CLICK_2
 	$AudioStreamPlayer.play()
+	#停止正在播放的视频
+	if video_player.is_playing():
+		video_player.stop()
+		print("is_video_playing:"+str(video_player.is_playing()))
 	panel.hide()
 
-
 func _on_Panel_visibility_changed():
-	get_tree().paused=panel.visible
+	var is_panel_visible=panel.visible
+	get_tree().paused=is_panel_visible
+	if is_panel_visible:
+		change_page(current_page)
 
 
 func _on_LeftTextureButton_pressed():
@@ -70,7 +76,7 @@ func change_page(page_index:int):
 	video_player.set_stream(video_list[page_index]["video"])
 	video_player.play()
 	rich_label.bbcode_text=video_list[page_index]["text"]
-	
+	print("is_video_playing:"+str(video_player.is_playing()))
 	
 func init_video(list:Array):
 	video_list=list
@@ -80,7 +86,7 @@ func init_video(list:Array):
 	if total_page<=1:
 		right_btn.disabled=true
 		right_btn.visible=false
-	change_page(current_page)
+	#change_page(current_page)
 
 
 

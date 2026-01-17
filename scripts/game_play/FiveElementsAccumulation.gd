@@ -38,9 +38,19 @@ onready var tu_count_label_tween=$TuControl/CountLabel/Tween
 onready var tu_key_label=$TuControl/KeyLabel
 onready var tu_color=Color("#b36d41")
 
-
+var platform:String
 
 func _ready():
+	#判断当前运行的平台
+	platform=OS.get_name()
+	if platform == "Android" or platform == "iOS":
+		#移动端关闭键位提示
+		jin_key_label.hide()
+		mu_key_label.hide()
+		shui_key_label.hide()
+		huo_key_label.hide()
+		tu_key_label.hide()
+		
 	#获取玩家保存的ui设置
 	var value=DataMgr.get_setting("user","wuxing_calibration_rect_scale")
 	self.rect_scale=Vector2(value,value)	
@@ -334,3 +344,30 @@ func display_tu():
 func _on_change_wuxing_calibration_rectscale(value):
 	self.rect_scale=Vector2(value,value)
 	DataMgr.set_setting("user","wuxing_calibration_rect_scale",value)
+
+
+
+
+func _on_jin_button_down():
+	if elements_dic[GameEnums.TaijiMode.jin]["count"]>0:
+		EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.jin,Global.taiji_mode,false)
+
+
+func _on_mu_button_down():
+	if elements_dic[GameEnums.TaijiMode.mu]["count"]>0:
+		EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.mu,Global.taiji_mode,false)
+
+
+func _on_shui_button_down():
+	if elements_dic[GameEnums.TaijiMode.shui]["count"]>0:
+		EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.shui,Global.taiji_mode,false)
+
+
+func _on_huo_button_down():
+	if elements_dic[GameEnums.TaijiMode.huo]["count"]>0:
+		EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.huo,Global.taiji_mode,false)
+
+
+func _on_tu_button_down():
+	if elements_dic[GameEnums.TaijiMode.tu]["count"]>0:
+		EventBus.fire_event_3param("global_taiji_mode_changed",GameEnums.TaijiMode.tu,Global.taiji_mode,false)
