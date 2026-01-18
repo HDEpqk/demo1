@@ -16,7 +16,7 @@ var video_list:=[]
 
 func _ready():
 	panel.hide()
-	
+	self.show()
 #func update_condition_label(text:String):
 #	condition_label.set_text(text)
 #	var tween = condition_label.get_node("Tween")

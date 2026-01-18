@@ -4,10 +4,8 @@
 [ext_resource path="res://art/ui/start/startSceneBG.png" type="Texture" id=2]
 [ext_resource path="res://art/tutorial/tutorial_back_main.png" type="Texture" id=3]
 [ext_resource path="res://scripts/tutorial/TutorialStartScene.gd" type="Script" id=4]
-[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=6]
-
-[sub_resource type="Theme" id=1]
-Label/fonts/font = ExtResource( 6 )
+[ext_resource path="res://new_theme.tres" type="Theme" id=5]
+[ext_resource path="res://art/tutorial/lock_64.png" type="Texture" id=6]
 
 [node name="TutorialStartScene" type="Node2D"]
 script = ExtResource( 4 )
@@ -27,29 +25,38 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -596.0
-margin_top = -35.0
-margin_right = 596.0
-margin_bottom = 35.0
-theme = SubResource( 1 )
-custom_constants/hseparation = 110
+margin_left = -597.0
+margin_top = -57.0
+margin_right = 597.0
+margin_bottom = 57.0
+grow_horizontal = 2
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 597, 57 )
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme = ExtResource( 5 )
+custom_constants/hseparation = 66
 columns = 7
 
 [node name="Button" type="Button" parent="CanvasLayer/GridContainer"]
-margin_right = 76.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
+margin_right = 114.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
 icon = ExtResource( 1 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -32.0
-margin_top = -12.0
-margin_right = 32.0
-rect_pivot_offset = Vector2( 32, 0 )
+anchor_bottom = 1.0
+margin_left = -30.25
+margin_top = -114.5
+margin_right = 33.75
+margin_bottom = -90.5
+rect_pivot_offset = Vector2( 32, 24 )
 text = "阴阳切换"
 align = 1
 
@@ -59,30 +66,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="Button2" type="Button" parent="CanvasLayer/GridContainer"]
-margin_left = 186.0
-margin_right = 262.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
+margin_left = 180.0
+margin_right = 294.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
 icon = ExtResource( 1 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button2"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -32.0
-margin_top = -12.0
-margin_right = 32.0
-rect_pivot_offset = Vector2( 32, 0 )
+anchor_bottom = 1.0
+margin_left = -30.25
+margin_top = -114.5
+margin_right = 33.75
+margin_bottom = -90.5
+rect_pivot_offset = Vector2( 32, 24 )
 text = "阴死阳生"
 align = 1
 
@@ -92,30 +103,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="Button3" type="Button" parent="CanvasLayer/GridContainer"]
-margin_left = 372.0
-margin_right = 448.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
-icon = ExtResource( 1 )
+margin_left = 360.0
+margin_right = 474.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
+icon = ExtResource( 6 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button3"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -32.0
-margin_top = -12.0
-margin_right = 32.0
-rect_pivot_offset = Vector2( 32, 0 )
+anchor_bottom = 1.0
+margin_left = -30.25
+margin_top = -114.5
+margin_right = 33.75
+margin_bottom = -90.5
+rect_pivot_offset = Vector2( 32, 24 )
 text = "能量计算"
 align = 1
 
@@ -125,30 +140,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="Button4" type="Button" parent="CanvasLayer/GridContainer"]
-margin_left = 558.0
-margin_right = 634.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
+margin_left = 540.0
+margin_right = 654.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
 icon = ExtResource( 1 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button4"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
+anchor_bottom = 1.0
 margin_left = -64.0
-margin_top = -12.0
+margin_top = -114.0
 margin_right = 64.0
-rect_pivot_offset = Vector2( 64, 0 )
+margin_bottom = -90.0
+rect_pivot_offset = Vector2( 64, 24 )
 text = "生五行和五行积攒"
 align = 1
 
@@ -158,30 +177,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="Button5" type="Button" parent="CanvasLayer/GridContainer"]
-margin_left = 744.0
-margin_right = 820.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
+margin_left = 720.0
+margin_right = 834.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
 icon = ExtResource( 1 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button5"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -48.0
-margin_top = -12.0
-margin_right = 48.0
-rect_pivot_offset = Vector2( 48, 0 )
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -114.0
+margin_right = 64.0
+margin_bottom = -90.0
+rect_pivot_offset = Vector2( 64, 24 )
 text = "五行相生相克"
 align = 1
 
@@ -191,30 +214,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="Button6" type="Button" parent="CanvasLayer/GridContainer"]
-margin_left = 930.0
-margin_right = 1006.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
+margin_left = 900.0
+margin_right = 1014.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
 icon = ExtResource( 1 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button6"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -56.0
-margin_top = -12.0
-margin_right = 56.0
-rect_pivot_offset = Vector2( 56, 0 )
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -114.0
+margin_right = 64.0
+margin_bottom = -90.0
+rect_pivot_offset = Vector2( 64, 24 )
 text = "受伤和游戏结束"
 align = 1
 
@@ -224,30 +251,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="Button7" type="Button" parent="CanvasLayer/GridContainer"]
-margin_left = 1116.0
-margin_right = 1192.0
-margin_bottom = 70.0
-rect_pivot_offset = Vector2( 38, 35 )
+margin_left = 1080.0
+margin_right = 1194.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 57, 57 )
 icon = ExtResource( 1 )
 flat = true
+icon_align = 1
 
 [node name="LevelTitle" type="Label" parent="CanvasLayer/GridContainer/Button7"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-margin_left = -32.0
-margin_top = -12.0
-margin_right = 32.0
-rect_pivot_offset = Vector2( 32, 0 )
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -114.0
+margin_right = 64.0
+margin_bottom = -90.0
+rect_pivot_offset = Vector2( 64, 24 )
 text = "脸谱"
 align = 1
 
@@ -257,12 +288,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4.0
-margin_top = -8.0
-margin_right = 4.0
-margin_bottom = 8.0
+margin_left = -4.5
+margin_top = -12.0
+margin_right = 4.5
+margin_bottom = 12.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 8 )
+rect_pivot_offset = Vector2( 4, 12 )
 text = "1"
 
 [node name="TutorialBackMainBtn" type="Button" parent="CanvasLayer"]
@@ -270,12 +301,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -38.0
-margin_top = -70.0
-margin_right = 38.0
+margin_left = -57.0
+margin_top = -114.0
+margin_right = 57.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 38, 35 )
+rect_pivot_offset = Vector2( 57, 114 )
+theme = ExtResource( 5 )
 icon = ExtResource( 3 )
 flat = true
 icon_align = 1
@@ -283,13 +315,16 @@ icon_align = 1
 [node name="Label" type="Label" parent="CanvasLayer/TutorialBackMainBtn"]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
+anchor_bottom = 1.0
 margin_left = -48.0
-margin_top = -11.0
+margin_top = -24.0
 margin_right = 48.0
+margin_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 6 )
+rect_pivot_offset = Vector2( 48, 24 )
 text = "返回开始场景"
 align = 1
 valign = 1

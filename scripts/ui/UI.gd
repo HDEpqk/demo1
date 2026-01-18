@@ -268,7 +268,7 @@ func _on_combo(combo_count,combo_timeout,lianpu_taiji_mode):
 	combo_label.show()
 	var tween = combo_label.get_node("Tween")
 	tween.interpolate_property(combo_label, "rect_scale",
-	Vector2(4, 4), Vector2(3, 3), 0.1,
+	Vector2(3, 3), Vector2(2, 2), 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.interpolate_callback(combo_label,combo_timeout,"hide")
 	tween.start()

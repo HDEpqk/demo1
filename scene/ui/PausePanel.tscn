@@ -4,12 +4,18 @@
 [ext_resource path="res://new_theme.tres" type="Theme" id=2]
 [ext_resource path="res://art/ui/pause/lamb-back.png" type="Texture" id=3]
 [ext_resource path="res://art/ui/pause/lamb-home.png" type="Texture" id=4]
-[ext_resource path="res://ttf/c16xcnb2.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ttf/SourceHanSansCN-Regular.tres" type="DynamicFont" id=5]
 
 [node name="PausePanel" type="Control"]
 pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
@@ -24,31 +30,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -171.0
-margin_top = -135.0
-margin_right = 171.0
-margin_bottom = 135.0
-rect_pivot_offset = Vector2( 171, 135 )
+margin_left = -153.0
+margin_top = -161.0
+margin_right = 153.0
+margin_bottom = 161.0
+rect_scale = Vector2( 0.6, 0.6 )
+rect_pivot_offset = Vector2( 153, 161 )
 theme_type_variation = "pause_panel"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 margin_left = 25.0
 margin_top = 25.0
-margin_right = 317.0
-margin_bottom = 245.0
+margin_right = 281.0
+margin_bottom = 297.0
 custom_constants/margin_right = 30
 custom_constants/margin_left = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 modulate = Color( 0, 0, 0, 1 )
 margin_left = 30.0
-margin_right = 262.0
-margin_bottom = 220.0
+margin_right = 226.0
+margin_bottom = 272.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_constants/separation = 20
 
 [node name="ResumeGameButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_right = 232.0
+margin_right = 196.0
 margin_bottom = 98.0
 size_flags_vertical = 2
 custom_fonts/font = ExtResource( 5 )
@@ -56,21 +64,25 @@ text = "继续游戏"
 icon = ExtResource( 3 )
 
 [node name="BackToStartButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 102.0
-margin_right = 232.0
-margin_bottom = 200.0
+margin_top = 118.0
+margin_right = 196.0
+margin_bottom = 216.0
 size_flags_horizontal = 0
 size_flags_vertical = 2
 custom_fonts/font = ExtResource( 5 )
 text = "返回开始场景"
 icon = ExtResource( 4 )
 
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 236.0
+margin_right = 196.0
+margin_bottom = 236.0
+
 [node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer"]
-margin_top = 204.0
-margin_right = 232.0
-margin_bottom = 220.0
+margin_top = 256.0
+margin_right = 196.0
+margin_bottom = 272.0
 size_flags_vertical = 2
-size_flags_stretch_ratio = 2.0
 max_value = 1.2
 step = 0.1
 value = 1.0
@@ -83,11 +95,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 6.0
-margin_top = -8.0
-margin_bottom = 8.0
-rect_scale = Vector2( 1.5, 1.5 )
-rect_pivot_offset = Vector2( 0, 8 )
+margin_left = 6.6665
+margin_top = -14.0001
+margin_right = 15.6665
+margin_bottom = 18.9999
+rect_pivot_offset = Vector2( 0, 15 )
 text = "1"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -7,7 +7,10 @@ var i:=1
 
 func _ready():
 	self.hide()
-
+	
+	#测试用于解锁全部关卡
+#	for i in range(7):
+#		DataMgr.set_setting("tutorial","is_passed_level_%d"%(i+1),true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

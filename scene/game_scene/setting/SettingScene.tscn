@@ -41,7 +41,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-custom_constants/separation = 150
+custom_constants/separation = 120
 
 [node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
 
@@ -106,14 +106,14 @@ align = 1
 valign = 1
 
 [node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
-margin_top = 150.0
-margin_bottom = 150.0
+margin_top = 120.0
+margin_bottom = 120.0
 
 [node name="Center" parent="CanvasLayer/VBoxContainer/Control2" instance=ExtResource( 2 )]
 
 [node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer"]
-margin_top = 300.0
-margin_bottom = 300.0
+margin_top = 240.0
+margin_bottom = 240.0
 
 [node name="LianpuReturn" parent="CanvasLayer/VBoxContainer/Control3" instance=ExtResource( 3 )]
 position = Vector2( 0, 0 )

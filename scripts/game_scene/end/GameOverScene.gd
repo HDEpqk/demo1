@@ -3,11 +3,15 @@ extends Node2D
 
 #限时相关
 #onready var rank_limited_dic:Dictionary={}
+onready var end_reason_label=$CanvasLayer/VBoxContainer2/EndReasonLabel
+onready var highest_score_label=$CanvasLayer/VBoxContainer2/HighestScoreLabel
+onready var current_score_label=$CanvasLayer/VBoxContainer2/CurrentScoreLabel
 
+onready var user_register=$CanvasLayer/UserRegister
 
 func _ready():
 	DataMgr.check_is_reset_upload_count()
-	$CanvasLayer/UserRegister.visible=false
+	user_register.visible=false
 #	var viewport_size = GuiAutoload.viewport_size
 #	#设置场景脸谱的位置
 #	$LianpuGameOver.position=viewport_size/2
@@ -25,22 +29,22 @@ func _ready():
 	#UI显示
 	if SceneMgr.game_scene_name=="LimitedGame":
 		highest_limited_score=DataMgr.get_setting("user","highest_limited_score")
-		$CanvasLayer/HighestScoreLabel.text="限时挑战最高得分:"+str(highest_limited_score)
+		highest_score_label.text="限时挑战最高得分:"+str(highest_limited_score)
 		if Global.score>highest_limited_score:
 			DataMgr.set_setting("user","highest_limited_score",Global.score)
 			highest_limited_score=DataMgr.get_setting("user","highest_limited_score")
-			$CanvasLayer/HighestScoreLabel.text="限时挑战最高得分:"+str(highest_limited_score)
+			highest_score_label.text="限时挑战最高得分:"+str(highest_limited_score)
 	elif SceneMgr.game_scene_name=="EndlessGame":
 		highest_endless_score=DataMgr.get_setting("user","highest_endless_score")
-		$CanvasLayer/HighestScoreLabel.text="无尽挑战最高得分:"+str(highest_endless_score)
+		highest_score_label.text="无尽挑战最高得分:"+str(highest_endless_score)
 		if Global.score>highest_endless_score:
 			DataMgr.set_setting("user","highest_endless_score",Global.score)
 			highest_endless_score=DataMgr.get_setting("user","highest_endless_score")
-			$CanvasLayer/HighestScoreLabel.text="无尽挑战最高得分:"+str(highest_endless_score)
+			highest_score_label.text="无尽挑战最高得分:"+str(highest_endless_score)
 	
 
-	$CanvasLayer/CurrentScoreLabel.text="本局得分:"+str(Global.score)
-	$CanvasLayer/EndReasonLabel.text="死因:"+str(SceneMgr.scene_info)
+	current_score_label.text="本局得分:"+str(Global.score)
+	end_reason_label.text="游戏结束，"+str(SceneMgr.scene_info)
 	
 	#http相关
 	EventBus.connect("http_fetch_request_completed",self,"_on_http_fetch_request_completed")

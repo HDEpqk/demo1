@@ -714,7 +714,7 @@ var default_settings = {
 		"limited_upload_current_count":3,#限时上传当前次数，一定时间恢复
 		"endless_upload_current_count":3,#无尽上传当前次数，一定时间恢复
 		"upload_timestamp": 0,#时间戳,用于记录历史某个时间点#"is_set_upload_timestamp": false #记录游戏第一次启动是否记录了upload_timestamp
-		"wuxing_calibration_rect_scale":1
+		"wuxing_calibration_rect_scale":0.8
 	},
 	"leancloud": {
 		"cache_limited_obj":{#rank_limited_dic的本地缓存对象

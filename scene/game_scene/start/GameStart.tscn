@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://art/lianpu/LianpuBoss/zhuanzhu_64x64.png" type="Texture" id=1]
+[ext_resource path="res://art/ui/start/hj_studio_white_2048x2048.png" type="Texture" id=1]
 [ext_resource path="res://scripts/game_scene/start/GameStart.gd" type="Script" id=2]
 [ext_resource path="res://audio/start/游戏启动音.wav" type="AudioStream" id=3]
 [ext_resource path="res://new_theme.tres" type="Theme" id=4]
@@ -75,24 +75,31 @@ autoplay = "game_start"
 anims/game_start = SubResource( 1 )
 
 [node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TextureRect" type="TextureRect" parent="Control"]
-self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -137.0
-margin_top = -32.0
-margin_right = -73.0
-margin_bottom = 32.0
+margin_left = 30.0
+margin_top = -45.0
+margin_right = 30.0
+margin_bottom = -45.0
+rect_pivot_offset = Vector2( -15, 15 )
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = -17.0
+margin_right = -80.0
+margin_bottom = 47.0
+rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 1 )
+expand = true
 
 [node name="Label" type="Label" parent="Control"]
-self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -106,15 +113,14 @@ theme = ExtResource( 4 )
 text = "禾几工作室"
 
 [node name="englishLabel" type="Label" parent="Control"]
-self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -44.0
-margin_top = 10.0
-margin_right = 44.0
-margin_bottom = 8.0
+margin_left = -53.0
+margin_top = 15.0
+margin_right = 47.0
+margin_bottom = 39.0
 rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 44, 8 )
 theme = ExtResource( 4 )

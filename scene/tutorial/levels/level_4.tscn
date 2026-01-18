@@ -2658,6 +2658,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TeachingDisplay" parent="." instance=ExtResource( 8 )]
+visible = false
 
 [node name="PassedLevel" parent="." instance=ExtResource( 12 )]
 
