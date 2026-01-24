@@ -50,11 +50,14 @@ func _on_ResumeGameButton_pressed():
 	
 func _on_PausePanel_visibility_changed():
 	get_tree().paused=visible
-	if $"../../Center"!=null:
-		$"../../Center".visible=!visible
+	if visible == true:
+		#播放音效
+		$AudioStreamPlayer.stream=SELECT_SFX
+		$AudioStreamPlayer.play()
 
 
 func _on_HSlider_value_changed(value):
+	if visible == false:return
 	EventBus.fire_event("change_wuxing_calibration_rectscale",value)
 	slider_label.text=str(value)
 	#播放音效
@@ -87,7 +90,3 @@ func _on_BackToStartButton_button_down():
 	$AudioStreamPlayer.play()
 
 
-func _on_PausePanel_draw():
-	#播放音效
-	$AudioStreamPlayer.stream=SELECT_SFX
-	$AudioStreamPlayer.play()

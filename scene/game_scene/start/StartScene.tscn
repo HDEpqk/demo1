@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=2]
+[gd_scene load_steps=108 format=2]
 
 [ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=1]
 [ext_resource path="res://scripts/game_scene/start/StartScene.gd" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://scripts/game_scene/start/LianpuUserRegister.gd" type="Script" id=10]
 [ext_resource path="res://scene/ui/UserRegister.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/tutorial/TutorialControl.gd" type="Script" id=12]
-[ext_resource path="res://scripts/tutorial/TutorialOption.gd" type="Script" id=13]
 [ext_resource path="res://art/tutorial/tutorial_icon_64.png" type="Texture" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -1144,46 +1143,6 @@ bus = "SFX"
 [node name="UserRegister" parent="CanvasLayer" instance=ExtResource( 11 )]
 visible = false
 
-[node name="TutorialOption" type="Control" parent="CanvasLayer"]
-pause_mode = 2
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_scale = Vector2( 2, 2 )
-script = ExtResource( 13 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TutorialOption"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -113.0
-margin_top = -68.0
-margin_right = 113.0
-margin_bottom = 68.0
-
-[node name="Button" type="Button" parent="CanvasLayer/TutorialOption/VBoxContainer"]
-margin_right = 226.0
-margin_bottom = 66.0
-theme = ExtResource( 7 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "我是新手，开始新手教程"
-
-[node name="Button2" type="Button" parent="CanvasLayer/TutorialOption/VBoxContainer"]
-margin_top = 70.0
-margin_right = 226.0
-margin_bottom = 136.0
-theme = ExtResource( 7 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "我是高手，跳过新手教程"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/TutorialOption"]
-volume_db = -10.0
-pitch_scale = 3.0
-bus = "SFX"
-
 [node name="TutorialControl" type="Control" parent="CanvasLayer"]
 anchor_left = 0.8
 anchor_right = 0.8
@@ -1222,11 +1181,6 @@ volume_db = -10.0
 pitch_scale = 2.0
 bus = "SFX"
 
-[connection signal="visibility_changed" from="CanvasLayer/TutorialOption" to="CanvasLayer/TutorialOption" method="_on_TutorialOption_visibility_changed"]
-[connection signal="mouse_entered" from="CanvasLayer/TutorialOption/VBoxContainer/Button" to="CanvasLayer/TutorialOption" method="_on_Button_mouse_entered"]
-[connection signal="pressed" from="CanvasLayer/TutorialOption/VBoxContainer/Button" to="CanvasLayer/TutorialOption" method="_on_Button_pressed"]
-[connection signal="mouse_entered" from="CanvasLayer/TutorialOption/VBoxContainer/Button2" to="CanvasLayer/TutorialOption" method="_on_Button2_mouse_entered"]
-[connection signal="pressed" from="CanvasLayer/TutorialOption/VBoxContainer/Button2" to="CanvasLayer/TutorialOption" method="_on_Button2_pressed"]
 [connection signal="button_down" from="CanvasLayer/TutorialControl/TutorialBtn" to="CanvasLayer/TutorialControl" method="_on_TutorialBtn_button_down"]
 [connection signal="button_up" from="CanvasLayer/TutorialControl/TutorialBtn" to="CanvasLayer/TutorialControl" method="_on_TutorialBtn_button_up"]
 [connection signal="mouse_entered" from="CanvasLayer/TutorialControl/TutorialBtn" to="CanvasLayer/TutorialControl" method="_on_TutorialBtn_mouse_entered"]

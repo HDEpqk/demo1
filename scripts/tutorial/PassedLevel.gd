@@ -7,19 +7,13 @@ var i:=1
 
 func _ready():
 	self.hide()
-	
 	#测试用于解锁全部关卡
 #	for i in range(7):
 #		DataMgr.set_setting("tutorial","is_passed_level_%d"%(i+1),true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func _on_PassedLevelPanel_visibility_changed():
-#	if panel.visible==true:
-#		$"../TeachingDisplay".pause_mode=Node.PAUSE_MODE_INHERIT
+	#print("panel.visible:"+str(panel.visible))
 	get_tree().paused=panel.visible
 
 
@@ -64,3 +58,5 @@ func _on_BackToTutorialStartButton_button_down():
 	#播放音效
 	$AudioStreamPlayer.stream=CURSOR_CLICK_1
 	$AudioStreamPlayer.play()
+
+

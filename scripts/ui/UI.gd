@@ -10,8 +10,6 @@ onready var pause_btn=$PauseButton
 onready var pause_panel=$PausePanel
 
 
-
-
 #加倍相关
 onready var total_multipleLabel=$TotalMultipleLabel
 onready var multiple_timer_Label=$TotalMultipleLabel/MultipleTimerLabel
@@ -56,14 +54,6 @@ var current_crazy_time:float=0
 
 func _ready():
 	pause_btn.connect("pressed", self, "_on_pauseBtn_pressed")
-	#注册面板
-	#UiMgr.register_control("PausePanel",pause_panel)
-	#注册MainCountdownLabel
-	#UiMgr.register_control("MainCountdownLabel",main_countdown_label)
-	#注册EnergyCalibration
-	#UiMgr.register_control("EnergyCalibration",energy_calibration)
-	#注册TotalScoreLabel
-	#UiMgr.register_control("TotalScoreLabel",total_score_label)
 	#订阅玩家能量更新的事件
 	EventBus.connect("global_energy_changed", self, "_update_energy_bar")
 	#订阅玩家分数更新的事件

@@ -34,7 +34,7 @@ func _on_ConfirmButton_pressed():
 		else:
 			popup_dialog_icon.set_visible(true)
 			popup_dialog_label.self_modulate=Color("#F4606C")
-			popup_dialog_label.text="今日限时排行榜上传次数已耗光"
+			popup_dialog_label.text="今日无尽排行榜上传次数已耗光"
 			popup_dialog.popup()
 
 

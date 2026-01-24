@@ -30,28 +30,23 @@ var last_label:String
 #onready var viewport_size = get_viewport().size
 func _ready():
 	._ready()
-
+	var platform=OS.get_name()
+	var text:String
+	if platform == "Android" or platform == "iOS":
+		text="五行积攒：\n\t\t暂时没使用的五行可以积攒起来，后续通过触碰对应元素图片使用，使用之后会减少积攒的次数。"
+	else:
+		text="五行积攒：\n\t\t暂时没使用的五行可以积攒起来，后续通过相应按键（Q金W木E水R火T土）或者鼠标点击对应元素图片使用，使用之后会减少积攒的次数。"
 	var list=[
 		{"video":LEVEL_4_0,
 		"text":"生五行：\n\t\t玩家通过三连击消灭相同五行属性的脸谱可以生金木水火，连击间隔要在1s内。"},
 		{"video":LEVEL_4_1,
 		"text":"生五行：\n\t\t三连击消灭不同五行属性的脸谱可以生土。"},
 		{"video":LEVEL_4_2,
-		"text":"五行积攒：\n\t\t暂时没使用的五行可以积攒起来，后续通过相应按键（Q金W木E水R火T土）直接切换使用，使用之后会减少积攒的次数。"},
+		"text":text},
 		{"video":LEVEL_4_3,"text":"木保护：\n\t\t当中心太极状态为木时，可以防止一次危险区域伤害或者÷0危险。"}
 	]
 	teaching_display.init_video(list)
-#	lianpu1.position.x = viewport_size.x/2
-#	lianpu1.position.y = viewport_size.y/2-130
-#
-#	lianpu2.position.x = viewport_size.x/2+200
-#	lianpu2.position.y = viewport_size.y/2-130
-#
-#	lianpu3.position.x = viewport_size.x/2-200
-#	lianpu3.position.y = viewport_size.y/2-130
-#
-#	danger_fire_lianpu.position.x = viewport_size.x/2+400
-#	danger_fire_lianpu.position.y = viewport_size.y/2-130
+
 	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	EventBus.connect("use_wuxing",self,"_on_use_wuxing")
@@ -105,7 +100,7 @@ func show_pass_condition():
 	var condition_label=$TeachingDisplay.get_node("PassLevelConditionLabel")
 	var text="过关条件：\n1.五行生火（%d/1）\n2.五行生土（%d/1）\n3.五行生木（%d/1）" \
 	% [huo_count,tu_count,mu_count] \
-	+ "\n4.按R切换到火并划过一个脸谱（%d/1）\n5.在五行生木后划过危险火区域触发木保护（%d/1）"\
+	+ "\n4.切换到火并划过一个脸谱（%d/1）\n5.在五行生木后划过危险火区域触发木保护（%d/1）"\
 	% [use_huo_count,mu_protect_count]
 	condition_label.set_text(text)
 	

@@ -1,13 +1,11 @@
-[gd_scene load_steps=84 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 06.png" type="Texture" id=1]
 [ext_resource path="res://art/lianpu/death/Free Smoke Fx  Pixel 05.png" type="Texture" id=2]
 [ext_resource path="res://art/lianpu/LianpuNormal/red_shadow_64.png" type="Texture" id=3]
 [ext_resource path="res://new_theme.tres" type="Theme" id=4]
-[ext_resource path="res://art/ui/other/countdown_icon.png" type="Texture" id=5]
 [ext_resource path="res://art/ui/pause/pauseBtn.png" type="Texture" id=6]
 [ext_resource path="res://art/ui/five_elements_calibration/五行积攒图.png" type="Texture" id=7]
-[ext_resource path="res://scripts/ui/EnergyCalibration.gd" type="Script" id=8]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/tutorial/PassedLevel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=11]
@@ -18,8 +16,6 @@
 [ext_resource path="res://scripts/game_play/FiveElementsAccumulation.gd" type="Script" id=16]
 [ext_resource path="res://scripts/tutorial/levels/level_5.gd" type="Script" id=17]
 [ext_resource path="res://scripts/tutorial/TutorialSpawnManager.gd" type="Script" id=18]
-[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=19]
-[ext_resource path="res://art/ui/game/scaleNeedle.png" type="Texture" id=20]
 
 [sub_resource type="CapsuleShape2D" id=86]
 radius = 8.94378
@@ -1297,14 +1293,6 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Gradient" id=142]
-interpolation_mode = 1
-offsets = PoolRealArray( 0, 0.238532, 0.497207, 0.770642 )
-colors = PoolColorArray( 0.717647, 0, 0, 1, 0, 0.596078, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1 )
-
-[sub_resource type="GradientTexture2D" id=143]
-gradient = SubResource( 142 )
-
 [node name="level_5" type="Node2D"]
 script = ExtResource( 17 )
 
@@ -1517,167 +1505,6 @@ texture_normal = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/PauseButton"]
 
-[node name="TotalMultipleLabel" type="Label" parent="TutorialUILevel5"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -230.0
-margin_top = 30.0
-margin_right = -174.0
-margin_bottom = 41.0
-rect_scale = Vector2( 1.2, 1.2 )
-rect_pivot_offset = Vector2( 64, 0 )
-theme = ExtResource( 4 )
-text = "倍数:×1"
-valign = 1
-
-[node name="MultipleTimerLabel" type="Label" parent="TutorialUILevel5/TotalMultipleLabel"]
-self_modulate = Color( 0.411765, 0.858824, 0.105882, 1 )
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 28.0
-margin_right = 36.0
-margin_bottom = 16.0
-rect_scale = Vector2( 1.2, 1.2 )
-rect_pivot_offset = Vector2( 8, 0 )
-theme = ExtResource( 4 )
-text = "5"
-
-[node name="MultipleCountdownIcon" type="TextureRect" parent="TutorialUILevel5/TotalMultipleLabel"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 11.0
-margin_bottom = 16.0
-rect_scale = Vector2( 1.2, 1.2 )
-rect_pivot_offset = Vector2( 16, 0 )
-texture = ExtResource( 5 )
-
-[node name="MultipleTimer" type="Timer" parent="TutorialUILevel5/TotalMultipleLabel"]
-
-[node name="EnergyCalibration" type="Control" parent="TutorialUILevel5"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_top = 30.0
-margin_bottom = 25.0
-rect_scale = Vector2( 1.2, 1.2 )
-theme = ExtResource( 4 )
-script = ExtResource( 8 )
-
-[node name="BG" type="TextureRect" parent="TutorialUILevel5/EnergyCalibration"]
-self_modulate = Color( 0.768627, 0.768627, 0.768627, 1 )
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -200.0
-margin_right = 200.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 200, 0 )
-texture = SubResource( 143 )
-expand = true
-
-[node name="min" type="Label" parent="TutorialUILevel5/EnergyCalibration/BG"]
-modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.25
-anchor_top = 1.0
-anchor_right = 0.25
-anchor_bottom = 1.0
-margin_left = -12.0
-margin_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 12, 0 )
-text = "-10"
-align = 1
-valign = 1
-
-[node name="mid" type="Label" parent="TutorialUILevel5/EnergyCalibration/BG"]
-modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -4.00002
-margin_top = -6.0
-margin_right = 3.99998
-margin_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 4, 0 )
-text = "0"
-align = 1
-valign = 1
-
-[node name="max" type="Label" parent="TutorialUILevel5/EnergyCalibration/BG"]
-modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.75
-anchor_top = 1.0
-anchor_right = 0.75
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = 7.99997
-margin_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 12, 0 )
-text = "10"
-align = 1
-valign = 1
-
-[node name="pointer" type="TextureRect" parent="TutorialUILevel5/EnergyCalibration/BG"]
-self_modulate = Color( 0, 0, 1, 1 )
-anchor_left = 0.5
-anchor_right = 0.5
-margin_right = 10.0
-margin_bottom = 80.0
-rect_scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 20 )
-expand = true
-
-[node name="Node" type="Control" parent="TutorialUILevel5/EnergyCalibration/BG/pointer"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_top = -48.0
-rect_scale = Vector2( 8, 8 )
-
-[node name="current" type="Label" parent="TutorialUILevel5/EnergyCalibration/BG/pointer/Node"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_top = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource( 4 )
-text = "+4"
-align = 1
-valign = 1
-
-[node name="Tween" type="Tween" parent="TutorialUILevel5/EnergyCalibration/BG/pointer/Node/current"]
-
-[node name="CountdownLabel" type="Label" parent="TutorialUILevel5/EnergyCalibration/BG"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 60.0
-margin_top = -9.0
-margin_right = 76.0
-margin_bottom = 7.0
-rect_scale = Vector2( 2, 2 )
-text = "20"
-align = 1
-valign = 1
-
-[node name="CountdownIcon" type="TextureRect" parent="TutorialUILevel5/EnergyCalibration/BG"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 25.0
-margin_top = -7.0
-rect_scale = Vector2( 2, 2 )
-texture = ExtResource( 5 )
-
-[node name="CountdownTimer" type="Timer" parent="TutorialUILevel5/EnergyCalibration"]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TutorialUILevel5/EnergyCalibration"]
-volume_db = -80.0
-bus = "SFX"
-
 [node name="ComboLabel" type="Label" parent="TutorialUILevel5"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1694,7 +1521,6 @@ margin_top = 124.0
 margin_right = 100.0
 margin_bottom = 136.0
 theme = ExtResource( 4 )
-custom_fonts/normal_font = ExtResource( 19 )
 bbcode_enabled = true
 bbcode_text = "[color=#2d93dd]水[/color][color=#000000]克[/color][color=#e40000]火[/color]"
 text = "水克火"
@@ -1707,7 +1533,6 @@ margin_top = 165.0
 margin_right = 100.0
 margin_bottom = 136.0
 theme = ExtResource( 4 )
-custom_fonts/normal_font = ExtResource( 19 )
 bbcode_enabled = true
 bbcode_text = "[color=#2d93dd]水[/color]生[color=#28c641]木[/color]"
 text = "水生木"
@@ -1765,6 +1590,12 @@ text = "0"
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl/CountLabel"]
 
+[node name="jin" type="TextureButton" parent="TutorialUILevel5/FiveElementsAccumulation/JinControl"]
+margin_left = 57.0
+margin_top = -11.0
+margin_right = 94.0
+margin_bottom = 40.0
+
 [node name="MuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -1793,6 +1624,12 @@ rect_scale = Vector2( 2, 2 )
 text = "0"
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl/CountLabel"]
+
+[node name="mu" type="TextureButton" parent="TutorialUILevel5/FiveElementsAccumulation/MuControl"]
+margin_left = -136.0
+margin_top = -145.0
+margin_right = -99.0
+margin_bottom = -105.0
 
 [node name="ShuiControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
 anchor_left = 0.5
@@ -1823,6 +1660,12 @@ text = "0"
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl/CountLabel"]
 
+[node name="shui" type="TextureButton" parent="TutorialUILevel5/FiveElementsAccumulation/ShuiControl"]
+margin_left = -88.0
+margin_top = -12.0
+margin_right = -54.0
+margin_bottom = 36.0
+
 [node name="HuoControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -1851,6 +1694,12 @@ text = "0"
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl/CountLabel"]
 
+[node name="huo" type="TextureButton" parent="TutorialUILevel5/FiveElementsAccumulation/HuoControl"]
+margin_left = -17.0
+margin_top = -233.0
+margin_right = 21.0
+margin_bottom = -193.0
+
 [node name="TuControl" type="Control" parent="TutorialUILevel5/FiveElementsAccumulation"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -1877,6 +1726,12 @@ text = "0"
 
 [node name="Tween" type="Tween" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl/CountLabel"]
 
+[node name="tu" type="TextureButton" parent="TutorialUILevel5/FiveElementsAccumulation/TuControl"]
+margin_left = 99.0
+margin_top = -142.0
+margin_right = 139.0
+margin_bottom = -107.0
+
 [node name="PausePanel" parent="TutorialUILevel5" instance=ExtResource( 12 )]
 visible = false
 grow_horizontal = 2
@@ -1887,4 +1742,8 @@ visible = false
 
 [node name="PassedLevel" parent="." instance=ExtResource( 10 )]
 
-[connection signal="timeout" from="TutorialUILevel5/EnergyCalibration/CountdownTimer" to="TutorialUILevel5/EnergyCalibration" method="_on_CountdownTimer_timeout"]
+[connection signal="button_down" from="TutorialUILevel5/FiveElementsAccumulation/JinControl/jin" to="TutorialUILevel5/FiveElementsAccumulation" method="_on_jin_button_down"]
+[connection signal="button_down" from="TutorialUILevel5/FiveElementsAccumulation/MuControl/mu" to="TutorialUILevel5/FiveElementsAccumulation" method="_on_mu_button_down"]
+[connection signal="button_down" from="TutorialUILevel5/FiveElementsAccumulation/ShuiControl/shui" to="TutorialUILevel5/FiveElementsAccumulation" method="_on_shui_button_down"]
+[connection signal="button_down" from="TutorialUILevel5/FiveElementsAccumulation/HuoControl/huo" to="TutorialUILevel5/FiveElementsAccumulation" method="_on_huo_button_down"]
+[connection signal="button_down" from="TutorialUILevel5/FiveElementsAccumulation/TuControl/tu" to="TutorialUILevel5/FiveElementsAccumulation" method="_on_tu_button_down"]

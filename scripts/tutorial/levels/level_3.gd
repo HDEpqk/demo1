@@ -17,4 +17,9 @@ func _ready():
 	teaching_display.init_video(list)
 #	lianpu.position.x = viewport_size.x/2
 #	lianpu.position.y = viewport_size.y/2+130
+	#绑定游戏结束事件
+	EventBus.connect_event("game_over",self,"_on_game_over")
+	
 
+func _on_game_over(info):
+	get_tree().reload_current_scene()

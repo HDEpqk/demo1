@@ -6,7 +6,7 @@ onready var collision_shape = $CollisionShape2D
 onready var timers=$Timers
 onready var mu_protect_vfx=$MuProtectVFX
 
-export var total_time: int = 3  # 总倒计时秒数
+export var total_time: int = 5  # 总倒计时秒数
 #export var sprite_alpha:float=28.0/255
 
 onready var timer_yin:Timer=$Timers/Timer_yin

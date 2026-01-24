@@ -727,7 +727,6 @@ var default_settings = {
 		}
 	},
 	"tutorial": {
-		"is_first_tutorial":true,#是否进行第一次新手教程
 		"is_passed_level_1":true,#是否通过了第一关
 		"is_passed_level_2":false,
 		"is_passed_level_3":false,

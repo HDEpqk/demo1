@@ -1,16 +1,9 @@
 extends Control
 
-
 onready var btn1=$Button
 onready var btn2=$Button2
 const SELECT_SFX=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Select - 1.mp3str")
 const CURSOR_CLICK_1=preload("res://audio/ui/JDSherbert - Ultimate UI SFX Pack - Cursor - 1.mp3str")
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-
 
 
 func _on_Button_pressed():

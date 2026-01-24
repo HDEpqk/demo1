@@ -18,7 +18,7 @@ func _on_MainCountdownTimer_timeout():
 	update_display()
 	if current_time <= 0:
 		main_countdown_timer.stop()
-		main_countdown_label.text = "TIME UP!"
+		#main_countdown_label.text = "TIME UP!"
 		#触发游戏结束事件
 		EventBus.fire_event("game_over","总时间结束了┗|｀O′|┛ 嗷~~!")
 

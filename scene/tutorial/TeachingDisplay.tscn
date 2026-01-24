@@ -75,7 +75,6 @@ margin_top = 30.0
 margin_right = 320.0
 margin_bottom = 360.0
 rect_pivot_offset = Vector2( 320, 0 )
-volume_db = -80.0
 loop = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
@@ -84,7 +83,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -319.0
-margin_top = -157.0
+margin_top = -200.0
 margin_right = 319.0
 rect_pivot_offset = Vector2( 319, 157 )
 custom_fonts/normal_font = ExtResource( 4 )

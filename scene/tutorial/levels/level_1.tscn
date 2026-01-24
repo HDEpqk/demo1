@@ -33,6 +33,25 @@ bbcode_text = "长按鼠标左键划过中心太极,切换阴阳状态，[color=
 text = "长按鼠标左键划过中心太极,切换阴阳状态，黑色为阴，白色为阳。"
 fit_content_height = true
 
+[node name="Control" type="Control" parent="TutorialSpotlight"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Center" parent="TutorialSpotlight/Control" instance=ExtResource( 2 )]
+
+[node name="count" type="Label" parent="TutorialSpotlight"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 100.0
+margin_right = 145.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 5 )
+text = "1.xxxx"
+
+[node name="Tween" type="Tween" parent="TutorialSpotlight/count"]
+
 [node name="CursorIcon" type="TextureRect" parent="TutorialSpotlight"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -45,23 +64,6 @@ margin_bottom = 20.0
 texture = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="TutorialSpotlight/CursorIcon"]
-
-[node name="count" type="Label" parent="TutorialSpotlight"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 100.0
-custom_fonts/font = ExtResource( 5 )
-text = "1.xxxx"
-
-[node name="Tween" type="Tween" parent="TutorialSpotlight/count"]
-
-[node name="Control" type="Control" parent="TutorialSpotlight"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-
-[node name="Center" parent="TutorialSpotlight/Control" instance=ExtResource( 2 )]
 
 [node name="TutorialUILevel1" type="CanvasLayer" parent="."]
 pause_mode = 2

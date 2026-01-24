@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var viewport_size = get_viewport().size
 
-onready var crazy_time_bg=$CrazyTimeBG
+
 onready var energy_calibration=$EnergyCalibration
 
 onready var pause_btn=$PauseButton

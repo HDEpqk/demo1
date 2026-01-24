@@ -165,7 +165,7 @@ func _on_CountdownTimer_timeout():
 		
 	if current_time <= 0:
 		countdown_timer.stop()
-		countdown_label.text = "TIME UP!"
+		#countdown_label.text = "TIME UP!"
 		#把倒计时文本恢复颜色
 		countdown_label.self_modulate=Color.white
 		#触发游戏结束事件

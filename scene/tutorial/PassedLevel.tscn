@@ -8,6 +8,7 @@
 
 [node name="PassedLevel" type="CanvasLayer"]
 pause_mode = 2
+visible = false
 script = ExtResource( 4 )
 
 [node name="PassedLevelPanel" type="Control" parent="."]
