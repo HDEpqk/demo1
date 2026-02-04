@@ -20,7 +20,7 @@ const LIANPU_CONFIG := [
 		"type": "normal_red",
 		"scene": preload("res://scene/game_play/LianpuNormal/normal_red.tscn"),
 		"min_score": 0,
-		"weight": 10,
+		"weight": 20,
 		"reward_score":1,
 		"speed":15,
 		"mode":GameEnums.TaijiMode.huo
@@ -29,7 +29,7 @@ const LIANPU_CONFIG := [
 		"type": "normal_yellow",
 		"scene": preload("res://scene/game_play/LianpuNormal/normal_yellow.tscn"),
 		"min_score": 0,
-		"weight": 10,
+		"weight": 20,
 		"reward_score":1,
 		"speed":15,
 		"mode":GameEnums.TaijiMode.jin		
@@ -38,7 +38,7 @@ const LIANPU_CONFIG := [
 		"type": "normal_green",
 		"scene": preload("res://scene/game_play/LianpuNormal/normal_green.tscn"),
 		"min_score": 0,
-		"weight": 10,
+		"weight": 20,
 		"reward_score":1,
 		"speed":15,
 		"mode":GameEnums.TaijiMode.mu		
@@ -47,7 +47,7 @@ const LIANPU_CONFIG := [
 		"type": "normal_blue",
 		"scene": preload("res://scene/game_play/LianpuNormal/normal_blue.tscn"),
 		"min_score": 0,
-		"weight": 10,
+		"weight": 20,
 		"reward_score":1,
 		"speed":15,
 		"mode":GameEnums.TaijiMode.shui
@@ -93,7 +93,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
-		"reward_score":10,
+		"reward_score":30,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
@@ -102,7 +102,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 2,
-		"reward_score":30,
+		"reward_score":50,
 		"speed":25,
 		"mode":GameEnums.TaijiMode.jin
 	},
@@ -111,7 +111,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuProp/prop_multiple.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
-		"reward_score":10,
+		"reward_score":30,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
@@ -120,7 +120,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 3,
-		"reward_score":10,
+		"reward_score":30,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	},
@@ -129,7 +129,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_red.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 1,
-		"reward_score":40,
+		"reward_score":20,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
 	},
@@ -138,7 +138,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_yellow.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 1,
-		"reward_score":40,
+		"reward_score":20,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.jin
 	},
@@ -147,7 +147,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_green.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 1,
-		"reward_score":40,
+		"reward_score":20,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.mu
 	},
@@ -156,7 +156,7 @@ const LIANPU_CONFIG := [
 		"scene": preload("res://scene/game_play/LianpuHide/hide_blue.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
 		"weight": 1,
-		"reward_score":40,
+		"reward_score":20,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
 	}

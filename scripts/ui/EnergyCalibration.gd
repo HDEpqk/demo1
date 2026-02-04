@@ -6,7 +6,7 @@ const SFX_COUNT_DOWN = preload("res://audio/sfx/count_down.wav")
 export var value_range: Vector2 = Vector2(-1.1, 1.1)  # 值范围（左到右）
 export var bg_width: float = 400.0  # 背景条宽度（需与实际尺寸一致）
 export var pointer_max_offset: float = 200.0  # 指针最大左右偏移（背景条宽度的一半）
-export var total_time: int = 20  # 总倒计时秒数
+export var total_time: int = 10  # 总倒计时秒数
 
 var current_value: float = 0.0  # 当前值（初始为 0，对应中间位置）
 var half_bg_width: float =bg_width/2
@@ -19,7 +19,7 @@ var isMultipledTwice:bool=false
 
 onready var current_energy_label=$BG/pointer/Node/current
 onready var min_energy_label=$BG/min
-onready var mid_energy_label=$BG/mid
+#onready var mid_energy_label=$BG/mid
 onready var max_energy_label=$BG/max
 onready var pointer_texture=$BG/pointer
 onready var bg=$BG
@@ -112,6 +112,9 @@ func set_energy(new_value: float):
 func check_energy():
 	#检查能量处于什么范围
 	if Global.energy>Global.max_energy or Global.energy<Global.min_energy:
+#		if Global.energy>100 or Global.energy<-100:
+#			EventBus.fire_event("game_over","能量超限")
+#			return
 		if !is_timming:
 			#显示倒计时
 			countdown_label.visible=true
@@ -165,12 +168,12 @@ func _on_CountdownTimer_timeout():
 		
 	if current_time <= 0:
 		countdown_timer.stop()
-		#countdown_label.text = "TIME UP!"
+		countdown_label.text = ""
 		#把倒计时文本恢复颜色
 		countdown_label.self_modulate=Color.white
 		#触发游戏结束事件
 		EventBus.fire_event("game_over","会响的倒计时结束了┗|｀O′|┛ 嗷~~!")
-	elif current_time<=10:
+	elif current_time<=5:
 		countdown_label.self_modulate=Color.red
 		if $AudioStreamPlayer.stream==null:
 			$AudioStreamPlayer.stream=SFX_COUNT_DOWN

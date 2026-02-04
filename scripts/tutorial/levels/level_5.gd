@@ -53,15 +53,7 @@ func _ready():
 	]
 
 	teaching_display.init_video(list)
-#	lianpu1.position.x = viewport_size.x/2
-#	lianpu1.position.y = viewport_size.y/2-130
-#
-#	lianpu2.position.x = viewport_size.x/2+200
-#	lianpu2.position.y = viewport_size.y/2-130
-#
-#	lianpu3.position.x = viewport_size.x/2-200
-#	lianpu3.position.y = viewport_size.y/2-130
-	
+
 	
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	EventBus.connect("use_wuxing",self,"_on_use_wuxing")

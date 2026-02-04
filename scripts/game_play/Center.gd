@@ -102,7 +102,7 @@ func _on_body_entered(body):
 	# 获取敌人的太极模式类型
 	var enemy_type = body.taiji_mode
 	if body.is_in_group("lianpu"):
-		#if Global.taiji_mode==enemy_type:return#如果center和lianpu处于相同模式那么不产生交互
+		if Global.taiji_mode==enemy_type:return#如果center和lianpu处于相同模式那么不产生交互
 		if body.is_in_group("lianpu_water"):
 			body.handle_death_water(true)
 			return

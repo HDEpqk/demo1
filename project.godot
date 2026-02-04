@@ -46,6 +46,7 @@ _global_script_class_icons={
 
 config/name="数字脸谱"
 run/main_scene="res://scene/game_scene/start/GameStart.tscn"
+boot_splash/show_image=false
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/windows_native_icon="res://art/lianpu/LianpuBoss/icon.ico"
 

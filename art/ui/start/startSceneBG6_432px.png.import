@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hj_studio_white_64x64.png-5a931c24b15bb392a34565c96514f895.stex"
+path="res://.import/startSceneBG6_432px.png-c4893db785916b02202009f0a04847af.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/ui/start/hj_studio_white_64x64.png"
-dest_files=[ "res://.import/hj_studio_white_64x64.png-5a931c24b15bb392a34565c96514f895.stex" ]
+source_file="res://art/ui/start/startSceneBG6_432px.png"
+dest_files=[ "res://.import/startSceneBG6_432px.png-c4893db785916b02202009f0a04847af.stex" ]
 
 [params]
 

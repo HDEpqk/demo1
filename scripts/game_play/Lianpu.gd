@@ -277,6 +277,12 @@ func handle_energy_operation():
 				EventBus.fire_event("game_over","你÷了0┗|｀O′|┛ 嗷~~!")
 			else:
 				new_energy_value=Global.energy/energy
+		GameEnums.OperationType.xiaoyu:
+			#new_energy_value=Global.energy+energy
+			return
+		GameEnums.OperationType.dayu:
+			#new_energy_value=Global.energy-energy
+			return
 	#如果不处于无敌模式则进行能量计算
 	if !Global.is_invincible:
 		EventBus.fire_event("global_energy_changed",new_energy_value)

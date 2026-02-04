@@ -37,13 +37,15 @@ anchor_left = 0.25
 anchor_top = 1.0
 anchor_right = 0.25
 anchor_bottom = 1.0
-margin_left = -12.0
-margin_bottom = 3.0
+margin_left = -29.0
+margin_top = -10.0
+margin_right = 4.0
+margin_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 12, 0 )
-text = "-10"
+text = "-100"
 align = 1
 valign = 1
 
@@ -78,7 +80,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 12, 0 )
-text = "10"
+text = "100"
 align = 1
 valign = 1
 

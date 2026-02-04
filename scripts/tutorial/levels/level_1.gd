@@ -23,7 +23,12 @@ func _ready():
 	#订阅太极模式变化的事件
 	EventBus.connect("global_taiji_mode_changed",self,"_on_global_taiji_mode_changed")
 	condition_label.text="过关条件：\n1.切换阴阳（%d/4）" % taiji_change_count
-	
+	#根据不同平台提示不同文字
+	var platform=OS.get_name()
+	if platform == "Android" or platform == "iOS":
+		$TutorialSpotlight/RichTextLabel.bbcode_text="手指长按屏幕划过中心太极,切换阴阳状态，[color=#000000]黑色为阴[/color]，白色为阳。"
+	else:
+		$TutorialSpotlight/RichTextLabel.bbcode_text="长按鼠标左键划过中心太极,切换阴阳状态，[color=#000000]黑色为阴[/color]，白色为阳。"
 func _on_global_taiji_mode_changed(new_value: int,old_value: int=0,is_new_mode:=true):
 	taiji_change_count+=1
 	condition_label.text="过关条件：\n1.切换阴阳（%d/4）" % taiji_change_count

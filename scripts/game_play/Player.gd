@@ -104,18 +104,18 @@ func _physics_process(delta):
 		trail.clear_points()
 
 func _on_body_entered(body):
-	DebugUtils.log("_on_body_entered:"+body.name)
+	#DebugUtils.log("_on_body_entered:"+body.name)
 	if !is_long_pressed or !Global.mode_status[Global.taiji_mode]["isActive"] : return
 	
 	if body.is_in_group("lianpu"):
 		#关闭danger_area的检测
 		if body.has_node("Area2D"):
 			var area=body.get_node("Area2D")
-			DebugUtils.log("area:"+str(area))
+			#DebugUtils.log("area:"+str(area))
 			area.set_monitoring(false)
 			area.set_monitorable(false)
-			DebugUtils.log("body Area2D is_monitoring:"+str(area.is_monitoring()))
-			DebugUtils.log("body Area2D is_monitorable:"+str(area.is_monitorable()))
+			#DebugUtils.log("body Area2D is_monitoring:"+str(area.is_monitoring()))
+			#DebugUtils.log("body Area2D is_monitorable:"+str(area.is_monitorable()))
 			
 		# 获取敌人的太极模式类型
 		var enemy_type = body.taiji_mode  # 需要确保敌人有taiji_mode属性
@@ -131,8 +131,16 @@ func _on_body_entered(body):
 					audio_player.play()
 				return
 			_:	
-				#if Global.taiji_mode==enemy_type:return#如果player和lianpu处于相同模式那么不产生交互
-				if body.is_in_group("lianpu_water"):
+				if Global.taiji_mode==enemy_type:return#如果player和lianpu处于相同模式那么不产生交互
+				if body.is_in_group("lianpu_prop"):
+					if Global.is_invincible:
+						body.handle_death()  # 销毁敌人
+					else:
+						#如果全局能量大于或小于脸谱能量，则执行消除逻辑
+						if body.operation_type==GameEnums.OperationType.dayu and Global.energy<body.energy:return
+						if body.operation_type==GameEnums.OperationType.xiaoyu and Global.energy>body.energy:return
+						body.handle_death()  # 销毁敌人
+				elif body.is_in_group("lianpu_water"):
 					if Global.taiji_mode==GameEnums.TaijiMode.tu:
 						body.handle_death_water(true)
 						return
