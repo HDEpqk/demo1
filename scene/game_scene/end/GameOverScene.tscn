@@ -1093,7 +1093,7 @@ margin_bottom = 120.0
 margin_top = 240.0
 margin_bottom = 240.0
 
-[node name="LianpuUploadScore" type="RigidBody2D" parent="CanvasLayer/VBoxContainer/Control3" groups=["lianpu", "lianpu_prop"]]
+[node name="LianpuUploadScore" type="RigidBody2D" parent="CanvasLayer/VBoxContainer/Control3" groups=["lianpu", "lianpu_ui"]]
 script = ExtResource( 9 )
 
 [node name="BodyCollision" type="CollisionShape2D" parent="CanvasLayer/VBoxContainer/Control3/LianpuUploadScore"]

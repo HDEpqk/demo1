@@ -13,6 +13,7 @@
 [ext_resource path="res://art/ui/leaderboard/rank_third_icon_256.png" type="Texture" id=11]
 
 [node name="LeaderBoarder" type="CanvasLayer"]
+layer = -1
 script = ExtResource( 2 )
 
 [node name="Title" type="TextureRect" parent="."]
@@ -258,8 +259,6 @@ margin_right = 311.0
 margin_bottom = 30.0
 text = "我的得分:3.208"
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
-
 [node name="PopupDialog" parent="." instance=ExtResource( 7 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -291,5 +290,7 @@ margin_bottom = 300.0
 
 [node name="LianpuReturn" parent="VBoxContainer/Control2" instance=ExtResource( 4 )]
 position = Vector2( 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
 
 [connection signal="tab_selected" from="TabContainer" to="." method="_on_TabContainer_tab_selected"]

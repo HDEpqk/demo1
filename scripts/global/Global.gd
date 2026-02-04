@@ -12,6 +12,7 @@ var energy_multiple:int=1
 var lianpu_multiple:int=1
 var is_invincible:=false#当前是否是无敌状态
 var is_mu_protect_open:=false#当前木保护是否开启
+#var is_gaming:=false#是否处于游戏场景中（区别于开始场景等场景）
 #var is_multiple_timer_timming:bool=false#加倍计时器是否在倒计时
 
 func set_multiple(value:int):
@@ -159,3 +160,4 @@ func reset_data():
 	lianpu_multiple=1
 	is_invincible=false
 	is_mu_protect_open=false
+	#is_gaming=false

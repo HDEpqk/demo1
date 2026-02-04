@@ -5,7 +5,7 @@ onready var return_label=$SelectionLabel
 
 func _ready():
 	# 安全初始化taiji_mode
-	taiji_mode=GameEnums.TaijiMode.yin
+	taiji_mode=GameEnums.TaijiMode.yang
 	# 安全初始化图片
 	if return_sprite!= null:
 		return_sprite.texture=load("res://art/ui/setting/returnBtn.png")

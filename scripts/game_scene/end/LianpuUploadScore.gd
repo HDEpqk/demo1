@@ -14,7 +14,7 @@ func _ready():
 	#检查是否需要重置upload次数
 	DataMgr.check_is_reset_upload_count()
 	# 安全初始化taiji_mode
-	taiji_mode=GameEnums.TaijiMode.yin
+	taiji_mode=GameEnums.TaijiMode.yang
 	# 安全初始化图片
 	if return_sprite!= null:
 		return_sprite.texture=load("res://art/ui/setting/lianpu_upload.png")

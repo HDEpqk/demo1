@@ -126,13 +126,16 @@ func _on_body_entered(body):
 		match Global.taiji_mode:
 			GameEnums.TaijiMode.yang:
 				body.cycle_taiji_mode()
-				if !body.is_in_group("lianpu_prop"):#如果不是lianpu_prop就播放切换声音
+				if !body.is_in_group("lianpu_prop") and !body.is_in_group("lianpu_ui"):#如果不是lianpu_prop或者lianpu_ui就播放切换声音
 					audio_player.stream=SFX_YANG
 					audio_player.play()
 				return
 			_:	
 				if Global.taiji_mode==enemy_type:return#如果player和lianpu处于相同模式那么不产生交互
+				
 				if body.is_in_group("lianpu_prop"):
+#					DebugUtils.log("_on_body_entered:"+body.name)
+#					if !Global.is_gaming:body.handle_death() #不在游戏场景的道具脸谱不进行大于或小于判断
 					if Global.is_invincible:
 						body.handle_death()  # 销毁敌人
 					else:
