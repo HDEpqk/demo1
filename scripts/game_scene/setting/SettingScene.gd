@@ -17,9 +17,9 @@ func _ready():
 		resolution.visible=false
 		return
 
-	window_mode.add_item("FULLSCREEN",0)
-	window_mode.add_item("WINDOW",1)
-	window_mode.add_item("WINDOW BORDERLESS",2)
+	window_mode.add_item("全屏",0)
+	window_mode.add_item("窗口",1)
+	window_mode.add_item("无边框窗口",2)
 #	resolution.add_item("3840x2160",0)
 #	resolution.add_item("2560x1440",1)
 	resolution.add_item("1920x1080",0)

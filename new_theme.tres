@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=2]
+[gd_resource type="Theme" load_steps=26 format=2]
 
 [ext_resource path="res://ttf/SourceHanSansCN-Regular.tres" type="DynamicFont" id=1]
 [ext_resource path="res://art/ui/kenney_fantasy-ui-borders/PNG/Double/Panel/panel-031.png" type="Texture" id=3]
@@ -41,6 +41,15 @@ margin_left = 3.0
 margin_right = 3.0
 margin_top = 3.0
 margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id=18]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 96, 96 )
+margin_left = 25.0
+margin_right = 25.0
+margin_top = 25.0
+margin_bottom = 25.0
+modulate_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 3 )
@@ -154,6 +163,13 @@ Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/styles/normal = null
 LineEdit/styles/normal = SubResource( 5 )
+OptionButton/colors/font_color = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+OptionButton/colors/font_color_focus = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+OptionButton/styles/disabled = SubResource( 18 )
+OptionButton/styles/normal = SubResource( 18 )
+OptionButton/styles/pressed = SubResource( 18 )
 PanelContainer/styles/panel = SubResource( 2 )
 PopupDialog/styles/panel = SubResource( 12 )
 RegisterTitle/base_type = "Label"
