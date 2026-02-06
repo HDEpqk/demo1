@@ -12,6 +12,7 @@ var energy_multiple:int=1
 var lianpu_multiple:int=1
 var is_invincible:=false#当前是否是无敌状态
 var is_mu_protect_open:=false#当前木保护是否开启
+#var platform:String
 #var is_gaming:=false#是否处于游戏场景中（区别于开始场景等场景）
 #var is_multiple_timer_timming:bool=false#加倍计时器是否在倒计时
 
@@ -77,6 +78,8 @@ func _ready():
 	EventBus.connect("mu_protect_open",self,"_on_mu_protect_open")
 	#订阅木保护关闭事件
 	EventBus.connect("mu_protect_close",self,"_on_mu_protect_close")
+	#获取当前设备平台
+	#platform=OS.get_name()
 	
 func _on_energy_changed(new_value: float):
 	energy = new_value
@@ -153,11 +156,10 @@ func reset_data():
 	taiji_mode=GameEnums.TaijiMode.yin
 	energy=0
 	score=0
-	min_energy=-10
-	max_energy=10
+	min_energy=-100
+	max_energy=100
 	multiple=1
 	energy_multiple=1
 	lianpu_multiple=1
 	is_invincible=false
 	is_mu_protect_open=false
-	#is_gaming=false

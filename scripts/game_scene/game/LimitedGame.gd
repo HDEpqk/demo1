@@ -6,7 +6,6 @@ extends Node2D
 func _ready():
 	var scene_name=get_tree().current_scene.name
 	SceneMgr.game_scene_name=scene_name
-	
-
+		
 
 

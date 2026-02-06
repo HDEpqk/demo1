@@ -23,8 +23,8 @@ static func url_encode(input_str: String) -> String:
 	return result
 
 # 测试示例
-func _ready():
-	var test_str = "玩家4"
-	var encoded = url_encode(test_str)
-	print("原始字符串: ", test_str)
-	print("编码结果: ", encoded)  # 输出：%E7%8E%A9%E5%AE%B6%E5%9B%9B（与标准一致）
+#func _ready():
+#	var test_str = "玩家4"
+#	var encoded = url_encode(test_str)
+#	print("原始字符串: ", test_str)
+#	print("编码结果: ", encoded)  # 输出：%E7%8E%A9%E5%AE%B6%E5%9B%9B（与标准一致）

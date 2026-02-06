@@ -63,7 +63,6 @@ text = "教学选择场景"
 icon = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
 pitch_scale = 3.0
 bus = "SFX"
 

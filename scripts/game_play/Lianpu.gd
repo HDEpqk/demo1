@@ -164,24 +164,27 @@ func init(dic:Dictionary):
 	#脸谱能量字体跟随太极模式颜色
 	init_energy_label_color()
 	var fangda=1.5
+#	var platform=OS.get_name()
+#	if platform == "Android" or platform == "iOS":
+#		#初始脸谱能量字体大小
+#		if $EnergyLabel!=null:
+#			$EnergyLabel.set_scale($EnergyLabel.get_scale()*fangda*2)
+#	#	#初始脸谱碰撞器大小
+#		if $BodyCollision!=null:
+#			$BodyCollision.set_scale($BodyCollision.get_scale()*fangda)
+#		if $Sprite!=null:
+#			$Sprite.set_scale($Sprite.get_scale()*fangda)
+#		if $AnimatedSprite!=null:
+#			$AnimatedSprite.set_scale($AnimatedSprite.get_scale()*fangda)
+#		if $AnimatedDeath!=null:
+#			$AnimatedDeath.set_scale($AnimatedDeath.get_scale()*fangda)
+#	else:
+#		#初始脸谱能量字体大小
+#		if $EnergyLabel!=null:
+#			$EnergyLabel.set_scale($EnergyLabel.get_scale()*fangda)
 	#初始脸谱能量字体大小
 	if $EnergyLabel!=null:
-		$EnergyLabel.set_scale($EnergyLabel.get_scale()*1.5)
-#	#初始脸谱碰撞器大小
-#	if $BodyCollision!=null:
-#		$BodyCollision.set_scale($BodyCollision.get_scale()*fangda)
-#		pass
-#	if $Sprite!=null:
-#		$Sprite.set_scale($Sprite.get_scale()*fangda)
-#		pass
-#	if $AnimatedSprite!=null:
-#		$AnimatedSprite.set_scale($AnimatedSprite.get_scale()*fangda)
-#		pass
-#	if $AnimatedDeath!=null:
-#		$AnimatedDeath.set_scale($AnimatedDeath.get_scale()*fangda)
-#		pass
-
-
+		$EnergyLabel.set_scale($EnergyLabel.get_scale()*fangda)
 
 func cycle_taiji_mode():
 	# 自动获取类型名称（如"danger_fire"）

@@ -10,10 +10,10 @@
 
 [node name="TeachingDisplay" type="CanvasLayer"]
 pause_mode = 2
+layer = -1
 script = ExtResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -5.0
 bus = "SFX"
 
 [node name="PassLevelConditionLabel" type="Label" parent="."]
@@ -59,7 +59,6 @@ align = 1
 valign = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PassLevelTutorial"]
-volume_db = -10.0
 pitch_scale = 2.0
 bus = "SFX"
 

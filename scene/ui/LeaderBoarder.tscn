@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://new_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/LeaderBoarder.gd" type="Script" id=2]
-[ext_resource path="res://ttf/c16xcnb.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scene/game_scene/setting/LianpuReturn.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scene/game_play/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scene/game_play/Center.tscn" type="PackedScene" id=6]
@@ -239,30 +238,28 @@ theme = ExtResource( 1 )
 custom_constants/separation = 33
 
 [node name="rank" type="Label" parent="LocalPlayerInfo"]
-margin_top = 17.0
-margin_right = 9.0
-margin_bottom = 18.0
-custom_fonts/font = ExtResource( 3 )
+margin_top = 6.0
+margin_right = 104.0
+margin_bottom = 30.0
 text = "我的排名:3208"
 
 [node name="name" type="Label" parent="LocalPlayerInfo"]
-margin_left = 42.0
+margin_left = 137.0
 margin_top = 6.0
-margin_right = 170.0
+margin_right = 265.0
 margin_bottom = 30.0
 text = "我的昵称:3208k神"
 
 [node name="score" type="Label" parent="LocalPlayerInfo"]
-margin_left = 203.0
+margin_left = 298.0
 margin_top = 6.0
-margin_right = 311.0
+margin_right = 406.0
 margin_bottom = 30.0
 text = "我的得分:3.208"
 
 [node name="PopupDialog" parent="." instance=ExtResource( 7 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
 pitch_scale = 3.0
 bus = "SFX"
 

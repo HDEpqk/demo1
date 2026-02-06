@@ -1177,7 +1177,6 @@ align = 1
 valign = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/TutorialControl"]
-volume_db = -10.0
 pitch_scale = 2.0
 bus = "SFX"
 

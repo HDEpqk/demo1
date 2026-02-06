@@ -106,7 +106,7 @@ margin_top = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource( 3 )
-text = "+4"
+text = "0"
 align = 1
 valign = 1
 
@@ -135,7 +135,6 @@ texture = ExtResource( 4 )
 [node name="CountdownTimer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
 bus = "SFX"
 
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]
