@@ -23,3 +23,6 @@ func _ready():
 
 func _on_game_over(info):
 	get_tree().reload_current_scene()
+
+func _exit_tree():
+	Global.reset_data()
