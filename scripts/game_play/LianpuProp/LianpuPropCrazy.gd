@@ -17,9 +17,7 @@ func handle_death():
 	#播放joker音效
 	$AudioStreamPlayer.stream=load("res://audio/sfx/joker_laugh.tres")
 	$AudioStreamPlayer.play()
-	
-	handle_score_operation()#加分
-	handle_energy_operation()#根据运算类型进行不同运算
+	.handle_death()
 	
 
 func _on_AudioStreamPlayer_finished():

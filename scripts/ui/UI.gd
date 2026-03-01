@@ -137,6 +137,9 @@ func _on_global_multiple_changed(new_value: int,isTiming:bool,duration:float):
 		total_multipleLabel.self_modulate=Color.white
 	else:
 		total_multipleLabel.self_modulate=Color("#69db1b")
+		#播放音效
+		$AudioStreamPlayer.stream=load("res://audio/sfx/gain_score.wav")
+		$AudioStreamPlayer.play()
 	if isTiming:
 		multiple_timer_Label.show()
 		multiple_timer_icon.show()
@@ -159,13 +162,18 @@ func _on_MultipleTimer_timeout():
 		total_multipleLabel.text="倍数:×"+str(Global.get_multiple())
 
 func _on_accelerate_spawn_begin(duration):
-	DebugUtils.log("begin accelerate!:UI")
+	#DebugUtils.log("begin accelerate!:UI")
+	if !Global.is_invincible:
+		#显示crazy_time_bg背景	
+		crazy_time_bg.color=Color.tomato#Color.crimson
+		crazy_time_bg.color.a=0.4
+		crazy_time_bg.show()
 	#隐藏减速文本
 	decelerate_spawn_label.hide()
 	decelerate_spawn_timer_Label.hide()
 	decelerate_spawn_timer_icon.hide()
 	#显示加速文本
-	accelerate_spawn_label.text="加速生成"
+	accelerate_spawn_label.text="加速状态"
 	accelerate_spawn_label.show()
 	accelerate_spawn_timer_Label.text=str(duration)
 	accelerate_spawn_timer_Label.show()
@@ -182,16 +190,22 @@ func _on_AccelerateSpawnTimer_timeout():
 		accelerate_spawn_label.hide()
 		accelerate_spawn_timer_Label.hide()
 		accelerate_spawn_timer_icon.hide()
+		if !Global.is_invincible:
+			crazy_time_bg.hide()#隐藏crazy_time_bg背景
 		EventBus.fire_event("accelerate_spawn_end")
 
 func _on_decelerate_spawn_begin(duration):
-	DebugUtils.log("begin decelerate:UI!")
+	if !Global.is_invincible:
+		#显示crazy_time_bg背景	
+		crazy_time_bg.color=Color.aqua
+		crazy_time_bg.color.a=0.4
+		crazy_time_bg.show()
 	#隐藏加速文本
 	accelerate_spawn_label.hide()
 	accelerate_spawn_timer_Label.hide()
 	accelerate_spawn_timer_icon.hide()
 	#显示减速文本
-	decelerate_spawn_label.text="减速生成"
+	decelerate_spawn_label.text="减速状态"
 	decelerate_spawn_label.show()
 	decelerate_spawn_timer_Label.text=str(duration)
 	decelerate_spawn_timer_Label.show()
@@ -209,6 +223,8 @@ func _on_DecelerateeSpawnTimer_timeout():
 		decelerate_spawn_label.hide()
 		decelerate_spawn_timer_Label.hide()
 		decelerate_spawn_timer_icon.hide()
+		if !Global.is_invincible:
+			crazy_time_bg.hide()#隐藏crazy_time_bg背景
 		EventBus.fire_event("decelerate_spawn_end")
 
 func _on_crazy_time_begin(duration):

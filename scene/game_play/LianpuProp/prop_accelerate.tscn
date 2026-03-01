@@ -366,6 +366,7 @@ frames = SubResource( 95 )
 animation = "death_04"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 10.0
 bus = "SFX"
 
 [node name="EnergyLabel" type="Label" parent="."]
@@ -382,3 +383,5 @@ grow_vertical = 2
 rect_pivot_offset = Vector2( 16, 16 )
 align = 1
 valign = 1
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

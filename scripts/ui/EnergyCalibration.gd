@@ -6,7 +6,7 @@ const SFX_COUNT_DOWN = preload("res://audio/sfx/count_down.wav")
 export var value_range: Vector2 = Vector2(-1.1, 1.1)  # 值范围（左到右）
 export var bg_width: float = 400.0  # 背景条宽度（需与实际尺寸一致）
 export var pointer_max_offset: float = 200.0  # 指针最大左右偏移（背景条宽度的一半）
-export var total_time: int = 10  # 总倒计时秒数
+export var total_time: int = 20  # 总倒计时秒数
 
 var current_value: float = 0.0  # 当前值（初始为 0，对应中间位置）
 var half_bg_width: float =bg_width/2
@@ -173,12 +173,13 @@ func _on_CountdownTimer_timeout():
 		countdown_label.self_modulate=Color.white
 		#触发游戏结束事件
 		EventBus.fire_event("game_over","会响的倒计时结束了┗|｀O′|┛ 嗷~~!")
-	elif current_time<=5:
-		countdown_label.self_modulate=Color.red
-		if $AudioStreamPlayer.stream==null:
-			$AudioStreamPlayer.stream=SFX_COUNT_DOWN
-		if $AudioStreamPlayer.stream!=null:
-			$AudioStreamPlayer.play()
+	elif current_time<=10:
+		if current_time<=5:
+			countdown_label.self_modulate=Color.red
+			if $AudioStreamPlayer.stream==null:
+				$AudioStreamPlayer.stream=SFX_COUNT_DOWN
+			if $AudioStreamPlayer.stream!=null:
+				$AudioStreamPlayer.play()
 		#加倍
 		if !isMultipledTwice:
 			Global.set_energy_multiple(4)

@@ -5,10 +5,13 @@ extends Node2D
 export var base_spawn_interval := 3.0
 export var score_acceleration := 0.98  # 每1000分时间缩短系数
 export var min_spawn_interval: float = 0.3   # 最小生成间隔
+export var decelerate_speed_scale:=0.5#减速速度调节比例
+export var accelerate_speed_scale:=1.2#加速速度调节比例
+
 #加速后的生成间隔
 var accelerate_spawn_interval:=1.0
 #减速后的生成间隔
-var decelerate_spawn_interval:=5.0
+#var decelerate_spawn_interval:=5.0
 #当前是否是加速状态
 var is_accelerate:=false
 #当前是否是减速状态
@@ -159,8 +162,7 @@ const LIANPU_CONFIG := [
 		"reward_score":20,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui
-	}
-	
+	}	
 ]
 
 onready var timer = $SpawnTimer
@@ -182,7 +184,6 @@ func _on_score_changed(new_score: int):
 	update_spawn_speed()
 
 func update_spawn_speed():
-
 	#DebugUtils.log("update_spawn_speed() - is_accelerate: " + str(is_accelerate) + ", is_decelerate: " + str(is_decelerate))
 	# 原方法代码...
 	# 根据分数加速生成：每1000分减少2%间隔时间
@@ -194,8 +195,11 @@ func update_spawn_speed():
 			current_spawn_interval=min_spawn_interval
 		else:
 			current_spawn_interval=min(accelerate_spawn_interval, current_spawn_interval)
-	elif is_decelerate:
-		current_spawn_interval=decelerate_spawn_interval
+#	elif is_decelerate:
+#		#current_spawn_interval=decelerate_spawn_interval
+#		#减速状态减慢容器中已生成脸谱的移动速度
+#		for lianpu in lianpu_container.get_children():
+#			lianpu.speed*=decelerate_speed_scale
 
 	timer.wait_time = current_spawn_interval
 	DebugUtils.log("当前生成间隔时间："+str(timer.wait_time))
@@ -216,6 +220,12 @@ func _on_SpawnTimer_timeout():
 	var mode = lianpu_dic["mode"]
 	var reward_score=lianpu_dic["reward_score"]
 	var speed=lianpu_dic["speed"]
+	#如果在加速状态，脸谱移动速度变快
+	if is_accelerate:
+		speed*=accelerate_speed_scale
+	#如果在减速状态，脸谱移动速度变慢
+	if is_decelerate:
+		speed*=decelerate_speed_scale
 	var lianpu_type=lianpu_dic["type"]
 	var dic:={"mode":mode,
 	"pos":pos,
@@ -334,6 +344,12 @@ func _spawn_replacement(lianpu_dic: Dictionary, pos: Vector2):
 	var mode = lianpu_dic["mode"]
 	var reward_score=lianpu_dic["reward_score"]
 	var speed=lianpu_dic["speed"]
+	#如果在加速状态，脸谱移动速度变快
+	if is_accelerate:
+		speed*=accelerate_speed_scale
+	#如果在减速状态，脸谱移动速度变慢
+	if is_decelerate:
+		speed*=decelerate_speed_scale
 	var lianpu_type=lianpu_dic["type"]
 	var dic:={"mode":mode,
 	"pos":pos,
@@ -355,11 +371,15 @@ func _on_accelerate_spawn_begin(duration):
 	is_accelerate=true
 	if is_decelerate:
 		is_decelerate=false
+	for lianpu in lianpu_container.get_children():
+		lianpu.speed*=accelerate_speed_scale
 	update_spawn_speed()	
 
 func _on_accelerate_spawn_end(value):
 	DebugUtils.log("end accelerate!:SpawnMgr")
 	is_accelerate=false
+	for lianpu in lianpu_container.get_children():
+		lianpu.speed/=accelerate_speed_scale
 	update_spawn_speed()	
 
 func _on_decelerate_spawn_begin(duration):
@@ -367,11 +387,17 @@ func _on_decelerate_spawn_begin(duration):
 	is_decelerate=true
 	if is_accelerate:
 		is_accelerate=false
+	#减速状态减慢容器中已生成脸谱的移动速度
+	for lianpu in lianpu_container.get_children():
+		lianpu.speed*=decelerate_speed_scale
 	update_spawn_speed()
 
 func _on_decelerate_spawn_end(value):
 	DebugUtils.log("end decelerate!:SpawnMgr")
 	is_decelerate=false
+	#减速状态结束恢复容器中已生成脸谱的移动速度
+	for lianpu in lianpu_container.get_children():
+		lianpu.speed/=decelerate_speed_scale
 	update_spawn_speed()	
 
 func _on_wuxing_generation_available(lianpu_data):

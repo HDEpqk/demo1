@@ -93,7 +93,7 @@ func _physics_process(delta):
 		# 应用当前离开速度
 		linear_velocity = exit_velocity
 		is_set_linear_velocity=false
-		DebugUtils.log("只设置一次linear_velocity")
+		#DebugUtils.log("只设置一次linear_velocity")
 	if is_avoiding_center:
 		# 检查是否超出屏幕边界
 		var viewport_rect = get_viewport_rect()
@@ -364,7 +364,6 @@ func init_energy_label_color():
 			$EnergyLabel.self_modulate=Color("#2d93dd")
 			
 func _on_death_animation_finished():
-	DebugUtils.log("死亡动画结束的回调")
 	queue_free()
 
 

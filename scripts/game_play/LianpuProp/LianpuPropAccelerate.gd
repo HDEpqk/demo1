@@ -10,5 +10,13 @@ func handle_death():
 	#关闭碰撞体和图片
 	$BodyCollision.set_deferred("disabled", true)
 	$AnimatedSprite.visible=false
-	EventBus.fire_event("accelerate_spawn_begin",5)
+	$EnergyLabel.visible=false#关闭EnergyLabel
+	EventBus.fire_event("accelerate_spawn_begin",10)
+	#播放音效
+	$AudioStreamPlayer.stream=load("res://audio/sfx/boiling.mp3str")
+	$AudioStreamPlayer.play()
 	.handle_death()
+
+
+func _on_AudioStreamPlayer_finished():
+	call_deferred("queue_free")  # 延迟安全销毁

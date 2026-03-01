@@ -11,7 +11,15 @@ func handle_death():
 	#关闭碰撞体和图片
 	$BodyCollision.set_deferred("disabled", true)
 	$AnimatedSprite.visible=false
+	$EnergyLabel.visible=false#关闭EnergyLabel
 	#更新lianpu倍数
 	Global.set_lianpu_multiple(2)
 	EventBus.fire_event_3param("global_multiple_changed",Global.get_multiple(),true,5)
+	#播放音效
+	$AudioStreamPlayer.stream=load("res://audio/sfx/gain_score.wav")
+	$AudioStreamPlayer.play()
 	.handle_death()
+
+
+func _on_AudioStreamPlayer_finished():
+	call_deferred("queue_free")  # 延迟安全销毁

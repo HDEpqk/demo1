@@ -1,7 +1,7 @@
 extends RichTextLabel
 
-const GAIN_SCORE_SFX=preload("res://audio/sfx/gain_score.wav")
-onready var audio_player=$AudioStreamPlayer
+#const GAIN_SCORE_SFX=preload("res://audio/sfx/gain_score.wav")
+#onready var audio_player=$AudioStreamPlayer
 # 目标分数（最终要显示的分数）
 var target_score = 0
 # 当前显示的分数
@@ -26,16 +26,16 @@ func _process(delta):
 		
 		# 更新显示
 		bbcode_text ="得分:"+"[color=#e40000]"+"%.0f" % current_score+"[/color]"
-		audio_player.stream=GAIN_SCORE_SFX
-		audio_player.play()
+		#audio_player.stream=GAIN_SCORE_SFX
+		#audio_player.play()
 
 	elif current_score > target_score:
 		# 使用线性插值让分数逐渐接近目标值
 		current_score = lerp(current_score, target_score, delta * speed)
 		# 更新显示
 		bbcode_text ="得分:"+"[color=#2d93dd]"+"%.0f" % current_score+"[/color]"
-		audio_player.stream=GAIN_SCORE_SFX
-		audio_player.play()
+		#audio_player.stream=GAIN_SCORE_SFX
+		#audio_player.play()
 
 # 设置目标分数（外部调用此方法来更新分数）
 func set_score(new_score):

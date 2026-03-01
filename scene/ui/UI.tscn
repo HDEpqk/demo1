@@ -22,6 +22,11 @@ script = ExtResource( 1 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -5.0
+margin_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0, 0, 0, 0.478431 )
 
 [node name="EnergyCalibration" parent="." instance=ExtResource( 2 )]
 margin_bottom = 25.0
@@ -472,8 +477,12 @@ anchor_bottom = 0.5
 
 [node name="PausePanel" parent="." instance=ExtResource( 3 )]
 visible = false
+margin_top = -5.0
+margin_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="TotalMultipleLabel/MultipleTimer" to="." method="_on_MultipleTimer_timeout"]
 [connection signal="timeout" from="AccelerateSpawnLabel/AccelerateSpawnTimer" to="." method="_on_AccelerateSpawnTimer_timeout"]

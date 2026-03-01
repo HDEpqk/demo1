@@ -29,7 +29,7 @@ func init(dic:Dictionary):
 	#开启碰撞体
 	$BodyCollision.set("disabled", false)
 
-func handle_death():	
+func handle_death():
 	if is_dying:return#如果正在死亡则退出避免重复调用
 	is_dying=true
 	# 切换到死亡层（Player 不检测此层）
@@ -54,21 +54,17 @@ func handle_death():
 			$AnimatedDeath.self_modulate=Color("#b36d41")
 		
 	$AnimatedDeath.visible=true#打开AnimatedDeath
-	if $EnergyLabel!=null:
-		$EnergyLabel.visible=false#关闭EnergyLabel
 	#随机播放死亡动画
 	if death_animations.size() > 0:
 		# 随机选择一个死亡动画
 		var random_index = randi() % death_animations.size()
 		var random_animation:String = death_animations[random_index]
-
 		#播放随机选择的动画
 		$AnimationPlayer.play(random_animation)
 	else:
 		print("No death animations found.")
-	
-	
-	handle_element_counter_sfx()#播放死亡音效
+
+	#handle_element_counter_sfx()#播放死亡音效
 	handle_score_operation()#加分
 	handle_energy_operation()#根据运算类型进行不同运算
 
@@ -82,3 +78,6 @@ func update_energy_label():
 			$EnergyLabel.text=">"+str(energy)
 		GameEnums.OperationType.xiaoyu:
 			$EnergyLabel.text="<"+str(energy)
+
+func _on_death_animation_finished():
+	pass
