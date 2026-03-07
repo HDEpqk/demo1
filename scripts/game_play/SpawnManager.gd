@@ -95,7 +95,7 @@ const LIANPU_CONFIG := [
 		"type": "prop_accelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_accelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 3,
+		"weight": 30,
 		"reward_score":30,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.huo
@@ -104,7 +104,7 @@ const LIANPU_CONFIG := [
 		"type": "prop_crazy",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_crazy.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 2,
+		"weight": 20,
 		"reward_score":50,
 		"speed":25,
 		"mode":GameEnums.TaijiMode.jin
@@ -122,7 +122,7 @@ const LIANPU_CONFIG := [
 		"type": "prop_decelerate",
 		"scene": preload("res://scene/game_play/LianpuProp/prop_decelerate.tscn"),
 		"min_score": 0,#全局分数达到该分数才生成该lianpu
-		"weight": 3,
+		"weight": 30,
 		"reward_score":30,
 		"speed":20,
 		"mode":GameEnums.TaijiMode.shui

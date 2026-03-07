@@ -165,8 +165,8 @@ func _on_accelerate_spawn_begin(duration):
 	#DebugUtils.log("begin accelerate!:UI")
 	if !Global.is_invincible:
 		#显示crazy_time_bg背景	
-		crazy_time_bg.color=Color.tomato#Color.crimson
-		crazy_time_bg.color.a=0.4
+		crazy_time_bg.modulate=Color.red#Color.tomato
+		#crazy_time_bg.color.a=0.4
 		crazy_time_bg.show()
 	#隐藏减速文本
 	decelerate_spawn_label.hide()
@@ -197,8 +197,8 @@ func _on_AccelerateSpawnTimer_timeout():
 func _on_decelerate_spawn_begin(duration):
 	if !Global.is_invincible:
 		#显示crazy_time_bg背景	
-		crazy_time_bg.color=Color.aqua
-		crazy_time_bg.color.a=0.4
+		crazy_time_bg.modulate=Color.skyblue#Color.white
+		#crazy_time_bg.color.a=0.4
 		crazy_time_bg.show()
 	#隐藏加速文本
 	accelerate_spawn_label.hide()
@@ -231,8 +231,8 @@ func _on_crazy_time_begin(duration):
 	current_crazy_time=duration
 	crazy_time_timer.start()
 	#显示crazy_time_bg背景
-	crazy_time_bg.color=Color.gold
-	crazy_time_bg.color.a=0.4
+	crazy_time_bg.modulate=Color.yellow
+	#crazy_time_bg.color.a=0.4
 	crazy_time_bg.show()
 
 	#开始加速
